@@ -36,3 +36,18 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+group :assets do
+  gem "execjs"
+  gem "therubyracer"
+end
+
+group :development, :test do
+  gem "rspec-rails"
+  gem "shoulda"
+  gem "factory_girl_rails"
+  gem "guard-rspec"
+  gem "libnotify"
+  gem "yard", "~> 0.7.4"
+  gem "yard-rest", :git => "git@github.com:dwaynemac/yard-rest-plugin.git"
+end

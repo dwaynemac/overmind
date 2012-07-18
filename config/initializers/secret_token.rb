@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Overmind::Application.config.secret_token = 'c653340941ff59bfc69b8e03b8fb88c66cbbb5e729596d6f808718cf8a97d902241c8b63ef5032100ae7fa3cec4fe3220aef681358ed9438d2a97493538b2b7a'
+Overmind::Application.config.secret_token = '9ad177fccac9dddf8e35792733be6711dbfb005558baaf8c1b334e8fcab9514e233db49896223a15f7008b987a8a109040a929fbc1a707b942bb8ea5cce6bba4'
