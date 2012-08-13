@@ -1,12 +1,18 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+# CAS authentication
+gem 'devise', '1.5.0'
+gem 'devise_cas_authenticatable', '1.0.0.alpha13'
 
+gem 'sqlite3', :group => [:development, :test]
+gem 'pg', :group => :production
+
+gem 'cancan'
 
 # Gems used only for assets and not required
 # in production environments by default.
