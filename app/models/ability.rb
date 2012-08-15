@@ -16,6 +16,8 @@ class Ability
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
+    user ||= User.new
+
     cannot :manage, :all
 
     case user.role
