@@ -5,16 +5,22 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
       </a>
       <a class="brand" href="#">Overmind</a>
       <div class="container nav-collapse">
         <ul class="nav">
-          <%- if can?(:read, School) -%>
-            <li><%= link_to 'schools', schools_path %></li>
-          <%- end -%>
-          <%- if can?(:manage, User) -%>
-            <li><%= link_to 'users', users_path %></li>
-          <%- end -%>
+          <%= li(params[:controller], 'federations') do
+                link_to 'federations', federations_path
+              end if can?(:read, Federation)
+          %>
+          <%= li(params[:controller], 'schools') do
+                link_to 'schools', schools_path
+              end if can?(:read, School) -%>
+          <%= li(params[:controller], 'users') do
+                link_to 'users', users_path
+              end if can?(:manage,User)
+          %>
         </ul>
       </div><!--/.nav-collapse -->
     </div>

@@ -3,3 +3,7 @@
 
 en:
   hello: "Hello world"
+  errors:
+    attributes:
+      ref_date:
+        not_end_of_month: "Reference date should be at the end of a month"

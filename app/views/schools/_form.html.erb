@@ -8,7 +8,7 @@
   <div class="control-group">
     <%= f.label :federation_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.number_field :federation_id, :class => 'number_field' %>
+      <%= f.select :federation_id, Federation.accessible_by(current_ability).map{|f| [f.name,f.id]}, :class => 'number_field' %>
     </div>
   </div>
 

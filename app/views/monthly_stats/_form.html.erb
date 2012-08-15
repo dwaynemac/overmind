@@ -1,0 +1,37 @@
+<%= form_for [@school,@monthly_stat], html: {:class => 'form-horizontal'} do |f| %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :name, ['Enrollments'] %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :ref_date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :ref_date, class: 'date_select', discard_day: true, end_year: Date.today.year %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :value, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :value, :class => 'number_field' %>
+    </div>
+  </div>
+
+  <%#
+  <div class="control-group">
+    %= f.label :school_id, :class => 'control-label' %
+    <div class="controls">
+      %= f.number_field :school_id, :class => 'number_field' %
+    </div>
+  </div>
+  %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                @school, :class => 'btn' %>
+  </div>
+<% end %>

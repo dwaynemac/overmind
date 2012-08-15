@@ -26,9 +26,11 @@ class Ability
       when 'council'
         can :read, Federation
         can :read, School
+        can :read, MonthlyStat
       else
         can :read, Federation, id: user.federation_id
         can :read, School, federation_id: user.federation_id
+        can :read, MonthlyStat, school: { federation_id: user.federation_id }
     end
   end
 end

@@ -11,10 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120815160337) do
+ActiveRecord::Schema.define(:version => 20120815212631) do
 
   create_table "federations", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "monthly_stats", :force => true do |t|
+    t.date     "ref_date"
+    t.integer  "school_id"
+    t.string   "name"
+    t.integer  "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
