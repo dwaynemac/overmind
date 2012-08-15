@@ -5,7 +5,6 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:ref_date) %></th>
-      <th><%= model_class.human_attribute_name(:school_id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:value) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -15,9 +14,8 @@
   <tbody>
     <% @monthly_stats.each do |monthly_stat| %>
       <tr>
-        <td><%= link_to monthly_stat.id, school_monthly_stat_path(monthly_stat) %></td>
+        <td><%= monthly_stat.id %></td>
         <td><%= monthly_stat.ref_date %></td>
-        <td><%= monthly_stat.school_id %></td>
         <td><%= monthly_stat.name %></td>
         <td><%= monthly_stat.value %></td>
         <td><%=l monthly_stat.created_at %></td>

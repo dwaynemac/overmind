@@ -1,7 +1,7 @@
 Overmind::Application.routes.draw do
   devise_for :users
   resources :schools do
-    resources :monthly_stats
+    resources :monthly_stats, except: [:show]
   end
   resources :federations
   resources :users
