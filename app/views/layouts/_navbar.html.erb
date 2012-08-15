@@ -9,11 +9,12 @@
       <a class="brand" href="#">Overmind</a>
       <div class="container nav-collapse">
         <ul class="nav">
-          <li><%= link_to 'schools', schools_path %></li>
+          <%- if can?(:read, School) -%>
+            <li><%= link_to 'schools', schools_path %></li>
+          <%- end -%>
           <%- if can?(:manage, User) -%>
             <li><%= link_to 'users', users_path %></li>
           <%- end -%>
-          <li><%= link_to "Link3", "/path3"  %></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
