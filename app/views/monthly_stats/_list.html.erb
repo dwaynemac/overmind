@@ -20,19 +20,19 @@
         <td><%= monthly_stat.value %></td>
         <td><%=l monthly_stat.created_at %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_school_monthly_stat_path(monthly_stat), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <%= link_to(t('.edit', :default => t("helpers.links.edit")),
+                      edit_school_monthly_stat_path(monthly_stat), :class => 'btn btn-mini') if can?(:edit,monthly_stat) %>
+          <%= link_to(t('.destroy', :default => t("helpers.links.destroy")),
                       school_monthly_stat_path(monthly_stat),
                       :method => :delete,
                       :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                      :class => 'btn btn-mini btn-danger' %>
+                      :class => 'btn btn-mini btn-danger') if can?(:destroy,monthly_stat) %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<%= link_to(t('.new', :default => t("helpers.links.new")),
             new_school_monthly_stat_path(school_id: @school.id),
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn-primary') if can?(:create,@school.monthly_stats.new) %>

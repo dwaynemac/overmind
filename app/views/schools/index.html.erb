@@ -5,7 +5,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:federation_id) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -14,17 +13,16 @@
   <tbody>
     <% @schools.each do |school| %>
       <tr>
-        <td><%= link_to school.id, school_path(school) %></td>
-        <td><%= school.name %></td>
+        <td><%= link_to_if can?(:read,school), school.name, school_path(school) %></td>
         <td><%= school.federation.try :name %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_school_path(school), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <%= link_to(t('.edit', :default => t("helpers.links.edit")),
+                      edit_school_path(school), :class => 'btn btn-mini') if can?(:edit, school) %>
+          <%= link_to(t('.destroy', :default => t("helpers.links.destroy")),
                       school_path(school),
                       :method => :delete,
                       :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                      :class => 'btn btn-mini btn-danger' %>
+                      :class => 'btn btn-mini btn-danger') if can?(:destroy,school) %>
         </td>
       </tr>
     <% end %>
