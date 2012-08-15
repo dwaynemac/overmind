@@ -25,12 +25,13 @@
     <div class="container">
       <div class="content">
         <div class="row">
-           <div class="span9">
+          <div class="span2">
+            <%= render 'layouts/side_bar' %>
+          </div>
+          <div class="span10">
               <%= yield %>
             </div>
-            <div class="span3">
-              <%= render 'layouts/side_bar' %>
-            </div><!--/span-->
+
         </div><!--/row-->
       </div><!--/content-->
 

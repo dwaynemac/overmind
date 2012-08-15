@@ -38,5 +38,12 @@ describe Ability do
       fed = create(:federation)
       ability.can?(:read,fed).should be_false
     end
+    it "should be able to read schools from his federation" do
+      fed = create(:federation)
+      create(:school)
+      3.times{create(:school, federation: fed)}
+      user.update_attribute(:federation_id, fed.id)
+      School.accessible_by(ability).count.should == 3
+    end
   end
 end
