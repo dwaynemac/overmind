@@ -1,0 +1,1 @@
+exec "cd .. && guard"

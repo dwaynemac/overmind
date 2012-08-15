@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe School do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    create(:school)
+  end
+  it { should belong_to :federation }
+  it { should validate_presence_of :name }
+  it { should validate_uniqueness_of :name }
 end
