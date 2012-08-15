@@ -24,4 +24,5 @@ describe MonthlyStat do
   it "should always have a school" do
     should validate_presence_of :school
   end
+  it { should ensure_inclusion_of(:name).in_array(MonthlyStat::VALID_NAMES)}
 end

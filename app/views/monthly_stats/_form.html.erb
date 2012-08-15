@@ -2,7 +2,7 @@
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
-      <%= f.select :name, ['Enrollments'] %>
+      <%= f.select :name, MonthlyStat::VALID_NAMES %>
     </div>
   </div>
 

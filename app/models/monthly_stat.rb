@@ -2,6 +2,8 @@ class MonthlyStat < ActiveRecord::Base
 
   attr_accessible :value, :name, :school_id, :ref_date
 
+  VALID_NAMES = [:enrollments, :dropouts, :students, :interviews]
+
   belongs_to :school
   validates_presence_of :school
   validates_presence_of :name
