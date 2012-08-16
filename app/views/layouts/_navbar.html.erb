@@ -11,7 +11,11 @@
       <div class="container nav-collapse">
         <ul class="nav">
           <%= li(params[:controller], 'federations') do
-                link_to 'federations', federations_path
+                if current_user.federation.present? && can?(:read_only_one,Federation)
+                  link_to current_user.federation.name, current_user.federation
+                else
+                  link_to 'federations', federations_path
+                end
               end if can?(:read, Federation)
           %>
           <%= li(params[:controller], 'schools') do
