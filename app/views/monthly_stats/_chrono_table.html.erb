@@ -28,9 +28,9 @@
               monthly_stat.try :value %>
           <%- if monthly_stat && @school -%>
             <%= link_to('e',
-                        edit_school_monthly_stat_path([@school,monthly_stat]), :class => 'pictos') if can?(:edit,monthly_stat) %>
+                        edit_school_monthly_stat_path(school_id: @school.id, id: monthly_stat.id), :class => 'pictos') if can?(:edit,monthly_stat) %>
             <%= link_to('d',
-                        school_monthly_stat_path([@school,monthly_stat]),
+                        school_monthly_stat_path(id: monthly_stat, school_id: @school.id),
                         :method => :delete,
                         :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
                         :class => 'pictos red') if can?(:destroy,monthly_stat) %>
