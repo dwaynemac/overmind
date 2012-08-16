@@ -1,0 +1,47 @@
+<%- model_class = MonthlyStat.new.class -%>
+<h2><%=t '.title', :default => model_class.model_name.human.pluralize %></h2>
+
+<table class="table table-striped table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="12">
+        <%= @year ||= 2012 %>
+      </th>
+    </tr>
+    <tr>
+      <th></th>
+      <%- (1...13).each do |m| -%>
+        <th>
+          <%= Date::MONTHNAMES[m] %>
+        </th>
+      <%- end -%>
+    </tr>
+  </thead>
+  <tbody>
+  <%- MonthlyStat::VALID_NAMES.each do |stat_name| -%>
+    <tr>
+      <th><%= stat_name %></th>
+      <%- (1...13).each do |m| -%>
+        <td>
+          <%= monthly_stat = @school.monthly_stats.where(ref_date: Date.civil(@year, m, 1).end_of_month, name: stat_name).first
+              monthly_stat.try :value %>
+          <%- if monthly_stat.present? -%>
+            <%= link_to('e',
+                        edit_school_monthly_stat_path(monthly_stat), :class => 'pictos') if can?(:edit,monthly_stat) %>
+            <%= link_to('d',
+                        school_monthly_stat_path(monthly_stat),
+                        :method => :delete,
+                        :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                        :class => 'pictos red') if can?(:destroy,monthly_stat) %>
+          <%- end -%>
+        </td>
+    <%- end -%>
+    </tr>
+  <%- end -%>
+  </tbody>
+</table>
+
+<%= link_to(t('.new', :default => t("helpers.links.new")),
+            new_school_monthly_stat_path(school_id: @school.id),
+            :class => 'btn btn-primary') if can?(:create,@school.monthly_stats.new) %>

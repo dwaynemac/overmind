@@ -18,7 +18,7 @@ class MonthlyStatsController < ApplicationController
   def edit; end
 
   def update
-    if @monthly_stat.update_attributes(params[:monthly_stats])
+    if @monthly_stat.update_attributes(params[:monthly_stat])
       redirect_to @school, notice: t('monthly_stats.update.success')
     else
       render :edit
