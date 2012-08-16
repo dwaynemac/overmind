@@ -19,12 +19,12 @@
     </tr>
   </thead>
   <tbody>
-  <%- @monthly_stats.each_pair do |name, stats| -%>
+  <%- MonthlyStat::VALID_NAMES.each do |name| -%>
     <tr>
       <th><%= name %></th>
       <%- (1...13).each do |month| -%>
         <td>
-          <%= monthly_stat = stats[month]
+          <%= monthly_stat = @monthly_stats[name][month]
               monthly_stat.try :value %>
           <%- if monthly_stat && @school -%>
             <%= link_to('e',

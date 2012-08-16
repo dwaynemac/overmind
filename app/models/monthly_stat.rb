@@ -29,6 +29,7 @@ class MonthlyStat < ActiveRecord::Base
         end
       end
     end
+    matrix.symbolize_keys!
   end
 
   private
