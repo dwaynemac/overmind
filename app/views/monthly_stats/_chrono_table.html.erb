@@ -39,5 +39,44 @@
     <%- end -%>
     </tr>
   <%- end -%>
+  <tr>
+    <th>
+      % Evasion
+      <%- if !@monthly_stats[:dropouts].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !@monthly_stats[:students].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
+        <a style="position:relative; float: right;" rel="popover" href="#" class="pictos" data-title="Cálculo de la evasion" data-content="Esta evasión es calculada a partir de valores absolutos. Dividiendo el TOTAL de bajas por el TOTAL de alumnos. No es el promedio de las evasiones">?</a>
+      <%- end -%>
+    </th>
+      <td>-</td>
+      <%- (2...13).each do |month| -%>
+        <td>
+          <%-
+              dropouts = @monthly_stats[:dropouts][month].try(:value)||0
+              students = @monthly_stats[:students][month-1].try(:value)
+          -%>
+          <%- if students -%>
+            <%= number_with_precision (dropouts.to_f/students)*100, precision: 0 %>%
+          <%- end -%>
+        </td>
+      <%- end -%>
+  </tr>
+  <tr>
+    <th>
+      % Efectividad
+      <%- if !@monthly_stats[:enrollments].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !@monthly_stats[:interviews].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
+        <a style="position:relative; float: right;" rel="popover" href="#" class="pictos" data-title="Cálculo de la efectividad" data-content="Esta efectividad es calculada a partir de valores absolutos. Dividiendo el TOTAL de inscripciones por el TOTAL de visitas. No es el promedio de las efectividades">?</a>
+      <%- end -%>
+    </th>
+    <%- (1...13).each do |month| -%>
+      <td>
+        <%-
+            enrollments = @monthly_stats[:enrollments][month].try(:value)||0
+            interviews = @monthly_stats[:interviews][month].try(:value)
+        -%>
+        <%- if interviews -%>
+          <%= number_with_precision (enrollments.to_f/interviews)*100, precision: 0 %>%
+        <%- end -%>
+      </td>
+    <%- end -%>
+  </tr>
   </tbody>
 </table>
