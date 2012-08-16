@@ -6,7 +6,7 @@
     <tr>
       <th></th>
       <th colspan="12">
-        <%= @year ||= 2012 %>
+        <%= @year %>
       </th>
     </tr>
     <tr>
@@ -19,14 +19,14 @@
     </tr>
   </thead>
   <tbody>
-  <%- MonthlyStat::VALID_NAMES.each do |stat_name| -%>
+  <%- @monthly_stats.each_pair do |name, stats| -%>
     <tr>
-      <th><%= stat_name %></th>
-      <%- (1...13).each do |m| -%>
+      <th><%= name %></th>
+      <%- (1...13).each do |month| -%>
         <td>
-          <%= monthly_stat = @school.monthly_stats.where(ref_date: Date.civil(@year, m, 1).end_of_month, name: stat_name).first
+          <%= monthly_stat = stats[month]
               monthly_stat.try :value %>
-          <%- if monthly_stat.present? -%>
+          <%- if monthly_stat.present? && monthly_stat.is_a?(MonthlyStat) -%>
             <%= link_to('e',
                         edit_school_monthly_stat_path(monthly_stat), :class => 'pictos') if can?(:edit,monthly_stat) %>
             <%= link_to('d',
@@ -41,7 +41,3 @@
   <%- end -%>
   </tbody>
 </table>
-
-<%= link_to(t('.new', :default => t("helpers.links.new")),
-            new_school_monthly_stat_path(school_id: @school.id),
-            :class => 'btn btn-primary') if can?(:create,@school.monthly_stats.new) %>

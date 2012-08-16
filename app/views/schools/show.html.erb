@@ -24,6 +24,9 @@
 
 <div id="stats">
   <%= render 'monthly_stats/chrono_table' %>
+  <%= link_to(t('.new', :default => t("helpers.links.new")),
+              new_school_monthly_stat_path(school_id: @school.id),
+              :class => 'btn btn-primary') if can?(:create,@school.monthly_stats.new) %>
 </div>
 
 

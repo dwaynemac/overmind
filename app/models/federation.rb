@@ -4,4 +4,5 @@ class Federation < ActiveRecord::Base
   validates_uniqueness_of :name
   has_many :users
   has_many :schools
+  has_many :monthly_stats, through: :schools
 end

@@ -15,6 +15,22 @@ class MonthlyStat < ActiveRecord::Base
 
   validates_uniqueness_of :name, scope: [:school_id, :ref_date]
 
+  def self.to_matrix
+    matrix = Hash.new({})
+    self.scoped.group_by(&:name).each_pair do |stat_name, stats|
+      matrix[stat_name] = stats.group_by{|ms|ms.ref_date.month}
+    end
+    matrix.each_pair do |stat_name,stats_by_month|
+      stats_by_month.each_pair do |month,stats|
+        if stats.size>1
+          matrix[stat_name][month] = ReducedStat.new(stats.sum(&:value))
+        else
+          matrix[stat_name][month] = stats.first
+        end
+      end
+    end
+  end
+
   private
 
   def move_ref_date_to_end_of_month

@@ -1,21 +1,20 @@
 <%- model_class = @federation.class -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1>
+    <%= @federation.name %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_federation_path(@federation), :class => 'btn btn-mini' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                federation_path(@federation),
+                :method => 'delete',
+                :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                :class => 'btn btn-danger btn-mini' %>
+  </h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @federation.name %></dd>
-</dl>
+<%= render 'monthly_stats/chrono_table' %>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               federations_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_federation_path(@federation), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              federation_path(@federation),
-              :method => 'delete',
-              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-              :class => 'btn btn-danger' %>
 </div>

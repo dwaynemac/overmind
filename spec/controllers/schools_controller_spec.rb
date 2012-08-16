@@ -14,5 +14,6 @@ describe SchoolsController do
       it { should respond_with :success }
       it { should assign_to :schools }
     end
+
   end
 end

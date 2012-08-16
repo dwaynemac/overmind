@@ -7,7 +7,7 @@
   <dt><strong><%= model_class.human_attribute_name(:username) %>:</strong></dt>
   <dd><%= @user.username %></dd>
   <dt><strong><%= model_class.human_attribute_name(:federation_id) %>:</strong></dt>
-  <dd><%= @user.federation_id %></dd>
+  <dd><%= @user.federation.try(:name) || '-' %></dd>
   <dt><strong><%= model_class.human_attribute_name(:role) %>:</strong></dt>
   <dd><%= @user.role %></dd>
 </dl>

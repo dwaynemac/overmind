@@ -6,6 +6,11 @@ class FederationsController < ApplicationController
 
   end
 
+  def show
+    @year = 2012
+    @monthly_stats = @federation.monthly_stats.to_matrix
+  end
+
   def new
 
   end

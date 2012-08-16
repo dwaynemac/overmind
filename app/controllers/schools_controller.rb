@@ -7,7 +7,8 @@ class SchoolsController < ApplicationController
   end
 
   def show
-    @monthly_stats = @school.monthly_stats
+    @year = Date.today.year
+    @monthly_stats = @school.monthly_stats.to_matrix
   end
 
   def new
