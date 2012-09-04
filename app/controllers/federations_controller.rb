@@ -3,7 +3,7 @@ class FederationsController < ApplicationController
   load_and_authorize_resource
 
   def index
-
+    @federations = @federations.sort{|a,b|b.schools.count <=> a.schools.count } # @federations.order('name')
   end
 
   def show

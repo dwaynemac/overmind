@@ -3,7 +3,7 @@ class SchoolsController < ApplicationController
   load_and_authorize_resource
 
   def index
-
+    @schools = @schools.order('name')
   end
 
   def show
