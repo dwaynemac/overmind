@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :school do
     sequence(:name){|n|"school#{n}"}
+    sequence(:nucleo_id)
   end
 end

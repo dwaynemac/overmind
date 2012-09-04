@@ -18,6 +18,7 @@ class RemoteSchool < LogicalModel
 
   alias_attribute :name, :uni_nome
   alias_attribute :id, :id_unidade
+  alias_attribute :federation_id, :uni_federacao
 
   # belongs_to federation
   def federation

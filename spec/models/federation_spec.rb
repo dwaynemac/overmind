@@ -9,4 +9,10 @@ describe Federation do
   it { should have_many :schools }
   it { should have_many(:monthly_stats).through(:schools)}
   it { should have_many :users}
+
+  it_behaves_like "it uses FederationApi" do
+    let(:object){Federation.new}
+    let(:klass){Federation}
+  end
+
 end

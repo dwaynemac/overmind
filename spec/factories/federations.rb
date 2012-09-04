@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :federation do
     sequence(:name){|n|"fed#{n}"}
+    sequence(:nucleo_id)
   end
 end
