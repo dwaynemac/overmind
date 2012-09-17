@@ -5,8 +5,9 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= t '.schools_count' %></th>
+      <th><%= link_to model_class.human_attribute_name(:name), federations_path %></th>
+      <th><%= link_to t('.schools_count'), federations_path(order: 'schools') %></th>
+      <th><%= link_to t('.students_count'), federations_path(order: 'students') %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -15,6 +16,7 @@
       <tr>
         <td><%= link_to_if can?(:read,federation), federation.name, federation %></td>
         <td><%= federation.schools.count %></td>
+        <td><%= federation.schools.sum(:last_students_count) %></td>
         <td>
           <%= link_to(t('.edit', :default => t("helpers.links.edit")),
                       edit_federation_path(federation), :class => 'btn btn-mini') if can?(:edit,federation) %>

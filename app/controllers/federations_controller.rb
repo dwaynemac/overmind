@@ -3,7 +3,14 @@ class FederationsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @federations = @federations.sort{|a,b|b.schools.count <=> a.schools.count } # @federations.order('name')
+    @federations = case params[:order]
+      when /schools/
+        @federations.sort{|a,b|b.schools.count <=> a.schools.count }
+      when /students/
+        @federations.sort{|a,b|b.schools.sum(:last_students_count) <=> a.schools.sum(:last_students_count) }
+      else
+        @federations.order('name')
+    end
   end
 
   def show
