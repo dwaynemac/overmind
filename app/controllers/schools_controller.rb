@@ -3,7 +3,9 @@ class SchoolsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @schools = @schools.page(params[:page]).order('name')
+    order_by = params[:order] || 'name'
+    @schools = @schools.order(order_by)
+    @schools = @schools.page(params[:page])
   end
 
   def show

@@ -7,4 +7,9 @@ class School < ActiveRecord::Base
 
   include SchoolApi
 
+  def cache_last_student_count
+    lsc = self.monthly_stats.where(name: :students).order(:ref_date).last
+    self.update_attribute(:last_students_count, lsc.try(:value))
+  end
+
 end

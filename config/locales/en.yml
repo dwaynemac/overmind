@@ -8,3 +8,9 @@ en:
       ref_date:
         not_end_of_month: "Reference date should be at the end of a month"
   see: "see"
+  date:
+    formats:
+      month: "%b %Y"
+  schools:
+    index:
+      last_registered_stat: "This column show last registered number for each school"

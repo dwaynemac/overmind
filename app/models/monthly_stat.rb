@@ -37,6 +37,20 @@ class MonthlyStat < ActiveRecord::Base
     matrix.symbolize_keys!
   end
 
+  def importing=(v)
+    @importing = v
+  end
+
+  def importing?
+    !!@importing
+  end
+
+  after_save :cache_student_count, unless: ->{self.importing?}
+
+  def cache_student_count
+    self.school.cache_last_student_count
+  end
+
   private
 
   def move_ref_date_to_end_of_month

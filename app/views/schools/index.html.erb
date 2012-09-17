@@ -7,8 +7,9 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= link_to model_class.human_attribute_name(:name), schools_path(order: 'name asc') %></th>
       <th><%= model_class.human_attribute_name(:federation_id) %></th>
+      <th><%= link_to t('.students'), schools_path(order: 'last_students_count desc'), rel: 'tooltip', data: {'original-title' => t('.last_registered_stat')} %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -17,6 +18,9 @@
       <tr>
         <td><%= link_to_if can?(:read,school), school.name, school_path(school) %></td>
         <td><%= school.federation.try :name %></td>
+        <td>
+          <%= school.last_students_count %>
+        </td>
         <td>
           <%= link_to(t('.edit', :default => t("helpers.links.edit")),
                       edit_school_path(school), :class => 'btn btn-mini') if can?(:edit, school) %>
