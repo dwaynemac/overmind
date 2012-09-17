@@ -14,6 +14,8 @@ gem 'pg', :group => :production
 
 gem 'logical_model'
 
+gem 'kaminari'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -38,4 +40,8 @@ group :development, :test do
   gem "libnotify"
   gem "yard", "~> 0.7.4"
   gem "yard-rest", :git => "git@github.com:dwaynemac/yard-rest-plugin.git"
+end
+
+group :development do
+  gem 'foreman'
 end

@@ -13,6 +13,9 @@ describe SchoolsController do
       end
       it { should respond_with :success }
       it { should assign_to :schools }
+      it "should paginate" do
+        assigns(:schools).should be_a Kaminari
+      end
     end
 
   end
