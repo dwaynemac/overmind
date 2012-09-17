@@ -13,7 +13,11 @@ module SchoolApi
       RemoteSchool
     end
 
-
+    # Fetches enabled schools from SecretariaVirtual
+    #  If school doesn't exist localy.
+    #  * it's created
+    #  If school exists localy
+    #  * name is updated
     def load_from_sv
       Federation.load_from_sv
       schools = self.api.paginate(filter: 'enabled')
@@ -23,8 +27,18 @@ module SchoolApi
           local_fed = Federation.find_by_nucleo_id(school.federation_id)
           School.create(name: school.name, nucleo_id: school.id, federation_id: local_fed.id)
         else
+          new_attributes = {}
+
           if local_school.name != school.name
-            local_school.update_attribute :name, school.name
+            new_attributes.merge!({name: school.name})
+          end
+          if local_school.federation.try(:nucleo_id) != school.federation_id
+            new_fed = Federation.find_by_nucleo_id(school.federation_id)
+            new_attributes.merge!({federation_id: new_fed.id})
+          end
+
+          unless new_attributes.empty?
+            local_school.update_attributes new_attributes
           end
         end
       end
