@@ -15,6 +15,11 @@ class MonthlyStat < ActiveRecord::Base
 
   validates_uniqueness_of :name, scope: [:school_id, :ref_date]
 
+  def self.for_year(year)
+    year = year.to_i
+    where(ref_date: (Date.civil(year,1,1)...Date.civil(year,12,31)))
+  end
+
   def self.to_matrix
     matrix = Hash.new({})
     self.scoped.group_by(&:name).each_pair do |stat_name, stats|

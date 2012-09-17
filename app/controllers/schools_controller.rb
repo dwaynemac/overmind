@@ -7,8 +7,9 @@ class SchoolsController < ApplicationController
   end
 
   def show
-    @year = Date.today.year
-    @monthly_stats = @school.monthly_stats.to_matrix
+    @years = (2005..Date.today.year)
+    @year = params[:year] || Date.today.year
+    @monthly_stats = @school.monthly_stats.for_year(@year).to_matrix
   end
 
   def new
