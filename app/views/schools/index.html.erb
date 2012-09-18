@@ -7,6 +7,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th></th>
       <th><%= link_to model_class.human_attribute_name(:name), schools_path(order: 'name asc') %></th>
       <th><%= model_class.human_attribute_name(:federation_id) %></th>
       <th><%= link_to t('.students'), schools_path(order: 'last_students_count desc'), rel: 'tooltip', data: {'original-title' => t('.last_registered_stat')} %></th>
@@ -16,6 +17,11 @@
   <tbody>
     <% @schools.each do |school| %>
       <tr>
+          <td>
+            <%- if school.account_name.nil? -%>
+              <span class="badge badge-important"><a href="#" rel="tooltip" data-original-title="<%= t('.not_syncing') %>">!</a></span>
+            <%- end -%>
+          </td>
         <td><%= link_to_if can?(:read,school), school.name, school_path(school) %></td>
         <td><%= school.federation.try :name %></td>
         <td>

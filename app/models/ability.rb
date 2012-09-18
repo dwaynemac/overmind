@@ -19,6 +19,7 @@ class Ability
     user ||= User.new
 
     cannot :manage, :all
+    cannot :sync, School
 
     case user.role
       when 'admin'
