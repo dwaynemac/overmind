@@ -16,6 +16,10 @@
 
 <%= render 'monthly_stats/chrono_table' %>
 
+<div>
+  <%= link_to t('.schools'), schools_path(federation_id: @federation.id), class: 'btn' %>
+</div>
+
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               federations_path, :class => 'btn'  %>
