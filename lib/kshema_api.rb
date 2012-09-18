@@ -1,5 +1,4 @@
 # expects base class to have included BelongsToAccount
-# expects base class to have :hydra attr_accessor
 module KshemaApi
 
   KEY = "a7ad4703203d9a3a120"
@@ -23,11 +22,9 @@ module KshemaApi
 
   module InstanceMethods
 
-    def async_fetch_stat(name, ref_date)
-      if self.account_name.nil?
-        return nil
-      end
-      request = Typhoeus::Request.new(uri, params: {
+    def fetch_stat(name, ref_date)
+
+      response = Typhoeus::Request.get(uri, params: {
           key: KEY,
           stat_name: transform_name(name),
           padma_account_name: self.account_name,
@@ -35,29 +32,15 @@ module KshemaApi
           month: ref_date.month
       })
 
-      request.on_complete do |response|
-        if response.success?
-          yield response.body
-        elsif response.timed_out?
-          nil
-        elsif response.code == 0
-          nil
-        else
-          nil
-        end
+      if response.success?
+        response.body
+      elsif response.timed_out?
+        nil
+      elsif response.code == 0
+        nil
+      else
+        nil
       end
-
-      HYDRA.queue(request)
-    end
-
-    def fetch_stat(name, ref_date)
-      if self.account_name.nil?
-        return nil
-      end
-      stat = nil
-      async_fetch_stat(name,ref_date){|res|stat = res}
-      HYDRA.run
-      stat
     end
 
     def uri
@@ -72,7 +55,7 @@ module KshemaApi
           interviews: 'VisitCount',
           p_interviews: 'VisitPCount'
       }
-      transform_name[name.to_sym]
+      transform_name[name]
     end
   end
 end
