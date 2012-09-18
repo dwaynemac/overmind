@@ -40,7 +40,7 @@ class School < ActiveRecord::Base
   # @return nil on Connection Problems
   # @return [TrueClass]
   def nucleo_enabled?
-    !!(self.api.uni_status == '1')
+    !!(self.api.try(:uni_status) == '1')
   end
 
   # @return nil on Connection Problems
