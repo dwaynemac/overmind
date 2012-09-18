@@ -44,7 +44,11 @@ class SchoolsController < ApplicationController
   end
 
   def sync_year
-    @school.sync_year_stats(params[:year].to_i,update_existing: true)
-    redirect_to school_path(id: @school.id, year: params[:year])
+    if @school.account_name.present?
+      @school.sync_year_stats(params[:year].to_i,update_existing: true)
+      redirect_to school_path(id: @school.id, year: params[:year])
+    else
+      redirect_to school_path(id: @school.id, year: params[:year]), error: 'no account_name'
+    end
   end
 end

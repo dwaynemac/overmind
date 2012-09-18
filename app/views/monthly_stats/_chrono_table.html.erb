@@ -40,11 +40,13 @@
                         :method => :delete,
                         :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
                         :class => 'pictos red') if can?(:destroy,monthly_stat) %>
-            <%= link_to('r',
-                        sync_school_monthly_stat_path(id: monthly_stat, school_id: @school.id, year: @year),
-                        rel: 'tooltip',
-                        data: {'original-title' => "sync from #{monthly_stat.service}"},
-                        :class => 'pictos red') if can?(:sync,@school) %>
+            <%- unless monthly_stat.service.blank? -%>
+              <%= link_to('r',
+                          sync_school_monthly_stat_path(id: monthly_stat, school_id: @school.id, year: @year),
+                          rel: 'tooltip',
+                          data: {'original-title' => "sync from #{monthly_stat.service}"},
+                          :class => 'pictos red') if can?(:sync,@school) %>
+            <%- end -%>
           <%- end -%>
         </td>
     <%- end -%>
