@@ -5,7 +5,7 @@ class RemoteSchool < LogicalModel
 
   self.use_api_key = true
   self.api_key_name = 'api_key'
-  self.api_key = 'secured'
+  self.api_key = (Rails.env=="production")? 'swasthya' : 'secured'
 
   self.host  = NUCLEO_HOST
   self.resource_path = "/schools"
@@ -13,7 +13,8 @@ class RemoteSchool < LogicalModel
   self.attribute_keys = [
       :id_unidade,
       :uni_federacao,
-      :uni_nome
+      :uni_nome,
+      :uni_status
   ]
 
   alias_attribute :name, :uni_nome

@@ -5,7 +5,7 @@ module SchoolApi
     base.send :include, InstanceMethods
     base.send :extend, ClassMethods
 
-    base.send :validates_uniqueness_of, :nucleo_id
+    base.send :validates_uniqueness_of, :nucleo_id, allow_blank: true
   end
 
   module ClassMethods

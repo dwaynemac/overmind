@@ -29,14 +29,22 @@
         <td>
           <%= monthly_stat = @monthly_stats[name][month]
               monthly_stat.try :value %>
-          <%- if monthly_stat && @school -%>
+          <%- unless monthly_stat.nil? || monthly_stat.is_a?(ReducedStat) || @school.nil? -%>
             <%= link_to('e',
-                        edit_school_monthly_stat_path(school_id: @school.id, id: monthly_stat.id), :class => 'pictos') if can?(:edit,monthly_stat) %>
+                        edit_school_monthly_stat_path(school_id: @school.id, id: monthly_stat.id),
+                        rel: 'tooltip', data: {'original-title' => t('edit')},
+                        :class => 'pictos') if can?(:edit,monthly_stat) %>
             <%= link_to('d',
                         school_monthly_stat_path(id: monthly_stat, school_id: @school.id),
+                        rel: 'tooltip', data: {'original-title' => t('delete')},
                         :method => :delete,
                         :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
                         :class => 'pictos red') if can?(:destroy,monthly_stat) %>
+            <%= link_to('r',
+                        sync_school_monthly_stat_path(id: monthly_stat, school_id: @school.id, year: @year),
+                        rel: 'tooltip',
+                        data: {'original-title' => "sync from #{monthly_stat.service}"},
+                        :class => 'pictos red') if can?(:sync,@school) %>
           <%- end -%>
         </td>
     <%- end -%>

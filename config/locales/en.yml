@@ -14,3 +14,7 @@ en:
   schools:
     index:
       last_registered_stat: "This column show last registered number for each school"
+    show:
+      sync_year_data: "Sync %{year} data"
+  edit: "edit"
+  delete: 'delete'

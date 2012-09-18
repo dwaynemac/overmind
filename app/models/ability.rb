@@ -23,6 +23,7 @@ class Ability
     case user.role
       when 'admin'
         can :manage, :all
+        can :sync, School
       when 'council'
         can :read, Federation
         can :read, School

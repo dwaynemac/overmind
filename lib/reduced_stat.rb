@@ -1,3 +1,4 @@
+# Used for Federation totals
 class ReducedStat
   attr_accessor :value
 

@@ -8,7 +8,7 @@ class RemoteFederation < LogicalModel
 
   self.use_api_key = true
   self.api_key_name = 'api_key'
-  self.api_key = 'secured'
+  self.api_key = (Rails.env=="production")? 'swasthya' : 'secured'
 
 
   self.attribute_keys = [

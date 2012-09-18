@@ -52,13 +52,38 @@ describe MonthlyStat do
       before do
         @matrix = MonthlyStat.to_matrix
       end
-      it "should set a Struct" do
+      it "should set a ReducedStat" do
         @matrix['enrollments'][1].should be_a(ReducedStat)
       end
       it "should store SUM in #value" do
         @matrix['enrollments'][1].value.should == 7
       end
 
+    end
+  end
+
+  it "stores service name" do
+    should have_db_column :service
+  end
+
+  describe ".create_from_service!" do
+    let(:school){ create(:school)}
+    before do
+      School.any_instance.stub(:fetch_stat).and_return('2')
+    end
+    it "should create a monthly stat On school" do
+      expect{MonthlyStat.create_from_service!(school,:enrollments,Date.today)}.to change{school.monthly_stats.count}.by(1)
+    end
+  end
+
+  describe "#update_from_service" do
+    let(:ms){ create(:monthly_stat, value: 1)}
+    before do
+      School.any_instance.stub(:fetch_stat).and_return('4')
+    end
+    it "should update value" do
+      ms.update_from_service!
+      ms.reload.value.should == 4
     end
   end
 end

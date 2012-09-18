@@ -30,4 +30,9 @@ class MonthlyStatsController < ApplicationController
     redirect_to @school
   end
 
+  def sync
+    @monthly_stat.update_from_service!
+    redirect_to school_path(id: @school.id, year: params[:year])
+  end
+
 end
