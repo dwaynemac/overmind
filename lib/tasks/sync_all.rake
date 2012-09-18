@@ -1,5 +1,13 @@
 task :sync_all => :environment do
-  School.all.each do |school|
+  schools = []
+  if ENV['federation_id']
+    schools = Federation.find(ENV['federation_id']).schools
+  elsif ENV['school_id']
+    schools = School.where(id: ENV['school_id'])
+  else
+    schools = School.all
+  end
+  schools.each do |school|
     if school.padma_enabled?
       puts "syncing #{school.name}"
       (2010..Time.zone.today.year).each do |year|
