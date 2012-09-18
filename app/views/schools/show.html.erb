@@ -35,7 +35,7 @@
               new_school_monthly_stat_path(school_id: @school.id),
               :class => 'btn btn-primary') if can?(:create,@school.monthly_stats.new) %>
   <%- if can?(:sync, @school) -%>
-    <%- if @school.account_name -%>
+    <%- if @school.padma_enabled? -%>
       <%= link_to(t('.sync_year_data', year: @year).capitalize,
                   sync_year_school_path(id: @school.id, year: @year),
                   class: 'btn btn-primary') %>
