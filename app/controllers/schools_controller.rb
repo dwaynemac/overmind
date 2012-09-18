@@ -4,6 +4,9 @@ class SchoolsController < ApplicationController
 
   def index
     order_by = params[:order] || 'name'
+    if params[:federation_id]
+      @schools = @schools.where(federation_id: params[:federation_id])
+    end
     @schools = @schools.order(order_by)
     @schools = @schools.page(params[:page])
   end
