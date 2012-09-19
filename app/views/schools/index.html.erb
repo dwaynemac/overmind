@@ -19,7 +19,7 @@
     <% @schools.each do |school| %>
       <tr>
           <td>
-            <%- if school.account_name.nil? -%>
+            <%- unless school.padma_enabled? -%>
               <span class="badge badge-important"><a href="#" rel="tooltip" data-original-title="<%= t('.not_syncing') %>">!</a></span>
             <%- end -%>
           </td>
