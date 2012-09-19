@@ -56,7 +56,9 @@
         month: "<%= Date::MONTHNAMES[month] %>",
         students: <%= monthly_stat = @monthly_stats[:students][month]; monthly_stat.try(:value) || 0 %>,
         dropouts: <%= monthly_stat = @monthly_stats[:dropouts][month]; monthly_stat.try(:value) || 0 %>,
-        enrollments: <%= monthly_stat = @monthly_stats[:enrollments][month]; monthly_stat.try(:value) || 0 %>
+        enrollments: <%= monthly_stat = @monthly_stats[:enrollments][month]; monthly_stat.try(:value) || 0 %>,
+        interviews: <%= monthly_stat = @monthly_stats[:interviews][month]; monthly_stat.try(:value) || 0 %>
+
       },
     <%- end -%>
     <%- month = 12 -%>
@@ -64,7 +66,8 @@
       month: "<%= Date::MONTHNAMES[month] %>",
       students: <%= monthly_stat = @monthly_stats[:students][month]; monthly_stat.try(:value) || 0 %>,
       dropouts: <%= monthly_stat = @monthly_stats[:dropouts][month]; monthly_stat.try(:value) || 0 %>,
-      enrollments: <%= monthly_stat = @monthly_stats[:enrollments][month]; monthly_stat.try(:value) || 0 %>
+      enrollments: <%= monthly_stat = @monthly_stats[:enrollments][month]; monthly_stat.try(:value) || 0 %>,
+      interviews: <%= monthly_stat = @monthly_stats[:interviews][month]; monthly_stat.try(:value) || 0 %>
     }
   ]
 </script>

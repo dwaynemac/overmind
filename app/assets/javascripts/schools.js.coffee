@@ -25,6 +25,16 @@ $(document).ready ->
   students_graph.dashLength = 1
   chart.addGraph(students_graph)
 
+  interviews_graph = new AmCharts.AmGraph()
+  interviews_graph.valueField = "interviews"
+  interviews_graph.title = "Interviews"
+  interviews_graph.type = "column"
+  interviews_graph.fillAlphas = 0.5;
+  interviews_graph.lineColor = "yellow"
+  interviews_graph.lineThickness = 1
+  interviews_graph.dashLength = 1
+  chart.addGraph(interviews_graph)
+
   enrollments_graph = new AmCharts.AmGraph()
   enrollments_graph.valueField = "enrollments"
   enrollments_graph.title = "Enrollments"
