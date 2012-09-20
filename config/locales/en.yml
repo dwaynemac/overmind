@@ -21,3 +21,9 @@ en:
       show_only_w_account_name_blank: "Only schools without account name"
   edit: "edit"
   delete: 'delete'
+  layouts:
+    navbar:
+      global: 'Global'
+      federations: 'Federations'
+      schools: 'Schools'
+      users: 'Users'

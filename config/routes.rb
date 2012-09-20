@@ -12,5 +12,10 @@ Overmind::Application.routes.draw do
   end
   resources :federations
   resources :users
+  resources :monthly_stats, only: [] do
+    collection do
+      get 'global'
+    end
+  end
   root to: 'schools#index'
 end

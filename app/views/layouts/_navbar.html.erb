@@ -10,19 +10,23 @@
       <a class="brand" href="#">Overmind</a>
       <div class="container nav-collapse">
         <ul class="nav">
+          <%= li(params[:controller], 'monthly_stats') do
+              link_to t('.global'), global_monthly_stats_path
+            end if can?(:see_global,MonthlyStat)
+          %>
           <%= li(params[:controller], 'federations') do
                 if current_user.federation.present? && can?(:read_only_one,Federation)
                   link_to current_user.federation.name, current_user.federation
                 else
-                  link_to 'federations', federations_path
+                  link_to t('.federations'), federations_path
                 end
               end if can?(:read, Federation)
           %>
           <%= li(params[:controller], 'schools') do
-                link_to 'schools', schools_path
+                link_to t('.schools'), schools_path
               end if can?(:read, School) -%>
           <%= li(params[:controller], 'users') do
-                link_to 'users', users_path
+                link_to t('.users'), users_path
               end if can?(:manage,User)
           %>
         </ul>

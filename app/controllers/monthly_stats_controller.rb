@@ -1,7 +1,7 @@
 class MonthlyStatsController < ApplicationController
 
-  load_and_authorize_resource :school
-  load_and_authorize_resource through: :school
+  load_and_authorize_resource :school, except: [:global]
+  load_and_authorize_resource through: :school, except: [:global]
 
   def index; end
 
@@ -35,4 +35,10 @@ class MonthlyStatsController < ApplicationController
     redirect_to school_path(id: @school.id, year: params[:year])
   end
 
+  def global
+    authorize! :see_global, MonthlyStat
+    @years = 2010..2012
+    @year = params[:year] || Time.zone.today.year
+    @monthly_stats = MonthlyStat.for_year(@year).to_matrix
+  end
 end

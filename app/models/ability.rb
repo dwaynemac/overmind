@@ -20,15 +20,18 @@ class Ability
 
     cannot :manage, :all
     cannot :sync, School
+    cannot :see_global, MonthlyStat
 
     case user.role
       when 'admin'
         can :manage, :all
         can :sync, School
+        can :see_global, MonthlyStat
       when 'council'
         can :read, Federation
         can :read, School
         can :read, MonthlyStat
+        can :see_global, MonthlyStat
       else
         can :read_only_one, Federation
         can :read, Federation, id: user.federation_id
