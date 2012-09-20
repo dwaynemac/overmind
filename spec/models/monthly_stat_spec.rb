@@ -42,23 +42,22 @@ describe MonthlyStat do
       @matrix.default.should == {}
     end
     it "should default matrix[stat-name][month] to nil" do
-      @matrix['no-key'].default.should be_nil
-      @matrix['enrollments'].default.should be_nil
+      @matrix[:'no-key'].default.should be_nil
+      @matrix[:enrollments].default.should be_nil
     end
     it "should store found stats on matrix keeping scope" do
-      @matrix.should == {'enrollments' => {1 => @jan, 4 => @apr, 12 => @dec}}
+      @matrix.should == {:enrollments => {1 => @jan, 4 => @apr, 12 => @dec}}
     end
     context "when there is more than one stat in a month (eg: scoping by fed)" do
       before do
         @matrix = MonthlyStat.to_matrix
       end
       it "should set a ReducedStat" do
-        @matrix['enrollments'][1].should be_a(ReducedStat)
+        @matrix[:enrollments][1].should be_a(ReducedStat)
       end
       it "should store SUM in #value" do
-        @matrix['enrollments'][1].value.should == 7
+        @matrix[:enrollments][1].value.should == 7
       end
-
     end
   end
 
