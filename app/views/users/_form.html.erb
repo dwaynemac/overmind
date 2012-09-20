@@ -11,6 +11,14 @@
       <%= f.select :federation_id, Federation.accessible_by(current_ability).map{|fed|[fed.name,fed.id]} %>
     </div>
   </div>
+
+  <div class="control-group">
+    <%= f.label :locale, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :locale, User::LOCALES %>
+    </div>
+  </div>
+
   <div class="control-group">
     <%= f.label :role, :class => 'control-label' %>
     <div class="controls">
@@ -20,7 +28,7 @@
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+    <%= link_to t('cancel', :default => t("helpers.links.cancel")),
                 users_path, :class => 'btn' %>
   </div>
 <% end %>

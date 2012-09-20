@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120918163709) do
+ActiveRecord::Schema.define(:version => 20120920162741) do
 
   create_table "federations", :force => true do |t|
     t.string   "name"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20120918163709) do
     t.datetime "updated_at",    :null => false
     t.integer  "federation_id"
     t.string   "role"
+    t.string   "locale"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true

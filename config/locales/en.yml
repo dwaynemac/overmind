@@ -2,12 +2,22 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  see: "see"
+  confirm: "sure?"
+  cancel: "cancel"
+  search: "Search"
+  delete: 'delete'
+  destroy: 'delete'
+  monthly_stats:
+    chrono_table:
+      evasion_calculation: 'Calculo de la evasion'
+      evasion_explanation: 'Esta evasion es calculada a partir de valores absolutos. Dividiendo el TOTAL de bajas por el TOTAL de alumnos. No es el promedio de las evasiones'
+      efectividad_calculation: "Cálculo de la efectividad"
+      efectividad_explanation: "Esta efectividad es calculada a partir de valores absolutos. Dividiendo el TOTAL de inscripciones por el TOTAL de visitas. No es el promedio de las efectividades"
   errors:
     attributes:
       ref_date:
         not_end_of_month: "Reference date should be at the end of a month"
-  see: "see"
   date:
     formats:
       month: "%b %Y"
@@ -15,15 +25,24 @@ en:
     index:
       last_registered_stat: "This column show last registered number for each school"
       not_syncing: "No sync service configured"
+      students: "Students"
+      title: "Schools"
+      new: "New school"
     show:
       sync_year_data: "Sync %{year} data"
     search_form:
       show_only_w_account_name_blank: "Only schools without account name"
-  edit: "edit"
-  delete: 'delete'
   layouts:
     navbar:
       global: 'Global'
       federations: 'Federations'
       schools: 'Schools'
       users: 'Users'
+  users:
+    index:
+      actions: "Actions"
+      new: "New user"
+  activerecord:
+    attributes:
+      school:
+        account_name: "Cuenta PADMA"

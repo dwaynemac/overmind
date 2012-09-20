@@ -56,7 +56,7 @@
     <th>
       % Evasion
       <%- if !@monthly_stats[:dropouts].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !@monthly_stats[:students].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
-        <a style="position:relative; float: right;" rel="popover" href="#" class="pictos" data-title="Cálculo de la evasion" data-content="Esta evasión es calculada a partir de valores absolutos. Dividiendo el TOTAL de bajas por el TOTAL de alumnos. No es el promedio de las evasiones">?</a>
+        <a style="position:relative; float: right;" rel="popover" href="#" class="pictos" data-title="<%= t('monthly_stats.chrono_table.evasion_calculation') %>" data-content="<%= t('monthly_stats.chrono_table.evasion_explanation') %>">?</a>
       <%- end -%>
     </th>
       <td>-</td>
@@ -76,7 +76,7 @@
     <th>
       % Efectividad
       <%- if !@monthly_stats[:enrollments].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !@monthly_stats[:interviews].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
-        <a style="position:relative; float: right;" rel="popover" href="#" class="pictos" data-title="Cálculo de la efectividad" data-content="Esta efectividad es calculada a partir de valores absolutos. Dividiendo el TOTAL de inscripciones por el TOTAL de visitas. No es el promedio de las efectividades">?</a>
+        <a style="position:relative; float: right;" rel="popover" href="#" class="pictos" data-title="<%= t('monthly_stats.chrono_table.efectividad_calculation') %>" data-content="<%= t('monthly_stats.chrono_table.efectividad_explanation') %>">?</a>
       <%- end -%>
     </th>
     <%- (1...13).each do |month| -%>

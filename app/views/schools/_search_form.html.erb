@@ -9,15 +9,15 @@
   <div id="search_form">
     <%= search_form_for @q, class: 'form-horizontal' do |f| %>
       <div class="control-group">
-        <%= f.label :name_cont, t('school.attributes.name') %>
+        <%= f.label :name_cont, t('activerecord.attributes.school.name') %>
         <%= f.text_field :name_cont %>
       </div>
       <div class="control-group">
-        <%= f.label :account_name_cont, t('school.attributes.account_name') %>
+        <%= f.label :account_name_cont, t('activerecord.attributes.school.account_name') %>
         <%= f.text_field :account_name_cont %>
       </div>
       <div class="control-group">
-        <%= f.label :federation_id_eq, t('school.attributes.federation') %>
+        <%= f.label :federation_id_eq, t('activerecord.attributes.school.federation_id') %>
         <%= f.select :federation_id_eq, Federation.all.map { |f| [f.name, f.id] }, include_blank: true %>
       </div>
       <div class="control-group">
