@@ -19,7 +19,7 @@
 <%= render 'monthly_stats/chrono_table' %>
 
 <div>
-  <%= link_to t('.schools'), schools_path(federation_id: @federation.id), class: 'btn' %>
+  <%= link_to t('.schools'), schools_path(q: {federation_id_eq: @federation.id}), class: 'btn' %>
 </div>
 
 <div class="form-actions">

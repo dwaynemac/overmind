@@ -1,0 +1,30 @@
+<div id="search">
+  <script type="text/javascript">
+    function showSearchForm(){
+      $('#show-search-form-btn').hide();
+      $('#search_form').show();
+    }
+  </script>
+  <%= link_to t('search'), "javascript:showSearchForm();", class: 'btn', id: 'show-search-form-btn' %>
+  <div id="search_form">
+    <%= search_form_for @q, class: 'form-horizontal' do |f| %>
+      <div class="control-group">
+        <%= f.label :name_cont, t('school.attributes.name') %>
+        <%= f.text_field :name_cont %>
+      </div>
+      <div class="control-group">
+        <%= f.label :account_name_cont, t('school.attributes.account_name') %>
+        <%= f.text_field :account_name_cont %>
+      </div>
+      <div class="control-group">
+        <%= f.label :federation_id_eq, t('school.attributes.federation') %>
+        <%= f.select :federation_id_eq, Federation.all.map { |f| [f.name, f.id] }, include_blank: true %>
+      </div>
+      <div class="control-group">
+        <%= f.label :account_name_blank, t('.show_only_w_account_name_blank') %>
+        <%= f.check_box :account_name_blank %>
+      </div>
+      <%= f.button t('search'), class: 'btn' %>
+    <%- end -%>
+  </div>
+</div>

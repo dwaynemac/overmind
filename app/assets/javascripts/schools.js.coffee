@@ -72,5 +72,4 @@ $(document).ready ->
   legend.markerType = "circle"
   chart.addLegend(legend)
 
-
   chart.write('chartContainer')
