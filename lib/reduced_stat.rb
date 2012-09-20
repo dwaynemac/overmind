@@ -1,8 +1,9 @@
 # Used for Federation totals
 class ReducedStat
-  attr_accessor :value
+  attr_accessor :value, :ref_date
 
-  def initialize(value)
-    self.value = value
+  def initialize(attributes)
+    self.value = attributes[:value]
+    self.ref_date = attributes[:ref_date]
   end
 end

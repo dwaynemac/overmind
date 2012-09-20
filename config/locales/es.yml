@@ -7,6 +7,15 @@ es:
   delete: 'eliminar'
   destroy: 'eliminar'
   search: 'buscar'
+  monthly_stat:
+    names:
+      dropout_rate: '% Evasión'
+      enrollment_rate: '% Efectividad'
+      enrollments: 'Matrículas'
+      dropouts: 'Bajas'
+      students: 'Alumnos'
+      interviews: 'Visitas'
+      p_interviews: 'Visitas perfil'
   views:
     pagination:
       first: 'Primera'

@@ -7,6 +7,15 @@ pt:
   delete: 'apagar'
   destroy: 'apagar'
   search: 'pequisar'
+  monthly_stat:
+    names:
+      dropout_rate: '% Evasāo'
+      enrollment_rate: '% Efetividad'
+      enrollments: 'Matriculas'
+      dropouts: 'Baixas'
+      students: 'Alunos'
+      interviews: 'Visitas'
+      p_interviews: 'Visitas perfil'
   views:
     pagination:
       first: 'Primeira'

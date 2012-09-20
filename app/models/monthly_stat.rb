@@ -3,6 +3,7 @@ class MonthlyStat < ActiveRecord::Base
   attr_accessible :value, :name, :school_id, :ref_date, :service
 
   VALID_NAMES = [:enrollments, :dropouts, :students, :interviews, :p_interviews]
+  RATES = [:dropout_rate, :enrollment_rate]
 
   belongs_to :school
   validates_presence_of :school
@@ -27,19 +28,57 @@ class MonthlyStat < ActiveRecord::Base
 
   def self.to_matrix
     matrix = Hash.new({})
+
+    # fetch from DB grouped by name.
     self.scoped.group_by(&:name).each_pair do |stat_name, stats|
+      # TODO ERROR: if stat has not been scoped to a year this will acumulate all months
       matrix[stat_name] = stats.group_by{|ms|ms.ref_date.month}
     end
+
+    # reduce each month to a total
     matrix.each_pair do |stat_name,stats_by_month|
       stats_by_month.each_pair do |month,stats|
         if stats.size>1
-          matrix[stat_name][month] = ReducedStat.new(stats.sum(&:value))
+          matrix[stat_name][month] = ReducedStat.new(
+              value: stats.sum(&:value),
+              ref_date: stats.last.ref_date
+          )
         else
           matrix[stat_name][month] = stats.first
         end
       end
     end
+
     matrix.symbolize_keys!
+
+    # dropout_rate
+    matrix[:dropout_rate] = {}
+    matrix[:dropouts].each_pair do |month,stat|
+      students = nil
+      if month > 1
+        students = matrix[:students][month-1].try(:value)
+      else
+        # reproduce current scope removing conditions on ref_date
+        students = self.unscoped.joins(self.scoped.joins_values).where(self.scoped.where_clauses.reject{|c|c=~/ref_date/}).where(ref_date: (stat.ref_date-1.month), name: 'students').sum(:value)
+      end
+
+      if students && students > 0
+        drops = matrix[:dropouts][month].try(:value) || 0
+        matrix[:dropout_rate][month] = ReducedStat.new(value: drops.to_f / students.to_f)
+      end
+    end
+
+    # enrollment_rate
+    matrix[:enrollment_rate] = {}
+    matrix[:enrollments].each_key do |month|
+      interviews = matrix[:p_interviews][month].try(:value)
+      if interviews && interviews > 0
+        enrollments = matrix[:enrollments][month].try(:value) || 0
+        matrix[:enrollment_rate][month] = ReducedStat.new(value: enrollments.to_f / interviews.to_f)
+      end
+    end
+
+    matrix
   end
 
   def importing=(v)

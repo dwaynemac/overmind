@@ -17,7 +17,7 @@ $(document).ready ->
 
   students_graph = new AmCharts.AmGraph()
   students_graph.valueField = "students"
-  students_graph.title = "Students"
+  students_graph.title = $("#stats-names").data(students_graph.valueField)
   students_graph.type = "line"
   students_graph.lineColor = "#3a81ec"
   students_graph.lineThickness = 2
@@ -27,7 +27,7 @@ $(document).ready ->
 
   p_interviews_graph = new AmCharts.AmGraph()
   p_interviews_graph.valueField = "p_interviews"
-  p_interviews_graph.title = "P Interviews"
+  p_interviews_graph.title = $("#stats-names").data(p_interviews_graph.valueField)
   p_interviews_graph.type = "column"
   p_interviews_graph.fillAlphas = 0.5;
   p_interviews_graph.lineColor = "yellow"
@@ -37,7 +37,7 @@ $(document).ready ->
 
   enrollments_graph = new AmCharts.AmGraph()
   enrollments_graph.valueField = "enrollments"
-  enrollments_graph.title = "Enrollments"
+  enrollments_graph.title = $("#stats-names").data(enrollments_graph.valueField)
   enrollments_graph.type = "column"
   enrollments_graph.fillAlphas = 0.5;
   enrollments_graph.lineColor = "green"
@@ -47,7 +47,7 @@ $(document).ready ->
 
   dropouts_graph = new AmCharts.AmGraph()
   dropouts_graph.valueField = "dropouts"
-  dropouts_graph.title = "Dropouts"
+  dropouts_graph.title = $("#stats-names").data(dropouts_graph.valueField)
   dropouts_graph.type = "column"
   dropouts_graph.fillAlphas = 0.5;
   dropouts_graph.lineColor = "red"

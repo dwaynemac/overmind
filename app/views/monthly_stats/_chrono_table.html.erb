@@ -24,7 +24,7 @@
   <tbody>
   <%- MonthlyStat::VALID_NAMES.each do |name| -%>
     <tr>
-      <th><%= name %></th>
+      <th><%= t("monthly_stat.names.#{name}") %></th>
       <%- (1...13).each do |month| -%>
         <td>
           <%= monthly_stat = @monthly_stats[name][month]
@@ -54,40 +54,43 @@
   <%- end -%>
   <tr>
     <th>
-      % Evasion
+      <%= t('monthly_stat.names.dropout_rate') %>
       <%- if !@monthly_stats[:dropouts].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !@monthly_stats[:students].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
-        <a style="position:relative; float: right;" rel="popover" href="#" class="pictos" data-title="<%= t('monthly_stats.chrono_table.evasion_calculation') %>" data-content="<%= t('monthly_stats.chrono_table.evasion_explanation') %>">?</a>
+        <a style="position:relative; float: right;"
+           rel="popover"
+           href="#"
+           class="pictos"
+           data-title="<%= t('monthly_stats.chrono_table.evasion_calculation') %>"
+           data-content="<%= t('monthly_stats.chrono_table.evasion_explanation') %>">?</a>
       <%- end -%>
     </th>
-      <td>-</td>
-      <%- (2...13).each do |month| -%>
+      <%- (1...13).each do |month| -%>
         <td>
-          <%-
-              dropouts = @monthly_stats[:dropouts][month].try(:value)||0
-              students = @monthly_stats[:students][month-1].try(:value)
+          <%= v = @monthly_stats[:dropout_rate][month].try :value
+              number_with_precision(v*100,precision:0) if v
           -%>
-          <%- if students -%>
-            <%= number_with_precision (dropouts.to_f/students)*100, precision: 0 %>%
-          <%- end -%>
+          <%= '%' if v %>
         </td>
       <%- end -%>
   </tr>
   <tr>
     <th>
-      % Efectividad
+      <%= t('monthly_stat.names.enrollment_rate') %>
       <%- if !@monthly_stats[:enrollments].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !@monthly_stats[:interviews].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
-        <a style="position:relative; float: right;" rel="popover" href="#" class="pictos" data-title="<%= t('monthly_stats.chrono_table.efectividad_calculation') %>" data-content="<%= t('monthly_stats.chrono_table.efectividad_explanation') %>">?</a>
+        <a style="position:relative; float: right;"
+           rel="popover"
+           href="#"
+           class="pictos"
+           data-title="<%= t('monthly_stats.chrono_table.efectividad_calculation') %>"
+           data-content="<%= t('monthly_stats.chrono_table.efectividad_explanation') %>">?</a>
       <%- end -%>
     </th>
     <%- (1...13).each do |month| -%>
       <td>
-        <%-
-            enrollments = @monthly_stats[:enrollments][month].try(:value)||0
-            p_interviews = @monthly_stats[:p_interviews][month].try(:value)
-        -%>
-        <%- if p_interviews -%>
-          <%= number_with_precision (enrollments.to_f/p_interviews)*100, precision: 0 %>%
-        <%- end -%>
+        <%= v = @monthly_stats[:enrollment_rate][month].try :value
+            number_with_precision v*100, precision: 0 if v
+        %>
+        <%= '%' if v %>
       </td>
     <%- end -%>
   </tr>

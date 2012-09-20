@@ -45,6 +45,14 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
-
+    <%# TODO use js I18n, see CRM -%>
+    <div style="display: none;">
+      <!-- i18n -->
+      <span id="stats-names"
+        <%- (MonthlyStat::VALID_NAMES+MonthlyStat::RATES).each do |name| -%>
+          data-<%= name %>="<%= t "monthly_stat.names.#{name}" %>"
+        <%- end -%>
+      ></span>
+    </div>
   </body>
 </html>
