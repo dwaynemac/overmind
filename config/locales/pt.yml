@@ -14,6 +14,9 @@ pt:
       enrollments: 'Matriculas'
       dropouts: 'Baixas'
       students: 'Alunos'
+      assistant_students: 'Monitorados Assistentes'
+      professor_students: 'Monitorados Docentes'
+      master_students:    'Monitorados Maestros'
       interviews: 'Visitas'
       p_interviews: 'Visitas perfil'
   views:

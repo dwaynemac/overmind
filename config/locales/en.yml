@@ -8,6 +8,18 @@ en:
   search: "Search"
   delete: 'delete'
   destroy: 'delete'
+  monthly_stat:
+    names:
+      dropout_rate: 'Dropout Rate'
+      enrollment_rate: 'Enrollment Rate'
+      enrollments: 'Enrollments'
+      dropouts: 'Drop Outs'
+      students: 'Students'
+      assistant_students: 'Assistant Students'
+      professor_students: 'Professor Students'
+      master_students:    'Master Students'
+      interviews: 'Interviews'
+      p_interviews: 'P Interviews'
   monthly_stats:
     chrono_table:
       evasion_calculation: 'Calculo de la evasion'

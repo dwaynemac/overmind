@@ -2,7 +2,11 @@ class MonthlyStat < ActiveRecord::Base
 
   attr_accessible :value, :name, :school_id, :ref_date, :service
 
-  VALID_NAMES = [:enrollments, :dropouts, :students, :interviews, :p_interviews]
+  VALID_NAMES = [:enrollments,
+                 :dropouts,
+                 :students, :assistant_students, :professor_students, :master_students,
+                 :interviews, :p_interviews
+  ]
   RATES = [:dropout_rate, :enrollment_rate]
 
   belongs_to :school

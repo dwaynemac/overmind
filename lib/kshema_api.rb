@@ -53,7 +53,10 @@ module KshemaApi
           dropouts: 'DropoutsCount',
           students: 'StudentCount',
           interviews: 'VisitCount',
-          p_interviews: 'VisitPCount'
+          p_interviews: 'VisitPCount',
+          assistant_students: 'AsistenteStudentCount',
+          professor_students: 'DocenteStudentCount',
+          master_students: 'MaestroStudentCount',
       }
       transform_name[name]
     end
