@@ -19,6 +19,9 @@ class MonthlyStat < ActiveRecord::Base
   before_validation :move_ref_date_to_end_of_month
   validate :ref_date_is_end_of_month
 
+  after_save :cache_student_count, unless: ->{self.importing?}
+  after_save :cache_teachers_count, unless: ->{self.importing?}
+
   validates_uniqueness_of :name, scope: [:school_id, :ref_date]
 
   def self.for_month(ref_date)
@@ -93,10 +96,14 @@ class MonthlyStat < ActiveRecord::Base
     !!@importing
   end
 
-  after_save :cache_student_count, unless: ->{self.importing?}
-
   def cache_student_count
+    # TODO dont run if this stat is not :students
     self.school.cache_last_student_count
+  end
+
+  def cache_teachers_count
+    # TODO dont run if this stat is not :assistante_students, etc
+    self.school.cache_last_teachers_count
   end
 
   # creates a new MonthlyStat

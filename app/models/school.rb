@@ -37,6 +37,17 @@ class School < ActiveRecord::Base
     self.update_attribute(:last_students_count, lsc.try(:value))
   end
 
+  def cache_last_teachers_count
+    sum = 0
+    [:assistant_students, :professor_students, :master_students].each do |stat_name|
+      l = self.monthly_stats.where(name: stat_name).order(:ref_date).last
+      if l
+        sum += l.value
+      end
+    end
+    self.update_attribute(:last_teachers_count, sum)
+  end
+
   # @return nil on Connection Problems
   # @return [TrueClass]
   def nucleo_enabled?

@@ -36,6 +36,7 @@ pt:
       actions: 'Acçoes'
       title: "Unidades"
       new: "Nova unidade"
+      teachers: "Instrutores"
     show:
       sync_year_data: "Sincroniçar dados do %{year}"
     search_form:
@@ -280,3 +281,4 @@ pt:
       students_count: "Número de alunos"
       actions: "Ações"
       new: "Nova federaçāo"
+      teachers: "Instrutores"

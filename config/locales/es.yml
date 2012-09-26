@@ -36,6 +36,7 @@ es:
       actions: 'Acciones'
       title: "Escuelas"
       new: "Nueva escuela"
+      teachers: "Instructores"
     show:
       sync_year_data: "Sincronizar datos del %{year}"
     search_form:
@@ -280,3 +281,4 @@ es:
       students_count: "Cantidad de alumnos"
       actions: "Acciones"
       new: "Nueva federación"
+      teachers: "Instructores"
