@@ -37,6 +37,7 @@ pt:
       title: "Unidades"
       new: "Nova unidade"
       teachers: "Instrutores"
+      synced_at: "Ultima sincroniçacāo"
     show:
       sync_year_data: "Sincroniçar dados do %{year}"
     search_form:

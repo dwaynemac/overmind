@@ -43,6 +43,7 @@ en:
       title: "Schools"
       new: "New school"
       teachers: "Teachers"
+      synced_at: "Last synced at"
     show:
       sync_year_data: "Sync %{year} data"
     search_form:

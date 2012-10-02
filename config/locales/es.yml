@@ -37,6 +37,7 @@ es:
       title: "Escuelas"
       new: "Nueva escuela"
       teachers: "Instructores"
+      synced_at: "Última sincronización"
     show:
       sync_year_data: "Sincronizar datos del %{year}"
     search_form:

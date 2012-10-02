@@ -46,6 +46,7 @@
     <%- if @school.padma_enabled? -%>
       <%= link_to(t('.sync_year_data', year: @year).capitalize,
                   sync_year_school_path(id: @school.id, year: @year),
+                  rel: 'tooltip', data: {'original-title' => "#{t('schools.index.synced_at')}: #{l(@school.synced_at) if @school.synced_at}"},
                   class: 'btn btn-primary') %>
     <%- end -%>
   <%- end -%>
