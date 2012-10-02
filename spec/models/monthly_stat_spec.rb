@@ -111,13 +111,25 @@ describe MonthlyStat do
   end
 
   describe "#update_from_service" do
-    let(:ms){ create(:monthly_stat, value: 1)}
-    before do
-      School.any_instance.stub(:fetch_stat).and_return('4')
+    context "for monthly stat with service name stored" do
+      let(:ms){ create(:monthly_stat, value: 1, service: 'any-service')}
+      before do
+        School.any_instance.stub(:fetch_stat).and_return('4')
+      end
+      it "should update value" do
+        ms.update_from_service!
+        ms.reload.value.should == 4
+      end
     end
-    it "should update value" do
-      ms.update_from_service!
-      ms.reload.value.should == 4
+    context "for monthly stat withou service name stored" do
+      let(:ms){ create(:monthly_stat, value: 1)}
+      before do
+        School.any_instance.stub(:fetch_stat).and_return('4')
+      end
+      it "should not update value" do
+        ms.update_from_service!
+        ms.reload.value.should == 1
+      end
     end
   end
 end
