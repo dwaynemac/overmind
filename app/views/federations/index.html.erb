@@ -8,7 +8,7 @@
       <th><%= link_to model_class.human_attribute_name(:name), federations_path %></th>
       <th><%= link_to t('.schools_count'), federations_path(order: 'schools') %></th>
       <th><%= link_to t('.students_count'), federations_path(order: 'students') %></th>
-      <th><%= t('.teachers') %></th>
+      <th><%= link_to t('.teachers'), federations_path(order: 'teachers') %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
