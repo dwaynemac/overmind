@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120926233104) do
+ActiveRecord::Schema.define(:version => 20121002195934) do
 
   create_table "federations", :force => true do |t|
     t.string   "name"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20120926233104) do
     t.integer  "last_students_count"
     t.string   "account_name"
     t.integer  "last_teachers_count"
+    t.datetime "synced_at"
   end
 
   create_table "users", :force => true do |t|

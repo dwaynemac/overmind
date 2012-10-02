@@ -30,6 +30,7 @@ class School < ActiveRecord::Base
         end
       end
     end
+    self.update_attribute(:synced_at,Time.now)
   end
 
   def cache_last_student_count
