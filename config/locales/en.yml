@@ -26,6 +26,8 @@ en:
       evasion_explanation: 'Esta evasion es calculada a partir de valores absolutos. Dividiendo el TOTAL de bajas por el TOTAL de alumnos. No es el promedio de las evasiones'
       efectividad_calculation: "Cálculo de la efectividad"
       efectividad_explanation: "Esta efectividad es calculada a partir de valores absolutos. Dividiendo el TOTAL de inscripciones por el TOTAL de visitas. No es el promedio de las efectividades"
+    form:
+      manual_edition_disable_sync: "Manually stored statístics are not synced with other services.."
   errors:
     attributes:
       ref_date:
@@ -62,3 +64,4 @@ en:
   federations:
     index:
       teachers: "Teachers"
+  warning: "Warning!"

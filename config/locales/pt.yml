@@ -275,6 +275,8 @@ pt:
       evasion_explanation: "Esta evasāo foi calculada a partir de dados absolutos. Dividindo o TOTAL de baixas por o TOTAL de alunos. Nāo é a média de evasōes"
       efectividad_calculation: "Cálculo da efetividad"
       efectividad_explanation: "Esta efetividad foi calculada a partir de dados absolutos. Dividiedo o TOTAL de inscriçōnes por o TOTAL de visitas. Nāo é a média de efetividades"
+    form:
+      manual_edition_disable_sync: "Estatísticas cadastradas manualmente nāo sāo sincornizadas com outros sistemas como PADMA."
   federations:
     index:
       schools_count: "Número de unidades"
@@ -282,3 +284,4 @@ pt:
       actions: "Ações"
       new: "Nova federaçāo"
       teachers: "Instrutores"
+  warning: "Atençāo!"
