@@ -15,7 +15,7 @@
       <th><%= link_to model_class.human_attribute_name(:name), schools_path(order: 'name asc', params: query) %></th>
       <th><%= model_class.human_attribute_name(:federation_id) %></th>
       <th><%= link_to t('.students'), schools_path(order: 'last_students_count desc', params: query), rel: 'tooltip', data: {'original-title' => t('.last_registered_stat')} %></th>
-      <th><%= link_to_if false, t('.teachers'), schools_path(order: 'last_teachers_count desc', params: query), rel: 'tooltip', data: {'original-title' => t('.last_registered_stat')} %></th>
+      <th><%= link_to t('.teachers'), schools_path(order: 'last_teachers_count desc', params: query), rel: 'tooltip', data: {'original-title' => t('.last_registered_stat')} %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
