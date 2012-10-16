@@ -1,10 +1,21 @@
+# MonthlyStat represents statistiv for a *month*
+# = Attributes
+#
+# * :ref_date is last day of such month.
+# * :name [String] name of the statistic.
+# * :service name of service from wich this stat was extracted. If nil then stat was manually registered.
+# * :value
+#
 class MonthlyStat < ActiveRecord::Base
 
-  attr_accessible :value, :name, :school_id, :ref_date, :service
+  attr_accessible :value, :name, :school_id, :ref_date, :service, :account_name, :id
 
   VALID_NAMES = [:enrollments,
                  :dropouts,
-                 :students, :assistant_students, :professor_students, :master_students,
+                 :students,
+                 :assistant_students, # students at Assistant lev
+                 :professor_students, # students at Professor level.
+                 :master_students, # students at Master level.
                  :interviews, :p_interviews
   ]
   RATES = [:dropout_rate, :enrollment_rate]
@@ -131,6 +142,19 @@ class MonthlyStat < ActiveRecord::Base
         nil
       end
     end
+  end
+
+  def as_json(args={})
+    args = {methods: [:account_name], except: [:school_id]}.merge(args)
+    super(args)
+  end
+
+  def account_name=(name)
+    self.school = School.where(account_name: name).last
+  end
+
+  def account_name
+    school.try :account_name
   end
 
   private
