@@ -17,5 +17,12 @@ Overmind::Application.routes.draw do
       get 'global'
     end
   end
+
+  namespace 'api' do
+    namespace 'v0' do
+      resources :monthly_stats
+    end
+  end
+
   root to: 'schools#index'
 end
