@@ -16,6 +16,11 @@ PADMA_ACCOUNTS_HOST = case Rails.env
     "localhost:3001"
 end
 
+module Accounts
+  HYDRA = ::HYDRA
+  API_KEY = "8c330b5d70f86ebfa6497c901b299b79afc6d68c60df6df0bda0180d3777eb4a5528924ac96cf58a25e599b4110da3c4b690fa29263714ec6604b6cb2d943656"
+end
+
 class LogicalModel
   if Rails.env.production?
     def self.logger

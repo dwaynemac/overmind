@@ -8,6 +8,9 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    accounts_client (0.0.1)
+      logical_model
+      railties (~> 3.1)
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
       mail (~> 2.4.4)
@@ -204,6 +207,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  accounts_client (~> 0.0.1)
   cancan
   coffee-rails (~> 3.2.1)
   devise (= 1.5.0)
