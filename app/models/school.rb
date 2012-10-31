@@ -7,7 +7,7 @@ class School < ActiveRecord::Base
 
   include SchoolApi
   
-  include BelongsToAccount
+  include Accounts::BelongsToAccount
   validates_uniqueness_of :account_name, allow_blank: true
 
   include KshemaApi

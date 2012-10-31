@@ -208,5 +208,5 @@ Devise.setup do |config|
   # end
 
   config.cas_base_url    = "https://metododerose.org:8443"
-  config.cas_create_user = false
+  config.cas_create_user = true
 end

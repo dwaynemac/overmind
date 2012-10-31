@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  include Accounts::IsAUser
+
   devise :cas_authenticatable
 
   attr_accessible :username, :federation_id, :role, :locale
@@ -8,7 +10,7 @@ class User < ActiveRecord::Base
   validates_presence_of :username
   belongs_to :federation
 
-  VALID_ROLES = %W(admin council)
+  VALID_ROLES = %W(admin council president)
 
   LOCALES = %W(es en pt)
 end

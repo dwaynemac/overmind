@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-
+    @users = @users.where("role is not null AND role <> ''") unless params[:all]
   end
 
   def new

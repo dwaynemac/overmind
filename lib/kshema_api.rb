@@ -1,4 +1,4 @@
-# expects base class to have included BelongsToAccount
+# expects base class to have included Accounts::BelongsToAccount
 module KshemaApi
 
   KEY = "a7ad4703203d9a3a120"

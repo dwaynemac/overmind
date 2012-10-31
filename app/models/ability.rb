@@ -32,11 +32,14 @@ class Ability
         can :read, School
         can :read, MonthlyStat
         can :see_global, MonthlyStat
-      else
+      when 'president'
         can :read_only_one, Federation
         can :read, Federation, id: user.federation_id
         can :read, School, federation_id: user.federation_id
         can :read, MonthlyStat, school: { federation_id: user.federation_id }
+      else
+        can :read, School, school: {account_name: user.current_account.name }
+        can :read, MonthlyStat, school: {account_name: user.current_account.name }
     end
   end
 end
