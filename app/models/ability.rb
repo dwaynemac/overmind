@@ -38,8 +38,11 @@ class Ability
         can :read, School, federation_id: user.federation_id
         can :read, MonthlyStat, school: { federation_id: user.federation_id }
       else
-        can :read, School, school: {account_name: user.current_account.name }
-        can :read, MonthlyStat, school: {account_name: user.current_account.name }
+        if user.padma_enabled?
+          can :read, School, account_name: user.enabled_accounts.map(&:name)
+          can :see_detail, School, account_name: user.enabled_accounts.map(&:name)
+          can :read, MonthlyStat, school: {account_name: user.enabled_accounts.map(&:name) }
+        end
     end
   end
 end

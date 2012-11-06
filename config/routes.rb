@@ -1,5 +1,8 @@
 Overmind::Application.routes.draw do
-  devise_for :users
+  devise_for :users do
+    match "/login", :to => "devise/cas_sessions#new"
+    match '/logout', to: "devise/cas_sessions#destroy"
+  end
   resources :schools do
     resources :monthly_stats, except: [:show] do
       member do

@@ -30,6 +30,17 @@
               end if can?(:manage,User)
           %>
         </ul>
+        <ul class="nav pull-right">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= current_user.username %>
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to t('logout'), logout_url %></li>
+            </ul>
+          </li>
+        </ul>
       </div><!--/.nav-collapse -->
     </div>
   </div>
