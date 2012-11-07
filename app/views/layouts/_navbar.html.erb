@@ -23,7 +23,11 @@
               end if can?(:read, Federation)
           %>
           <%= li(params[:controller], 'schools') do
-                link_to t('.schools'), schools_path
+                if can?(:read_only_one, School)
+                  link_to current_user.enabled_accounts.first.name, schools_path
+                else
+                  link_to t('.schools'), schools_path
+                end
               end if can?(:read, School) -%>
           <%= li(params[:controller], 'users') do
                 link_to t('.users'), users_path

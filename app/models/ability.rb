@@ -41,6 +41,9 @@ class Ability
         if user.padma_enabled?
           can :read, School, account_name: user.enabled_accounts.map(&:name)
           can :see_detail, School, account_name: user.enabled_accounts.map(&:name)
+          if user.enabled_accounts.count == 1
+            can :read_only_one, School
+          end
           can :read, MonthlyStat, school: {account_name: user.enabled_accounts.map(&:name) }
         end
     end

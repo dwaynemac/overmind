@@ -3,12 +3,17 @@ class SchoolsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    order_by = params[:order] || 'name'
-    @q = @schools.search(params[:q])
-    @schools = @q.result
+    if @schools.count == 1
+      # if current ability can only view 1 school skip index.
+      redirect_to @schools.first
+    else
+      order_by = params[:order] || 'name'
+      @q = @schools.search(params[:q])
+      @schools = @q.result
 
-    @schools = @schools.order(order_by)
-    @schools = @schools.page(params[:page])
+      @schools = @schools.order(order_by)
+      @schools = @schools.page(params[:page])
+    end
   end
 
   def show
