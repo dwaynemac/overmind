@@ -1,3 +1,5 @@
+# This module extends Nucleo API client methods into a Class
+# Nucleo is Office's main DB.
 # expects base class to respond to :nucleo_id
 module SchoolApi
 
