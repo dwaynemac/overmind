@@ -1,3 +1,5 @@
+# @url /v0/monthly_stat
+# @topic MonthlyStat
 class Api::V0::MonthlyStatsController < Api::V0::ApiController
 
   # GET /api/v0/monthly_stats
@@ -15,9 +17,20 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
     render json: @monthly_stat
   end
 
-  # @url POST /api/v0/monthly_stats
-  # @argument [Hash] monthly_stat
-  # @options_for monthly_stat [String] account_name
+  # Creates MonthlyStat. If it already exists, existing stat will be updated.
+  #
+  # @url [POST] /api/v0/monthly_stats
+  #
+  # @required_argument [Hash] monthly_stat
+  # @keys_for monthly_stat [String] account_name
+  #
+  # @example_response { id: 1234 } - status: 201
+  # @response_code 201
+  # @example_response {errors: [], message: 'Stat not saved'} - status: 400
+  # @response_code 400
+  #
+  # @response_field id [Integer] id of created/updated monthly_stat (only for status: 201)
+  # @response_field errors [Array] (only for status: 400)
   def create
 
     if @monthly_stat = find_this_stat(params[:monthly_stat])
