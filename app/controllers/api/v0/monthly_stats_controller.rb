@@ -15,10 +15,17 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
     render json: @monthly_stat
   end
 
-  # POST /api/v0/monthly_stats
+  # @url POST /api/v0/monthly_stats
+  # @argument [Hash] monthly_stat
+  # @options_for monthly_stat [String] account_name
   def create
-    @monthly_stat = MonthlyStat.create(params[:monthly_stat])
-    if @monthly_stat.save
+
+    if @monthly_stat = find_this_stat(params[:monthly_stat])
+      @monthly_stat.value = params[:monthly_stat][:value]
+    else
+      @monthly_stat = MonthlyStat.new(params[:monthly_stat])
+    end
+    if @monthly_stat.save!
       render json: {id: @monthly_stat.id}, status: 201
     else
       render json: {
@@ -46,6 +53,16 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
     @monthly_stat = MonthlyStat.find(params[:id])
     @monthly_stat.destroy
     render json: 'ok', status: 200
+  end
+
+  private
+
+  # Finds MonthlyStat duplicate
+  # @param [Hash] attributes
+  # @return [MonthlyStat]
+  def find_this_stat(attributes)
+    school = School.find_by_account_name(attributes[:account_name])
+    MonthlyStat.where(name: attributes[:name], ref_date: attributes[:ref_date], school_id: school.try(:id)).first
   end
 
 end
