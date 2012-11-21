@@ -1,4 +1,4 @@
-# MonthlyStat represents statistiv for a *month*
+# MonthlyStat represents statistic for a *month*
 # = Attributes
 #
 # * :ref_date is last day of such month.
