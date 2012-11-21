@@ -4,16 +4,20 @@ describe Api::V0::MonthlyStatsController do
   before do
     create(:school, account_name: 'account-name')
   end
-  let(:a_monthly_stat){create(:monthly_stat, name: :students, ref_date: Date.civil(2012,10,31), account_name: 'account-name', value: 3)}
+  let(:a_monthly_stat){create(:monthly_stat, name: :students, ref_date: Date.civil(2012,10,31), service: 'a-service', account_name: 'account-name', value: 3)}
 
   describe "#create" do
     context "with existing MonthlyStat (name, ref_date, account)" do
       before do
         a_monthly_stat # creates
       end
-      it "updates stat" do
+      it "updates stat value" do
         expect{req_with_key :post, :create, monthly_stat: {name: 'students', ref_date: Date.civil(2012,10,31).to_s, account_name: 'account-name', value: 4}}.to_not change{MonthlyStat.count}
         a_monthly_stat.reload.value.should == 4
+      end
+      it "updates stat service" do
+        expect{req_with_key :post, :create, monthly_stat: {service: 'new-service', name: 'students', ref_date: Date.civil(2012,10,31).to_s, account_name: 'account-name', value: 4}}.to_not change{MonthlyStat.count}
+        a_monthly_stat.reload.service.should == 'new-service'
       end
     end
     context "with non-existing MonthlyStat" do

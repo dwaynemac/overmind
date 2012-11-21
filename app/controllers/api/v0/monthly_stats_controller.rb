@@ -38,6 +38,7 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   def create
     if @monthly_stat = find_this_stat(params[:monthly_stat])
       @monthly_stat.value = params[:monthly_stat][:value]
+      @monthly_stat.service = params[:monthly_stat][:service]
     else
       @monthly_stat = MonthlyStat.new(params[:monthly_stat])
     end
