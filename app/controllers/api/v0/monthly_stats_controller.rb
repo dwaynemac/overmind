@@ -11,14 +11,18 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
     }
   end
 
-  # GET /api/v0/monthly_stats/:id
+  # @url [GET] /api/v0/monthly_stats/:id
+  # @required_argument [Integer] id
+  # @response_code 200
+  # @example_response { ... monthly_stat_attributes ...}
   def show
-    @monthly_stat = MonthlyStat.find(params[:id])
+    @monthly_stat = MonthlyStat
+.find(params[:id])
     render json: @monthly_stat
   end
 
   # Creates MonthlyStat. If it already exists, existing stat will be updated.
-  #
+  #                                end
   # @url [POST] /api/v0/monthly_stats
   #
   # @required_argument [Hash] monthly_stat
@@ -32,7 +36,6 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   # @response_field id [Integer] id of created/updated monthly_stat (only for status: 201)
   # @response_field errors [Array] (only for status: 400)
   def create
-
     if @monthly_stat = find_this_stat(params[:monthly_stat])
       @monthly_stat.value = params[:monthly_stat][:value]
     else
