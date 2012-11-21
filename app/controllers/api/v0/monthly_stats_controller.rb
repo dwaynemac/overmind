@@ -26,7 +26,15 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   # @url [POST] /api/v0/monthly_stats
   #
   # @required_argument [Hash] monthly_stat
-  # @keys_for monthly_stat [String] account_name
+  # @key_for monthly_stat [String] account_name
+  # @key_for monthly_stat [String] name: stat name. Valid values are:
+  #   :enrollments,
+  #   :dropouts,
+  #   :students,
+  #   :assistant_students, # students at Assistant lev
+  #   :professor_students, # students at Professor level.
+  #   :master_students, # students at Master level.
+  #   :interviews, :p_interviews
   #
   # @example_response { id: 1234 } - status: 201
   # @response_code 201
