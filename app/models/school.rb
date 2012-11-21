@@ -1,5 +1,5 @@
 class School < ActiveRecord::Base
-  attr_accessible :name, :federation_id, :nucleo_id, :account_name
+  attr_accessible :name, :federation_id, :nucleo_id, :account_name, :migrated_kshema_to_padma_at
   belongs_to :federation
   validates_presence_of :name
   validates_uniqueness_of :name
@@ -61,6 +61,10 @@ class School < ActiveRecord::Base
     if self.account_name.present? && self.account.present?
       self.account.enabled?
     end
+  end
+
+  def padma2_enabled?
+    !self.migrated_kshema_to_padma_at.nil?
   end
 
 end

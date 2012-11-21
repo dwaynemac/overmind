@@ -38,4 +38,15 @@ describe School do
       school.synced_at.should be_within(1.minute).of(Time.now)
     end
   end
+
+  describe "#padma2_enabled?" do
+    context "when migrated_kshema_to_padma_at is nil" do
+      subject{School.new }
+      its(:padma2_enabled?) { should be_false}
+    end
+    context "when migrated_kshema_to_padma_at is a date" do
+      subject{ School.new(migrated_kshema_to_padma_at: Time.now)}
+      its(:padma2_enabled?) { should be_true }
+    end
+  end
 end
