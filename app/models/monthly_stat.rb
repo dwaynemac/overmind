@@ -149,9 +149,17 @@ class MonthlyStat < ActiveRecord::Base
   # @return [Integer] new value
   def update_from_service!
     unless service.blank?
-      remote_value = self.school.fetch_stat(self.name,self.ref_date)
+      remote_value = case service
+        when 'kshema'
+          self.school.fetch_stat(self.name,self.ref_date)
+        when 'contacts'
+          case self.name
+            when 'students'
+              self.school.count_students(self.ref_date)
+          end
+      end
       if remote_value && remote_value != self.value
-        self.update_attributes value: remote_value, service: 'kshema'
+        self.update_attributes value: remote_value
       else
         nil
       end

@@ -23,13 +23,13 @@ module PadmaStatsApi
     # Fetches students count from Contacts-ws
     # @param ref_date [Date]
     # @param options [Hash]
-    # @option options [String] teacher_name. Scope to this teacher -- not available yet.
-    # @option options [Integer] year
-    # @option options [Integer] month
     # @return [Integer]
     def count_students(ref_date, options = {})
-      req_options = options.select{|k,v|k.to_s.in?(%W(teacher_name year month))}
-      req_options.merge!({name: 'students', account_name: self.account_name})
+      req_options = {name: 'students',
+                      account_name: self.account_name,
+                      year: ref_date.year,
+                      month: ref_date.month
+                     }
 
       response = Typhoeus::Request.get("#{CONTACTS_URL}/v0/contacts/calculate",req_options)
       if response.success?
