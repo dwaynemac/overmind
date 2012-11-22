@@ -25,16 +25,17 @@ module PadmaStatsApi
     # @param options [Hash]
     # @return [Integer]
     def count_students(ref_date, options = {})
-      req_options = {name: 'students',
+      req_options = { app_key: "844d8c2d20a9cf9e97086df94f01e7bdd3d9afaa716055315706f2e31f40dc097c632af53e74ce3d5a1f23811b4e32e7a1e2b7fa5c128c8b28f1fc6e5a392015",
+                      name: 'students',
                       account_name: self.account_name,
                       year: ref_date.year,
                       month: ref_date.month
                      }
 
-      response = Typhoeus::Request.get("#{CONTACTS_URL}/v0/contacts/calculate",req_options)
+      response = Typhoeus::Request.get("#{CONTACTS_URL}/v0/contacts/calculate",params: req_options)
       if response.success?
         h = ActiveSupport::JSON.decode response.body
-        h[:value]
+        h['value']
       else
         nil
       end
