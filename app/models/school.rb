@@ -11,6 +11,7 @@ class School < ActiveRecord::Base
   validates_uniqueness_of :account_name, allow_blank: true
 
   include KshemaApi
+  include PadmaStatsApi
 
   # @param year [Integer]
   # @param options [Hash]

@@ -117,17 +117,31 @@ class MonthlyStat < ActiveRecord::Base
     self.school.cache_last_teachers_count
   end
 
-  # creates a new MonthlyStat
+  # creates a new MonthlyStat fetching value from remote service.
+  # @param [School] school
+  # @param [String] name. Statistic code name
+  # @param [Date] ref_date
   # @example @school.monthly_stats.create_from_service!(:enrollments, Date.today)
-  # @raise exception is creation fails
+  # @raise exception if creation fails
   # @return [MonthlyStat/NilClass]
   def self.create_from_service!(school,name,ref_date)
-    # TODO identify schools service
     ms = school.monthly_stats.new(name: name, ref_date: ref_date, service: 'kshema')
-    remote_value = school.fetch_stat(name, ref_date)
+
+    if school.padma2_enabled?
+      case name
+        when :students
+          ms.service = 'contacts'
+          remote_value = school.count_students(ref_date)
+      end
+    else
+      ms.service = 'kshema'
+      remote_value = school.fetch_stat(name, ref_date)
+    end
+
     if remote_value
       ms.value = remote_value
     end
+
     ms.save ? ms : nil
   end
 
