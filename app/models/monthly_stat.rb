@@ -130,7 +130,7 @@ class MonthlyStat < ActiveRecord::Base
     if school.padma2_enabled?
       case name
         when :students
-          ms.service = 'contacts'
+          ms.service = 'crm'
           remote_value = school.count_students(ref_date)
       end
     else
@@ -152,7 +152,7 @@ class MonthlyStat < ActiveRecord::Base
       remote_value = case service
         when 'kshema'
           self.school.fetch_stat(self.name,self.ref_date)
-        when 'contacts'
+        when 'crm'
           case self.name
             when 'students'
               self.school.count_students(self.ref_date)

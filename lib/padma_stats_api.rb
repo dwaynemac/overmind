@@ -10,6 +10,16 @@ module PadmaStatsApi
       'http://localhost:3002'
   end
 
+  CRM_URL = case Rails.env
+    when 'production'
+      'https://padma-crm.herokuapp.com'
+    when 'staging'
+      'https://padma-crm-staging.herokuapp.com'
+    else
+      'http://localhost:3000'
+  end
+
+
   def self.included(base)
     base.send :include, InstanceMethods
     base.send :extend, ClassMethods
@@ -20,19 +30,17 @@ module PadmaStatsApi
 
   module InstanceMethods
 
-    # Fetches students count from Contacts-ws
+    # Fetches students count from CRM-ws
     # @param ref_date [Date]
-    # @param options [Hash]
+    # @param options [Hash] -- No options available yet
     # @return [Integer]
     def count_students(ref_date, options = {})
-      req_options = { app_key: "844d8c2d20a9cf9e97086df94f01e7bdd3d9afaa716055315706f2e31f40dc097c632af53e74ce3d5a1f23811b4e32e7a1e2b7fa5c128c8b28f1fc6e5a392015",
-                      name: 'students',
-                      account_name: self.account_name,
+      req_options = { app_key: "844d8c2d20",
                       year: ref_date.year,
                       month: ref_date.month
                      }
 
-      response = Typhoeus::Request.get("#{CONTACTS_URL}/v0/contacts/calculate",params: req_options)
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
       if response.success?
         h = ActiveSupport::JSON.decode response.body
         h['value']
