@@ -125,10 +125,10 @@ class MonthlyStat < ActiveRecord::Base
   # @raise exception if creation fails
   # @return [MonthlyStat/NilClass]
   def self.create_from_service!(school,name,ref_date)
-    ms = school.monthly_stats.new(name: name, ref_date: ref_date, service: 'kshema')
+    ms = school.monthly_stats.new(name: name, ref_date: ref_date)
 
     if school.padma2_enabled?
-      case name
+      case name.to_sym
         when :students
           ms.service = 'crm'
           remote_value = school.count_students(ref_date)
