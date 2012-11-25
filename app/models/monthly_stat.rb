@@ -135,6 +135,9 @@ class MonthlyStat < ActiveRecord::Base
         when :enrollments
           ms.service = 'crm'
           remote_value = school.count_enrollments(ref_date)
+        when :dropouts
+          ms.service = 'crm'
+          remote_value = school.count_drop_outs(ref_date)
       end
     else
       ms.service = 'kshema'
@@ -156,11 +159,13 @@ class MonthlyStat < ActiveRecord::Base
         when 'kshema'
           self.school.fetch_stat(self.name,self.ref_date)
         when 'crm'
-          case self.name
+          case self.name.to_s
             when 'students'
               self.school.count_students(self.ref_date)
             when 'enrollments'
               self.school.count_enrollments(self.ref_date)
+            when 'dropouts'
+              self.school.count_drop_outs(self.ref_date)
           end
       end
       if remote_value && remote_value != self.value
