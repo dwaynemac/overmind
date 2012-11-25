@@ -138,6 +138,12 @@ class MonthlyStat < ActiveRecord::Base
         when :dropouts
           ms.service = 'crm'
           remote_value = school.count_drop_outs(ref_date)
+        when :interviews
+          ms.service = 'crm'
+          remote_value = school.count_interviews(ref_date)
+        when :p_interviews
+          ms.service = 'crm'
+          remote_value = school.count_interviews(ref_date, filter: { coefficient: 'p' })
       end
     else
       ms.service = 'kshema'
@@ -166,6 +172,10 @@ class MonthlyStat < ActiveRecord::Base
               self.school.count_enrollments(self.ref_date)
             when 'dropouts'
               self.school.count_drop_outs(self.ref_date)
+            when 'interviews'
+              remote_value = school.count_interviews(ref_date)
+            when 'p_interviews'
+              remote_value = school.count_interviews(ref_date, filter: { coefficient: 'p' })
           end
       end
       if remote_value && remote_value != self.value

@@ -49,6 +49,33 @@ module PadmaStatsApi
       end
     end
 
+    def count_interviews(ref_date, options={})
+      options[:filter] ||= {}
+      options[:filter].merge!({media: 'interview'})
+      count_communications(ref_date,options)
+    end
+
+    def count_communications(ref_date,options={})
+      req_options = { app_key: "844d8c2d20",
+                      filter: {
+                          year: ref_date.year,
+                          month: ref_date.month,
+                          account_name: self.account_name
+                      }
+      }
+      if options[:filter]
+        req_options[:filter].merge! options[:filter]
+      end
+
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/communications/count", params: req_options)
+      if response.success?
+        h = ActiveSupport::JSON.decode response.body
+        h['value']
+      else
+        nil
+      end
+    end
+
     def count_drop_outs(ref_date)
       req_options = { app_key: "844d8c2d20",
                       filter: {
