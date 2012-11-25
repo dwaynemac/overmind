@@ -49,5 +49,21 @@ module PadmaStatsApi
       end
     end
 
+    def count_enrollments(ref_date, options={})
+      req_options = { app_key: "844d8c2d20",
+                      year: ref_date.year,
+                      month: ref_date.month,
+                      account_name: self.account_name
+      }
+
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/enrollments/count", params: req_options)
+      if response.success?
+        h = ActiveSupport::JSON.decode response.body
+        h['value']
+      else
+        nil
+      end
+    end
+
   end
 end

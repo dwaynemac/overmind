@@ -132,6 +132,9 @@ class MonthlyStat < ActiveRecord::Base
         when :students
           ms.service = 'crm'
           remote_value = school.count_students(ref_date)
+        when :enrollments
+          ms.service = 'crm'
+          remote_value = school.count_enrollments(ref_date)
       end
     else
       ms.service = 'kshema'
@@ -156,6 +159,8 @@ class MonthlyStat < ActiveRecord::Base
           case self.name
             when 'students'
               self.school.count_students(self.ref_date)
+            when 'enrollments'
+              self.school.count_enrollments(self.ref_date)
           end
       end
       if remote_value && remote_value != self.value
