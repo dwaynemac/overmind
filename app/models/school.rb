@@ -18,7 +18,7 @@ class School < ActiveRecord::Base
   # @option options :update_existing (false)
   def sync_year_stats(year,options={})
     MonthlyStat::VALID_NAMES.each do |name|
-      months_range = (year == Time.zone.today.year)? (1..Time.zone.today.month-1) : (1...13)
+      months_range = (year == Time.zone.today.year)? (1..Time.zone.today.month) : (1...13)
       months_range.each do |month|
         ref_date = Date.civil(year.to_i,month,1)
         stats_for_month = self.monthly_stats.where(name: name).for_month(ref_date)
