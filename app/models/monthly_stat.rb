@@ -16,7 +16,8 @@ class MonthlyStat < ActiveRecord::Base
                  :assistant_students, # students at Assistant lev
                  :professor_students, # students at Professor level.
                  :master_students, # students at Master level.
-                 :interviews, :p_interviews
+                 :interviews, :p_interviews,
+                 :emails, :phonecalls
   ]
   RATES = [:dropout_rate, :enrollment_rate]
 
@@ -128,27 +129,15 @@ class MonthlyStat < ActiveRecord::Base
     ms = school.monthly_stats.new(name: name, ref_date: ref_date)
 
     if school.padma2_enabled?
-      case name.to_sym
-        when :students
-          ms.service = 'crm'
-          remote_value = school.count_students(ref_date)
-        when :enrollments
-          ms.service = 'crm'
-          remote_value = school.count_enrollments(ref_date)
-        when :dropouts
-          ms.service = 'crm'
-          remote_value = school.count_drop_outs(ref_date)
-        when :interviews
-          ms.service = 'crm'
-          remote_value = school.count_interviews(ref_date)
-        when :p_interviews
-          ms.service = 'crm'
-          remote_value = school.count_interviews(ref_date, filter: { coefficient: 'p' })
+      ms.service = case name.to_sym
+        when :students, :enrollments, :dropouts, :interviews, :p_interviews, :emails, :phonecalls
+          'crm'
       end
     else
       ms.service = 'kshema'
-      remote_value = school.fetch_stat(name, ref_date)
     end
+
+    remote_value = ms.get_remote_value
 
     if remote_value
       ms.value = remote_value
@@ -161,23 +150,7 @@ class MonthlyStat < ActiveRecord::Base
   # @return [Integer] new value
   def update_from_service!
     unless service.blank?
-      remote_value = case service
-        when 'kshema'
-          self.school.fetch_stat(self.name,self.ref_date)
-        when 'crm'
-          case self.name.to_s
-            when 'students'
-              self.school.count_students(self.ref_date)
-            when 'enrollments'
-              self.school.count_enrollments(self.ref_date)
-            when 'dropouts'
-              self.school.count_drop_outs(self.ref_date)
-            when 'interviews'
-              remote_value = school.count_interviews(ref_date)
-            when 'p_interviews'
-              remote_value = school.count_interviews(ref_date, filter: { coefficient: 'p' })
-          end
-      end
+      remote_value = get_remote_value
       if remote_value && remote_value != self.value
         self.update_attributes value: remote_value
       else
@@ -197,6 +170,30 @@ class MonthlyStat < ActiveRecord::Base
 
   def account_name
     school.try :account_name
+  end
+
+  def get_remote_value
+    case service
+      when 'kshema'
+        self.school.fetch_stat(name,ref_date)
+      when 'crm'
+        case self.name.to_s
+          when 'students'
+            self.school.count_students(ref_date)
+          when 'enrollments'
+            self.school.count_enrollments(ref_date)
+          when 'dropouts'
+            self.school.count_drop_outs(ref_date)
+          when 'interviews'
+            school.count_interviews(ref_date)
+          when 'p_interviews'
+            school.count_interviews(ref_date, filter: { coefficient: 'p' })
+          when 'emails'
+            school.count_communications(ref_date, filter: {media: 'email'})
+          when 'phonecalls'
+            school.count_communications(ref_date, filter: { media: 'phone_call'})
+        end
+    end
   end
 
   private
