@@ -16,6 +16,7 @@ class MonthlyStat < ActiveRecord::Base
                  :assistant_students, # students at Assistant lev
                  :professor_students, # students at Professor level.
                  :master_students, # students at Master level.
+                 :demand,
                  :interviews, :p_interviews,
                  :emails, :phonecalls
   ]
@@ -130,7 +131,7 @@ class MonthlyStat < ActiveRecord::Base
 
     if school.padma2_enabled?
       ms.service = case name.to_sym
-        when :students, :enrollments, :dropouts, :interviews, :p_interviews, :emails, :phonecalls, :assistant_students, :professor_students, :master_students
+        when :students, :enrollments, :dropouts, :demand, :interviews, :p_interviews, :emails, :phonecalls, :assistant_students, :professor_students, :master_students
           'crm'
       end
     else
@@ -175,21 +176,23 @@ class MonthlyStat < ActiveRecord::Base
   def get_remote_value
     case service
       when 'kshema'
-        self.school.fetch_stat(name,ref_date)
+        school.fetch_stat(name,ref_date)
       when 'crm'
         case self.name.to_sym
           when :students
-            self.school.count_students(ref_date)
+            school.count_students(ref_date)
           when :assistant_students
-            self.school.count_students(ref_date, level: 'asistente')
+            school.count_students(ref_date, level: 'asistente')
           when :professor_students
-            self.school.count_students(ref_date, level: 'docente')
+            school.count_students(ref_date, level: 'docente')
           when :master_students
-            self.school.count_students(ref_date, level: 'maestro')
+            school.count_students(ref_date, level: 'maestro')
           when :enrollments
-            self.school.count_enrollments(ref_date)
+            school.count_enrollments(ref_date)
           when :dropouts
-            self.school.count_drop_outs(ref_date)
+            school.count_drop_outs(ref_date)
+          when :demand
+            school.count_communications(ref_date)
           when :interviews
             school.count_interviews(ref_date)
           when :p_interviews
