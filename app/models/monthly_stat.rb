@@ -130,7 +130,7 @@ class MonthlyStat < ActiveRecord::Base
 
     if school.padma2_enabled?
       ms.service = case name.to_sym
-        when :students, :enrollments, :dropouts, :interviews, :p_interviews, :emails, :phonecalls
+        when :students, :enrollments, :dropouts, :interviews, :p_interviews, :emails, :phonecalls, :assistant_students, :professor_students, :master_students
           'crm'
       end
     else
@@ -177,20 +177,26 @@ class MonthlyStat < ActiveRecord::Base
       when 'kshema'
         self.school.fetch_stat(name,ref_date)
       when 'crm'
-        case self.name.to_s
-          when 'students'
+        case self.name.to_sym
+          when :students
             self.school.count_students(ref_date)
-          when 'enrollments'
+          when :assistant_students
+            self.school.count_students(ref_date, level: 'asistente')
+          when :professor_students
+            self.school.count_students(ref_date, level: 'docente')
+          when :master_students
+            self.school.count_students(ref_date, level: 'maestro')
+          when :enrollments
             self.school.count_enrollments(ref_date)
-          when 'dropouts'
+          when :dropouts
             self.school.count_drop_outs(ref_date)
-          when 'interviews'
+          when :interviews
             school.count_interviews(ref_date)
-          when 'p_interviews'
+          when :p_interviews
             school.count_interviews(ref_date, filter: { coefficient: 'p' })
-          when 'emails'
+          when :emails
             school.count_communications(ref_date, filter: {media: 'email'})
-          when 'phonecalls'
+          when :phonecalls
             school.count_communications(ref_date, filter: { media: 'phone_call'})
         end
     end

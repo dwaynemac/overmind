@@ -33,12 +33,23 @@ module PadmaStatsApi
     # Fetches students count from CRM-ws
     # @param ref_date [Date]
     # @param options [Hash] -- No options available yet
+    # @option options [String] level. Filter by level. Valid values: aspirante, sádhaka, yôgin, chêla, graduado, asistente, docente, maestro
     # @return [Integer]
     def count_students(ref_date, options = {})
       req_options = { app_key: "844d8c2d20",
                       year: ref_date.year,
                       month: ref_date.month
                      }
+
+      if options[:level]
+        req_options.merge!({
+          filter: {
+              attribute_values_at: [
+                  {attribute: 'level', value: options[:level]}
+              ]
+          }
+        })
+      end
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
       if response.success?
