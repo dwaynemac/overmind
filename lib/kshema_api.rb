@@ -8,6 +8,8 @@ module KshemaApi
       'http://localhost:3010'
     when 'production'
       'https://www.metododerose.org/kshema'
+    when 'staging'
+      'https://www.metododerose.org/kshema'
     when 'test'
       'mock-me'
   end
@@ -58,7 +60,7 @@ module KshemaApi
           professor_students: 'DocenteStudentCount',
           master_students: 'MaestroStudentCount',
       }
-      transform_name[name]
+      transform_name[name.to_sym]
     end
   end
 end

@@ -152,7 +152,7 @@ class MonthlyStat < ActiveRecord::Base
   def update_from_service!
     unless service.blank?
       remote_value = get_remote_value
-      if remote_value && remote_value != self.value
+      if remote_value && remote_value.to_i != self.value.to_i
         self.update_attributes value: remote_value
       else
         nil
