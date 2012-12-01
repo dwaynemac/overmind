@@ -12,7 +12,7 @@ gem 'cancan'
 gem 'sqlite3', :group => [:development, :test]
 gem 'pg', :group => :production
 
-gem 'logical_model'
+gem 'logical_model', '~> 0.4.1'
 gem 'accounts_client', '~> 0.0.5'
 gem 'kaminari'
 gem 'ransack'

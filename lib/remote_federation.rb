@@ -4,7 +4,6 @@ class RemoteFederation < LogicalModel
   self.resource_path = "/federations"
 
   self.hydra = HYDRA
-  self.use_ssl = (Rails.env=="production")
 
   self.use_api_key = true
   self.api_key_name = 'api_key'
