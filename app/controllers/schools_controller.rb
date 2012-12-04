@@ -16,6 +16,16 @@ class SchoolsController < ApplicationController
     end
   end
 
+  def show_by_name
+    @school = School.find_by_account_name(params[:account_name])
+    if @school.nil?
+      raise ActiveRecord::RecordNotFound
+    end
+    authorize! :read, @school
+    show
+    render action: :show
+  end
+
   def show
     @years = (2010..Date.today.year)
     @year = params[:year] || Date.today.year

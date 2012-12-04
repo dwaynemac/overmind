@@ -12,6 +12,9 @@ Overmind::Application.routes.draw do
     member do
       get 'sync_year'
     end
+    collection do
+      match "/pa/:account_name", to: 'schools#show_by_name'
+    end
   end
   resources :federations
   resources :users
