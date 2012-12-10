@@ -9,7 +9,7 @@ end
 
 PADMA_ACCOUNTS_HOST = case Rails.env
   when "production"
-    "padma-accounts.heroku.com"
+    "padma-accounts.herokuapp.com"
   when "development"
     "localhost:3001"
   when "test"
