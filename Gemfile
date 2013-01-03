@@ -13,7 +13,7 @@ gem 'sqlite3', :group => [:development, :test]
 gem 'pg', :group => :production
 
 gem 'logical_model', '~> 0.4.1'
-gem 'accounts_client', '~> 0.0.5'
+gem 'accounts_client', '~> 0.0.8'
 gem 'kaminari'
 gem 'ransack'
 
