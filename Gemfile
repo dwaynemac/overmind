@@ -10,7 +10,11 @@ gem 'cancan'
 
 # DB
 gem 'sqlite3', :group => [:development, :test]
-gem 'pg', :group => :production
+
+group :production do
+  gem 'pg'
+  gem 'newrelic_rpm'
+end
 
 gem 'logical_model', '~> 0.4.1'
 gem 'accounts_client', '~> 0.0.8'
