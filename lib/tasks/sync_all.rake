@@ -11,7 +11,8 @@ task :sync_all => :environment do
     if school.padma_enabled?
       puts "syncing #{school.name}"
       if ENV['year']
-        school.sync_year_stats(ENV['year'],update_existing: true)
+        year = (ENV['year'] == 'current')? Date.today.year : ENV['year']
+        school.sync_year_stats(year,update_existing: true)
       else
         (2010..Time.zone.today.year).each do |year|
           puts "    #{year}"
