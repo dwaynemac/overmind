@@ -24,3 +24,15 @@ task :sync_all => :environment do
     end
   end
 end
+
+desc "Syncs current year, only on the 1st of the month."
+task :sync_current_year_on_the_first => :environment do
+  today = Date.today
+  if today.day == 1
+    School.all.each do |school|
+      if school.padma_enabled?
+        school.sync_year_stats(today.year, update_existing: true)
+      end
+    end
+  end
+end
