@@ -1,6 +1,6 @@
 class SchoolsController < ApplicationController
 
-  load_and_authorize_resource
+  load_and_authorize_resource except: :show_by_name
 
   def index
     if @schools.count == 1
