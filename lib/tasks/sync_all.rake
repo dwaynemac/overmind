@@ -51,4 +51,14 @@ namespace :sync do
       end
     end
   end
+
+  desc "Syncs current year."
+  task :current_year => :environment do
+    today = Date.today
+    School.all.each do |school|
+      if school.padma_enabled?
+        school.sync_year_stats(today.year, update_existing: true)
+      end
+    end
+  end
 end
