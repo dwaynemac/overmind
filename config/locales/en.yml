@@ -20,6 +20,9 @@ en:
       master_students:    'Master Students'
       interviews: 'Interviews'
       p_interviews: 'P Interviews'
+      demand: 'Demans'
+      emails: 'Emails'
+      phonecalls: 'PhoneCalls'
   monthly_stats:
     chrono_table:
       evasion_calculation: 'Calculo de la evasion'

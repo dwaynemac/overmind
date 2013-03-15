@@ -19,6 +19,9 @@ es:
       master_students:    'Monitoreados Maestros'
       interviews: 'Visitas'
       p_interviews: 'Visitas perfil'
+      demand: 'Procura'
+      emails: 'Emails'
+      phonecalls: 'Llamadas'
   views:
     pagination:
       first: 'Primera'
