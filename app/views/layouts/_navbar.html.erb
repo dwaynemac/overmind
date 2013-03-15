@@ -33,7 +33,11 @@
                 link_to t('.users'), users_path
               end if can?(:manage,User)
           %>
+          <li class="divider-vertical"></li>
         </ul>
+        <form class="navbar-search" accept-charset="utf-8" action="<%= schools_path %>" id="navbar-search" method="get">
+          <input type="text" class="search-query" name="q[name_cont]" />
+        </form>
         <ul class="nav pull-right">
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
