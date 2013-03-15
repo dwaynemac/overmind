@@ -48,5 +48,6 @@ group :development, :test do
 end
 
 group :development do
+  gem 'subcontractor', '>= 0.6.1'
   gem 'foreman'
 end

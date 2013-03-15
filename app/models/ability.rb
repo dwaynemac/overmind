@@ -40,7 +40,7 @@ class Ability
       else
         if user.padma_enabled?
           can [:sync,:sync_year,:read,:see_detail], School, account_name: user.enabled_accounts.map(&:name)
-          if user.enabled_accounts.count == 1
+          if School.accessible_by(self).count == 1
             can :read_only_one, School
           end
           can [:sync,:read], MonthlyStat, school: {account_name: user.enabled_accounts.map(&:name) }

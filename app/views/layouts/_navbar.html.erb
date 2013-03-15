@@ -24,7 +24,7 @@
           %>
           <%= li(params[:controller], 'schools') do
                 if can?(:read_only_one, School)
-                  link_to( current_user.enabled_accounts.first.name, schools_path )if current_user.enabled_accounts
+                  link_to( current_user.enabled_accounts.first.name, schools_path ) if current_user.enabled_accounts
                 else
                   link_to t('.schools'), schools_path
                 end
