@@ -1,1 +1,1 @@
-bundle exec rails s -p 3007
+bundle exec foreman start -f Procfile.dev
