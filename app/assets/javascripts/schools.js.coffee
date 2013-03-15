@@ -3,6 +3,11 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(document).ready ->
 
+  $("#current_year").tooltip({placement: 'right'})
+  $("#current_year").click ->
+    $(this).hide()
+    $(this).siblings("form").show()
+
   chart = new AmCharts.AmSerialChart()
   chart.dataProvider = chartData
   chart.categoryField = "month"

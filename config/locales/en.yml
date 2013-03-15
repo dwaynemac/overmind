@@ -46,6 +46,7 @@ en:
       synced_at: "Last synced at"
     show:
       sync_year_data: "Sync %{year} data"
+      click_to_change: "Click to edit"
     search_form:
       show_only_w_account_name_blank: "Only schools without account name"
   layouts:
