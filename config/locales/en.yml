@@ -15,6 +15,11 @@ en:
       enrollments: 'Enrollments'
       dropouts: 'Drop Outs'
       students: 'Students'
+      aspirante_students: "Beginner Students"
+      sadhaka_students: "Sádhakas"
+      yogin_students: "Yôgins"
+      chela_students: "Chêlas"
+      graduado_students: "Graduated Students"
       assistant_students: 'Assistant Students'
       professor_students: 'Professor Students'
       master_students:    'Master Students'

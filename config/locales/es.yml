@@ -14,6 +14,11 @@ es:
       enrollments: 'Matrículas'
       dropouts: 'Bajas'
       students: 'Alumnos'
+      aspirante_students: "Alumnos iniciantes"
+      sadhaka_students: "Sádhakas"
+      yogin_students: "Yôgins"
+      chela_students: "Chêlas"
+      graduado_students: "Alumnos Graduados"
       assistant_students: 'Monitoreados Asistentes'
       professor_students: 'Monitoreados Docentes'
       master_students:    'Monitoreados Maestros'
