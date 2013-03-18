@@ -137,7 +137,7 @@ class MonthlyStat < ActiveRecord::Base
     if school.padma2_enabled?
       ms.service = case name.to_sym
         when :students, :enrollments, :dropouts, :demand, :interviews, :p_interviews, :emails, :phonecalls, :aspirante_students, :sadhaka_students, :yogin_students, :chela_students, :graduado_students, :assistant_students, :professor_students, :master_students
-        |  'crm'
+          'crm'
       end
     else
       ms.service = 'kshema'
