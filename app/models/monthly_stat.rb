@@ -182,7 +182,7 @@ class MonthlyStat < ActiveRecord::Base
   def get_remote_value
     case service
       when 'kshema'
-        school.fetch_stat(name,ref_date)
+        school.fetch_stat(self.name,ref_date)
       when 'crm'
         case self.name.to_sym
           when :students
