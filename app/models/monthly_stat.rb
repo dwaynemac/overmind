@@ -1,3 +1,4 @@
+# encoding: utf-8
 # MonthlyStat represents statistic for a *month*
 # = Attributes
 #
