@@ -186,6 +186,16 @@ class MonthlyStat < ActiveRecord::Base
         case self.name.to_sym
           when :students
             school.count_students(ref_date)
+          when :aspirante_students
+            school.count_students(ref_date, level: 'aspirante')
+          when :sadhaka_students
+            school.count_students(ref_date, level: 'sadhaka')
+          when :yogin_students
+            school.count_students(ref_date, level: 'yogin')
+          when :chela_students
+            school.count_students(ref_date, level: 'chela')
+          when :graduado_students
+            school.count_students(ref_date, level: 'graduado')
           when :assistant_students
             school.count_students(ref_date, level: 'asistente')
           when :professor_students
