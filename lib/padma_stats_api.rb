@@ -34,6 +34,7 @@ module PadmaStatsApi
     # @param ref_date [Date]
     # @param options [Hash]
     # @option options [String] level. Filter by level. Valid values: aspirante, sádhaka, yôgin, chêla, graduado, asistente, docente, maestro
+    # @option options [String] teacher_username
     # @return [Integer]
     def count_students(ref_date, options = {})
       req_options = { app_key: ENV['crm_key'],
@@ -49,6 +50,16 @@ module PadmaStatsApi
               ]
           }
         })
+      end
+
+      if options[:teacher_username]
+        req_options.merge!({
+             filter: {
+                 attribute_values_at: [
+                     {attribute: "local_teacher_for_#{self.account_name}", value: options[:teacher_username]}
+                 ]
+             }
+         })
       end
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
