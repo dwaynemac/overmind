@@ -34,4 +34,12 @@ Overmind::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # load environment variables from config file.
+  config.before_configuration do
+    env_file = File.join(Rails.root, 'config', 'local_env.yml')
+    YAML.load(File.open(env_file)).each do |key, value|
+      ENV[key.to_s] = value
+    end if File.exists?(env_file)
+  end
 end

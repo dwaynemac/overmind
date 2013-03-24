@@ -32,11 +32,11 @@ module PadmaStatsApi
 
     # Fetches students count from CRM-ws
     # @param ref_date [Date]
-    # @param options [Hash] -- No options available yet
+    # @param options [Hash]
     # @option options [String] level. Filter by level. Valid values: aspirante, sádhaka, yôgin, chêla, graduado, asistente, docente, maestro
     # @return [Integer]
     def count_students(ref_date, options = {})
-      req_options = { app_key: "844d8c2d20",
+      req_options = { app_key: ENV['crm_key'],
                       year: ref_date.year,
                       month: ref_date.month
                      }

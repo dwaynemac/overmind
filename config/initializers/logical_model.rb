@@ -18,7 +18,7 @@ end
 
 module Accounts
   HYDRA = ::HYDRA
-  API_KEY = "8c330b5d70f86ebfa6497c901b299b79afc6d68c60df6df0bda0180d3777eb4a5528924ac96cf58a25e599b4110da3c4b690fa29263714ec6604b6cb2d943656"
+  API_KEY = ENV['accounts_key']
 end
 
 class LogicalModel
