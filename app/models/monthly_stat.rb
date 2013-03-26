@@ -30,6 +30,9 @@ class MonthlyStat < ActiveRecord::Base
 
   belongs_to :school
   validates_presence_of :school
+
+  belongs_to :teacher
+
   validates_presence_of :name
   validates_presence_of :ref_date
   validates_presence_of :value

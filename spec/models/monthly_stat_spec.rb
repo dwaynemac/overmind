@@ -4,6 +4,9 @@ describe MonthlyStat do
   before do
     create(:monthly_stat)
   end
+
+  it { should belong_to :teacher }
+
   it "should ensure ref_date is end of month date" do
     ms = create(:monthly_stat, ref_date: Date.civil(2012,7,1))
     ms.save
