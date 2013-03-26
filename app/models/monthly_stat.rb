@@ -4,12 +4,12 @@
 #
 # * :ref_date is last day of such month.
 # * :name [String] name of the statistic.
-# * :service name of service from wich this stat was extracted. If nil then stat was manually registered.
+# * :service name of service from which this stat was extracted. If nil then stat was manually registered.
 # * :value
 #
 class MonthlyStat < ActiveRecord::Base
 
-  attr_accessible :value, :name, :school_id, :ref_date, :service, :account_name, :id
+  attr_accessible :value, :name, :school_id, :ref_date, :service, :account_name, :id   # account name is an accessor, delegated to School.
 
   VALID_NAMES = [:enrollments,
                  :dropouts,
