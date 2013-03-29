@@ -1,3 +1,4 @@
+# encoding: utf-8
 # expects base class to have respond to account_name
 module PadmaStatsApi
 
@@ -29,6 +30,43 @@ module PadmaStatsApi
   end
 
   module InstanceMethods
+
+    def fetch_stat_from_crm(name,ref_date)
+      case name.to_sym
+        when :students
+          self.count_students(ref_date)
+        when :aspirante_students
+          self.count_students(ref_date, level: 'aspirante')
+        when :sadhaka_students
+          self.count_students(ref_date, level: 'sádhaka')
+        when :yogin_students
+          self.count_students(ref_date, level: 'yôgin')
+        when :chela_students
+          self.count_students(ref_date, level: 'chêla')
+        when :graduado_students
+          self.count_students(ref_date, level: 'graduado')
+        when :assistant_students
+          self.count_students(ref_date, level: 'asistente')
+        when :professor_students
+          self.count_students(ref_date, level: 'docente')
+        when :master_students
+          self.count_students(ref_date, level: 'maestro')
+        when :enrollments
+          self.count_enrollments(ref_date)
+        when :dropouts
+          self.count_drop_outs(ref_date)
+        when :demand
+          self.count_communications(ref_date)
+        when :interviews
+          self.count_interviews(ref_date)
+        when :p_interviews
+          self.count_interviews(ref_date, filter: { coefficient: 'p' })
+        when :emails
+          self.count_communications(ref_date, filter: {media: 'email'})
+        when :phonecalls
+          self.count_communications(ref_date, filter: { media: 'phone_call'})
+      end
+    end
 
     # Fetches students count from CRM-ws
     # @param ref_date [Date]

@@ -187,40 +187,7 @@ class MonthlyStat < ActiveRecord::Base
       when 'kshema'
         school.fetch_stat(self.name,ref_date)
       when 'crm'
-        case self.name.to_sym
-          when :students
-            school.count_students(ref_date)
-          when :aspirante_students
-            school.count_students(ref_date, level: 'aspirante')
-          when :sadhaka_students
-            school.count_students(ref_date, level: 'sádhaka')
-          when :yogin_students
-            school.count_students(ref_date, level: 'yôgin')
-          when :chela_students
-            school.count_students(ref_date, level: 'chêla')
-          when :graduado_students
-            school.count_students(ref_date, level: 'graduado')
-          when :assistant_students
-            school.count_students(ref_date, level: 'asistente')
-          when :professor_students
-            school.count_students(ref_date, level: 'docente')
-          when :master_students
-            school.count_students(ref_date, level: 'maestro')
-          when :enrollments
-            school.count_enrollments(ref_date)
-          when :dropouts
-            school.count_drop_outs(ref_date)
-          when :demand
-            school.count_communications(ref_date)
-          when :interviews
-            school.count_interviews(ref_date)
-          when :p_interviews
-            school.count_interviews(ref_date, filter: { coefficient: 'p' })
-          when :emails
-            school.count_communications(ref_date, filter: {media: 'email'})
-          when :phonecalls
-            school.count_communications(ref_date, filter: { media: 'phone_call'})
-        end
+        school.fetch_stat_from_crm(self.name,ref_date)
     end
   end
 
