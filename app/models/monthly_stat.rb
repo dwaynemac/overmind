@@ -31,8 +31,6 @@ class MonthlyStat < ActiveRecord::Base
   belongs_to :school
   validates_presence_of :school
 
-  belongs_to :teacher
-
   validates_presence_of :name
   validates_presence_of :ref_date
   validates_presence_of :value
@@ -44,7 +42,6 @@ class MonthlyStat < ActiveRecord::Base
   after_save :cache_student_count, unless: ->{self.importing?}
   after_save :cache_teachers_count, unless: ->{self.importing?}
 
-  validates_uniqueness_of :name, scope: [:school_id, :ref_date]
 
   def self.for_month(ref_date)
     where(ref_date: ref_date.to_date.end_of_month)
