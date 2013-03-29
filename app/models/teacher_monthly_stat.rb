@@ -1,0 +1,2 @@
+class TeacherMonthlyStat < MonthlyStat
+end
