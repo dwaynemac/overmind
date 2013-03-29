@@ -1,4 +1,4 @@
-shared_examples_for "it uses SchoolApi for schools" do
+shared_examples_for "it uses NucleoApi for schools" do
   it { should validate_uniqueness_of :nucleo_id}
   describe "Class" do
     subject{klass}

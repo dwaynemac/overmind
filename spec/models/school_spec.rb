@@ -9,7 +9,7 @@ describe School do
   it { should validate_uniqueness_of :name }
   it { should have_many :monthly_stats }
 
-  it_behaves_like 'it uses SchoolApi for schools' do
+  it_behaves_like 'it uses NucleoApi for schools' do
     let(:object){School.last || create(:school)}
     let(:klass){School}
   end

@@ -1,11 +1,14 @@
 class School < ActiveRecord::Base
   attr_accessible :name, :federation_id, :nucleo_id, :account_name, :migrated_kshema_to_padma_at
+
   belongs_to :federation
+
   validates_presence_of :name
   validates_uniqueness_of :name
+
   has_many :monthly_stats, dependent: :destroy
 
-  include SchoolApi
+  include NucleoApi
   
   include Accounts::BelongsToAccount
   validates_uniqueness_of :account_name, allow_blank: true
