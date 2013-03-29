@@ -5,6 +5,15 @@ describe MonthlyStat do
     create(:monthly_stat)
   end
 
+  context "if teacher_id is not set" do
+    it "defaults type to SchoolMonthlyStat" do
+      ms = build(:monthly_stat, teacher_id: nil)
+      ms.save
+
+      ms.reload.type.should == 'SchoolMonthlyStat'
+      SchoolMonthlyStat.last.id.should == ms.id
+    end
+  end
 
   it "should ensure ref_date is end of month date" do
     ms = create(:monthly_stat, ref_date: Date.civil(2012,7,1))

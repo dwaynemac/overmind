@@ -31,6 +31,8 @@ class MonthlyStat < ActiveRecord::Base
   belongs_to :school
   validates_presence_of :school
 
+  before_save :set_type
+
   validates_presence_of :name
   validates_presence_of :ref_date
   validates_presence_of :value
@@ -238,6 +240,12 @@ class MonthlyStat < ActiveRecord::Base
     return if self.ref_date.nil?
     if self.ref_date.to_date.end_of_month != ref_date
       errors.add(:ref_date, t('errors.attributes.ref_date.not_end_of_month'))
+    end
+  end
+
+  def set_type
+    if teacher_id.nil?
+      self.type = 'SchoolMonthlyStat'
     end
   end
 end
