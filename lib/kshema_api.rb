@@ -24,9 +24,17 @@ module KshemaApi
 
   module InstanceMethods
 
-    def fetch_stat(name, ref_date)
-
-      response = Typhoeus::Request.get(uri, params: {
+    # @param name [String]
+    # @param ref_date [Date]
+    # @param options [Hash]
+    # @option options :async (false) queue in hydra but don't run.
+    # @option options :hydra (nil)
+    # unless :async
+    #   @return [String] response body
+    # else
+    #   @return [Typhoeus::Hydra] hydra with enqueued request.
+  def fetch_stat(name, ref_date, options = {})
+      request = Typhoeus::Request.new(uri, params: {
           key: KEY,
           stat_name: transform_name(name),
           padma_account_name: self.account_name,
@@ -34,14 +42,24 @@ module KshemaApi
           month: ref_date.month
       })
 
-      if response.success?
-        response.body
-      elsif response.timed_out?
-        nil
-      elsif response.code == 0
-        nil
+      request.on_complete do |response|
+        if response.success?
+          response.body
+        elsif response.timed_out?
+          nil
+        elsif response.code == 0
+          nil
+        else
+          nil
+        end
+      end
+
+      hydra = options[:hydra] || Typhoeus::Hydra.new
+      hydra.queue(request)
+      unless options[:async]
+        hydra.run
       else
-        nil
+        hydra
       end
     end
 
