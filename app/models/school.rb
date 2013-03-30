@@ -19,21 +19,33 @@ class School < ActiveRecord::Base
   # @param options [Hash]
   # @option options :update_existing (false)
   def sync_year_stats(year,options={})
+    months_range = (year == Time.zone.today.year)? (1..Time.zone.today.month) : (1...13)
+    months_range.each do |month|
+      sync_month_stats(year,month,options.merge({skip_synced_at_setting: true}))
+    end
+    self.update_attribute(:synced_at,Time.now)
+  end
+
+  # @param year [Integer]
+  # @param month [Integer]
+  # @param options [Hash]
+  # @option options :update_existing (false)
+  # @option options :skip_synced_at_setting (false)
+  def sync_month_stats(year,month,options={})
+    ref_date = Date.civil(year.to_i,month,1)
     MonthlyStat::VALID_NAMES.each do |name|
-      months_range = (year == Time.zone.today.year)? (1..Time.zone.today.month) : (1...13)
-      months_range.each do |month|
-        ref_date = Date.civil(year.to_i,month,1)
-        stats_for_month = self.monthly_stats.where(name: name).for_month(ref_date)
-        if stats_for_month.empty?
-          MonthlyStat.create_from_service!(self,name,ref_date)
-        else
-          if options[:update_existing]
-            stats_for_month.last.update_from_service!
-          end
+      stats_for_month = self.monthly_stats.where(name: name).for_month(ref_date)
+      if stats_for_month.empty?
+        MonthlyStat.create_from_service!(self,name,ref_date)
+      else
+        if options[:update_existing]
+          stats_for_month.last.update_from_service!
         end
       end
     end
-    self.update_attribute(:synced_at,Time.now)
+    unless options[:skip_synced_at_setting]
+      self.update_attribute(:synced_at, Time.now)
+    end
   end
 
   def cache_last_student_count
