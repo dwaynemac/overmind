@@ -9,12 +9,11 @@ class School < ActiveRecord::Base
   has_many :monthly_stats, dependent: :destroy
 
   include NucleoApi
-  
-  include Accounts::BelongsToAccount
-  validates_uniqueness_of :account_name, allow_blank: true
-
   include KshemaApi
   include PadmaStatsApi
+
+  include Accounts::BelongsToAccount
+  validates_uniqueness_of :account_name, allow_blank: true
 
   # @param year [Integer]
   # @param options [Hash]
