@@ -136,17 +136,7 @@ class MonthlyStat < ActiveRecord::Base
   # @return [MonthlyStat/NilClass]
   def self.create_from_service!(school,name,ref_date)
     ms = school.monthly_stats.new(name: name, ref_date: ref_date)
-
-    if school.padma2_enabled?
-      ms.service = case name.to_sym
-      when :students, :enrollments, :dropouts, :demand, :interviews, :p_interviews, :emails, :phonecalls,
-           :aspirante_students, :sadhaka_students, :yogin_students, :chela_students, :graduado_students, :assistant_students, :professor_students, :master_students
-        'crm'
-      end
-    else
-      ms.service = 'kshema'
-    end
-
+    ms.set_service
     remote_value = ms.get_remote_value
 
     if remote_value
@@ -188,6 +178,24 @@ class MonthlyStat < ActiveRecord::Base
         school.fetch_stat(self.name,ref_date)
       when 'crm'
         school.fetch_stat_from_crm(self.name,ref_date)
+    end
+  end
+
+
+  ##
+  # According to stat name and school this will set from wich service value needs to be fetched.
+  # @param school [School]
+  # @param stat_name [Symbol]
+  # @return [String]
+  def set_service
+    self.service = if self.school.padma2_enabled?
+      case self.name.to_sym
+        when :students, :enrollments, :dropouts, :demand, :interviews, :p_interviews, :emails, :phonecalls,
+            :aspirante_students, :sadhaka_students, :yogin_students, :chela_students, :graduado_students, :assistant_students, :professor_students, :master_students
+          'crm'
+      end
+    else
+      'kshema'
     end
   end
 

@@ -39,9 +39,9 @@ describe MonthlyStat do
     before do
       @out_of_scope = create(:monthly_stat, school: create(:school), ref_date: Date.civil(2012,1,3), value: 3, name: 'enrollments')
 
-      @apr = create(:monthly_stat, school: s, ref_date: Date.civil(2012,4,1), value: 1, name: 'enrollments')
-      @dec = create(:monthly_stat, school: s, ref_date: Date.civil(2012,12,5),value: 6, name: 'enrollments')
-      @jan = create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 4, name: 'enrollments')
+      @apr = create(:school_monthly_stat, school: s, ref_date: Date.civil(2012,4,1), value: 1, name: 'enrollments')
+      @dec = create(:school_monthly_stat, school: s, ref_date: Date.civil(2012,12,5),value: 6, name: 'enrollments')
+      @jan = create(:school_monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 4, name: 'enrollments')
 
       @matrix = s.monthly_stats.to_matrix
     end
@@ -53,7 +53,11 @@ describe MonthlyStat do
       @matrix[:enrollments].default.should be_nil
     end
     it "should store found stats on matrix keeping scope" do
-      @matrix.should == {:enrollments => {1 => @jan, 4 => @apr, 12 => @dec}, :dropout_rate => {}, :enrollment_rate => {}}
+      @matrix[:enrollments][1].should == @jan
+      @matrix[:enrollments][4].should == @apr
+      @matrix[:enrollments][12].should == @dec
+      @matrix[:dropout_rate].should == {}
+      @matrix[:enrollment_rate].should == {}
     end
     context "when there is more than one stat in a month (eg: scoping by fed)" do
       before do
@@ -113,7 +117,7 @@ describe MonthlyStat do
     context "with name: students" do
       context "for kshema schools" do
         before do
-          school.should_receive(:fetch_stat).and_return('2')
+          School.any_instance.stub(:fetch_stat).and_return('2')
         end
         it "creates a monthly stat On school" do
           expect{MonthlyStat.create_from_service!(school,:students,Date.today)}.to change{school.monthly_stats.count}.by(1)
@@ -125,8 +129,8 @@ describe MonthlyStat do
       end
       context "for padma2 schools" do
         before do
-          school.migrated_kshema_to_padma_at = Time.now
-          school.should_receive(:count_students).and_return('2')
+          school.update_attribute :migrated_kshema_to_padma_at, Time.now
+          School.any_instance.stub(:count_students).and_return '2'
         end
         it "created a monthly stat On school" do
           expect{MonthlyStat.create_from_service!(school,:students,Date.today)}.to change{school.monthly_stats.count}.by(1)
@@ -140,26 +144,24 @@ describe MonthlyStat do
   end
 
   describe "#update_from_service" do
-    context "for monthly stat with service name" do
-      context "kshema" do
-        let(:ms){ create(:monthly_stat, value: 1, service: 'kshema')}
-        before do
-          School.any_instance.should_receive(:fetch_stat).and_return('4')
-        end
-        it "should update value" do
-          ms.update_from_service!
-          ms.reload.value.should == 4
-        end
+    context "for monthly stat with service name kshema" do
+      let(:ms){ create(:monthly_stat, value: 1, service: 'kshema')}
+      before do
+        School.any_instance.stub(:fetch_stat).and_return('4')
       end
-      context "contacts" do
-        let(:ms){ create(:monthly_stat, value: 1, service: 'contacts', name: 'students')}
-        before do
-          School.any_instance.should_receive(:count_students).and_return('4')
-        end
-        it "should update value" do
-          ms.update_from_service!
-          ms.reload.value.should == 4
-        end
+      it "should update value" do
+        ms.update_from_service!
+        ms.reload.value.should == 4
+      end
+    end
+    context "for monthly stat with service name crm" do
+      let(:ms){ create(:monthly_stat, value: 1, service: 'crm', name: 'students')}
+      before do
+        School.any_instance.stub(:count_students).and_return('4')
+      end
+      it "should update value" do
+        ms.update_from_service!
+        ms.reload.value.should == 4
       end
     end
     context "for monthly stat without service name stored" do
