@@ -31,40 +31,45 @@ module PadmaStatsApi
 
   module InstanceMethods
 
-    def fetch_stat_from_crm(name,ref_date)
+    # @param name [String]
+    # @param ref_date [Date]
+    # @param options [Hash]
+    # @option options :async (false) queue in hydra but don't run.
+    # @option options :hydra (nil)
+    def fetch_stat_from_crm(name,ref_date, options={})
       case name.to_sym
         when :students
-          self.count_students(ref_date)
+          self.count_students(ref_date, options)
         when :aspirante_students
-          self.count_students(ref_date, level: 'aspirante')
+          self.count_students(ref_date, options.merge(level: 'aspirante'))
         when :sadhaka_students
-          self.count_students(ref_date, level: 'sádhaka')
+          self.count_students(ref_date, options.merge(level: 'sádhaka'))
         when :yogin_students
-          self.count_students(ref_date, level: 'yôgin')
+          self.count_students(ref_date, options.merge(level: 'yôgin'))
         when :chela_students
-          self.count_students(ref_date, level: 'chêla')
+          self.count_students(ref_date, options.merge(level: 'chêla'))
         when :graduado_students
-          self.count_students(ref_date, level: 'graduado')
+          self.count_students(ref_date, options.merge(level: 'graduado'))
         when :assistant_students
-          self.count_students(ref_date, level: 'asistente')
+          self.count_students(ref_date, options.merge(level: 'asistente'))
         when :professor_students
-          self.count_students(ref_date, level: 'docente')
+          self.count_students(ref_date, options.merge(level: 'docente'))
         when :master_students
-          self.count_students(ref_date, level: 'maestro')
+          self.count_students(ref_date, options.merge(level: 'maestro'))
         when :enrollments
-          self.count_enrollments(ref_date)
+          self.count_enrollments(ref_date, options)
         when :dropouts
-          self.count_drop_outs(ref_date)
+          self.count_drop_outs(ref_date, options)
         when :demand
-          self.count_communications(ref_date)
+          self.count_communications(ref_date, options)
         when :interviews
-          self.count_interviews(ref_date)
+          self.count_interviews(ref_date, options)
         when :p_interviews
-          self.count_interviews(ref_date, filter: { coefficient: 'p' })
+          self.count_interviews(ref_date, options.merge(filter: { coefficient: 'p' }))
         when :emails
-          self.count_communications(ref_date, filter: {media: 'email'})
+          self.count_communications(ref_date, options.merge(filter: {media: 'email'}))
         when :phonecalls
-          self.count_communications(ref_date, filter: { media: 'phone_call'})
+          self.count_communications(ref_date, options.merge(filter: { media: 'phone_call'}))
       end
     end
 
@@ -73,6 +78,8 @@ module PadmaStatsApi
     # @param options [Hash]
     # @option options [String] level. Filter by level. Valid values: aspirante, sádhaka, yôgin, chêla, graduado, asistente, docente, maestro
     # @option options [String] teacher_username
+    # @option options :async (false) queue in hydra but don't run.
+    # @option options :hydra (nil)
     # @return [Integer]
     def count_students(ref_date, options = {})
       req_options = { app_key: ENV['crm_key'],
@@ -100,14 +107,18 @@ module PadmaStatsApi
          })
       end
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
-      if response.success?
-        h = ActiveSupport::JSON.decode response.body
-        h['value']
-      else
-        nil
+      request = Typhoeus::Request.new("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
+      request.on_complete do |response|
+        if response.success?
+          h = ActiveSupport::JSON.decode response.body
+          h['value']
+        else
+          nil
+        end
       end
+      run_or_queue(options, request)
     end
+
 
     def count_interviews(ref_date, options={})
       options[:filter] ||= {}
@@ -127,13 +138,16 @@ module PadmaStatsApi
         req_options[:filter].merge! options[:filter]
       end
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/communications/count", params: req_options)
-      if response.success?
-        h = ActiveSupport::JSON.decode response.body
-        h['value']
-      else
-        nil
+      req = Typhoeus::Request.new("#{CRM_URL}/api/v0/communications/count", params: req_options)
+      req.on_complete do |response|
+        if response.success?
+          h = ActiveSupport::JSON.decode response.body
+          h['value']
+        else
+          nil
+        end
       end
+      run_or_queue options, req
     end
 
     def count_drop_outs(ref_date)
@@ -145,13 +159,15 @@ module PadmaStatsApi
                       }
       }
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/drop_outs/count", params: req_options)
+      req = Typhoeus::Request.new("#{CRM_URL}/api/v0/drop_outs/count", params: req_options)
+      req.on_complete do |response|
       if response.success?
         h = ActiveSupport::JSON.decode response.body
         h['value']
       else
         nil
       end
+      run_or_queue options, req
     end
 
     def count_enrollments(ref_date, options={})
@@ -163,14 +179,37 @@ module PadmaStatsApi
                       }
       }
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/enrollments/count", params: req_options)
-      if response.success?
-        h = ActiveSupport::JSON.decode response.body
-        h['value']
-      else
-        nil
+      request = Typhoeus::Request.new("#{CRM_URL}/api/v0/enrollments/count", params: req_options)
+      request.on_complete do |response|
+        if response.success?
+          h = ActiveSupport::JSON.decode response.body
+          h['value']
+        else
+          nil
+        end
       end
+      run_or_queue(options,request)
     end
 
+  end
+
+  private
+
+  ##
+  # Will run or enqueue request according to options
+  #
+  # @param options [Hash]
+  # @param request [Typhoeus::Request]
+  #
+  # @option options :hydra (nil)
+  # @option options async (false)
+  def run_or_queue(options, request)
+    hydra = options[:hydra] || Typhoeus::Hydra.new
+    hydra.queue(request)
+    unless options[:async]
+      hydra.run
+    else
+      hydra
+    end
   end
 end

@@ -172,12 +172,18 @@ class MonthlyStat < ActiveRecord::Base
     school.try :account_name
   end
 
-  def get_remote_value
+  # @param options [Hash]
+  # @option options :async
+  # @option options :hydra
+  # @return [String/Typhoeus::Hydra]
+  #   If :async is given then hydra with queues request is returns.
+  #   else response string is returned
+  def get_remote_value(options = {})
     case service
       when 'kshema'
-        school.fetch_stat(self.name,ref_date)
+        school.fetch_stat(self.name,ref_date,options)
       when 'crm'
-        school.fetch_stat_from_crm(self.name,ref_date)
+        school.fetch_stat_from_crm(self.name,ref_date,options)
     end
   end
 
