@@ -27,12 +27,8 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-end
-gem 'jquery-rails'
-
-gem "twitter-bootstrap-rails"
-
-group :assets do
+  gem 'jquery-rails'
+  gem "twitter-bootstrap-rails"
   gem "execjs"
   gem "therubyracer"
 end
@@ -50,4 +46,7 @@ end
 group :development do
   gem 'subcontractor', '>= 0.6.1'
   gem 'foreman'
+
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
