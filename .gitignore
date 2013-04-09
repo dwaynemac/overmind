@@ -20,3 +20,4 @@ local_env.yml
 config/local_env.yml
 .yardoc/
 public/documentation/
+doc/
