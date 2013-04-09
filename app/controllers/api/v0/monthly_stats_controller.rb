@@ -1,9 +1,9 @@
 # @restful_api v0
-# @required [String] api_key
 class Api::V0::MonthlyStatsController < Api::V0::ApiController
 
   # @action GET
   # @url /api/v0/monthly_stats
+  # @required [String] api_key
   def index
     @monthly_stats = MonthlyStat.all(include: :school)
     render json: {
@@ -14,6 +14,7 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
 
   # @url /api/v0/monthly_stats/:id
   # @action GET
+  # @required [String] api_key
   # @required [Integer] id
   # @response Array<MonthlyStat>
   def show
@@ -26,6 +27,7 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   # @url /api/v0/monthly_stats
   # @action POST
   #
+  # @required [String] api_key
   # @required [Hash] monthly_stat
   # @required [String] monthly_stat[account_name]
   # @required [String] monthly_stat[name] stat name. Valid values are:
@@ -60,7 +62,10 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
     end
   end
 
-  # PUT /api/v0/monthly_stats/:id
+  # @action PUT
+  # @url /api/v0/monthly_stats/:id
+  # @required [String] api_key
+  # @retuired [Integer] id
   def update
     @monthly_stat = MonthlyStat.find(params[:id])
     if @monthly_stat.update_attributes params[:monthly_stat]
@@ -75,6 +80,7 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
 
   # @url /api/v0/monthly_stats/:id
   # @action DELETE
+  # @required [String] api_key
   # @required [Integer] id
   def destroy
     @monthly_stat = MonthlyStat.find(params[:id])
