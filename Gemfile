@@ -39,8 +39,9 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "guard-rspec"
   gem "libnotify"
-  gem "yard", "~> 0.7.4"
-  gem "yard-rest", :git => "git@github.com:dwaynemac/yard-rest-plugin.git"
+  gem "yard", "~> 0.8.3"
+  gem 'yard-restful'
+  gem 'redcarpet'
 end
 
 group :development do

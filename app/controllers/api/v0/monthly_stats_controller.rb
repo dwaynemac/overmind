@@ -1,8 +1,9 @@
-# @url /v0/monthly_stat
-# @topic MonthlyStat
+# @restful_api v0
+# @required [String] api_key
 class Api::V0::MonthlyStatsController < Api::V0::ApiController
 
-  # GET /api/v0/monthly_stats
+  # @action GET
+  # @url /api/v0/monthly_stats
   def index
     @monthly_stats = MonthlyStat.all(include: :school)
     render json: {
@@ -11,23 +12,23 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
     }
   end
 
-  # @url [GET] /api/v0/monthly_stats/:id
-  # @required_argument [Integer] id
-  # @response_code 200
-  # @example_response { ... monthly_stat_attributes ...}
+  # @url /api/v0/monthly_stats/:id
+  # @action GET
+  # @required [Integer] id
+  # @response Array<MonthlyStat>
   def show
-    @monthly_stat = MonthlyStat
-.find(params[:id])
+    @monthly_stat = MonthlyStat.find(params[:id])
     render json: @monthly_stat
   end
 
   # Creates MonthlyStat. If it already exists, existing stat will be updated.
-  #                                end
-  # @url [POST] /api/v0/monthly_stats
   #
-  # @required_argument [Hash] monthly_stat
-  # @key_for monthly_stat [String] account_name
-  # @key_for monthly_stat [String] name: stat name. Valid values are:
+  # @url /api/v0/monthly_stats
+  # @action POST
+  #
+  # @required [Hash] monthly_stat
+  # @required [String] monthly_stat[account_name]
+  # @required [String] monthly_stat[name] stat name. Valid values are:
   #   :enrollments,
   #   :dropouts,
   #   :students,
@@ -36,12 +37,11 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   #   :master_students, # students at Master level.
   #   :interviews, :p_interviews
   #
-  # @example_response { id: 1234 } - status: 201
-  # @response_code 201
-  # @example_response {errors: [], message: 'Stat not saved'} - status: 400
-  # @response_code 400
-  #
+  # @example_response
+  #   id: 1234 - status: 201
   # @response_field id [Integer] id of created/updated monthly_stat (only for status: 201)
+  #
+  # @example_response {errors: [], message: 'Stat not saved'} - status: 400
   # @response_field errors [Array] (only for status: 400)
   def create
     if @monthly_stat = find_this_stat(params[:monthly_stat])
@@ -73,7 +73,9 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
     end
   end
 
-  # DELETE /api/v0/monthly_stats/:id
+  # @url /api/v0/monthly_stats/:id
+  # @action DELETE
+  # @required [Integer] id
   def destroy
     @monthly_stat = MonthlyStat.find(params[:id])
     @monthly_stat.destroy
