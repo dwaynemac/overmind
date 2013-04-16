@@ -8,6 +8,9 @@ class School < ActiveRecord::Base
 
   has_many :monthly_stats, dependent: :destroy
 
+  has_many :teacher_monthly_stats
+  has_many :school_monthly_stats
+
   include NucleoApi
   include KshemaApi
   include PadmaStatsApi
