@@ -27,10 +27,15 @@ describe School do
   describe "#sync_year_stats" do
     let(:school){create(:school)}
     before do
-      School.any_instance.stub(:fetch_stat).and_return('1')
+      SchoolMonthlyStat.any_instance.stub(:get_remote_value).and_return('1')
+      TeacherMonthlyStat.stub(:get_remote_values).and_return([
+          {full_name: 'Name', padma_username: 'username', value: '3'},
+          {full_name: 'Name2', padma_username: 'username5', value: '3'}
+                                                             ])
     end
     it "should create stats for each month for each stat name" do
       n = MonthlyStat::VALID_NAMES.size * 12
+      n = n + TeacherMonthlyStat::STATS_BY_TEACHER.size * 2 * 12
       expect{school.sync_year_stats(2011)}.to change{school.monthly_stats.count}.by(n)
     end
     it "should update school#synced_at timestamp" do
