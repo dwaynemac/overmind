@@ -5,6 +5,16 @@ class SchoolMonthlyStat < MonthlyStat
   validates_uniqueness_of :name, scope: [:school_id, :ref_date]
   validate :teacher_id_should_be_nil
 
+  def self.sync_from_service!(school,name,ref_date)
+    ms = school.school_monthly_stats.where(name: name, ref_date: ref_date)
+    if ms.empty?
+      create_from_service!(school,name,ref_date)
+    else
+      st = ms.first
+      st.update_from_service!
+    end
+  end
+
   # creates a new MonthlyStat fetching value from remote service.
   # @param [School] school
   # @param [String] name. Statistic code name
@@ -13,7 +23,7 @@ class SchoolMonthlyStat < MonthlyStat
   # @raise exception if creation fails
   # @return [MonthlyStat/NilClass]
   def self.create_from_service!(school,name,ref_date)
-    ms = school.monthly_stats.new(name: name, ref_date: ref_date)
+    ms = school.school_monthly_stats.new(name: name, ref_date: ref_date)
     ms.set_service
     remote_value = ms.get_remote_value
 

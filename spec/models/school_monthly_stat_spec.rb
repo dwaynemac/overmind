@@ -18,6 +18,22 @@ describe SchoolMonthlyStat do
     should validate_uniqueness_of(:name).scoped_to([:ref_date,:school_id])
   end
 
+  describe ".sync_from_service!" do
+    context "if stat exists" do
+      let(:sms){create(:school_monthly_stat)}
+      it "calls update_from_service! on it" do
+        sms
+        expect{SchoolMonthlyStat.sync_from_service!(sms.school,sms.name,sms.ref_date)}.not_to change{MonthlyStat.count}
+      end
+    end
+    context "if stats doesnt exist" do
+      it "calls create_from_service" do
+        SchoolMonthlyStat.should_receive('create_from_service!')
+        SchoolMonthlyStat.sync_from_service!(create(:school),'students',Date.today)
+      end
+    end
+  end
+
   describe ".create_from_service!" do
     let(:school){ create(:school) }
     context "with name: students" do
