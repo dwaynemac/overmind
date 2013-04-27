@@ -139,14 +139,6 @@ class MonthlyStat < ActiveRecord::Base
     school.try :account_name
   end
 
-  def get_remote_value
-    case service
-      when 'kshema'
-        school.fetch_stat(self.name,ref_date)
-      when 'crm'
-        school.fetch_stat_from_crm(self.name,ref_date)
-    end
-  end
 
 
   ##
@@ -160,6 +152,8 @@ class MonthlyStat < ActiveRecord::Base
         when :students, :enrollments, :dropouts, :demand, :interviews, :p_interviews, :emails, :phonecalls,
             :aspirante_students, :sadhaka_students, :yogin_students, :chela_students, :graduado_students, :assistant_students, :professor_students, :master_students
           'crm'
+        else
+          raise 'statistic not mapped to a service'
       end
     else
       'kshema'

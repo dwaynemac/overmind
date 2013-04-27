@@ -47,6 +47,18 @@ class SchoolMonthlyStat < MonthlyStat
     end
   end
 
+  # Will delegate fetching value to a corresponding module according to
+  # service.
+  # @return [Integer]
+  def get_remote_value
+    case service
+      when 'kshema'
+        school.fetch_stat(self.name,ref_date)
+      when 'crm'
+        school.fetch_stat_from_crm(self.name,ref_date)
+    end
+  end
+
   private
 
   def teacher_id_should_be_nil
