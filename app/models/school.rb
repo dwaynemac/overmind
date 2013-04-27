@@ -69,12 +69,6 @@ class School < ActiveRecord::Base
     end
   end
 
-  # @param year [Integer]
-  # @param month [Integer]
-  # @return Date.civil
-  def ref_date(year,month)
-    Date.civil(year.to_i,month.to_i,1)
-  end
 
   def cache_last_student_count
     lsc = self.monthly_stats.where(name: :students).order(:ref_date).last
@@ -92,6 +86,7 @@ class School < ActiveRecord::Base
     self.update_attribute(:last_teachers_count, sum)
   end
 
+  # Check on SecreatariaVirtual if school is enabled.
   # @return nil on Connection Problems
   # @return [TrueClass]
   def nucleo_enabled?
@@ -108,6 +103,15 @@ class School < ActiveRecord::Base
 
   def padma2_enabled?
     !self.migrated_kshema_to_padma_at.nil?
+  end
+
+  private
+
+  # @param year [Integer]
+  # @param month [Integer]
+  # @return Date.civil
+  def ref_date(year,month)
+    Date.civil(year.to_i,month.to_i,1)
   end
 
 end
