@@ -147,8 +147,15 @@ class MonthlyStat < ActiveRecord::Base
   # @param stat_name [Symbol]
   # @return [String]
   def set_service
-    self.service = if self.school.padma2_enabled?
-      case self.name.to_sym
+    self.service = MonthlyStat.service_for(self.school,self.name)
+  end
+
+  # @param school [School]
+  # @param name [String] a valid stat name
+  # @return [String]
+  def self.service_for(school,name)
+    if school.padma2_enabled?
+      case name.to_sym
         when :students, :enrollments, :dropouts, :demand, :interviews, :p_interviews, :emails, :phonecalls,
             :aspirante_students, :sadhaka_students, :yogin_students, :chela_students, :graduado_students, :assistant_students, :professor_students, :master_students
           'crm'

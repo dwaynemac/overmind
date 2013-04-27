@@ -8,8 +8,10 @@ class School < ActiveRecord::Base
 
   has_many :monthly_stats, dependent: :destroy
 
-  has_many :teacher_monthly_stats
   has_many :school_monthly_stats
+  has_many :teacher_monthly_stats
+
+  has_and_belongs_to_many :teachers
 
   include NucleoApi
   include KshemaApi
@@ -18,28 +20,44 @@ class School < ActiveRecord::Base
   include Accounts::BelongsToAccount
   validates_uniqueness_of :account_name, allow_blank: true
 
+  ##
+  # Syncs all stats of given year. School and Teacher
   # @param year [Integer]
   # @param options [Hash]
   # @option options :update_existing (false)
   def sync_year_stats(year,options={})
     months_range = (year == Time.zone.today.year)? (1..Time.zone.today.month) : (1...13)
     months_range.each do |month|
-      sync_month_stats(year,month,options.merge({skip_synced_at_setting: true}))
+      sync_school_month_stats(year,month,options.merge({skip_synced_at_setting: true}))
+      sync_teacher_monthly_stats(year,month)
     end
     self.update_attribute(:synced_at,Time.now)
   end
 
+  ##
+  # Updates teacher_monthly_stats.
+  # @param year [Integer]
+  # @param month [Integer]
+  def sync_teacher_monthly_stats(year,month)
+    ref = ref_date(year,month)
+    TeacherMonthlyStat::STATS_BY_TEACHER.each do |name|
+      TeacherMonthlyStat.sync_school_from_service(self,name,ref)
+    end
+  end
+
+  ##
+  # Updates all schools_monthly_stats of this school for given month
   # @param year [Integer]
   # @param month [Integer]
   # @param options [Hash]
   # @option options :update_existing (false)
   # @option options :skip_synced_at_setting (false)
-  def sync_month_stats(year,month,options={})
-    ref_date = Date.civil(year.to_i,month,1)
+  def sync_school_month_stats(year,month,options={})
+    ref = ref_date(year,month)
     MonthlyStat::VALID_NAMES.each do |name|
-      stats_for_month = self.monthly_stats.where(name: name).for_month(ref_date)
+      stats_for_month = self.monthly_stats.where(name: name).for_month(ref)
       if stats_for_month.empty?
-        MonthlyStat.create_from_service!(self,name,ref_date)
+        SchoolMonthlyStat.create_from_service!(self,name,ref)
       else
         if options[:update_existing]
           stats_for_month.last.update_from_service!
@@ -49,6 +67,13 @@ class School < ActiveRecord::Base
     unless options[:skip_synced_at_setting]
       self.update_attribute(:synced_at, Time.now)
     end
+  end
+
+  # @param year [Integer]
+  # @param month [Integer]
+  # @return Date.civil
+  def ref_date(year,month)
+    Date.civil(year.to_i,month.to_i,1)
   end
 
   def cache_last_student_count

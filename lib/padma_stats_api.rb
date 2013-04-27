@@ -31,40 +31,45 @@ module PadmaStatsApi
 
   module InstanceMethods
 
-    def fetch_stat_from_crm(name,ref_date)
+    # @param name [String]
+    # @param ref_date [Date]
+    # @param options [Hash]
+    # @option options [Boolean] by_teacher
+    # @return [Integer/Array<Hash>] will return array if :by_teacher option is given.
+    def fetch_stat_from_crm(name,ref_date,options={})
       case name.to_sym
         when :students
-          self.count_students(ref_date)
+          self.count_students(ref_date,options)
         when :aspirante_students
-          self.count_students(ref_date, level: 'aspirante')
+          self.count_students(ref_date, options.merge({level: 'aspirante'}))
         when :sadhaka_students
-          self.count_students(ref_date, level: 'sádhaka')
+          self.count_students(ref_date, options.merge({level: 'sádhaka'}))
         when :yogin_students
-          self.count_students(ref_date, level: 'yôgin')
+          self.count_students(ref_date, options.merge({level: 'yôgin'}))
         when :chela_students
-          self.count_students(ref_date, level: 'chêla')
+          self.count_students(ref_date, options.merge({level: 'chêla'}))
         when :graduado_students
-          self.count_students(ref_date, level: 'graduado')
+          self.count_students(ref_date, options.merge({level: 'graduado'}))
         when :assistant_students
-          self.count_students(ref_date, level: 'asistente')
+          self.count_students(ref_date, options.merge({level: 'asistente'}))
         when :professor_students
-          self.count_students(ref_date, level: 'docente')
+          self.count_students(ref_date, options.merge({level: 'docente'}))
         when :master_students
-          self.count_students(ref_date, level: 'maestro')
+          self.count_students(ref_date, options.merge({level: 'maestro'}))
         when :enrollments
-          self.count_enrollments(ref_date)
+          self.count_enrollments(ref_date,options)
         when :dropouts
-          self.count_drop_outs(ref_date)
+          self.count_drop_outs(ref_date,options)
         when :demand
-          self.count_communications(ref_date)
+          self.count_communications(ref_date,options)
         when :interviews
-          self.count_interviews(ref_date)
+          self.count_interviews(ref_date,options)
         when :p_interviews
-          self.count_interviews(ref_date, filter: { coefficient: 'p' })
+          self.count_interviews(ref_date, options.merge({filter: { coefficient: 'p' }}))
         when :emails
-          self.count_communications(ref_date, filter: {media: 'email'})
+          self.count_communications(ref_date, options.merge({filter: {media: 'email'}}))
         when :phonecalls
-          self.count_communications(ref_date, filter: { media: 'phone_call'})
+          self.count_communications(ref_date, options.merge({filter: { media: 'phone_call'}}))
       end
     end
 
@@ -72,8 +77,10 @@ module PadmaStatsApi
     # @param ref_date [Date]
     # @param options [Hash]
     # @option options [String] level. Filter by level. Valid values: aspirante, sádhaka, yôgin, chêla, graduado, asistente, docente, maestro
-    # @option options [String] teacher_username
-    # @return [Integer]
+    # @option options [String] teacher_username. -- will scope to this specific teacher
+    # @option options [Boolean] by_teacher. -- will return all teachers -- If :teacher_username is given this will be ignored.
+    # Returns array if by_teacher given.
+    # @return [Integer/Array<Hash>]
     def count_students(ref_date, options = {})
       req_options = { app_key: ENV['crm_key'],
                       year: ref_date.year,
@@ -98,12 +105,18 @@ module PadmaStatsApi
                  ]
              }
          })
+      elsif options[:by_teacher]
+        req_options.merge!({by_teacher: true})
       end
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
       if response.success?
         h = ActiveSupport::JSON.decode response.body
-        h['value']
+        if options[:by_teacher]
+          h
+        else
+          h['value']
+        end
       else
         nil
       end
@@ -136,7 +149,7 @@ module PadmaStatsApi
       end
     end
 
-    def count_drop_outs(ref_date)
+    def count_drop_outs(ref_date,options={})
       req_options = { app_key: "844d8c2d20",
                       filter: {
                           year: ref_date.year,

@@ -1,3 +1,5 @@
+##
+# Methods to interact with Kshema stats api.
 # expects base class to have included Accounts::BelongsToAccount
 module KshemaApi
 
@@ -24,18 +26,32 @@ module KshemaApi
 
   module InstanceMethods
 
-    def fetch_stat(name, ref_date)
+    # @param name [Symbol]
+    # @param ref_date [Date]
+    # @param options [Hash]
+    # @option options [Boolean] by_teacher
+    def fetch_stat(name, ref_date,options={})
 
-      response = Typhoeus::Request.get(uri, params: {
+      params = {
           key: KEY,
           stat_name: transform_name(name),
           padma_account_name: self.account_name,
           year: ref_date.year,
           month: ref_date.month
-      })
+      }
+
+      if options[:by_teacher]
+        params.merge!({include_teachers: true})
+      end
+
+      response = Typhoeus::Request.get(uri, params: params)
 
       if response.success?
-        response.body
+        if options[:by_teacher]
+          ActiveSupport::JSON.decode(response.body)
+        else
+          response.body
+        end
       elsif response.timed_out?
         nil
       elsif response.code == 0

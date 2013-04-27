@@ -16,7 +16,7 @@ group :production do
   gem 'newrelic_rpm'
 end
 
-gem 'logical_model', '~> 0.4.1'
+gem 'logical_model', '~> 0.4.10'
 gem 'accounts_client', '~> 0.0.8'
 gem 'kaminari'
 gem 'ransack'
