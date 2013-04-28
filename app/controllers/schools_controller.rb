@@ -29,7 +29,13 @@ class SchoolsController < ApplicationController
   def show
     @years = (2010..Date.today.year)
     @year = params[:year] || Date.today.year
+
     @school_monthly_stats = @school.school_monthly_stats.for_year(@year).to_matrix
+
+    @teachers_monthly_stats = {}
+    @school.teachers.each do |teacher|
+      @teachers_monthly_stats[teacher.id] = @school.teacher_monthly_stats.for_year(@year).where(teacher_id: teacher.id).to_matrix
+    end
   end
 
   def new

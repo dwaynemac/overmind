@@ -56,9 +56,11 @@
                   class: 'btn btn-primary') %>
     <%- end -%>
   <%- end -%>
+
+  <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
+    <%= render "monthly_stats/chrono_table", monthly_stats: stats, hide_year_form: true, title: Teacher.find(teacher_id).try(:full_name) %>
+  <% end %>
 </div>
-
-
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
