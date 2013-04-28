@@ -105,6 +105,20 @@ class School < ActiveRecord::Base
     !self.migrated_kshema_to_padma_at.nil?
   end
 
+  # Difference: stored for school - calculated from teachers
+  # @return [Integer] diference between value stored as total for school and sum of teachers values.
+  def diff(ref_date,stat_name)
+    absolute = school_monthly_stats.for_month(ref_date).where(name: stat_name).sum(:value)
+    calculated = teacher_monthly_stats.for_month(ref_date).where(name: stat_name).sum(:value)
+    absolute - calculated
+  end
+
+  # Check if stat stored for school matched calculated by teachers
+  # @return [Boolean]
+  def exact?(ref_date,stat_name)
+    (diff(ref_date,stat_name) == 0)
+  end
+
   private
 
   # @param year [Integer]
