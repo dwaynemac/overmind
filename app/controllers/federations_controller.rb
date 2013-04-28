@@ -18,7 +18,7 @@ class FederationsController < ApplicationController
   def show
     @years = (2010..Date.today.year)
     @year = params[:year] || Date.today.year
-    @monthly_stats = @federation.monthly_stats.for_year(@year).to_matrix
+    @monthly_stats = @federation.school_monthly_stats.for_year(@year).to_matrix
   end
 
   def new
