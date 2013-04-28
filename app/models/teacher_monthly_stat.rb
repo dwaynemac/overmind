@@ -1,6 +1,7 @@
 class TeacherMonthlyStat < MonthlyStat
   attr_accessible :teacher_id
   belongs_to :teacher
+
   validates_uniqueness_of :name, scope: [:school_id, :teacher_id, :ref_date]
 
   STATS_BY_TEACHER = [
@@ -20,6 +21,9 @@ class TeacherMonthlyStat < MonthlyStat
       raise ArgumentError, 'this stats is not available on a teacher granularity level.'
     end
 
+    # ensure the date is at end of month.
+    ref_date = ref_date.to_date.end_of_month
+
     service = MonthlyStat.service_for(school,name)
     teachers_stats = self.get_remote_values(school,name,service,ref_date) || []
 
@@ -36,11 +40,11 @@ class TeacherMonthlyStat < MonthlyStat
                             ref_date: ref_date)
       if existing.empty?
         # store new
-        self.create!(school_id: school.id,
-                                   teacher_id: teacher.id,
-                                   name: name,
-                                   ref_date: ref_date,
-                                   value: tstat['value'])
+        self.create(school_id: school.id,
+                     teacher_id: teacher.id,
+                     name: name,
+                     ref_date: ref_date,
+                     value: tstat['value'])
       else
         # update existing
         teacher_stat = existing.first
