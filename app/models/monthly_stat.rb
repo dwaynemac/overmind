@@ -58,7 +58,7 @@ class MonthlyStat < ActiveRecord::Base
 
     # fetch from DB grouped by name.
     self.scoped.group_by(&:name).each_pair do |stat_name, stats|
-      # TODO ERROR: if stat has not been scoped to a year this will acumulate all months
+      # FIXME if stat has not been scoped to a year this will acumulate all months
       matrix[stat_name] = stats.group_by{|ms|ms.ref_date.month}
     end
 
