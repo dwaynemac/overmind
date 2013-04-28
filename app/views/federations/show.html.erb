@@ -23,7 +23,7 @@
 
 <div id="teachersChartContainer" class="chart-container"></div>
 
-<%= render 'monthly_stats/chrono_table' %>
+<%= render 'monthly_stats/chrono_table', monthly_stats: @monthly_stats %>
 
 <div>
   <%= link_to t('.schools'), schools_path(q: {federation_id_eq: @federation.id}), class: 'btn' %>

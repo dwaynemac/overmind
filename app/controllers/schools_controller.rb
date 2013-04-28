@@ -29,7 +29,7 @@ class SchoolsController < ApplicationController
   def show
     @years = (2010..Date.today.year)
     @year = params[:year] || Date.today.year
-    @monthly_stats = @school.monthly_stats.for_year(@year).to_matrix
+    @school_monthly_stats = @school.school_monthly_stats.for_year(@year).to_matrix
   end
 
   def new

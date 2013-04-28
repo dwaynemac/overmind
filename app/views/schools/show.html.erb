@@ -44,7 +44,7 @@
 <div id="teachersChartContainer" class="chart-container"></div>
 
 <div id="stats">
-  <%= render 'monthly_stats/chrono_table' %>
+  <%= render 'monthly_stats/chrono_table', monthly_stats: @school_monthly_stats %>
   <%= link_to(t('.new', :default => t("helpers.links.new")),
               new_school_monthly_stat_path(school_id: @school.id),
               :class => 'btn btn-primary') if can?(:create,@school.monthly_stats.new) %>
@@ -58,6 +58,8 @@
   <%- end -%>
 </div>
 
+
+
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               schools_path, :class => 'btn'  %>
@@ -68,26 +70,26 @@
     <%- (1...12).each do |month| -%>
       {
         month: "<%= Date::MONTHNAMES[month] %>",
-        students: <%= monthly_stat = @monthly_stats[:students][month]; monthly_stat.try(:value) || 0 %>,
-        dropouts: <%= monthly_stat = @monthly_stats[:dropouts][month]; monthly_stat.try(:value) || 0 %>,
-        enrollments: <%= monthly_stat = @monthly_stats[:enrollments][month]; monthly_stat.try(:value) || 0 %>,
-        p_interviews: <%= monthly_stat = @monthly_stats[:p_interviews][month]; monthly_stat.try(:value) || 0 %>,
-        assistant_students: <%= monthly_stat = @monthly_stats[:assistant_students][month]; monthly_stat.try(:value) || 0 %>,
-        professor_students: <%= monthly_stat = @monthly_stats[:professor_students][month]; monthly_stat.try(:value) || 0 %>,
-        master_students: <%= monthly_stat = @monthly_stats[:master_students][month]; monthly_stat.try(:value) || 0 %>
+        students: <%= monthly_stat = @school_monthly_stats[:students][month]; monthly_stat.try(:value) || 0 %>,
+        dropouts: <%= monthly_stat = @school_monthly_stats[:dropouts][month]; monthly_stat.try(:value) || 0 %>,
+        enrollments: <%= monthly_stat = @school_monthly_stats[:enrollments][month]; monthly_stat.try(:value) || 0 %>,
+        p_interviews: <%= monthly_stat = @school_monthly_stats[:p_interviews][month]; monthly_stat.try(:value) || 0 %>,
+        assistant_students: <%= monthly_stat = @school_monthly_stats[:assistant_students][month]; monthly_stat.try(:value) || 0 %>,
+        professor_students: <%= monthly_stat = @school_monthly_stats[:professor_students][month]; monthly_stat.try(:value) || 0 %>,
+        master_students: <%= monthly_stat = @school_monthly_stats[:master_students][month]; monthly_stat.try(:value) || 0 %>
 
       },
     <%- end -%>
     <%- month = 12 -%>
     {
       month: "<%= Date::MONTHNAMES[month] %>",
-      students: <%= monthly_stat = @monthly_stats[:students][month]; monthly_stat.try(:value) || 0 %>,
-      dropouts: <%= monthly_stat = @monthly_stats[:dropouts][month]; monthly_stat.try(:value) || 0 %>,
-      enrollments: <%= monthly_stat = @monthly_stats[:enrollments][month]; monthly_stat.try(:value) || 0 %>,
-      p_interviews: <%= monthly_stat = @monthly_stats[:p_interviews][month]; monthly_stat.try(:value) || 0 %>,
-      assistant_students: <%= monthly_stat = @monthly_stats[:assistant_students][month]; monthly_stat.try(:value) || 0 %>,
-      professor_students: <%= monthly_stat = @monthly_stats[:professor_students][month]; monthly_stat.try(:value) || 0 %>,
-      master_students: <%= monthly_stat = @monthly_stats[:master_students][month]; monthly_stat.try(:value) || 0 %>
+      students: <%= monthly_stat = @school_monthly_stats[:students][month]; monthly_stat.try(:value) || 0 %>,
+      dropouts: <%= monthly_stat = @school_monthly_stats[:dropouts][month]; monthly_stat.try(:value) || 0 %>,
+      enrollments: <%= monthly_stat = @school_monthly_stats[:enrollments][month]; monthly_stat.try(:value) || 0 %>,
+      p_interviews: <%= monthly_stat = @school_monthly_stats[:p_interviews][month]; monthly_stat.try(:value) || 0 %>,
+      assistant_students: <%= monthly_stat = @school_monthly_stats[:assistant_students][month]; monthly_stat.try(:value) || 0 %>,
+      professor_students: <%= monthly_stat = @school_monthly_stats[:professor_students][month]; monthly_stat.try(:value) || 0 %>,
+      master_students: <%= monthly_stat = @school_monthly_stats[:master_students][month]; monthly_stat.try(:value) || 0 %>
     }
   ]
 </script>

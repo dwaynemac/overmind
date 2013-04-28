@@ -27,7 +27,7 @@
       <th><%= t("monthly_stat.names.#{name}") %></th>
       <%- (1...13).each do |month| -%>
         <td>
-          <%= monthly_stat = @monthly_stats[name][month]
+          <%= monthly_stat = monthly_stats[name][month]
               monthly_stat.try :value %>
           <%- unless monthly_stat.nil? || monthly_stat.is_a?(ReducedStat) || @school.nil? -%>
             <%= link_to('e',
@@ -55,7 +55,7 @@
   <tr>
     <th>
       <%= t('monthly_stat.names.dropout_rate') %>
-      <%- if !@monthly_stats[:dropouts].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !@monthly_stats[:students].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
+      <%- if !monthly_stats[:dropouts].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !monthly_stats[:students].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
         <a style="position:relative; float: right;"
            rel="popover"
            href="#"
@@ -66,7 +66,7 @@
     </th>
       <%- (1...13).each do |month| -%>
         <td>
-          <%= v = @monthly_stats[:dropout_rate][month].try :value
+          <%= v = monthly_stats[:dropout_rate][month].try :value
               number_with_precision(v*100,precision:0) if v
           -%>
           <%= '%' if v %>
@@ -76,7 +76,7 @@
   <tr>
     <th>
       <%= t('monthly_stat.names.enrollment_rate') %>
-      <%- if !@monthly_stats[:enrollments].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !@monthly_stats[:interviews].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
+      <%- if !monthly_stats[:enrollments].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !monthly_stats[:interviews].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
         <a style="position:relative; float: right;"
            rel="popover"
            href="#"
@@ -87,7 +87,7 @@
     </th>
     <%- (1...13).each do |month| -%>
       <td>
-        <%= v = @monthly_stats[:enrollment_rate][month].try :value
+        <%= v = monthly_stats[:enrollment_rate][month].try :value
             number_with_precision v*100, precision: 0 if v
         %>
         <%= '%' if v %>
