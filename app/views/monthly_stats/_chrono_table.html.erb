@@ -23,76 +23,82 @@
   </thead>
   <tbody>
   <%- MonthlyStat::VALID_NAMES.each do |name| -%>
-    <tr>
-      <th><%= t("monthly_stat.names.#{name}") %></th>
-      <%- (1...13).each do |month| -%>
-        <td>
-          <%= monthly_stat = monthly_stats[name][month]
-              monthly_stat.try :value %>
-          <%- unless monthly_stat.nil? || monthly_stat.is_a?(ReducedStat) || @school.nil? -%>
-            <%= link_to('e',
-                        edit_school_monthly_stat_path(school_id: @school.id, id: monthly_stat.id),
-                        rel: 'tooltip', data: {'original-title' => t('edit')},
-                        :class => 'pictos') if can?(:edit,monthly_stat) %>
-            <%= link_to('d',
-                        school_monthly_stat_path(id: monthly_stat, school_id: @school.id),
-                        rel: 'tooltip', data: {'original-title' => t('delete')},
-                        :method => :delete,
-                        :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                        :class => 'pictos red') if can?(:destroy,monthly_stat) %>
-            <%- unless monthly_stat.service.blank? -%>
-              <%= link_to('r',
-                          sync_school_monthly_stat_path(id: monthly_stat, school_id: @school.id, year: @year),
-                          rel: 'tooltip',
-                          data: {'original-title' => "sync from #{monthly_stat.service}"},
-                          :class => 'pictos red') if can?(:sync,@school) %>
+    <% unless monthly_stats[name] == {} %>
+      <tr>
+        <th><%= t("monthly_stat.names.#{name}") %></th>
+        <%- (1...13).each do |month| -%>
+          <td>
+            <%= monthly_stat = monthly_stats[name][month]
+                monthly_stat.try :value %>
+            <%- unless monthly_stat.nil? || monthly_stat.is_a?(ReducedStat) || @school.nil? -%>
+              <%= link_to('e',
+                          edit_school_monthly_stat_path(school_id: @school.id, id: monthly_stat.id),
+                          rel: 'tooltip', data: {'original-title' => t('edit')},
+                          :class => 'pictos') if can?(:edit,monthly_stat) %>
+              <%= link_to('d',
+                          school_monthly_stat_path(id: monthly_stat, school_id: @school.id),
+                          rel: 'tooltip', data: {'original-title' => t('delete')},
+                          :method => :delete,
+                          :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                          :class => 'pictos red') if can?(:destroy,monthly_stat) %>
+              <%- unless monthly_stat.service.blank? -%>
+                <%= link_to('r',
+                            sync_school_monthly_stat_path(id: monthly_stat, school_id: @school.id, year: @year),
+                            rel: 'tooltip',
+                            data: {'original-title' => "sync from #{monthly_stat.service}"},
+                            :class => 'pictos red') if can?(:sync,@school) %>
+              <%- end -%>
             <%- end -%>
-          <%- end -%>
-        </td>
-    <%- end -%>
-    </tr>
-  <%- end -%>
-  <tr>
-    <th>
-      <%= t('monthly_stat.names.dropout_rate') %>
-      <%- if !monthly_stats[:dropouts].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !monthly_stats[:students].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
-        <a style="position:relative; float: right;"
-           rel="popover"
-           href="#"
-           class="pictos"
-           data-title="<%= t('monthly_stats.chrono_table.evasion_calculation') %>"
-           data-content="<%= t('monthly_stats.chrono_table.evasion_explanation') %>">?</a>
+          </td>
       <%- end -%>
-    </th>
+      </tr>
+    <% end %>
+  <%- end -%>
+  <% unless monthly_stats[:dropout_rate] == {} %>
+    <tr>
+      <th>
+        <%= t('monthly_stat.names.dropout_rate') %>
+        <%- if !monthly_stats[:dropouts].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !monthly_stats[:students].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
+          <a style="position:relative; float: right;"
+             rel="popover"
+             href="#"
+             class="pictos"
+             data-title="<%= t('monthly_stats.chrono_table.evasion_calculation') %>"
+             data-content="<%= t('monthly_stats.chrono_table.evasion_explanation') %>">?</a>
+        <%- end -%>
+      </th>
+        <%- (1...13).each do |month| -%>
+          <td>
+            <%= v = monthly_stats[:dropout_rate][month].try :value
+                number_with_precision(v*100,precision:0) if v
+            -%>
+            <%= '%' if v %>
+          </td>
+        <%- end -%>
+    </tr>
+  <%-	end %>
+  <% unless monthly_stats[:enrollment_rate] == {} %>
+    <tr>
+      <th>
+        <%= t('monthly_stat.names.enrollment_rate') %>
+        <%- if !monthly_stats[:enrollments].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !monthly_stats[:interviews].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
+          <a style="position:relative; float: right;"
+             rel="popover"
+             href="#"
+             class="pictos"
+             data-title="<%= t('monthly_stats.chrono_table.efectividad_calculation') %>"
+             data-content="<%= t('monthly_stats.chrono_table.efectividad_explanation') %>">?</a>
+        <%- end -%>
+      </th>
       <%- (1...13).each do |month| -%>
         <td>
-          <%= v = monthly_stats[:dropout_rate][month].try :value
-              number_with_precision(v*100,precision:0) if v
-          -%>
+          <%= v = monthly_stats[:enrollment_rate][month].try :value
+              number_with_precision v*100, precision: 0 if v
+          %>
           <%= '%' if v %>
         </td>
       <%- end -%>
-  </tr>
-  <tr>
-    <th>
-      <%= t('monthly_stat.names.enrollment_rate') %>
-      <%- if !monthly_stats[:enrollments].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !monthly_stats[:interviews].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
-        <a style="position:relative; float: right;"
-           rel="popover"
-           href="#"
-           class="pictos"
-           data-title="<%= t('monthly_stats.chrono_table.efectividad_calculation') %>"
-           data-content="<%= t('monthly_stats.chrono_table.efectividad_explanation') %>">?</a>
-      <%- end -%>
-    </th>
-    <%- (1...13).each do |month| -%>
-      <td>
-        <%= v = monthly_stats[:enrollment_rate][month].try :value
-            number_with_precision v*100, precision: 0 if v
-        %>
-        <%= '%' if v %>
-      </td>
-    <%- end -%>
-  </tr>
+    </tr>
+  <%-	end %>
   </tbody>
 </table>
