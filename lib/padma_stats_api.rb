@@ -110,16 +110,7 @@ module PadmaStatsApi
       end
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
-      if response.success?
-        h = ActiveSupport::JSON.decode response.body
-        if options[:by_teacher]
-          h
-        else
-          h['value']
-        end
-      else
-        nil
-      end
+      parse_response(response,!options[:by_teacher])
     end
 
     def count_interviews(ref_date, options={})
@@ -141,12 +132,7 @@ module PadmaStatsApi
       end
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/communications/count", params: req_options)
-      if response.success?
-        h = ActiveSupport::JSON.decode response.body
-        h['value']
-      else
-        nil
-      end
+      parse_response(response)
     end
 
     def count_drop_outs(ref_date,options={})
@@ -159,12 +145,7 @@ module PadmaStatsApi
       }
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/drop_outs/count", params: req_options)
-      if response.success?
-        h = ActiveSupport::JSON.decode response.body
-        h['value']
-      else
-        nil
-      end
+      parse_response(response)
     end
 
     def count_enrollments(ref_date, options={})
@@ -177,13 +158,24 @@ module PadmaStatsApi
       }
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/enrollments/count", params: req_options)
-      if response.success?
-        h = ActiveSupport::JSON.decode response.body
-        h['value']
-      else
-        nil
-      end
+      parse_response(response)
     end
+  end
 
+  private
+
+  # @param response [Typhoeus::Response]
+  # @param get_value [Boolean] (true)
+  def parse_response(response,get_value=true)
+    if response.success?
+      body = ActiveSupport::JSON.decode response.body
+      if get_value
+        body['value']
+      else
+        body
+      end
+    else
+      nil
+    end
   end
 end
