@@ -16,3 +16,4 @@ then open doc/index.html
 Run
     ./script/build_api_documentation.sh
 
+.
