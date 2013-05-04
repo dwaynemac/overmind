@@ -5,15 +5,7 @@ class TeacherMonthlyStat < MonthlyStat
   validates_uniqueness_of :name, scope: [:school_id, :teacher_id, :ref_date]
 
   STATS_BY_TEACHER = [
-      :students,
-      :aspirante_students,  # students at Aspirante lev
-      :sadhaka_students,  # students at Sádhaka lev
-      :yogin_students,  # students at Yôgin lev
-      :chela_students,  # students at Chêla lev
-      :graduado_students,  # students at Graduado lev
-      :assistant_students, # students at Assistant lev
-      :professor_students, # students at Professor level.
-      :master_students, # students at Master level.
+      :students
   ]
 
   def self.sync_school_from_service(school,name,ref_date)
