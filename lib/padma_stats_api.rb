@@ -120,7 +120,7 @@ module PadmaStatsApi
     end
 
     def count_communications(ref_date,options={})
-      req_options = { app_key: "844d8c2d20",
+      req_options = { app_key: ENV['crm_key'],
                       filter: {
                           year: ref_date.year,
                           month: ref_date.month,
@@ -136,7 +136,7 @@ module PadmaStatsApi
     end
 
     def count_drop_outs(ref_date,options={})
-      req_options = { app_key: "844d8c2d20",
+      req_options = { app_key: ENV['crm_key'],
                       filter: {
                           year: ref_date.year,
                           month: ref_date.month,
@@ -149,16 +149,17 @@ module PadmaStatsApi
     end
 
     def count_enrollments(ref_date, options={})
-      req_options = { app_key: "844d8c2d20",
+      req_options = { app_key: ENV['crm_key'],
                       filter: {
                           year: ref_date.year,
                           month: ref_date.month,
                           account_name: self.account_name
                       }
       }
+      req_options.merge!({by_teacher: true}) if options[:by_teacher]
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/enrollments/count", params: req_options)
-      parse_response(response)
+      parse_response(response,!options[:by_teacher])
     end
   end
 
