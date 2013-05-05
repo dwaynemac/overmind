@@ -5,9 +5,17 @@ class TeacherMonthlyStat < MonthlyStat
   validates_uniqueness_of :name, scope: [:school_id, :teacher_id, :ref_date]
 
   STATS_BY_TEACHER = [
-      :students
+      :students,
+      :enrollments
   ]
 
+  ##
+  # Will fetch all stats in STATS_BY_TEACHER from corresponding service (according to school)
+  # for month of ref_date.
+  # @param school [School]
+  # @param name [Symbol] stat name
+  # @param ref_date [Date]
+  # @return --
   def self.sync_school_from_service(school,name,ref_date)
     unless STATS_BY_TEACHER.include?(name)
       raise ArgumentError, 'this stats is not available on a teacher granularity level.'
