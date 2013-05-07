@@ -143,9 +143,10 @@ module PadmaStatsApi
                           account_name: self.account_name
                       }
       }
+      req_options.merge!({by_teacher: true}) if options[:by_teacher]
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/drop_outs/count", params: req_options)
-      parse_response(response)
+      parse_response(response,!options[:by_teacher])
     end
 
     def count_enrollments(ref_date, options={})

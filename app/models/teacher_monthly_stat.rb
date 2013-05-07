@@ -6,7 +6,8 @@ class TeacherMonthlyStat < MonthlyStat
 
   STATS_BY_TEACHER = [
       :students,
-      :enrollments
+      :enrollments,
+      :dropouts
   ]
 
   ##
