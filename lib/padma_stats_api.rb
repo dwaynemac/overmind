@@ -130,9 +130,10 @@ module PadmaStatsApi
       if options[:filter]
         req_options[:filter].merge! options[:filter]
       end
+      req_options.merge!({by_teacher: true}) if options[:by_teacher]
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/communications/count", params: req_options)
-      parse_response(response)
+      parse_response(response,!options[:by_teacher])
     end
 
     def count_drop_outs(ref_date,options={})

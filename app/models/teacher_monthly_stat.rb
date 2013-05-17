@@ -7,17 +7,12 @@ class TeacherMonthlyStat < MonthlyStat
   STATS_BY_TEACHER = [
       :students,
 
-      :aspirante_students,
-      :sadhaka_students,
-      :yogin_students,
-      :chela_students,
-      :graduado_students,
-      :assistant_students,
-      :professor_students,
-      :master_students,
-
       :enrollments,
-      :dropouts
+      :dropouts,
+
+      :demand,
+      :interviews, :p_interviews,
+      :emails, :phonecalls
   ]
 
   ##
