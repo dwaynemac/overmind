@@ -27,6 +27,7 @@ class Ability
         can :manage, :all
         can :sync, School
         can :see_global, MonthlyStat
+        can :see_debug_info, School
       when 'council'
         can :read, Federation
         can :read, School
