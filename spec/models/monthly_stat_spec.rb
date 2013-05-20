@@ -104,7 +104,7 @@ describe MonthlyStat do
       end
     end
     it "shouldnt raise expection when scoped to federation" do
-      expect{create(:federation).monthly_stats.to_matrix}.not_to raise_exception
+      expect{create(:federation).school_monthly_stats.to_matrix}.not_to raise_exception
     end
   end
 
