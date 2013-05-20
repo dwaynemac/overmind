@@ -4,6 +4,11 @@
 
 <div class="page-header">
   <h1>
+    <span id="current_year" title="<%= t('schools.show.click_to_change') %>"><%= @year %></span>
+    <%= form_tag nil, method: 'GET', class: 'form-inline', id: 'set-year', style: 'display: none'  do -%>
+      <%= select_tag( :year, options_for_select(@years,@year)) %>
+      <%= submit_tag(t('see'), class: 'btn') %>
+    <%- end -%>
   </h1>
 </div>
 

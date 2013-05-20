@@ -37,7 +37,7 @@ class MonthlyStatsController < ApplicationController
 
   def global
     authorize! :see_global, MonthlyStat
-    @years = 2010..2012
+    @years = 2010..Date.today.year
     @year = params[:year] || Time.zone.today.year
     @monthly_stats = MonthlyStat.for_year(@year).to_matrix
   end
