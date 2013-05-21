@@ -41,6 +41,7 @@ module StatsMatrix
 
       matrix = add_enrollment_rate(matrix)
       matrix = add_dropout_rate(matrix)
+      add_swasthya_students_subtotal(matrix)
     end
 
     private
@@ -60,7 +61,7 @@ module StatsMatrix
     end
 
     # @param matrix [Hash]
-    # @return [Hash] matrix with dropout_rate added
+    # @return [Ha6sh] matrix with dropout_rate added
     def add_dropout_rate(matrix)
       matrix[:dropout_rate] = {}
       matrix[:dropouts].each_pair do |month,stat|
@@ -76,6 +77,23 @@ module StatsMatrix
           drops = matrix[:dropouts][month].try(:value) || 0
           matrix[:dropout_rate][month] = ReducedStat.new(value: drops.to_f / students.to_f)
         end
+      end
+      matrix
+    end
+
+    # Adds sum of students in swasthya
+    # @param matrix [Hash]
+    # @return [Hash] matrix with swasthya_students_subtotal added
+    def add_swasthya_students_subtotal(matrix)
+      matrix[:swasthya_students_subtotal] = {}
+      (1..12).each do |month|
+        matrix[:swasthya_students_subtotal][month] = [:sadhaka_students,
+                                             :yogin_students,
+                                             :chela_students,
+                                             :graduado_students,
+                                             :assistant_students,
+                                             :professor_students,
+                                             :master_students].map{|stat| matrix[stat][month].try(:value)||0 }.sum
       end
       matrix
     end

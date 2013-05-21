@@ -106,6 +106,18 @@ describe MonthlyStat do
     it "shouldnt raise expection when scoped to federation" do
       expect{create(:federation).school_monthly_stats.to_matrix}.not_to raise_exception
     end
+    describe "swasthya_students_subtotal" do
+      before do
+        create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 1, name: 'sadhaka_students')
+        create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 1, name: 'yogin_students')
+        create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 1, name: 'chela_students')
+
+        @matrix = s.monthly_stats.to_matrix
+      end
+      it "should set matrix[:swasthya_students_subtotal][1] to 3" do
+        @matrix[:swasthya_students_subtotal][1].should == 3
+      end
+    end
   end
 
   it "stores service name" do
