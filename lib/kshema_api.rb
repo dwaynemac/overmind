@@ -31,6 +31,7 @@ module KshemaApi
     # @param options [Hash]
     # @option options [Boolean] by_teacher
     def fetch_stat(name, ref_date,options={})
+      return nil if transform_name(name).blank?
 
       params = {
           key: KEY,
@@ -69,9 +70,9 @@ module KshemaApi
       transform_name = {
           enrollments: 'EnrollmentCount',
           dropouts: 'DropoutsCount',
+
           students: 'StudentCount',
-          interviews: 'VisitCount',
-          p_interviews: 'VisitPCount',
+
           aspirante_students: 'AspiranteStudentCount',
           sadhaka_students: 'SadhakaStudentCount',
           yogin_students: 'YoginStudentCount',
@@ -80,6 +81,14 @@ module KshemaApi
           assistant_students: 'AsistenteStudentCount',
           professor_students: 'DocenteStudentCount',
           master_students: 'MaestroStudentCount',
+
+          demand: 'ProcuraCount',
+
+          interviews: 'VisitCount',
+          p_interviews: 'VisitPCount',
+
+          emails: "EmailsCount",
+          phonecalls: "PhonecallsCount"
       }
       transform_name[name.to_sym]
     end
