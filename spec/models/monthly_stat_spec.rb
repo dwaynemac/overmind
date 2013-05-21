@@ -115,7 +115,10 @@ describe MonthlyStat do
         @matrix = s.monthly_stats.to_matrix
       end
       it "should set matrix[:swasthya_students_subtotal][1] to 3" do
-        @matrix[:swasthya_students_subtotal][1].should == 3
+        @matrix[:swasthya_students_subtotal][1].value.should == 3
+      end
+      it 'should leave value nil if there are no stats in such month' do
+        @matrix[:swasthya_students_subtotal][2].should be_nil
       end
     end
   end

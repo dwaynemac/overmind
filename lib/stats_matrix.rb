@@ -86,14 +86,18 @@ module StatsMatrix
     # @return [Hash] matrix with swasthya_students_subtotal added
     def add_swasthya_students_subtotal(matrix)
       matrix[:swasthya_students_subtotal] = {}
+      stats = [:sadhaka_students,
+               :yogin_students,
+               :chela_students,
+               :graduado_students,
+               :assistant_students,
+               :professor_students,
+               :master_students]
       (1..12).each do |month|
-        matrix[:swasthya_students_subtotal][month] = [:sadhaka_students,
-                                             :yogin_students,
-                                             :chela_students,
-                                             :graduado_students,
-                                             :assistant_students,
-                                             :professor_students,
-                                             :master_students].map{|stat| matrix[stat][month].try(:value)||0 }.sum
+        unless stats.select{|s|matrix[s][month]}.empty?
+          val = stats.map{|stat| matrix[stat][month].try(:value) || 0 }.sum
+          matrix[:swasthya_students_subtotal][month] = ReducedStat.new(value: val)
+        end
       end
       matrix
     end

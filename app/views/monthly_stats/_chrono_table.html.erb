@@ -60,6 +60,18 @@
       </tr>
     <% end %>
   <%- end -%>
+  <% unless monthly_stats[:swasthya_students_subtotal] == {} %>
+    <tr>
+      <th>
+        <%= t('monthly_stat.names.swasthya_students_subtotal') %>
+      </th>
+      <%- (1..12).each do |month| -%>
+        <td>
+          <%= monthly_stats[:swasthya_students_subtotal][month].try(:value) %>
+        </td>
+      <%- end -%>
+    </tr>
+  <%- end -%>
   <% unless monthly_stats[:dropout_rate] == {} %>
     <tr>
       <th>

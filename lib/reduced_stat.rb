@@ -1,4 +1,4 @@
-# Used for Federation totals
+# Used for Derived Stats
 class ReducedStat
   attr_accessor :value, :ref_date
 
