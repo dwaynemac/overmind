@@ -48,6 +48,9 @@ class ApplicationController < ActionController::Base
     if signed_in? && !current_user.locale.blank?
       I18n.locale = current_user.locale
     end
+    if params[:locale]
+      I18n.locale = params[:locale]
+    end
   end
 
 end
