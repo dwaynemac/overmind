@@ -27,6 +27,7 @@ es:
       demand: 'Procura'
       emails: 'Emails'
       phonecalls: 'Llamadas'
+      swasthya_students_subtotal: "SubTotal Alumnos en SwáSthya"
   views:
     pagination:
       first: 'Primera'
