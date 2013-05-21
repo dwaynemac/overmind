@@ -70,6 +70,8 @@ module PadmaStatsApi
           self.count_communications(ref_date, options.merge({filter: {media: 'email'}}))
         when :phonecalls
           self.count_communications(ref_date, options.merge({filter: { media: 'phone_call'}}))
+        when :website_contact
+          self.count_communications(ref_date, options.merge({filter: { media: 'website_contact'}}))
       end
     end
 

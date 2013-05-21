@@ -26,7 +26,8 @@ class MonthlyStat < ActiveRecord::Base
                  :master_students, # students at Master level.
                  :demand,
                  :interviews, :p_interviews,
-                 :emails, :phonecalls
+                 :emails, :phonecalls,
+                 :website_contact
   ]
   RATES = [:dropout_rate, :enrollment_rate]
 
