@@ -72,7 +72,21 @@ module PadmaStatsApi
           self.count_communications(ref_date, options.merge({filter: { media: 'phone_call'}}))
         when :website_contact
           self.count_communications(ref_date, options.merge({filter: { media: 'website_contact'}}))
+        when :conversion_rate
+          self.get_conversion_rate(ref_date,options)
       end
+    end
+
+    # @param ref_date [Date]
+    # @param options [Hash]
+    def get_conversion_rate(ref_date, options={})
+      req_options = { app_key: ENV['crm_key'],
+                      year: ref_date.year,
+                      month: ref_date.month
+      }
+
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options)
+      parse_response(response)
     end
 
     # Fetches students count from CRM-ws

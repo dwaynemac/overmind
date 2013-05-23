@@ -88,7 +88,9 @@ module KshemaApi
           p_interviews: 'VisitPCount',
 
           emails: "EmailsCount",
-          phonecalls: "PhonecallsCount"
+          phonecalls: "PhonecallsCount",
+
+          conversion_rate: "TelevisitToVisitRate"
       }
       transform_name[name.to_sym]
     end

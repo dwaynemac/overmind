@@ -27,9 +27,10 @@ class MonthlyStat < ActiveRecord::Base
                  :demand,
                  :interviews, :p_interviews,
                  :emails, :phonecalls,
-                 :website_contact
+                 :website_contact,
+                 :conversion_rate
   ]
-  RATES = [:dropout_rate, :enrollment_rate]
+  RATES = [:dropout_rate, :enrollment_rate] # reduced values.
 
   belongs_to :school
   validates_presence_of :school
@@ -106,7 +107,9 @@ class MonthlyStat < ActiveRecord::Base
     if school.padma2_enabled?
       case name.to_sym
         when :students, :enrollments, :dropouts, :demand, :interviews, :p_interviews, :emails, :phonecalls,
-            :aspirante_students, :sadhaka_students, :yogin_students, :chela_students, :graduado_students, :assistant_students, :professor_students, :master_students
+             :aspirante_students, :sadhaka_students, :yogin_students, :chela_students, :graduado_students,
+             :assistant_students, :professor_students, :master_students,
+             :conversion_rate
           'crm'
         else
           raise 'statistic not mapped to a service'
