@@ -119,6 +119,14 @@ class MonthlyStat < ActiveRecord::Base
     end
   end
 
+  def is_a_rate?
+    MonthlyStat.is_a_rate?(self.name)
+  end
+
+  def self.is_a_rate?(name)
+    (name == :conversion_rate) || RATES.include?(name)
+  end
+
   private
 
   def cast_ref_date_to_date

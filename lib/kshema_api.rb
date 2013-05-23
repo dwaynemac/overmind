@@ -48,7 +48,7 @@ module KshemaApi
 
       response = Typhoeus::Request.get(uri, params: params)
 
-      if response.success?
+      value = if response.success?
         if options[:by_teacher]
           ActiveSupport::JSON.decode(response.body)
         else
@@ -61,6 +61,12 @@ module KshemaApi
       else
         nil
       end
+
+      if MonthlyStat.is_a_rate?(name.to_sym)
+        value = (value.to_f*100).to_i
+      end
+
+      value
     end
 
     def uri

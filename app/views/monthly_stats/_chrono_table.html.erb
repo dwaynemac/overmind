@@ -36,6 +36,7 @@
           <td>
             <%= monthly_stat = monthly_stats[name][month]
                 monthly_stat.try :value %>
+            <%= '%' if MonthlyStat.is_a_rate?(name) -%>
             <%- unless monthly_stat.nil? || monthly_stat.is_a?(ReducedStat) || @school.nil? -%>
               <%= link_to('e',
                           edit_school_monthly_stat_path(school_id: @school.id, id: monthly_stat.id),
