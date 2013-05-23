@@ -5,7 +5,7 @@ class Teacher < ActiveRecord::Base
 
   has_many :monthly_stats
 
-  validates_uniqueness_of :username, allow_nil: true
+  validates_uniqueness_of :username, allow_nil: true, allow_blank: true
 
   # Will find or create teacher from padma_username and full_name.
   #
