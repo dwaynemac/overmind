@@ -16,6 +16,8 @@ en:
       enrollments: 'Enrollments'
       dropouts: 'Drop Outs'
       students: 'Students'
+      male_students: 'Male students'
+      female_students: 'Female students'
       aspirante_students: "Beginner Students"
       sadhaka_students: "Sádhakas"
       yogin_students: "Yôgins"

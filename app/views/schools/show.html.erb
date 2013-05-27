@@ -71,7 +71,7 @@
 
 <script>
   chartData = [
-    <%- (1...12).each do |month| -%>
+    <%- (1..12).each do |month| -%>
       {
         month: "<%= Date::MONTHNAMES[month] %>",
         students: <%= monthly_stat = @school_monthly_stats[:students][month]; monthly_stat.try(:value) || 0 %>,
@@ -80,8 +80,9 @@
         p_interviews: <%= monthly_stat = @school_monthly_stats[:p_interviews][month]; monthly_stat.try(:value) || 0 %>,
         assistant_students: <%= monthly_stat = @school_monthly_stats[:assistant_students][month]; monthly_stat.try(:value) || 0 %>,
         professor_students: <%= monthly_stat = @school_monthly_stats[:professor_students][month]; monthly_stat.try(:value) || 0 %>,
-        master_students: <%= monthly_stat = @school_monthly_stats[:master_students][month]; monthly_stat.try(:value) || 0 %>
-
+        master_students: <%= monthly_stat = @school_monthly_stats[:master_students][month]; monthly_stat.try(:value) || 0 %>,
+        male_students: <%= monthly_stat = @school_monthly_stats[:male_students][month]; monthly_stat.try(:value) || 0 %>,
+        female_students: <%= monthly_stat = @school_monthly_stats[:female_students][month]; monthly_stat.try(:value) || 0 %>
       },
     <%- end -%>
     <%- month = 12 -%>
@@ -93,7 +94,9 @@
       p_interviews: <%= monthly_stat = @school_monthly_stats[:p_interviews][month]; monthly_stat.try(:value) || 0 %>,
       assistant_students: <%= monthly_stat = @school_monthly_stats[:assistant_students][month]; monthly_stat.try(:value) || 0 %>,
       professor_students: <%= monthly_stat = @school_monthly_stats[:professor_students][month]; monthly_stat.try(:value) || 0 %>,
-      master_students: <%= monthly_stat = @school_monthly_stats[:master_students][month]; monthly_stat.try(:value) || 0 %>
+      master_students: <%= monthly_stat = @school_monthly_stats[:master_students][month]; monthly_stat.try(:value) || 0 %>,
+      male_students: <%= monthly_stat = @school_monthly_stats[:male_students][month]; monthly_stat.try(:value) || 0  %>,
+      female_students: <%= monthly_stat = @school_monthly_stats[:female_students][month]; monthly_stat.try(:value) || 0 %>
     }
   ]
 </script>
