@@ -24,6 +24,8 @@ class MonthlyStat < ActiveRecord::Base
                  :assistant_students, # students at Assistant lev
                  :professor_students, # students at Professor level.
                  :master_students, # students at Master level.
+                 :male_students,
+                 :female_students,
                  :demand,
                  :interviews, :p_interviews,
                  :emails, :phonecalls,

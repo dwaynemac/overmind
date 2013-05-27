@@ -9,7 +9,7 @@ module KshemaApi
     when 'development'
       'https://www.metododerose.org/kshema'
 
-                  when 'production'
+    when 'production'
       'https://www.metododerose.org/kshema'
     when 'staging'
       'https://www.metododerose.org/kshema'
@@ -88,6 +88,9 @@ module KshemaApi
           assistant_students: 'AsistenteStudentCount',
           professor_students: 'DocenteStudentCount',
           master_students: 'MaestroStudentCount',
+
+          male_students: 'MaleStudentCount',
+          female_students: 'FemaleStudentCount',
 
           demand: 'ProcuraCount',
 
