@@ -53,7 +53,7 @@
               new_school_monthly_stat_path(school_id: @school.id),
               :class => 'btn btn-primary') if can?(:create,@school.monthly_stats.new) %>
   <%- if can?(:sync, @school) -%>
-    <%- if @school.padma_enabled? -%>
+    <%- if @school.padma_enabled? && !@school.pending_sync_requests?(@year) -%>
       <%= link_to(t('.sync_year_data', year: @year).capitalize,
                   sync_year_school_path(id: @school.id, year: @year),
                   rel: 'tooltip', data: {'original-title' => "#{t('schools.index.synced_at')}: #{l(@school.synced_at) if @school.synced_at}"},

@@ -22,6 +22,14 @@ class School < ActiveRecord::Base
   include Accounts::BelongsToAccount
   validates_uniqueness_of :account_name, allow_blank: true
 
+  def pending_sync_requests?(year=nil)
+    scope = sync_requests
+    if year
+      scope = scope.where(year: year)
+    end
+    scope.pending.count > 0
+  end
+
   ##
   # Syncs all stats of given year. School and Teacher
   # @param year [Integer]
