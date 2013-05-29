@@ -50,10 +50,16 @@ es:
       teachers: "Instructores"
       synced_at: "Última sincronización"
     show:
-      sync_year_data: "Sincronizar datos del %{year}"
+      sync_year_data: "Solicitar sincronización de datos del %{year}"
       click_to_change: "Click aqui para modificar el año"
     search_form:
       show_only_w_account_name_blank: "Sólo escuelas sin cuenta PADMA configurada."
+    sync_year:
+      queued: "Sincronización programada para los próximos minutos."
+      couldnt_queue_sync: "No se pudo programar la sincronización de datos"
+    sync_request_notification:
+      pending_sync: "Ya esta programada la sincronización de estos datos. Puede demorar varios minutos."
+    sync_request_notification_running_sync: "En este momento estamos sincronizando estos datos"
   layouts:
     navbar:
       global: 'Global'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130329002757) do
+ActiveRecord::Schema.define(:version => 20130529192028) do
 
   create_table "federations", :force => true do |t|
     t.string    "name"
@@ -48,6 +48,14 @@ ActiveRecord::Schema.define(:version => 20130329002757) do
   create_table "schools_teachers", :force => true do |t|
     t.integer "teacher_id"
     t.integer "school_id"
+  end
+
+  create_table "sync_requests", :force => true do |t|
+    t.integer  "school_id"
+    t.integer  "year"
+    t.string   "state"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "teachers", :force => true do |t|

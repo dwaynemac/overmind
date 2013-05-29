@@ -11,6 +11,8 @@ class School < ActiveRecord::Base
   has_many :school_monthly_stats
   has_many :teacher_monthly_stats
 
+  has_many :sync_requests
+
   has_and_belongs_to_many :teachers
 
   include NucleoApi

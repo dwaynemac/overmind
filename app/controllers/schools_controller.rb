@@ -68,11 +68,11 @@ class SchoolsController < ApplicationController
   end
 
   def sync_year
-    if @school.account_name.present?
-      @school.sync_year_stats(params[:year].to_i,update_existing: true)
-      redirect_to school_path(id: @school.id, year: params[:year])
+    @sync_request = SyncRequest.new(school_id: @school.id, year: params[:year])
+    if @sync_request.save
+      redirect_to school_path(id: @school.id, year: params[:year]), notice: I18n.t('schools.sync_year.queued')
     else
-      redirect_to school_path(id: @school.id, year: params[:year]), error: 'no account_name'
+      redirect_to school_path(id: @school.id, year: params[:year]), error: I18n.t('schools.sync_year.couldnt_queue_sync')
     end
   end
 end

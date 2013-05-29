@@ -1,5 +1,17 @@
 namespace :sync do
 
+  desc 'Run all pending SyncRequest'
+  task :run_all_requested => :environment do
+    SyncRequest.pending.each do |sr|
+      sr.start
+    end
+  end
+
+  desc "Destroy all finished SyncRequest"
+  task :clear_managed_request => :environment do
+    SyncRequest.finished.destroy_all
+  end
+
   desc 'syncs all, To filter it will read from environment: federation_id, school_id and year (all optional)'
   task :all => :environment do
     schools = []

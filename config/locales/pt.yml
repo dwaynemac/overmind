@@ -39,7 +39,7 @@ pt:
       teachers: "Instrutores"
       synced_at: "Ultima sincroniçacāo"
     show:
-      sync_year_data: "Sincroniçar dados do %{year}"
+      sync_year_data: "Solicitar a sincronizaçāo dos dados do %{year}"
     search_form:
       show_only_w_account_name_blank: "So unidades sem conta PADMA."
   layouts:

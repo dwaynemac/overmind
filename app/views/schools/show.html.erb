@@ -28,6 +28,8 @@
 
 </div>
 
+<%= render :partial => 'sync_request_notification' %>
+
 <%- if can?(:see_debug_info,@school) -%>
   <dl class="dl-horizontal">
     <dt><strong><%= model_class.human_attribute_name(:federation_id) %>:</strong></dt>
