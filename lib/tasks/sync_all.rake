@@ -8,7 +8,7 @@ namespace :sync do
   end
 
   desc "Destroy all finished SyncRequest"
-  task :clear_managed_request => :environment do
+  task :clear_finished_requests => :environment do
     SyncRequest.finished.destroy_all
   end
 
