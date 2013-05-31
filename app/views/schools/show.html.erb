@@ -24,6 +24,12 @@
       <%= select_tag( :year, options_for_select(@years,@year)) %>
       <%= submit_tag(t('see'), class: 'btn') %>
     <%- end -%>
+    <%- if can?(:sync, @school) && @school.padma_enabled? && !@school.pending_sync_requests?(@year)  -%>
+      <%= link_to(t('.sync_year_data', year: @year).capitalize,
+                  sync_year_school_path(id: @school.id, year: @year),
+                  rel: 'tooltip', data: {'original-title' => "#{t('schools.index.synced_at')}: #{l(@school.synced_at) if @school.synced_at}"},
+                  class: 'btn btn-mini') %>
+    <%- end -%>
   </h2>
 
 </div>
@@ -52,14 +58,6 @@
   <%= link_to(t('.new', :default => t("helpers.links.new")),
               new_school_monthly_stat_path(school_id: @school.id),
               :class => 'btn btn-primary') if can?(:create,@school.monthly_stats.new) %>
-  <%- if can?(:sync, @school) -%>
-    <%- if @school.padma_enabled? && !@school.pending_sync_requests?(@year) -%>
-      <%= link_to(t('.sync_year_data', year: @year).capitalize,
-                  sync_year_school_path(id: @school.id, year: @year),
-                  rel: 'tooltip', data: {'original-title' => "#{t('schools.index.synced_at')}: #{l(@school.synced_at) if @school.synced_at}"},
-                  class: 'btn btn-primary') %>
-    <%- end -%>
-  <%- end -%>
 
   <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
     <%= render "monthly_stats/chrono_table", monthly_stats: stats, hide_year_form: true, title: Teacher.find(teacher_id).try(:full_name) %>
