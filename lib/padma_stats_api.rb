@@ -57,9 +57,9 @@ module PadmaStatsApi
         when :master_students
           self.count_students(ref_date, options.merge({level: 'maestro'}))
         when :male_students
-          self.count_students(ref_date, options.merge({gender: 'male'}))
+          self.count_students(ref_date, options.merge({filter: { where: {gender: 'male'}}}))
         when :female_students
-          self.count_students(ref_date, options.merge({gender: 'female'}))
+          self.count_students(ref_date, options.merge({filter: { where: {gender: 'female'}}}))
         when :enrollments
           self.count_enrollments(ref_date,options)
         when :dropouts
@@ -97,6 +97,7 @@ module PadmaStatsApi
     # Fetches students count from CRM-ws
     # @param ref_date [Date]
     # @param options [Hash]
+    # @option options [Hash] filter . Any valid argument for contacts-ws/search
     # @option options [String] level. Filter by level. Valid values: aspirante, sádhaka, yôgin, chêla, graduado, asistente, docente, maestro
     # @option options [String] teacher_username. -- will scope to this specific teacher
     # @option options [Boolean] by_teacher. -- will return all teachers -- If :teacher_username is given this will be ignored.
@@ -128,6 +129,16 @@ module PadmaStatsApi
          })
       elsif options[:by_teacher]
         req_options.merge!({by_teacher: true})
+      end
+
+      # do this last to avoid overriding of :filter
+      # in previous merges
+      if options[:filter].is_a?(Hash)
+        if req_options[:filter]
+          req_options[:filter].merge!(options[:filter])
+        else
+          req_options[:filter] = options[:filter]
+        end
       end
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
