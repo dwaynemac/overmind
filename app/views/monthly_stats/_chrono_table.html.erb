@@ -8,14 +8,7 @@
     <tr>
       <th></th>
       <th colspan="12">
-        <%- if hide_year_form||=false %>
-          <%= @year %>
-        <% else %>
-          <%= form_tag nil, method: 'GET', class: 'form-inline'  do -%>
-            <%= select_tag( :year, options_for_select(@years,@year)) %>
-            <%= submit_tag(t('see'), class: 'btn') %>
-          <%- end -%>
-        <%- end -%>
+        <%= @year %>
       </th>
     </tr>
     <tr>
