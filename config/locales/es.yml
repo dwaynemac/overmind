@@ -30,6 +30,7 @@ es:
       emails: 'Emails'
       phonecalls: 'Llamadas'
       swasthya_students_subtotal: "SubTotal Alumnos en SwáSthya"
+      conversion_rate: "Conversion"
   views:
     pagination:
       first: 'Primera'
@@ -294,6 +295,8 @@ es:
       evasion_explanation: "Esta evasión es calculada a partir de valores absolutos. Dividiendo el TOTAL de bajas por el TOTAL de alumnos. No es el promedio de las evasiones"
       efectividad_calculation: "Cálculo de la efectividad"
       efectividad_explanation: "Esta efectividad es calculada a partir de valores absolutos. Dividiendo el TOTAL de inscripciones por el TOTAL de visitas. No es el promedio de las efectividades"
+      conversion_calculation: "Cálculo de la conversion total"
+      conversion_explanation: "Esta tasa de conversion es el promedio de las tasas de conversion de las escuelas."
     form:
       manual_edition_disable_sync: "Las estadísticas registradas manualmente no se syncronizarán con otros sistemas."
   federations:

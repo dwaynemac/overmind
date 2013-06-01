@@ -15,7 +15,11 @@ class MonthlyStat < ActiveRecord::Base
 
   VALID_NAMES = [:enrollments,
                  :dropouts,
+
                  :students,
+                 :male_students,
+                 :female_students,
+
                  :aspirante_students,  # students at Aspirante lev
                  :sadhaka_students,  # students at Sádhaka lev
                  :yogin_students,  # students at Yôgin lev
@@ -24,8 +28,7 @@ class MonthlyStat < ActiveRecord::Base
                  :assistant_students, # students at Assistant lev
                  :professor_students, # students at Professor level.
                  :master_students, # students at Master level.
-                 :male_students,
-                 :female_students,
+
                  :demand,
                  :interviews, :p_interviews,
                  :emails, :phonecalls,
