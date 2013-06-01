@@ -130,6 +130,7 @@ class MonthlyStat < ActiveRecord::Base
   end
 
   def self.is_a_rate?(name)
+    name = name.to_sym
     (name == :conversion_rate) || RATES.include?(name)
   end
 

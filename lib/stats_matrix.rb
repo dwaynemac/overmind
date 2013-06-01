@@ -27,8 +27,13 @@ module StatsMatrix
       matrix.each_pair do |stat_name,stats_by_month|
         stats_by_month.each_pair do |month,stats|
           if stats.size>1
+            val = stats.sum(&:value)
+            if MonthlyStat.is_a_rate?(stat_name)
+              val = val.to_f/stats.size
+            end
+
             matrix[stat_name][month] = ReducedStat.new(
-                value: stats.sum(&:value),
+                value: val,
                 ref_date: stats.last.ref_date
             )
           else

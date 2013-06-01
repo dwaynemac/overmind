@@ -27,9 +27,12 @@
         <th><%= t("monthly_stat.names.#{name}") %></th>
         <%- (1...13).each do |month| -%>
           <td>
-            <%= monthly_stat = monthly_stats[name][month]
-                monthly_stat.try :value %>
-            <%= '%' if MonthlyStat.is_a_rate?(name) -%>
+            <% monthly_stat = monthly_stats[name][month]
+               v = monthly_stat.try :value -%>
+            <%- if v -%>
+              <%= MonthlyStat.is_a_rate?(name)? number_with_precision(v,precision:0) : v %>
+            <%- end -%>
+            <%= '%' if MonthlyStat.is_a_rate?(name) %>
             <%- unless monthly_stat.nil? || monthly_stat.is_a?(ReducedStat) || @school.nil? -%>
               <%= link_to('e',
                           edit_school_monthly_stat_path(school_id: @school.id, id: monthly_stat.id),
