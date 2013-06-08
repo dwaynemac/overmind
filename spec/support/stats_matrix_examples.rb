@@ -1,4 +1,4 @@
-shared_examples_for "it includes StatsMatrix" do
+shared_examples_for "a stats matrix" do
   describe "to_matrix" do
     let(:s){ create :school }
     before do
