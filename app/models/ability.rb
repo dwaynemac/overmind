@@ -31,7 +31,8 @@ class Ability
       when 'data_entry'
         can :read, Federation
         can [:read, :sync, :sync_year], School
-        can [:read, :see_global, :sync, :create, :update], MonthlyStat
+        can [:read, :see_global, :sync, :create], MonthlyStat
+        can [:update, :destroy], MonthlyStat, service: ''
       when 'council'
         can :read, Federation
         can :read, School
