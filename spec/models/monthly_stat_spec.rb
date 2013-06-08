@@ -5,6 +5,8 @@ describe MonthlyStat do
     create(:monthly_stat)
   end
 
+  it_behaves_like "a stats matrix"
+
   context "if teacher_id is not set" do
     it "defaults type to SchoolMonthlyStat" do
       ms = build(:monthly_stat, teacher_id: nil)
@@ -33,9 +35,6 @@ describe MonthlyStat do
     should validate_presence_of :school
   end
   it { should ensure_inclusion_of(:name).in_array(MonthlyStat::VALID_NAMES)}
-
-  it_behaves_like "it includes StatsMatrix"
-
 
   it "stores service name" do
     should have_db_column :service

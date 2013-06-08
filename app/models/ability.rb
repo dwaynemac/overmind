@@ -28,6 +28,10 @@ class Ability
         can :sync, School
         can :see_global, MonthlyStat
         can :see_debug_info, School
+      when 'data_entry'
+        can :read, Federation
+        can [:read, :sync, :sync_year], School
+        can [:read, :see_global, :sync, :create, :update], MonthlyStat
       when 'council'
         can :read, Federation
         can :read, School

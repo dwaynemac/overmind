@@ -7,7 +7,7 @@ describe Federation do
   it { should validate_uniqueness_of :name }
   it { should validate_presence_of :name }
   it { should have_many :schools }
-  it { should have_many(:monthly_stats).through(:schools)}
+  it { should have_many(:school_monthly_stats).through(:schools)}
   it { should have_many :users}
 
   it_behaves_like "it uses FederationApi" do
