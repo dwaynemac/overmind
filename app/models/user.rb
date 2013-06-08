@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validates_presence_of :username
   belongs_to :federation
 
-  VALID_ROLES = %W(admin council president)
+  VALID_ROLES = %W(admin council president data_entry)
 
   LOCALES = %W(es en pt)
 
