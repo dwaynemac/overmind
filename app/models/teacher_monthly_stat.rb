@@ -2,8 +2,6 @@ class TeacherMonthlyStat < MonthlyStat
   attr_accessible :teacher_id
   belongs_to :teacher
 
-  validates_uniqueness_of :name, scope: [:school_id, :teacher_id, :ref_date]
-
   STATS_BY_TEACHER = [
       :students,
 

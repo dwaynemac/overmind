@@ -16,6 +16,10 @@ describe SchoolMonthlyStat do
 
   it "should allow only one value per name per school per month" do
     should validate_uniqueness_of(:name).scoped_to([:ref_date,:school_id])
+
+    prev = create(:monthly_stat, ref_date: Date.civil(2013,5,1))
+    dup = build(:monthly_stat, school_id: prev.school_id, name: prev.name, value: 34, ref_date: Date.civil(2013,5,2))
+    dup.should_not be_valid
   end
 
   describe ".sync_from_service!" do

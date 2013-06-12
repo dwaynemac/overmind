@@ -38,16 +38,16 @@ class MonthlyStat < ActiveRecord::Base
   RATES = [:dropout_rate, :enrollment_rate] # reduced values.
 
   belongs_to :school
+
+  before_validation :set_type # this doesn't make subType validations to run.
+  before_validation :cast_ref_date_to_date
+  before_validation :move_ref_date_to_end_of_month
+
+  validates_uniqueness_of :name, scope: [:school_id, :teacher_id, :ref_date]
   validates_presence_of :school
-
-  before_save :set_type
-
   validates_presence_of :name
   validates_presence_of :ref_date
   validates_presence_of :value
-
-  before_validation :cast_ref_date_to_date
-  before_validation :move_ref_date_to_end_of_month
   validate :ref_date_is_end_of_month
 
   after_save :cache_student_count, unless: ->{self.importing?}
