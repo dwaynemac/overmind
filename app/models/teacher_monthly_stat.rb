@@ -10,7 +10,9 @@ class TeacherMonthlyStat < MonthlyStat
 
       :demand,
       :interviews, :p_interviews,
-      :emails, :phonecalls
+      :emails, :phonecalls,
+
+      :conversion_rate
   ]
 
   ##

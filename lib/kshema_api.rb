@@ -8,7 +8,6 @@ module KshemaApi
   KSHEMA_HOST = case Rails.env
     when 'development'
       'https://www.metododerose.org/kshema'
-
     when 'production'
       'https://www.metododerose.org/kshema'
     when 'staging'
