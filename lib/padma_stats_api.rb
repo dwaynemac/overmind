@@ -86,12 +86,25 @@ module PadmaStatsApi
     def get_conversion_rate(ref_date, options={})
       req_options = { app_key: ENV['crm_key'],
                       year: ref_date.year,
-                      month: ref_date.month
+                      month: ref_date.month,
       }
+      if options[:by_teacher]
+        req_options.merge!({by_teacher: true})
+      end
+
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options)
-      val = parse_response(response)
-      (val.to_f*100).to_i
+
+      res = parse_response(response,!options[:by_teacher])
+      if options[:by_teacher]
+        res.each do |h|
+          h['value'] = (h['value'].to_f*100).to_i
+        end
+        res
+      else
+        (res.to_f*100).to_i
+      end
+
     end
 
     # Fetches students count from CRM-ws
