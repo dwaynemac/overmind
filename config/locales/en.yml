@@ -62,6 +62,8 @@ en:
       click_to_change: "Click to edit"
     search_form:
       show_only_w_account_name_blank: "Only schools without account name"
+    sync_request_notification:
+      failed_sync: "There was an error when trying to sync your data. Contact support."
   layouts:
     navbar:
       global: 'Global'

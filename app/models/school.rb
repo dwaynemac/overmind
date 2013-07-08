@@ -30,6 +30,14 @@ class School < ActiveRecord::Base
     scope.pending.count > 0
   end
 
+  def failed_sync_requests?(year=nil)
+    scope = sync_requests
+    if year
+      scope = scope.where(year: year)
+    end
+    scope.failed.count > 0
+  end
+
   ##
   # Syncs all stats of given year. School and Teacher
   # @param year [Integer]

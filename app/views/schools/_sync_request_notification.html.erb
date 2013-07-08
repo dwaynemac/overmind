@@ -1,4 +1,9 @@
-<%- if @school.pending_sync_requests?(@year) -%>
+<%- if @school.failed_sync_requests?(@year) -%>
+  <div class="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <%= t('schools.sync_request_notification.failed_sync') %>
+  </div>
+<%- elsif @school.pending_sync_requests?(@year) -%>
   <div class="alert">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <%= t('schools.sync_request_notification.pending_sync') %>

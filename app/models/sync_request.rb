@@ -8,6 +8,7 @@ class SyncRequest < ActiveRecord::Base
 
   before_create :default_state
 
+  scope :failed, where(state: 'failed')
   scope :pending, where(state: %W(ready failed))
   scope :finished, where(state: 'finished')
 

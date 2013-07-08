@@ -42,6 +42,8 @@ pt:
       sync_year_data: "Solicitar a sincronizaçāo dos dados do %{year}"
     search_form:
       show_only_w_account_name_blank: "So unidades sem conta PADMA."
+    sync_request_notification:
+      failed_sync: "Ocorreu um erro durante a sincronização. Contate o suporte técnico."
   layouts:
     navbar:
       global: 'Global'
