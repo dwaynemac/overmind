@@ -21,8 +21,9 @@ class SyncRequest < ActiveRecord::Base
 
     self.update_attribute(:state, (school.synced_at > 10.minutes.ago)? 'finished' : 'failed')
     state
-  rescue
+  rescue => e
     self.update_attribute :state, 'failed'
+    logger.warn e.message
     state
   end
 
