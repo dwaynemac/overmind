@@ -12,7 +12,7 @@ class SyncRequest < ActiveRecord::Base
   scope :pending, where(state: %W(ready failed))
   scope :finished, where(state: 'finished')
 
-  def start
+  def start(safe=true)
     return unless school.present? && year.present?
 
     self.update_attribute :state, 'in_progress'
@@ -23,7 +23,12 @@ class SyncRequest < ActiveRecord::Base
     state
   rescue => e
     self.update_attribute :state, 'failed'
-    logger.warn e.message
+    unless safe
+      raise e
+    else
+      logger.info "SyncRequest #{self.id} failed with exception."
+      logger.debug e.message
+    end
     state
   end
 
