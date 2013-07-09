@@ -96,15 +96,16 @@ module PadmaStatsApi
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options)
 
       res = parse_response(response,!options[:by_teacher])
-      if options[:by_teacher]
-        res.each do |h|
-          h['value'] = (h['value'].to_f*100).to_i
+      if res
+        if options[:by_teacher]
+          res.each do |h|
+            h['value'] = (h['value'].to_f*100).to_i
+          end
+          res
+        else
+          (res.to_f*100).to_i
         end
-        res
-      else
-        (res.to_f*100).to_i
       end
-
     end
 
     # Fetches students count from CRM-ws
