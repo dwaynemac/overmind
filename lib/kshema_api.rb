@@ -47,25 +47,27 @@ module KshemaApi
 
       response = Typhoeus::Request.get(uri, params: params)
 
-      value = if response.success?
+      ret = nil
+      if response.success?
         if options[:by_teacher]
-          ActiveSupport::JSON.decode(response.body)
+          ret = ActiveSupport::JSON.decode(response.body)
+
+          if MonthlyStat.is_a_rate?(name.to_sym)
+            ret.each do |teacher_hash|
+              teacher_hash['value'] = (teacher_hash['value'].to_f*100).to_i
+            end
+          end
         else
-          response.body
+          ret = response.body
+
+          if MonthlyStat.is_a_rate?(name.to_sym)
+            ret = (ret.to_f*100).to_i
+          end
         end
-      elsif response.timed_out?
-        nil
-      elsif response.code == 0
-        nil
-      else
-        nil
       end
 
-      if MonthlyStat.is_a_rate?(name.to_sym)
-        value = (value.to_f*100).to_i
-      end
 
-      value
+      ret
     end
 
     def uri
