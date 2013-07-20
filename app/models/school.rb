@@ -43,11 +43,14 @@ class School < ActiveRecord::Base
   # @param year [Integer]
   # @param options [Hash]
   # @option options :update_existing (false)
+  # @optoin options :skip_teachers (false)
   def sync_year_stats(year,options={})
     months_range = (year == Time.zone.today.year)? (1..Time.zone.today.month) : (1...13)
     months_range.each do |month|
       sync_school_month_stats(year,month,options.merge({skip_synced_at_setting: true}))
-      sync_teacher_monthly_stats(year,month)
+      unless options[:skip_teachers]
+        sync_teacher_monthly_stats(year,month)
+      end
     end
     self.update_attribute(:synced_at,Time.now)
   end
