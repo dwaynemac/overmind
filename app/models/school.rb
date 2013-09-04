@@ -43,7 +43,7 @@ class School < ActiveRecord::Base
   # @param year [Integer]
   # @param options [Hash]
   # @option options :update_existing (false)
-  # @optoin options :skip_teachers (false)
+  # @option options :skip_teachers (false)
   def sync_year_stats(year,options={})
     months_range = (year == Time.zone.today.year)? (1..Time.zone.today.month) : (1...13)
     months_range.each do |month|

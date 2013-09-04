@@ -26,7 +26,7 @@ class SyncRequest < ActiveRecord::Base
     unless safe
       raise e
     else
-      logger.info "SyncRequest #{self.id} failed with exception."
+      logger.warn "SyncRequest #{self.id} failed with exception."
       logger.debug e.message
     end
     state
