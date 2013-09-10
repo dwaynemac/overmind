@@ -14,7 +14,7 @@ namespace :sync do
     SyncRequest.finished.destroy_all
   end
 
-  desc 'syncs all, To filter it will read from environment: federation_id, school_id and year (all optional)'
+  desc 'Queue sync for all, To filter it will read from environment: federation_id, school_id and year (all optional)'
   task :all => :environment do
     schools = []
     if ENV['federation_id']
@@ -26,14 +26,14 @@ namespace :sync do
     end
     schools.each do |school|
       if school.padma_enabled?
-        puts "syncing #{school.name}"
+        puts "queueing sync for #{school.name}"
         if ENV['year']
           year = (ENV['year'] == 'current')? Date.today.year : ENV['year']
-          school.sync_year_stats(year,update_existing: true)
+          SyncRequest.create(school_id: school.id, year: year)
         else
           (2010..Time.zone.today.year).each do |year|
             puts "    #{year}"
-            school.sync_year_stats(year,update_existing: true)
+            SyncRequest.create(school_id: school.id, year: year)
           end
         end
       else
@@ -42,36 +42,36 @@ namespace :sync do
     end
   end
 
-  desc "Syncs current year, only on the 1st of the month."
+  desc "Queues syncs for current year, only on the 1st of the month."
   task :current_year_on_the_first => :environment do
     today = Date.today
     if today.day == 1
       School.all.each do |school|
         if school.padma_enabled?
-          school.sync_year_stats(today.year, update_existing: true)
+          SyncRequest.create(school_id: school.id, year: today.year)
         end
       end
     end
   end
 
-  desc "Syncs current year, only on mondays."
+  desc "Queues syncs for current year, only on mondays."
   task :current_year_on_sundays => :environment do
     today = Date.today
     if today.wday == 0
       School.all.each do |school|
         if school.padma_enabled?
-          school.sync_year_stats(today.year, update_existing: true)
+          SyncRequest.create(school_id: school.id, year: today.year)
         end
       end
     end
   end
 
-  desc "Syncs current year."
+  desc "Queues syncs for current year."
   task :current_year => :environment do
     today = Date.today
     School.all.each do |school|
       if school.padma_enabled?
-        school.sync_year_stats(today.year, update_existing: true)
+        SyncRequest.create(school_id: school.id, year: today.year)
       end
     end
   end
