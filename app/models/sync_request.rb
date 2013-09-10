@@ -19,7 +19,8 @@ class SyncRequest < ActiveRecord::Base
 
   scope :in_progress, where(state: %W(paused running))
   scope :failed, where(state: 'failed')
-  scope :pending, where(state: %W(ready paused failed))
+  scope :pending, where(state: %W(ready paused))
+  scope :unfinished, where(state: %W(ready paused running failed))
   scope :finished, where(state: 'finished')
 
   # @param safe [Boolean] if true, exceptions will be catched and logged without raising (true)
