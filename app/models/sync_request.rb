@@ -23,7 +23,7 @@ class SyncRequest < ActiveRecord::Base
   scope :finished, where(state: 'finished')
 
   # @param safe [Boolean] if true, exceptions will be catched and logged without raising (true)
-  def start(safe=false)
+  def start(safe=true)
     return unless school.present? && year.present?
     return if finished? || failed?
 
