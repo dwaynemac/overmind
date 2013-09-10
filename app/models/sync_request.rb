@@ -1,5 +1,5 @@
 class SyncRequest < ActiveRecord::Base
-  attr_accessible :school_id, :year, :state
+  attr_accessible :school_id, :year, :state, :synced_at
 
   attr_accessible :synced_upto # will save up to what month we have already synced this year.
 
@@ -15,45 +15,61 @@ class SyncRequest < ActiveRecord::Base
   # paused - sync in progress but paused
   # failed - sync stoped with an exception
   # finished - sync successfully finished
-  STATES = [:ready, :in_progress, :paused, :failed, :finished]
+  STATES = %W(ready in_progress paused failed finished)
 
   scope :failed, where(state: 'failed')
   scope :pending, where(state: %W(ready paused failed))
   scope :finished, where(state: 'finished')
 
-  def start(safe=true)
+  # @param safe [Boolean] if true, exceptions will be catched and logged without raising (true)
+  def start(safe=false)
     return unless school.present? && year.present?
-    self.update_attribute :state, 'in_progress'
+    return if finished? || failed?
 
     sync_month = synced_upto+1
+    if sync_month > 12
+      # This should never happen, state should be :finished
+      logger.debug 'SyncRequest #{self.id} is attempting to go over 12'
+      return
+    end
 
-    school.sync_teacher_monthly_stats(year,sync_month)
-    school.sync_school_month_stats(year,sync_month,{update_existing: true, skip_synced_at_setting: true})
+    self.update_attribute :state, 'in_progress'
 
-    # save progress and state
     new_attributes = {}
-    new_attributes[:synced_upto] = sync_month
+    if syncable_month?(sync_month)
+      school.sync_teacher_monthly_stats(year,sync_month)
+      school.sync_school_month_stats(year,sync_month,{update_existing: true, skip_synced_at_setting: true})
 
-    if synced_upto == 12
-      new_attributes[:state] = :finished
-      new_attributes[:synced_at] = Time.now
-    elsif synced_upto > 12
-      raise 'SyncRequest #{self.id} is attempting to go over 12'
+      # save progress and state
+      new_attributes[:synced_upto] = sync_month
+    end
+
+    if last_syncable_month?(sync_month)
+      new_attributes[:state] = 'finished'
+      self.school.update_attribute(:synced_at,Time.now)
     else
-      new_attributes[:state] = :paused
+      new_attributes[:state] = 'paused'
     end
     self.update_attributes(new_attributes)
 
     self.state
   rescue => e
     self.update_attribute :state, 'failed'
-    unless safe
-      raise e
-    else
+    if safe
       logger.warn "SyncRequest #{self.id} failed with exception."
       logger.debug e.message
+      state
+    else
+      raise e
     end
-    state
+  end
+
+  def ready?
+    state == 'ready'
+  end
+
+  def paused?
+    state == 'paused'
   end
 
   def pending?
@@ -64,11 +80,25 @@ class SyncRequest < ActiveRecord::Base
     state == 'failed'
   end
 
-  def finshed?
+  def finished?
     state == 'finished'
   end
 
   private
+
+  # Checks if given month is not in the future
+  # @param month [Integer] 
+  # @return [Boolean]
+  def syncable_month?(month)
+    (self.year < Time.now.year && month <= 12) || (self.year == Time.now.year && month <= Time.now.month)
+  end
+
+  # Checks if this is the last syncable month of self.year
+  # @param month [Integer] 
+  # @return [Boolean]
+  def last_syncable_month?(month)
+    (self.year < Time.now.year && month == 12) || (self.year == Time.now.year && month == Time.now.month)
+  end
 
   def set_defaults
     self.state = 'ready' if state.nil?

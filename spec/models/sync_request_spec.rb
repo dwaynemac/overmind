@@ -10,7 +10,7 @@ describe SyncRequest do
     it "defaults state to :ready" do
       sr = build(:sync_request)
       sr.save
-      sr.reload.state.should == 'ready'
+      sr.reload.should be_ready # ready? == true
     end
     it "defaults synced_upto to 0" do
       sr = build(:sync_request)
@@ -54,35 +54,131 @@ describe SyncRequest do
         sync_request.start
         sync_request.synced_upto.should == 1
       end
-      it "sets state to :paused" do
+      it "sets state to paused" do
         should_call_to_sync_month(1) # here for stubs
         sync_request.start
-        sync_request.state.should == :paused
+        sync_request.reload.should be_paused # paused? == true
       end
     end
 
     describe "second run" do
-      it "wont sync month 1"
-      it "syncs month 2"
-      it "wont sync month 3"
-      it "sets synced_upto to 2"
-      it "sets state to :paused"
+      before do
+        should_call_to_sync_month(1) # here for stubs
+        sync_request.start # first run
+      end
+      it "wont sync month 1" do
+        should_not_call_to_sync_month(1)
+        sync_request.start
+      end
+      it "syncs month 2" do
+        should_call_to_sync_month(2)
+        sync_request.start
+      end
+      it "wont sync month 3" do
+        should_not_call_to_sync_month(3)
+        sync_request.start
+      end
+      it "sets synced_upto to 2" do
+        should_call_to_sync_month(2) # here for stubs
+        sync_request.start
+        sync_request.reload.synced_upto.should == 2
+      end
+      it "sets state to paused" do
+        should_call_to_sync_month(2) # here for stubs
+        sync_request.start
+        sync_request.reload.should be_paused
+      end
     end
 
-    describe "last run" do
-      describe "when syncing current year" do
-        it "syncs current month"
-        it "sets synced_upto to current_month"
-        it "sets state to finish"
+    describe "when syncing current year" do
+      let(:now){Time.parse("24 Apr 2013")}
+      before do
+        Time.stub!(:now).and_return(now)
+        sync_request.update_attribute :year, Time.now.year
       end
-      describe "when syncing preivous years" do
-        it "syncs month 12"
-        it "sets synced_upto to 12"
-        it "sets state to :finished" do
-          sync_request.school.should_receive(:sync_year_stats).with(sync_request.year, update_existing: true).and_return(true)
-          sync_request.school.update_attribute :synced_at, Time.now
+      describe "4th (current month) run" do
+        before do
+          (1...Time.now.month).each do |i|
+            should_call_to_sync_month(i)
+            sync_request.start
+          end
+        end
+        it "syncs current month" do
+          should_call_to_sync_month(Time.now.month)
           sync_request.start
-          sync_request.state.should == 'finished'
+        end
+        it "sets synced_upto to current_month" do
+          should_call_to_sync_month(Time.now.month)
+          sync_request.start
+          sync_request.reload.synced_upto.should == Time.now.month
+        end
+        it "sets state to finished" do
+          should_call_to_sync_month(Time.now.month)
+          sync_request.start
+          sync_request.reload.should be_finished # finished? == true
+        end
+      end
+      describe "5th run (next month)" do
+        before do
+          (1..Time.now.month).each do |i|
+            should_call_to_sync_month(i)
+            sync_request.start
+          end
+        end
+        it "wont sync" do
+          should_not_call_to_sync_month(Time.now.month+1)
+          sync_request.start
+        end
+        it "wont change synced_upto" do
+          expect{sync_request.start}.not_to change{sync_request.synced_upto}
+        end
+        it "wont change state" do
+          expect{sync_request.start}.not_to change{sync_request.state}
+        end
+      end
+    end
+    describe "when syncing preivous years" do
+      before do
+        sync_request.update_attribute :year, Time.now.year - 1
+      end
+      describe "12th run" do
+        before do
+          (1...12).each do |i|
+            should_call_to_sync_month(i)
+            sync_request.start
+          end
+        end
+        it "syncs month 12" do
+          should_call_to_sync_month(12)
+          sync_request.start
+        end
+        it "sets synced_upto to 12" do
+          should_call_to_sync_month(12)
+          sync_request.start
+          sync_request.reload.synced_upto.should == 12
+        end
+        it "sets state to :finished" do
+          should_call_to_sync_month(12)
+          sync_request.start
+          sync_request.reload.should be_finished # finished? == true
+        end
+      end
+      describe "13th run" do
+        before do
+          (1..12).each do |i|
+            should_call_to_sync_month(i)
+            sync_request.start
+          end
+        end
+        it "wont sync" do
+          should_not_call_to_sync_month(Time.now.month+1)
+          sync_request.start
+        end
+        it "wont change synced_upto" do
+          expect{sync_request.start}.not_to change{sync_request.synced_upto}
+        end
+        it "wont change state" do
+          expect{sync_request.start}.not_to change{sync_request.state}
         end
       end
     end
