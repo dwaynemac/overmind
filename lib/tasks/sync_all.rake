@@ -2,8 +2,10 @@ namespace :sync do
 
   desc 'Run all pending SyncRequest'
   task :run_all_requested => :environment do
-    SyncRequest.pending.each do |sr|
-      sr.start
+    12.times do 
+      SyncRequest.pending.each do |sr|
+        sr.start
+      end
     end
   end
 
