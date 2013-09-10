@@ -11,38 +11,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130529192028) do
+ActiveRecord::Schema.define(:version => 20130909143319) do
 
   create_table "federations", :force => true do |t|
-    t.string    "name"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
-    t.integer   "nucleo_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "nucleo_id"
   end
 
   create_table "monthly_stats", :force => true do |t|
-    t.date      "ref_date"
-    t.integer   "school_id"
-    t.string    "name"
-    t.integer   "value"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
-    t.string    "service"
-    t.integer   "teacher_id"
-    t.string    "type"
+    t.date     "ref_date"
+    t.integer  "school_id"
+    t.string   "name"
+    t.integer  "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "service"
+    t.integer  "teacher_id"
+    t.string   "type"
   end
 
   create_table "schools", :force => true do |t|
-    t.string    "name"
-    t.integer   "federation_id"
-    t.timestamp "created_at",                  :null => false
-    t.timestamp "updated_at",                  :null => false
-    t.integer   "nucleo_id"
-    t.integer   "last_students_count"
-    t.string    "account_name"
-    t.integer   "last_teachers_count"
-    t.timestamp "synced_at"
-    t.datetime  "migrated_kshema_to_padma_at"
+    t.string   "name"
+    t.integer  "federation_id"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "nucleo_id"
+    t.integer  "last_students_count"
+    t.string   "account_name"
+    t.integer  "last_teachers_count"
+    t.datetime "synced_at"
+    t.datetime "migrated_kshema_to_padma_at"
   end
 
   create_table "schools_teachers", :force => true do |t|
@@ -54,8 +54,9 @@ ActiveRecord::Schema.define(:version => 20130529192028) do
     t.integer  "school_id"
     t.integer  "year"
     t.string   "state"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "synced_upto"
   end
 
   create_table "teachers", :force => true do |t|
@@ -66,12 +67,12 @@ ActiveRecord::Schema.define(:version => 20130529192028) do
   end
 
   create_table "users", :force => true do |t|
-    t.string    "username"
-    t.timestamp "created_at",    :null => false
-    t.timestamp "updated_at",    :null => false
-    t.integer   "federation_id"
-    t.string    "role"
-    t.string    "locale"
+    t.string   "username"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "federation_id"
+    t.string   "role"
+    t.string   "locale"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
