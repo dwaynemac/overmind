@@ -9,9 +9,9 @@
     <%= t('schools.sync_request_notification.pending_sync') %>
   </div>
 <%- end -%>
-<%- if @school.sync_requests.where(year: @year, state: 'in_progress').count > 0 -%>
+<%- if @school.sync_requests.in_progress.where(year: @year).count > 0 -%>
   <div class="alert">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <%= t('schools.sync_request_notification_running_sync') %>
+    <%= t('schools.sync_request_notification_running_sync', progress: @school.sync_requests.in_progress.last.progress) %>
   </div>
 <%- end -%>

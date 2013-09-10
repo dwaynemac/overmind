@@ -183,4 +183,45 @@ describe SyncRequest do
       end
     end
   end
+
+
+  describe "#progress" do
+    describe "for current year and current month 4" do
+      let(:now){Time.parse("24 Apr 2013")}
+      before do
+        Time.stub!(:now).and_return(now)
+        sync_request.year = Time.now.year
+      end
+      it "synced_upto 0 returns 0" do
+        sync_request.synced_upto = 0
+        sync_request.progress.should == 0
+      end
+      it "synced_upto 1 returns 25" do
+        sync_request.synced_upto = 1
+        sync_request.progress.should == 25
+      end
+      it "synced_upto 4 returns 100" do
+        sync_request.synced_upto = 4
+        sync_request.progress.should == 100
+      end
+    end
+    describe "for previous years" do
+      before do
+        sync_request.year = Time.now.year - 1
+      end
+      it "synced_upto 0 returns 0" do
+        sync_request.synced_upto = 0
+        sync_request.progress.should == 0
+      end
+      it "synced_upto 1 returns 8" do
+        sync_request.synced_upto = 1
+        sync_request.progress.should == 8
+      end
+      it "synced_upto 12 returns 100" do
+        sync_request.synced_upto = 12
+        sync_request.progress.should == 100
+      end
+    end
+  end
+
 end

@@ -22,6 +22,9 @@ class School < ActiveRecord::Base
   include Accounts::BelongsToAccount
   validates_uniqueness_of :account_name, allow_blank: true
 
+  ##
+  # Checks if this schools has pending sync_requests
+  # @return [Boolean]
   def pending_sync_requests?(year=nil)
     scope = sync_requests
     if year
@@ -30,6 +33,9 @@ class School < ActiveRecord::Base
     scope.pending.count > 0
   end
 
+  ##
+  # Checks if this schools has failed sync_requests
+  # @return [Boolean]
   def failed_sync_requests?(year=nil)
     scope = sync_requests
     if year

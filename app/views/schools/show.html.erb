@@ -8,7 +8,7 @@
     <%= @school.name %>
     <%- if can?(:edit, @school) -%>
     <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                edit_school_path(@school), :class => 'btn btn-mini' %>
+      edit_school_path(@school), :class => 'btn btn-mini' %>
     <%- end -%>
     <%- if can?(:destroy, @school) -%>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

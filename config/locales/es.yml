@@ -61,7 +61,7 @@ es:
     sync_request_notification:
       pending_sync: "Ya esta programada la sincronización de estos datos. Puede demorar varios minutos."
       failed_sync: "Hubo un error durante la sincronización de datos. Contacte al soporte técnico."
-    sync_request_notification_running_sync: "En este momento estamos sincronizando estos datos"
+    sync_request_notification_running_sync: "En este momento estamos sincronizando estos datos. (%{progress}%)"
   layouts:
     navbar:
       global: 'Global'

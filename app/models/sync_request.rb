@@ -11,12 +11,13 @@ class SyncRequest < ActiveRecord::Base
   before_create :set_defaults
 
   # ready - sync not started
-  # in_progress - sync currently running
+  # running - sync currently running
   # paused - sync in progress but paused
   # failed - sync stoped with an exception
   # finished - sync successfully finished
-  STATES = %W(ready in_progress paused failed finished)
+  STATES = %W(ready running paused failed finished)
 
+  scope :in_progress, where(state: %W(paused running))
   scope :failed, where(state: 'failed')
   scope :pending, where(state: %W(ready paused failed))
   scope :finished, where(state: 'finished')
@@ -33,7 +34,7 @@ class SyncRequest < ActiveRecord::Base
       return
     end
 
-    self.update_attribute :state, 'in_progress'
+    self.update_attribute :state, 'running'
 
     new_attributes = {}
     if syncable_month?(sync_month)
@@ -82,6 +83,12 @@ class SyncRequest < ActiveRecord::Base
 
   def finished?
     state == 'finished'
+  end
+
+  # @return [Integer] porcentage of progress
+  def progress
+    end_month = (self.year < Time.now.year)? 12 : Time.now.month
+    (synced_upto*100/end_month).to_i
   end
 
   private

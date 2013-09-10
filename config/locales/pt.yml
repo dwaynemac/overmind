@@ -44,6 +44,8 @@ pt:
       show_only_w_account_name_blank: "So unidades sem conta PADMA."
     sync_request_notification:
       failed_sync: "Ocorreu um erro durante a sincronização. Contate o suporte técnico."
+    sync_request_notification_running_sync: "A sincronizaçāo esta correndo neste momento. (%{progress}%)"
+      
   layouts:
     navbar:
       global: 'Global'
