@@ -1,5 +1,24 @@
 namespace :sync do
 
+  desc 'Sync worker, will constantly poll for pending sync_requests'
+  task :worker => :environment do
+    puts "Starting sync:worker"
+    begin
+      loop do
+        begin
+          SyncRequest.pending.each do |sr|
+            sr.start
+          end
+        rescue StandardError => e
+          puts "Exception in sync:worker: #{e.message}"
+        end
+      end
+    rescue SignalException => e
+      puts "Signal to sync:worker: #{e.message}"
+    end
+    puts "exiting sync:worker"
+  end
+  
   desc 'Run all pending SyncRequest'
   task :run_all_requested => :environment do
     SyncRequest.pending.each do |sr|
