@@ -9,6 +9,7 @@ describe SyncRequest do
   describe "on create" do
     it "defaults state to :ready" do
       sr = build(:sync_request)
+      sr.should be_valid
       sr.save
       sr.reload.should be_ready # ready? == true
     end
@@ -16,6 +17,11 @@ describe SyncRequest do
       sr = build(:sync_request)
       sr.save
       sr.reload.synced_upto.should == 0
+    end
+    it "checks there is no pending request for this school" do
+      sr = create(:sync_request)
+      new_sr = build(:sync_request, school_id: sr.id)
+      new_sr.should_not be_valid
     end
   end
 

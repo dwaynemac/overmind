@@ -7,6 +7,7 @@ class SyncRequest < ActiveRecord::Base
 
   validates_presence_of :school_id
   validates_presence_of :year
+  validate :only_one_unfinished_per_school
 
   before_create :set_defaults
 
@@ -93,6 +94,13 @@ class SyncRequest < ActiveRecord::Base
   end
 
   private
+
+  def only_one_unfinished_per_school
+    return if self.persisted?
+    if self.school && self.school.sync_requests.unfinished.count > 0
+      self.errors.add(:base, 'already have a sync_request for this school')
+    end
+  end
 
   # Checks if given month is not in the future
   # @param month [Integer] 
