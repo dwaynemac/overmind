@@ -50,6 +50,7 @@ class SyncRequest < ActiveRecord::Base
     if last_syncable_month?(sync_month)
       new_attributes[:state] = 'finished'
       self.school.update_attribute(:synced_at,Time.now)
+      self.school.cache_last_student_count
     else
       new_attributes[:state] = 'paused'
     end

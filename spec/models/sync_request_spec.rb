@@ -123,6 +123,12 @@ describe SyncRequest do
           sync_request.start
           sync_request.reload.should be_finished # finished? == true
         end
+        it "should cache student count in school" do
+          sync_request.school.should_receive(:cache_last_student_count)
+          should_call_to_sync_month(Time.now.month)
+          sync_request.start
+          sync_request.reload.should be_finished # finished? == true
+        end
       end
       describe "5th run (next month)" do
         before do
@@ -164,6 +170,12 @@ describe SyncRequest do
           sync_request.reload.synced_upto.should == 12
         end
         it "sets state to :finished" do
+          should_call_to_sync_month(12)
+          sync_request.start
+          sync_request.reload.should be_finished # finished? == true
+        end
+        it "should cache student count in school" do
+          sync_request.school.should_receive(:cache_last_student_count)
           should_call_to_sync_month(12)
           sync_request.start
           sync_request.reload.should be_finished # finished? == true
