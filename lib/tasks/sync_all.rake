@@ -7,7 +7,7 @@ namespace :sync do
       loop do
         begin
           SyncRequest.pending.each do |sr|
-            puts "starting SyncRequest##{sr.id} (#{sr.progress}%)"
+            puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year #{sr.year} (#{sr.synced_upto}%)"
             sr.start
           end
         rescue StandardError => e
