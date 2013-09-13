@@ -6,6 +6,7 @@ namespace :sync do
     begin
       loop do
         begin
+          puts "Polling for sync requests"
           SyncRequest.pending.each do |sr|
             puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year #{sr.year} (#{sr.synced_upto}%)"
             sr.start
