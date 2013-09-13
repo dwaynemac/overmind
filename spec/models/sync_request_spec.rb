@@ -10,12 +10,19 @@ describe SyncRequest do
     it "orders with highest priority first" do
       s = create(:sync_request, priority: 9)
       t = create(:sync_request, priority: 8)
+      l = create(:sync_request, priority: nil)
       f = create(:sync_request, priority: 10)
-      SyncRequest.prioritized.should == [f,s,t]
+      SyncRequest.prioritized.should == [f,s,t,l]
     end
   end
 
   describe "on create" do
+    it "defaults priority to 0" do
+      sr = build(:sync_request)
+      sr.priority.should be_nil
+      sr.save
+      sr.reload.priority.should == 0
+    end
     it "defaults state to :ready" do
       sr = build(:sync_request)
       sr.should be_valid
