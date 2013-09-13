@@ -98,7 +98,7 @@ class SyncRequest < ActiveRecord::Base
 
   def only_one_unfinished_per_school
     return if self.persisted?
-    if self.school && self.school.sync_requests.unfinished.count > 0
+    if self.school && self.school.sync_requests.unfinished.where(year: self.year).count > 0
       self.errors.add(:base, 'already have a sync_request for this school')
     end
   end
