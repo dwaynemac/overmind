@@ -2,6 +2,7 @@ class SyncRequest < ActiveRecord::Base
   attr_accessible :school_id, :year, :state, :synced_at
 
   attr_accessible :synced_upto # will save up to what month we have already synced this year.
+  attr_accessible :priority
 
   belongs_to :school
 
@@ -23,6 +24,7 @@ class SyncRequest < ActiveRecord::Base
   scope :pending, where(state: %W(ready paused))
   scope :unfinished, where(state: %W(ready paused running failed))
   scope :finished, where(state: 'finished')
+  scope :prioritized, order('priority desc')
 
   # @param safe [Boolean] if true, exceptions will be catched and logged without raising (true)
   def start(safe=true)

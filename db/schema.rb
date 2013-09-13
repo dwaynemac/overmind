@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130909143319) do
+ActiveRecord::Schema.define(:version => 20130913162409) do
 
   create_table "federations", :force => true do |t|
     t.string   "name"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130909143319) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "synced_upto"
+    t.integer  "priority"
   end
 
   create_table "teachers", :force => true do |t|

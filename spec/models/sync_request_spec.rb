@@ -6,6 +6,15 @@ describe SyncRequest do
   it { should validate_presence_of :school_id }
   it { should validate_presence_of :year }
 
+  describe ".prioritized" do
+    it "orders with highest priority first" do
+      s = create(:sync_request, priority: 9)
+      t = create(:sync_request, priority: 8)
+      f = create(:sync_request, priority: 10)
+      SyncRequest.prioritized.should == [f,s,t]
+    end
+  end
+
   describe "on create" do
     it "defaults state to :ready" do
       sr = build(:sync_request)
