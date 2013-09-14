@@ -7,10 +7,16 @@ namespace :sync do
       loop do
         begin
           puts "Polling for sync requests"
-          SyncRequest.prioritized.pending.each do |sr|
-            puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year #{sr.year} (#{sr.synced_upto}%)"
-            sr.start
+
+          priorities = SyncRequest.pending.order('priority desc').pluck('distinct priority')
+          grps = SyncRequest.pending.to_a.group_by(&:priority)
+          priorities.each do |i|
+            grps[i].each do |sr|
+              puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year #{sr.year} (#{sr.synced_upto})"
+              sr.start
+            end
           end
+
         rescue StandardError => e
           puts "Exception in sync:worker: #{e.message}"
         end
