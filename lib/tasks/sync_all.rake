@@ -8,12 +8,12 @@ namespace :sync do
         begin
           puts "Polling for sync requests"
 
-          priorities = SyncRequest.pending.order('priority desc').pluck('distinct priority')
-          grps = SyncRequest.pending.to_a.group_by(&:priority)
-          priorities.each do |i|
-            grps[i].each do |sr|
-              puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year #{sr.year} (#{sr.synced_upto})"
-              sr.start
+          SyncRequest.pending.order('priority desc').pluck('distinct priority').each do |i|
+            until (sync_requests = SyncRequest.pending.where(priority: i)).empty? do
+              sync_requests.each do |sr|
+                puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year #{sr.year} (#{sr.synced_upto})"
+                sr.start
+              end
             end
           end
 
