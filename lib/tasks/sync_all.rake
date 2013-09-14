@@ -27,13 +27,6 @@ namespace :sync do
     puts "exiting sync:worker"
   end
   
-  desc 'Run all pending SyncRequest'
-  task :run_all_requested => :environment do
-    SyncRequest.pending.each do |sr|
-      sr.start
-    end
-  end
-
   desc "Destroy all finished SyncRequest"
   task :clear_finished_requests => :environment do
     SyncRequest.finished.destroy_all
@@ -73,7 +66,7 @@ namespace :sync do
     if today.day == 1
       School.all.each do |school|
         if school.padma_enabled?
-          SyncRequest.create(school_id: school.id, year: today.year)
+          SyncRequest.create(school_id: school.id, year: today.year, priority: 5)
         end
       end
     end
@@ -85,7 +78,7 @@ namespace :sync do
     if today.wday == 0
       School.all.each do |school|
         if school.padma_enabled?
-          SyncRequest.create(school_id: school.id, year: today.year)
+          SyncRequest.create(school_id: school.id, year: today.year, priority: 2)
         end
       end
     end
