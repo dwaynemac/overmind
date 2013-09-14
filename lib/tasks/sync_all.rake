@@ -11,7 +11,7 @@ namespace :sync do
           SyncRequest.pending.order('priority desc').pluck('distinct priority').each do |i|
             until (sync_requests = SyncRequest.pending.where(priority: i)).empty? do
               sync_requests.each do |sr|
-                puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year #{sr.year} (#{sr.synced_upto})"
+                puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.synced_upto+1}, pr: #{sr.priority}"
                 sr.start
               end
             end
