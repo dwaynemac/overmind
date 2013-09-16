@@ -48,6 +48,12 @@ group :development do
   gem 'subcontractor', '>= 0.6.1'
   gem 'foreman'
 
+  gem 'yard', '~> 0.8.3'
+  gem 'yard-restful'
+  gem 'redcarpet'
+
+  gem 'git-pivotal-tracker-integration'
+  
   gem 'better_errors'
   gem 'binding_of_caller'
 end
