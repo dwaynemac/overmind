@@ -141,9 +141,14 @@ describe SyncRequest do
           sync_request.start
           sync_request.reload.should be_finished # finished? == true
         end
-        it "should cache student count in school" do
-          sync_request.school.should_receive(:cache_last_student_count)
+        it "sets synced_at in school" do
+          sync_request
           should_call_to_sync_month(Time.now.month)
+          expect{sync_request.start}.to change{sync_request.school.synced_at}
+        end
+        it "caches student count in school" do
+          sync_request.school.should_receive(:cache_last_student_count)
+          should_call_to_sync_month(Time.now.month) # for mocking
           sync_request.start
           sync_request.reload.should be_finished # finished? == true
         end
@@ -192,7 +197,12 @@ describe SyncRequest do
           sync_request.start
           sync_request.reload.should be_finished # finished? == true
         end
-        it "should cache student count in school" do
+        it "sets synced_at in school" do
+          sync_request
+          should_call_to_sync_month(12) # for mocking
+          expect{sync_request.start}.to change{sync_request.school.synced_at}
+        end
+        it "caches student count in school" do
           sync_request.school.should_receive(:cache_last_student_count)
           should_call_to_sync_month(12)
           sync_request.start

@@ -97,14 +97,14 @@ class School < ActiveRecord::Base
   end
 
   def cache_last_student_count
-    lsc = self.monthly_stats.where(name: :students).order(:ref_date).last
+    lsc = self.school_monthly_stats.where(name: :students).order(:ref_date).last
     self.update_attribute(:last_students_count, lsc.try(:value))
   end
 
   def cache_last_teachers_count
     sum = 0
     [:assistant_students, :professor_students, :master_students].each do |stat_name|
-      l = self.monthly_stats.where(name: stat_name).order(:ref_date).last
+      l = self.school_monthly_stats.where(name: stat_name).order(:ref_date).last
       if l
         sum += l.value
       end
