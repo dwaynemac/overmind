@@ -1,10 +1,10 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    accounts_client (0.0.8)
+    accounts_client (0.0.20)
       gravtastic
-      logical_model (~> 0.4.0)
-      railties (~> 3.1)
+      logical_model (~> 0.5.8)
+      railties (>= 3.1)
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
       mail (~> 2.4.4)
@@ -49,10 +49,17 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    columnize (0.3.6)
     commonjs (0.2.6)
     crack (0.4.1)
       safe_yaml (~> 0.9.0)
     debug_inspector (0.0.2)
+    debugger (1.6.1)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.3)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.3)
     devise (1.5.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -111,7 +118,7 @@ GEM
       rb-fchange (~> 0.0.5)
       rb-fsevent (~> 0.9.1)
       rb-inotify (~> 0.8.8)
-    logical_model (0.4.10)
+    logical_model (0.5.8)
       activemodel
       activesupport
       ethon (= 0.4.2)
@@ -240,11 +247,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  accounts_client (~> 0.0.8)
+  accounts_client (= 0.0.20)
   better_errors
   binding_of_caller
   cancan
   coffee-rails (~> 3.2.1)
+  debugger
   devise (= 1.5.0)
   devise_cas_authenticatable (= 1.0.0.alpha13)
   execjs
@@ -255,7 +263,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   libnotify
-  logical_model (~> 0.4.10)
+  logical_model (~> 0.5.8)
   newrelic_rpm
   pg
   rails (= 3.2.8)

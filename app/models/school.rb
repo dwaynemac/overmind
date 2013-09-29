@@ -128,7 +128,7 @@ class School < ActiveRecord::Base
   end
 
   def padma2_enabled?
-    !self.migrated_kshema_to_padma_at.nil?
+    !self.account.try(:migrated_to_padma_on).nil?
   end
 
   # Difference: stored for school - calculated from teachers
