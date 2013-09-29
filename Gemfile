@@ -16,8 +16,8 @@ group :production do
   gem 'newrelic_rpm'
 end
 
-gem 'logical_model', '~> 0.4.10'
-gem 'accounts_client', '~> 0.0.8'
+gem 'logical_model', '~> 0.5.8'
+gem 'accounts_client', '0.0.20'
 gem 'kaminari'
 gem 'ransack'
 
@@ -34,6 +34,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'debugger'
   gem "rspec-rails"
   gem "shoulda"
   gem "factory_girl_rails"

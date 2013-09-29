@@ -37,6 +37,7 @@ describe School do
   describe "#sync_year_stats" do
     let(:school){create(:school)}
     before do
+      School.any_instance.stub(:padma2_enabled?).and_return true
       SchoolMonthlyStat.any_instance.stub(:get_remote_value).and_return('1')
       TeacherMonthlyStat.stub(:get_remote_values).and_return([
           {full_name: 'Name', padma_username: 'username', value: '3'},
@@ -54,14 +55,4 @@ describe School do
     end
   end
 
-  describe "#padma2_enabled?" do
-    context "when migrated_kshema_to_padma_at is nil" do
-      subject{School.new }
-      its(:padma2_enabled?) { should be_false}
-    end
-    context "when migrated_kshema_to_padma_at is a date" do
-      subject{ School.new(migrated_kshema_to_padma_at: Time.now)}
-      its(:padma2_enabled?) { should be_true }
-    end
-  end
 end
