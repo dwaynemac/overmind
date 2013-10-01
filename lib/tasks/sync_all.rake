@@ -6,6 +6,7 @@ namespace :sync do
     begin
       loop do
         begin
+          runned_requests = 0
           puts "Polling for sync requests"
 
           SyncRequest.pending.order('priority desc').pluck('distinct priority').each do |i|
@@ -19,11 +20,17 @@ namespace :sync do
                 until sr.finished? || sr.failed? || i>12 do
                   puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.synced_upto+1}, pr: #{sr.priority}"
                   sr.start
+                  runned_requests += 1
                   i += 1
                 end
               end
             end
           end
+
+          if runned_requests == 0
+            sleep 5
+          end
+
 
         rescue StandardError => e
           puts "Exception in sync:worker: #{e.message}"
