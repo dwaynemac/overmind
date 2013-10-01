@@ -14,14 +14,14 @@ namespace :sync do
               sync_requests.each do |sr|
                 if (sr.night_only? && !(Time.now.hour > 2 && Time.now.hour < 5))
                   puts "Skipping SyncRequest##{sr.id} until night time"
-                  next 
-                end
-                i = 0
-                until sr.finished? || sr.failed? || i>12 do
-                  puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.synced_upto+1}, pr: #{sr.priority}"
-                  sr.start
-                  runned_requests += 1
-                  i += 1
+                else
+                  i = 0
+                  until sr.finished? || sr.failed? || i>12 do
+                    puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.synced_upto+1}, pr: #{sr.priority}"
+                    sr.start
+                    runned_requests += 1
+                    i += 1
+                  end
                 end
               end
             end
