@@ -99,7 +99,7 @@ class SyncRequest < ActiveRecord::Base
   # Return if this syncRequest should be run only at night.
   # @return [Boolean]
   def night_only?
-    priority && priority > 5
+    priority.nil? || priority < 5
   end
 
   private

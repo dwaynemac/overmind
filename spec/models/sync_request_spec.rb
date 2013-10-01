@@ -272,25 +272,25 @@ describe SyncRequest do
 
 
   describe "#nigh_only?" do
-    it "returns false for priority nil job" do
+    it "returns true for priority nil job" do
       sync_request.priority = nil
-      sync_request.should_not be_night_only
+      sync_request.should be_night_only
     end
-    it "returns false for priority 1 job" do
+    it "returns true for priority 1 job" do
       sync_request.priority = 1
-      sync_request.should_not be_night_only
+      sync_request.should be_night_only
     end
     it "returns false for priority 5 job" do
       sync_request.priority = 5
       sync_request.should_not be_night_only
     end
-    it "returns true for priority 6 job" do
+    it "returns false for priority 6 job" do
       sync_request.priority = 6
-      sync_request.should be_night_only
+      sync_request.should_not be_night_only
     end
     it "returns false for priority 10 job" do
       sync_request.priority = 10
-      sync_request.should be_night_only
+      sync_request.should_not be_night_only
     end
   end
 
