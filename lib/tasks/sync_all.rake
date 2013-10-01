@@ -28,6 +28,7 @@ namespace :sync do
           end
 
           if runned_requests == 0
+            puts "No requests handled, sleeping for 5 seconds"
             sleep 5
           end
 
