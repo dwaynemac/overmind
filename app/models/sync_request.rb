@@ -96,6 +96,12 @@ class SyncRequest < ActiveRecord::Base
     (synced_upto*100/end_month).to_i
   end
 
+  # Return if this syncRequest should be run only at night.
+  # @return [Boolean]
+  def night_only?
+    priority && priority > 5
+  end
+
   private
 
   def only_one_unfinished_per_school
