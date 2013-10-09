@@ -25,6 +25,8 @@ class SyncRequest < ActiveRecord::Base
   scope :unfinished, where(state: %W(ready paused running failed))
   scope :finished, where(state: 'finished')
   scope :prioritized, order('priority desc')
+  scope :night_only, where("priority IS NULL OR priority < 5")
+  scope :not_night_only, where("NOT (priority IS NULL OR priority < 5)")
 
   # @param safe [Boolean] if true, exceptions will be catched and logged without raising (true)
   def start(safe=true)

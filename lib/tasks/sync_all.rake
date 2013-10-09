@@ -6,37 +6,19 @@ namespace :sync do
     begin
       loop do
         begin
-          runned_requests = 0
           puts "Polling for sync requests"
 
-          # TODO filtrar las night_only con un scope en lugar de instancia por instancia
-          # TODO seria mejor hacer algo tipo:
-          # sr = SyncRequest.order('priority desc').first
-          # sr.start
-          # de esa manera cuando se crea una con priority se "mete" en el medio.
-          SyncRequest.pending.order('priority desc').pluck('distinct priority').each do |i|
-            until (sync_requests = SyncRequest.pending.where(priority: i)).empty? do
-              sync_requests.each do |sr|
-                if (sr.night_only? && !(Time.now.hour > 2 && Time.now.hour < 5))
-                  puts "Skipping SyncRequest##{sr.id} until night time"
-                else
-                  i = 0
-                  until sr.finished? || sr.failed? || i>12 do
-                    puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.synced_upto+1}, pr: #{sr.priority}"
-                    sr.start
-                    runned_requests += 1
-                    i += 1
-                  end
-                end
-              end
-            end
-          end
+          scope = SyncRequest.pending.order('priority desc')
+          h = Time.now.hour
+          scope = scope.not_night_only if !(h > 2 && h < 5)
 
-          if runned_requests == 0
-            puts "No requests handled, sleeping for 5 seconds"
-            sleep 5
+          sr = scope.first
+          i = 0
+          until sr.finished? || sr.failed? || i>12 do
+            puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.synced_upto+1}, pr: #{sr.priority}"
+            sr.start
+            i += 1
           end
-
 
         rescue StandardError => e
           puts "Exception in sync:worker: #{e.message}"
