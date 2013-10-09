@@ -13,11 +13,15 @@ namespace :sync do
           scope = scope.not_night_only if !(h > 2 && h < 5)
 
           sr = scope.first
-          i = 0
-          until sr.finished? || sr.failed? || i>12 do
-            puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.synced_upto+1}, pr: #{sr.priority}"
-            sr.start
-            i += 1
+          if sr
+            i = 0
+            until sr.finished? || sr.failed? || i>12 do
+              puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.synced_upto+1}, pr: #{sr.priority}"
+              sr.start
+              i += 1
+            end
+          else
+            sleep 5 
           end
 
         rescue StandardError => e
