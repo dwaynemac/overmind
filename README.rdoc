@@ -25,3 +25,5 @@ This rake tasks should be scheduled on background:
   sync:current_year_on_sundays   -- daily
   sync:run_all_requested         -- every 10 minutes
   sync:clear_finished_requests   -- daily
+
+test ari
