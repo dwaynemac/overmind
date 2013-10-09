@@ -9,6 +9,11 @@ namespace :sync do
           runned_requests = 0
           puts "Polling for sync requests"
 
+          # TODO filtrar las night_only con un scope en lugar de instancia por instancia
+          # TODO seria mejor hacer algo tipo:
+          # sr = SyncRequest.order('priority desc').first
+          # sr.start
+          # de esa manera cuando se crea una con priority se "mete" en el medio.
           SyncRequest.pending.order('priority desc').pluck('distinct priority').each do |i|
             until (sync_requests = SyncRequest.pending.where(priority: i)).empty? do
               sync_requests.each do |sr|
