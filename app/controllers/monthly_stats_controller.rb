@@ -40,6 +40,6 @@ class MonthlyStatsController < ApplicationController
     @years = 2010..Date.today.year
     @year = params[:year] || Time.zone.today.year
     stats = MonthlyStat.for_year(@year)
-    @monthly_stats = stats.to_matrix
+    @monthly_stats = Matrixer.new(stats).to_matrix
   end
 end
