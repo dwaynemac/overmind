@@ -4,7 +4,7 @@ module PadmaStatsApi
 
   CONTACTS_URL = case Rails.env
     when 'production'
-     'https://padma-contacts.herokuapp.com'
+     'https://contacts.padm.am'
     when 'staging'
      'https://padma-contacts-staging.herokuapp.com'
     else
@@ -13,7 +13,7 @@ module PadmaStatsApi
 
   CRM_URL = case Rails.env
     when 'production'
-      'https://padma-crm.herokuapp.com'
+      'https://crm.padm.am'
     when 'staging'
       'https://padma-crm-staging.herokuapp.com'
     else
