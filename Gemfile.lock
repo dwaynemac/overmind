@@ -131,6 +131,9 @@ GEM
     mime-types (1.23)
     mini_portile (0.5.1)
     multi_json (1.7.2)
+    newrelic-typhoeus (0.0.3)
+      newrelic_rpm (~> 3.0)
+      typhoeus (>= 0.4.2)
     newrelic_rpm (3.4.2.1)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
@@ -264,6 +267,7 @@ DEPENDENCIES
   kaminari
   libnotify
   logical_model (~> 0.5.8)
+  newrelic-typhoeus
   newrelic_rpm
   pg
   rails (= 3.2.8)

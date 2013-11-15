@@ -16,6 +16,7 @@ gem 'sqlite3', :group => [:development, :test]
 group :production do
   gem 'pg'
   gem 'newrelic_rpm'
+  gem 'newrelic-typhoeus'
 end
 
 gem 'logical_model', '~> 0.5.8'
