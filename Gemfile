@@ -37,12 +37,14 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'debugger'
   gem "rspec-rails"
   gem "shoulda"
   gem "factory_girl_rails"
   gem "guard-rspec"
   gem "libnotify"
+end
+
+group :doc do
   gem "yard", "~> 0.8.3"
   gem 'yard-restful'
   gem 'redcarpet'
@@ -52,9 +54,7 @@ group :development do
   gem 'subcontractor', '>= 0.6.1'
   gem 'foreman'
 
-  gem 'yard', '~> 0.8.3'
-  gem 'yard-restful'
-  gem 'redcarpet'
+  gem 'debugger'
 
   gem 'git-pivotal-tracker-integration'
   
