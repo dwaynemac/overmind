@@ -2,7 +2,7 @@ class Api::V0::ApiController < ActionController::Base
   # TODO strip down to ActionController::Metal
 
   before_filter :require_api_key
-  KEY = 'secret-key'
+  KEY = ENV['api_key']
 
   private
 
