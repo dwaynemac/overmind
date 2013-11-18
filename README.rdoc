@@ -1,4 +1,4 @@
-= Overmind Module (ws and web app)
+== Overmind {<img src="https://travis-ci.org/dwaynemac/overmind.png" />}[https://travis-ci.org/dwaynemac/overmind] {<img src="https://codeclimate.com/github/dwaynemac/overmind.png" />}[https://codeclimate.com/github/dwaynemac/overmind] {<img src="https://gemnasium.com/dwaynemac/overmind.png" alt="Dependecies" />}[https://gemnasium.com/dwaynemac/overmind] {<img src="https://coveralls.io/repos/dwaynemac/overmind/badge.png" alt="Coverage Status" />}[https://coveralls.io/r/dwaynemac/overmind]
 
 Stores cached statistics
 
