@@ -47,6 +47,7 @@ describe SchoolMonthlyStat do
           School.any_instance.stub(:fetch_stat).and_return('2')
         end
         it "creates a monthly stat On school" do
+          School.any_instance.stub(:fetch_stat_from_crm).and_return('2')
           expect{SchoolMonthlyStat.create_from_service!(school,:students,Date.today)}.to change{school.monthly_stats.count}.by(1)
         end
         it "uses KshemaAPi" do

@@ -271,6 +271,7 @@ DEPENDENCIES
   newrelic_rpm
   pg
   rails (= 3.2.8)
+  rake
   ransack
   redcarpet
   rspec-rails

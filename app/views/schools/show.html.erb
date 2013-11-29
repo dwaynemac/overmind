@@ -19,22 +19,17 @@
     <%- end -%>
   </h1>
   <h2>
-    <span id="current_year" title="<%= t('schools.show.click_to_change') %>"><%= @year %></span>
-    <%= form_tag nil, method: 'GET', class: 'form-inline', id: 'set-year'  do -%>
-      <%= select_tag( :year, options_for_select(@years,@year)) %>
-      <%= submit_tag(t('see'), class: 'btn') %>
-    <%- end -%>
-    <%- if can?(:sync, @school) && @school.padma_enabled? && !@school.pending_sync_requests?(@year)  -%>
-      <%= link_to(t('.sync_year_data', year: @year).capitalize,
-                  sync_year_school_path(id: @school.id, year: @year),
-                  rel: 'tooltip', data: {'original-title' => "#{t('schools.index.synced_at')}: #{l(@school.synced_at) if @school.synced_at}"},
-                  class: 'btn btn-mini') %>
-    <%- end -%>
+    <div>
+      <span id="current_year" title="<%= t('schools.show.click_to_change') %>"><%= @year %></span>
+      <%= form_tag nil, method: 'GET', class: 'form-inline', id: 'set-year'  do -%>
+        <%= select_tag( :year, options_for_select(@years,@year)) %>
+        <%= submit_tag(t('see'), class: 'btn') %>
+      <%- end -%>
+    </div>
   </h2>
-
+  <%= render :partial => 'sync_request_notification' %>
 </div>
 
-<%= render :partial => 'sync_request_notification' %>
 
 <%- if can?(:see_debug_info,@school) -%>
   <dl class="dl-horizontal">

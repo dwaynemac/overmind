@@ -66,13 +66,4 @@ class SchoolsController < ApplicationController
     @school.destroy
     redirect_to schools_path
   end
-
-  def sync_year
-    @sync_request = SyncRequest.new(school_id: @school.id, year: params[:year], priority: 10)
-    if @sync_request.save
-      redirect_to school_path(id: @school.id, year: params[:year]), notice: I18n.t('schools.sync_year.queued')
-    else
-      redirect_to school_path(id: @school.id, year: params[:year]), error: I18n.t('schools.sync_year.couldnt_queue_sync')
-    end
-  end
 end
