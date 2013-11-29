@@ -1,6 +1,6 @@
 <%- if @school.sync_requests.in_progress.where(year: @year).count > 0 -%>
   <div class="alert">
-    <button type="button" class="close" data-dismiss="alert">, :update&times;</button>
+    <button type="button" class="close" data-dismiss="alert">, &times;</button>
     <%= t('schools.sync_request_notification_running_sync', progress: @school.sync_requests.in_progress.last.progress) %>
   </div>
 <%- elsif @school.failed_sync_requests?(@year) -%>
