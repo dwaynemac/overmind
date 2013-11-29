@@ -15,6 +15,7 @@ Overmind::Application.routes.draw do
     collection do
       match "/pa/:account_name", to: 'schools#show_by_name'
     end
+    resources :sync_requests, only: [:create, :update]
   end
   resources :federations
   resources :users
