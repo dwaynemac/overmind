@@ -14,9 +14,11 @@
     <%= t('schools.sync_request_notification.pending_sync') %>
   </div>
   <% if sr.priority < 10 -%>
-    <%= form_for [@school,sr], method: 'PUT', id: 'requset-sync-form' do |f| %>
-      <%= f.hidden_field :priority, value: 15 %>
-      <%= f.submit(t('schools.show.sync_now_year_data', year: @year).capitalize, class: 'btn btn-mini') %>
+    <%- if can?(:create, SyncRequest) && @school.padma_enabled?  -%>
+      <%= form_for [@school,sr], method: 'PUT', id: 'requset-sync-form' do |f| %>
+        <%= f.hidden_field :priority, value: 15 %>
+        <%= f.submit(t('schools.show.sync_now_year_data', year: @year).capitalize, class: 'btn btn-mini') %>
+      <% end -%>
     <% end -%>
   <% end -%>
 <% else -%>
