@@ -34,6 +34,11 @@ describe SyncRequest do
       sr.save
       sr.reload.synced_upto.should == 0
     end
+    it "leaves synced_upto unchanged if its specified" do
+      sr = build(:sync_request, synced_upto: 10)
+      sr.save
+      sr.reload.synced_upto.should == 10
+    end
     it "checks there is no pending request for same school and same year" do
       sr = create(:sync_request)
       new_sr_invalid = build(:sync_request, school_id: sr.id, year: sr.year)

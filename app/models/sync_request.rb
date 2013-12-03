@@ -129,7 +129,7 @@ class SyncRequest < ActiveRecord::Base
 
   def set_defaults
     self.state = 'ready' if state.nil?
-    self.synced_upto = 0
+    self.synced_upto = 0 if self.synced_upto.nil?
     self.priority = 0 if self.priority.nil?
   end
 end
