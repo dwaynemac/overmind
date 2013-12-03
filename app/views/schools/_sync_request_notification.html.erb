@@ -28,7 +28,7 @@
       <%= f.hidden_field :year %>
       <%= f.hidden_field :priority %>
       <%= f.hidden_field :synced_upto, value: (cur_month<2)? 0 : cur_month-2 %>
-      <%= f.submit(t('schools.show.sync_year_data', year: @year).capitalize, class: 'btn btn-mini') %>
+      <%= f.submit(t('schools.show.sync_last_months').capitalize, class: 'btn btn-mini') %>
     <% end -%>
   <%- end -%>
 <%- end -%>

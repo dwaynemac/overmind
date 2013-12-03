@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
@@ -51,6 +52,7 @@ es:
       teachers: "Instructores"
       synced_at: "Última sincronización"
     show:
+      sync_last_months: "Sincronizar últimos meses"
       sync_year_data: "Solicitar sincronización de datos del %{year}"
       sync_now_year_data: "Priorizar la sincronización de mis datos del %{year}"
       click_to_change: "Click aqui para modificar el año"
