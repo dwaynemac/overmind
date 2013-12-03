@@ -23,9 +23,11 @@
   <% end -%>
 <% else -%>
   <%- if can?(:create, SyncRequest) && @school.padma_enabled?  -%>
+    <% cur_month = Date.today.month -%>
     <%= form_for [@school,@school.sync_requests.new(year: @year, priority: 10)], method: 'POST', id: 'requset-sync-form' do |f| %>
       <%= f.hidden_field :year %>
       <%= f.hidden_field :priority %>
+      <%= f.hidden_field :synced_upto, (cur_month<2) 0 : cur_month-2 %>
       <%= f.submit(t('schools.show.sync_year_data', year: @year).capitalize, class: 'btn btn-mini') %>
     <% end -%>
   <%- end -%>
