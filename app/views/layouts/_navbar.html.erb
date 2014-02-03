@@ -1,55 +1,73 @@
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="#">Overmind</a>
-      <div class="container nav-collapse">
-        <ul class="nav">
-          <%= li(params[:controller], 'monthly_stats') do
-              link_to t('.global'), global_monthly_stats_path
-            end if can?(:see_global,MonthlyStat)
-          %>
-          <%= li(params[:controller], 'federations') do
-                if current_user.federation.present? && can?(:read_only_one,Federation)
-                  link_to current_user.federation.name, current_user.federation
-                else
-                  link_to t('.federations'), federations_path
-                end
-              end if can?(:read, Federation)
-          %>
-          <%= li(params[:controller], 'schools') do
-                if can?(:read_only_one, School)
-                  link_to( current_user.enabled_accounts.first.name, schools_path ) if current_user.enabled_accounts
-                else
-                  link_to t('.schools'), schools_path
-                end
-              end if can?(:read, School) -%>
-          <%= li(params[:controller], 'users') do
-                link_to t('.users'), users_path
-              end if can?(:manage,User)
-          %>
-          <li class="divider-vertical"></li>
-        </ul>
-        <form class="navbar-search" accept-charset="utf-8" action="<%= schools_path %>" id="navbar-search" method="get">
-          <input type="text" class="search-query" name="q[name_cont]" />
-        </form>
-        <ul class="nav pull-right">
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <%= current_user.username %>
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to t('logout'), logout_url %></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!--/.nav-collapse -->
-    </div>
+<nav id="navbar-1" class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">PADMA</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
   </div>
-</div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul id="menu-top-left" class="nav navbar-nav">
+          <li><a href="http://padma-overmind-staging.herokuapp.com/schools">PADMA</a></li>
+          <li><a href="http://padma-crm-staging.herokuapp.com">CRM</a></li>
+          <li><a href="http://padma-crm-staging.herokuapp.com">Accounts</a></li>
+          <li><a href="http://padma-support.com.ar">Centro de Ayuda</a></li>
+          <li><a href="http://fnz-staging.herokuapp.com/users/auth/cas">Financiero</a></li>
+    </ul>
+    <ul id="menu-top-right" class="nav navbar-nav navbar-right">
+      <li><a id="username" href="http://padma-accounts-staging.herokuapp.com"><img src="https://secure.gravatar.com/avatar/d55ef2d05b82c322260a7148e4b8d6bb.gif?d=http://padma-crm-staging.herokuapp.com/assets/header_sessionbox_userpicture.png&r=PG&s=21">
+        <%= current_user.username %>
+        </a></li>
+      <li>
+        <%= link_to logout_url do %>
+          <%= t('logout') %>
+          <span class="glyphicon glyphicon-off"></span><span class="translation_missing" title="translation missing: es.logout"></span>
+        <% end %>
+      </li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav> 
+
+<nav id="navbar-2" class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex2-collapse">
+      <span class="sr-only">Overmind</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <%= link_to image_tag('logo_30px.png'), root_url, class: "navbar-brand" %>
+    </button>
+  </div>
+  <div class="collapse navbar-collapse navbar-ex2-collapse">
+    <ul class="nav navbar-nav">
+      <%= link_to image_tag('logo_30px.png'), root_url, class: "navbar-brand" %>
+      <%= content_tag :li,  class: ('active' if controller_name == 'monthly_stats') do %>
+        <%= link_to(t('layouts.navbar.monthly_stats'), global_monthly_stats_path) if can?(:see_global,MonthlyStat) %>
+      <% end %>
+      <%= content_tag :li,  class: ('active' if controller_name == 'federations') do %>
+        <%= if can?(:read, Federation)
+              if current_user.federation.present? && can?(:read_only_one,Federation)
+                link_to current_user.federation.name, current_user.federation
+              else
+                link_to t('.federations'), federations_path
+              end 
+            end%>
+      <% end %>
+      <%= content_tag :li,  class: ('active' if controller_name == 'schools') do %>
+        <%= if can?(:read, School)
+              if can?(:read_only_one, School)
+                link_to( current_user.enabled_accounts.first.name, schools_path ) if current_user.enabled_accounts
+              else
+                link_to t('.schools'), schools_path
+              end 
+            end%>
+      <% end %>
+      <%= content_tag :li,  class: ('active' if controller_name == 'users') do %>
+        <%= link_to(t('layouts.navbar.monthly_stats'), users_path) if can?(:manage,User) %>
+      <% end %>
+    </ul>
+  </div>
+</nav> 
