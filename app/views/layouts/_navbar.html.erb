@@ -44,30 +44,35 @@
   <div class="collapse navbar-collapse navbar-ex2-collapse">
     <ul class="nav navbar-nav">
       <%= link_to image_tag('logo_30px.png'), root_url, class: "navbar-brand" %>
-      <%= content_tag :li,  class: ('active' if controller_name == 'monthly_stats') do %>
-        <%= link_to(t('layouts.navbar.monthly_stats'), global_monthly_stats_path) if can?(:see_global,MonthlyStat) %>
-      <% end %>
-      <%= content_tag :li,  class: ('active' if controller_name == 'federations') do %>
-        <%= if can?(:read, Federation)
-              if current_user.federation.present? && can?(:read_only_one,Federation)
-                link_to current_user.federation.name, current_user.federation
-              else
-                link_to t('.federations'), federations_path
-              end 
-            end%>
-      <% end %>
-      <%= content_tag :li,  class: ('active' if controller_name == 'schools') do %>
-        <%= if can?(:read, School)
-              if can?(:read_only_one, School)
-                link_to( current_user.enabled_accounts.first.name, schools_path ) if current_user.enabled_accounts
-              else
-                link_to t('.schools'), schools_path
-              end 
-            end%>
-      <% end %>
-      <%= content_tag :li,  class: ('active' if controller_name == 'users') do %>
-        <%= link_to(t('layouts.navbar.monthly_stats'), users_path) if can?(:manage,User) %>
-      <% end %>
+      <%= content_tag :li,  class: ('active' if controller_name == 'monthly_stats') do
+         link_to t('.global'), global_monthly_stats_path
+            end if can?(:see_global,MonthlyStat)
+      %>
+      <%= content_tag :li,  class: ('active' if controller_name == 'federations') do
+          if current_user.federation.present? && can?(:read_only_one,Federation)
+                  link_to current_user.federation.name, current_user.federation
+                else
+                  link_to t('.federations'), federations_path
+                end
+              end if can?(:read, Federation)
+      %>
+      <%= content_tag :li,  class: ('active' if controller_name == 'schools') do
+        if can?(:read_only_one, School)
+                  link_to( current_user.enabled_accounts.first.name, schools_path ) if current_user.enabled_accounts
+                else
+                  link_to t('.schools'), schools_path
+                end
+              end if can?(:read, School)
+      %>
+      <%= content_tag :li,  class: ('active' if controller_name == 'users') do
+         link_to t('.users'), users_path
+              end if can?(:manage,User)
+      %>
     </ul>
+    <form class="navbar-form" role="search" action="<%= schools_path %>" id="navbar-search" method="get">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search" name="q[name_cont]" id="srch-term" />
+      </div>
+    </form>
   </div>
 </nav> 
