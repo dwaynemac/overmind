@@ -32,7 +32,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-rails'
   gem "execjs"
-  gem 'less-rails-bootstrap'
+  gem 'less-rails-bootstrap', '~> 3.0.6'
   gem "therubyracer"
 end
 
