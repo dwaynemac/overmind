@@ -39,7 +39,7 @@ padding-left: 20px;
 #navbar-2 ul li.active{
   } 
 #navbar-2 input{
-  height: 30px;
+  /*height: 30px;*/
   } 
   
 #navbar-1 li a{
@@ -91,4 +91,8 @@ vertical-align:middle!important;
 
 #navbar-search {
   margin-top: 10px;
+}
+
+.fix-logo-height {
+  padding-top: 10px;
 }
