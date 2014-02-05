@@ -64,7 +64,7 @@ padding-left: 20px;
   }
   
 #navbar-2 li a, #navbar-2 li active{
-  font:normal 18px Arial, Helvetica, sans-serif;
+  font:bold 14px Arial, Helvetica, sans-serif;
   text-shadow:none !important;
   padding:15px 30px 15px 30px;
   }
@@ -92,7 +92,16 @@ padding-top:5px;
 }
 
 .navbar .navbar-nav > .active > a {
-  background-color: #f8f8f8;
+  background: #f8f8f8;
+  background: -moz-linear-gradient(top, #fff, #f8f8f8);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #f8f8f8));
+}
+
+.navbar .navbar-nav > .active > a:hover {
+  background-color: #E5E5E5;
+  background: #dfdfdf;
+  background: -moz-linear-gradient(top, #fff, #dfdfdf);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #dfdfdf));
 }
 
 /*------------- APPLICATION.CSS --------------------*/
@@ -104,7 +113,7 @@ padding-top:5px;
   padding-right: 20px;
 }
 
-.navbar-nav > li > a {padding-top:9px !important; padding-bottom:8px !important;}
+.navbar-nav > li > a {padding-top:12px !important; padding-bottom:11px !important;}
 .navbar {
   min-height: 40px !important;
 }
