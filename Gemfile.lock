@@ -110,7 +110,7 @@ GEM
     less-rails (2.4.2)
       actionpack (>= 3.1)
       less (~> 2.4.0)
-    less-rails-bootstrap (3.1.0.0)
+    less-rails-bootstrap (3.0.6)
       less-rails (~> 2.4.2)
     libnotify (0.7.4)
       ffi (~> 1.0.11)
@@ -262,7 +262,7 @@ DEPENDENCIES
   guard-rspec
   jquery-rails
   kaminari
-  less-rails-bootstrap
+  less-rails-bootstrap (~> 3.0.6)
   libnotify
   logical_model (~> 0.5.8)
   newrelic-typhoeus

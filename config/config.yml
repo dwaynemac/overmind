@@ -1,0 +1,33 @@
+defaults: &defaults
+  crm-url: http://localhost:3000
+  accounts-url: http://localhost:3001
+  support-url: http://padma-support.com.ar
+  overmind-url: http://localhost:3007
+  mailing-url: http://localhost:3020
+  fnz-url: http://localhost:3008
+  attendance-url: http://localhost:3004
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  crm-url: http://crm.padm.am
+  accounts-url: http://accounts.padm.am
+  overmind-url: http://statistics.padm.am
+  mailing-url: http://padma-mailing.herokuapp.com
+  fnz-url: http://fnz.herokuapp.com
+  attendance-url: http://padma-attendance.herokuapp.com
+
+
+staging:
+  <<: *defaults
+  crm-url: http://padma-crm-staging.herokuapp.com
+  accounts-url: http://padma-accounts-staging.herokuapp.com
+  overmind-url: http://padma-overmind-staging.herokuapp.com
+  mailing-url: http://padma-mailing-staging.herokuapp.com
+  fnz-url: http://fnz-staging.herokuapp.com
+  attendance-url: http://padma-attendance-staging.herokuapp.com
