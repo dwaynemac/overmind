@@ -41,6 +41,14 @@ padding-left: 20px;
 #navbar-2 input{
   /*height: 30px;*/
   } 
+
+#navbar-2 > div > ul > li:last-child {
+  border-right: 1px solid #CFCFCF;
+}
+
+#navbar-2 > div > ul > li {
+  border-left: 1px solid #CFCFCF;
+}
   
 #navbar-1 li a{
   font:normal 12px Arial, Helvetica, sans-serif;
