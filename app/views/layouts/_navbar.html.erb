@@ -43,7 +43,7 @@
   </div>
   <div class="collapse navbar-collapse navbar-ex2-collapse">
     <ul class="nav navbar-nav">
-      <%= link_to image_tag('logo_30px.png'), root_url, class: "navbar-brand fix-logo-height" %>
+      <%= link_to image_tag('logo_30px.png'), root_url, class: "navbar-brand" %>
       <%= content_tag :li,  class: ('active' if controller_name == 'monthly_stats') do
          link_to t('.global'), global_monthly_stats_path
             end if can?(:see_global,MonthlyStat)
