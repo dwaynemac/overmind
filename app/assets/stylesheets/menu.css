@@ -104,6 +104,13 @@ padding-top:5px;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #dfdfdf));
 }
 
+.navbar .navbar-nav > li > a:hover {
+  background-color: #E5E5E5;
+  background: #dfdfdf;
+  background: -moz-linear-gradient(top, #fff, #dfdfdf);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #dfdfdf));
+}
+
 /*------------- APPLICATION.CSS --------------------*/
 
 .navbar-brand{
