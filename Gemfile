@@ -19,7 +19,7 @@ group :production do
   gem 'newrelic-typhoeus'
 end
 
-gem 'logical_model', '~> 0.5.8'
+gem 'logical_model', '~> 0.5.10'
 gem 'accounts_client', '0.0.20'
 gem 'kaminari'
 gem 'ransack'
