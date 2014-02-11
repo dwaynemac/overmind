@@ -18,9 +18,9 @@ production:
   crm-url: http://crm.padm.am
   accounts-url: http://accounts.padm.am
   overmind-url: http://statistics.padm.am
-  mailing-url: http://padma-mailing.herokuapp.com
+  mailing-url: http://mailing.padm.am
   fnz-url: http://fnz.herokuapp.com
-  attendance-url: http://padma-attendance.herokuapp.com
+  attendance-url: http://attendance.padm.am
 
 
 staging:
