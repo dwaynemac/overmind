@@ -3,4 +3,5 @@ language: ruby
 rvm:
  - 1.9.3
 before_script:
+ - "cp config/local_env.yml.example config/local_env.yml"
  - "bundle exec rake db:migrate RAILS_ENV=test"
