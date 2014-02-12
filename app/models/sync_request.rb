@@ -1,3 +1,15 @@
+##
+# SyncRequest
+#
+# corresponds to a specific year and a specific school.
+#
+# @!attribute priority [rw]
+#   @return [String] importance of this sync.
+#                    nil or < 5 will only be synced at night
+#                    syncs are excecuted in order of priority.
+#                    scheduled syncs have low priority by default
+#                    syncs requestes by user through web have high priority
+#
 class SyncRequest < ActiveRecord::Base
   attr_accessible :school_id, :year, :state, :synced_at
 
