@@ -49,8 +49,7 @@ describe SyncRequest do
   end
 
   def should_call_to_sync_month(n)
-    sync_request.school.should_receive(:sync_school_month_stats).with(
-      sync_request.year,
+    sync_request.school.should_receive(:sync_school_month_stats).with( sync_request.year,
       n,
       {update_existing: true, skip_synced_at_setting: true}
     )
@@ -58,9 +57,7 @@ describe SyncRequest do
   end
 
   def should_not_call_to_sync_month(n)
-    sync_request.school.should_not_receive(:sync_school_month_stats).with(sync_request.year,n,
-      {update_existing: true}                                                                     
-    )
+    sync_request.school.should_not_receive(:sync_school_month_stats).with(sync_request.year,n, {update_existing: true} )
     sync_request.school.should_not_receive(:sync_teacher_monthly_stats).with(sync_request.year,n)
   end
 
