@@ -230,6 +230,19 @@ describe SyncRequest do
         end
       end
     end
+
+    describe "if exception is raised" do
+      before do
+        SyncRequest.any_instance.stub(:syncable_month?).and_raise 'hell'
+      end
+      it "catches it" do
+        expect{sync_request.start}.not_to raise_exception
+      end
+      it "sets :state to 'failed'" do
+        sync_request.start
+        sync_request.state.should == 'failed'
+      end
+    end
   end
 
 
