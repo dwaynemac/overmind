@@ -30,7 +30,6 @@ class Ability
         can :see_global, MonthlyStat
         can :see_debug_info, School
       when 'data_entry'
-        can :read, Federation
         can [:read, :sync, :sync_year], School
         can :create, SyncRequest
         can [:read, :see_global, :sync, :create], MonthlyStat
