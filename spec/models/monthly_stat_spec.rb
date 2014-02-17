@@ -39,4 +39,48 @@ describe MonthlyStat do
   it "stores service name" do
     should have_db_column :service
   end
+
+  describe ".service_for" do
+    describe "for a school without account_name" do
+      let(:school){create(:school, account_name: nil)}
+      it "returns nil" do
+        MonthlyStat.service_for(school,'students',Date.today).should be_nil
+      end
+    end
+    describe "for a school with account_name" do
+      let(:school){create(:school, account_name: 'account-name')}
+      describe "if school was not migrated to padma" do
+        before do
+          stub_account(migrated_to_padma_on: nil)
+        end
+        it "returns kshema" do
+          MonthlyStat.service_for(school,'students',Date.today).should == 'kshema'
+        end
+      end
+      describe "if school was migrated to padma" do
+        before do
+          stub_account(migrated_to_padma_on: Date.civil(2013,1,1))
+        end
+        describe "if stat's ref_date is before migration date" do
+          let(:ref_date){Date.civil(2012,1,1)}
+          it "returns kshema" do
+            MonthlyStat.service_for(school,'students',ref_date).should == 'kshema'
+          end
+        end
+        describe "if stat's ref_date is after migration date" do
+          let(:ref_date){Date.civil(2014,1,1)}
+          it "returns crm" do
+            MonthlyStat.service_for(school,'students',ref_date).should == 'crm'
+          end
+        end
+      end
+    end
+  end
+end
+
+def stub_account(attrs)
+  attrs = attrs.merge(name: 'account-name')
+  PadmaAccount.stub(:find).with('account-name').and_return(
+    PadmaAccount.new(attrs)
+  )
 end

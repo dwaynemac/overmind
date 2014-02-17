@@ -101,17 +101,20 @@ class MonthlyStat < ActiveRecord::Base
   # @param stat_name [Symbol]
   # @return [String]
   def set_service
-    self.service = MonthlyStat.service_for(self.school,self.name)
+    self.service = MonthlyStat.service_for(self.school,self.name,self.ref_date)
   end
 
-  # @param school [School]
-  # @param name [String] a valid stat name
-  # @return [String]
-  def self.service_for(school,name)
-    if school.padma2_enabled?
-      'crm'
+  def self.service_for(school,stat_name,ref_date)
+    if school.account_name.blank?
+      nil
     else
-      'kshema'
+      migrated_to_padma_on = school.account.migrated_to_padma_on.try(:to_date)
+      if migrated_to_padma_on.nil? || ref_date < migrated_to_padma_on
+        'kshema'
+      else
+        # stat_name could be used here to divide stats between different PADMA modules
+        'crm'
+      end
     end
   end
 

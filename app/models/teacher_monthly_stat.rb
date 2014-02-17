@@ -42,7 +42,7 @@ class TeacherMonthlyStat < MonthlyStat
     # ensure the date is at end of month.
     ref_date = ref_date.to_date.end_of_month
 
-    service = MonthlyStat.service_for(school,name)
+    service = MonthlyStat.service_for(school,name,ref_date)
     teachers_stats = self.get_remote_values(school,name,service,ref_date) || []
 
     teachers_stats.each do |tstat|
