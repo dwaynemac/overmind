@@ -22,7 +22,7 @@ module Accounts
 end
 
 class LogicalModel
-  if Rails.env.production?
+  if Rails.env.production? || Rails.env.staging?
     def self.logger
       Rails.logger
     end
