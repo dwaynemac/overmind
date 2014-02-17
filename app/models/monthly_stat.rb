@@ -95,8 +95,6 @@ class MonthlyStat < ActiveRecord::Base
     school.try :account_name
   end
 
-
-
   ##
   # According to stat name and school this will set from wich service value needs to be fetched.
   # @param school [School]
@@ -112,18 +110,6 @@ class MonthlyStat < ActiveRecord::Base
   def self.service_for(school,name)
     if school.padma2_enabled?
       'crm'
-=begin
-      CURRENTLY ALL PADMA STATS ARE CALCULATED ON CRM.
-      case name.to_sym
-        when :students, :enrollments, :dropouts, :demand, :interviews, :p_interviews, :emails, :phonecalls,
-             :aspirante_students, :sadhaka_students, :yogin_students, :chela_students, :graduado_students,
-             :assistant_students, :professor_students, :master_students,
-             :conversion_rate
-          'crm'
-        else
-          raise 'statistic not mapped to a service'
-      end
-=end
     else
       'kshema'
     end
