@@ -101,7 +101,8 @@ class MonthlyStat < ActiveRecord::Base
   # @param stat_name [Symbol]
   # @return [String]
   def set_service
-    self.service = MonthlyStat.service_for(self.school,self.name,self.ref_date)
+    new_service = MonthlyStat.service_for(self.school,self.name,self.ref_date)
+    self.service = new_service unless new_service.nil?
   end
 
   def self.service_for(school,stat_name,ref_date)
