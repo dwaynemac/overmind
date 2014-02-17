@@ -142,6 +142,8 @@ GEM
     nokogiri-happymapper (0.5.7)
       nokogiri (~> 1.5)
     orm_adapter (0.0.7)
+    padma-deployment (0.0.1)
+      railties (>= 3.1)
     pg (0.14.0)
     pivotal-tracker (0.5.12)
       builder
@@ -267,6 +269,7 @@ DEPENDENCIES
   logical_model (~> 0.5.10)
   newrelic-typhoeus
   newrelic_rpm
+  padma-deployment
   pg
   rails (= 3.2.8)
   rake

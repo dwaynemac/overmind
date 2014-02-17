@@ -61,6 +61,7 @@ group :development do
   gem 'debugger'
 
   gem 'git-pivotal-tracker-integration'
+  gem 'padma-deployment'
   
   gem 'better_errors'
   gem 'binding_of_caller'
