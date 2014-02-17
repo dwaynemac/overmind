@@ -1,5 +1,5 @@
 task :update_services => :environment do
-  MonthlyStat.where("ref_date > ?",Date.civil(2012,11,30)).each do |ms|
+  MonthlyStat.where("ref_date > ?",Date.civil(2013,6,1)).each do |ms|
     old_service = ms.service
     ms.set_service
     new_service = ms.service
