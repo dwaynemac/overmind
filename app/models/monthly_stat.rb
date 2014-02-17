@@ -106,14 +106,19 @@ class MonthlyStat < ActiveRecord::Base
 
   def self.service_for(school,stat_name,ref_date)
     if school.account_name.blank?
-      nil
+      ''
     else
-      migrated_to_padma_on = school.account.migrated_to_padma_on.try(:to_date)
-      if migrated_to_padma_on.nil? || ref_date < migrated_to_padma_on
-        'kshema'
+      account = school.account
+      if account.nil?
+        nil
       else
-        # stat_name could be used here to divide stats between different PADMA modules
-        'crm'
+        migrated_to_padma_on = account.migrated_to_padma_on.try(:to_date)
+        if migrated_to_padma_on.nil? || ref_date < migrated_to_padma_on
+          'kshema'
+        else
+          # stat_name could be used here to divide stats between different PADMA modules
+          'crm'
+        end
       end
     end
   end
