@@ -64,6 +64,8 @@ module PadmaStatsApi
           self.count_enrollments(ref_date,options)
         when :dropouts
           self.count_drop_outs(ref_date,options)
+        when :dropouts_begginers
+          self.count_drop_outs(ref_date,options.merge({filter: {level: 'aspirante'}})
         when :demand
           self.count_communications(ref_date,options)
         when :interviews
@@ -182,6 +184,9 @@ module PadmaStatsApi
       parse_response(response,!options[:by_teacher])
     end
 
+    # @param options [Hash]
+    # @option options [String] level
+    # @option options [String] year
     def count_drop_outs(ref_date,options={})
       req_options = { app_key: ENV['crm_key'],
                       filter: {
@@ -191,6 +196,7 @@ module PadmaStatsApi
                       }
       }
       req_options.merge!({by_teacher: true}) if options[:by_teacher]
+      req_options[:filter][:level] = options[:level] if options[:level]
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/drop_outs/count", params: req_options, sslversion: :sslv3)
       parse_response(response,!options[:by_teacher])
