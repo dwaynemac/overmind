@@ -78,6 +78,7 @@ module KshemaApi
       transform_name = {
           enrollments: 'EnrollmentCount',
           dropouts: 'DropoutsCount',
+          dropouts_begginers: 'BegginersDropoutsCount',
 
           students: 'StudentCount',
 
