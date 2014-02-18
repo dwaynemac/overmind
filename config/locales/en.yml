@@ -1,84 +1,93 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  see: "see"
-  edit: "edit"
-  confirm: "sure?"
-  cancel: "cancel"
-  search: "Search"
-  delete: 'delete'
-  destroy: 'delete'
-  monthly_stat:
-    names:
-      dropout_rate: 'Dropout Rate'
-      enrollment_rate: 'Enrollment Rate'
-      enrollments: 'Enrollments'
-      dropouts: 'Drop Outs'
-      students: 'Students'
-      male_students: 'Male students'
-      female_students: 'Female students'
-      aspirante_students: "Beginner Students"
-      sadhaka_students: "Sádhakas"
-      yogin_students: "Yôgins"
-      chela_students: "Chêlas"
-      graduado_students: "Graduated Students"
-      assistant_students: 'Assistant Students'
-      professor_students: 'Professor Students'
-      master_students:    'Master Students'
-      interviews: 'Interviews'
-      p_interviews: 'P Interviews'
-      demand: 'Demans'
-      emails: 'Emails'
-      phonecalls: 'PhoneCalls'
-  monthly_stats:
-    chrono_table:
-      evasion_calculation: 'Calculo de la evasion'
-      evasion_explanation: 'Esta evasion es calculada a partir de valores absolutos. Dividiendo el TOTAL de bajas por el TOTAL de alumnos. No es el promedio de las evasiones'
-      efectividad_calculation: "Cálculo de la efectividad"
-      efectividad_explanation: "Esta efectividad es calculada a partir de valores absolutos. Dividiendo el TOTAL de inscripciones por el TOTAL de visitas. No es el promedio de las efectividades"
-      conversion_calculation: "Conversion calculation"
-      conversion_explanation: "Conversion rate is the average of schools conversion rates."
-    form:
-      manual_edition_disable_sync: "Manually stored statístics are not synced with other services.."
-  errors:
-    attributes:
-      ref_date:
-        not_end_of_month: "Reference date should be at the end of a month"
-  date:
-    formats:
-      month: "%b %Y"
-  schools:
-    index:
-      last_registered_stat: "This column show last registered number for each school"
-      not_syncing: "No sync service configured"
-      students: "Students"
-      title: "Schools"
-      new: "New school"
-      teachers: "Teachers"
-      synced_at: "Last synced at"
-    show:
-      sync_year_data: "Request sync for %{year} data"
-      click_to_change: "Click to edit"
-    search_form:
-      show_only_w_account_name_blank: "Only schools without account name"
-    sync_request_notification:
-      failed_sync: "There was an error when trying to sync your data. Contact support."
-  layouts:
-    navbar:
-      global: 'Global'
-      federations: 'Federations'
-      schools: 'Schools'
-      users: 'Users'
-  users:
-    index:
-      actions: "Actions"
-      new: "New user"
   activerecord:
     attributes:
       school:
-        account_name: "Cuenta PADMA"
+        account_name: Cuenta PADMA
+  cancel: cancel
+  confirm: sure?
+  date:
+    formats:
+      month: '%b %Y'
+  delete: delete
+  destroy: delete
+  edit: edit
+  errors:
+    attributes:
+      ref_date:
+        not_end_of_month: Reference date should be at the end of a month
   federations:
     index:
-      teachers: "Teachers"
-  warning: "Warning!"
+      teachers: Teachers
+  helpers:
+    links:
+      back: Back
+      confirm: Are you sure?
+      destroy: Destroy
+      edit: Edit
+      new: New
+  layouts:
+    navbar:
+      federations: Federations
+      global: Global
+      schools: Schools
+      search_placeholder: search
+      users: Users
+  monthly_stat:
+    names:
+      aspirante_students: Beginner Students
+      assistant_students: Assistant Students
+      chela_students: Chêlas
+      demand: Demans
+      dropout_rate: Dropout Rate
+      dropouts: Drop Outs
+      emails: Emails
+      enrollment_rate: Enrollment Rate
+      enrollments: Enrollments
+      female_students: Female students
+      graduado_students: Graduated Students
+      interviews: Interviews
+      male_students: Male students
+      master_students: Master Students
+      p_interviews: P Interviews
+      phonecalls: PhoneCalls
+      professor_students: Professor Students
+      sadhaka_students: Sádhakas
+      students: Students
+      yogin_students: Yôgins
+  monthly_stats:
+    chrono_table:
+      conversion_calculation: Conversion calculation
+      conversion_explanation: Conversion rate is the average of schools conversion
+        rates.
+      efectividad_calculation: Efectivity calculation
+      efectividad_explanation: This efectivity is calculated from absolute values.
+        Dividing the TOTAL of enrollments by the TOTAL of visits. It's not the average of efectivities
+      evasion_calculation: Churn calculation
+      evasion_explanation: Churn is calculated from absolute values.
+        Dividing the TOTAL of dropouts by the TOTAL of students. It's not the average of dropouts
+    form:
+      manual_edition_disable_sync: Manually stored statístics are not synced with
+        other services..
+  schools:
+    index:
+      last_registered_stat: This column show last registered number for each school
+      new: New school
+      not_syncing: No sync service configured
+      students: Students
+      synced_at: Last synced at
+      teachers: Teachers
+      title: Schools
+    search_form:
+      show_only_w_account_name_blank: Only schools without account name
+    show:
+      click_to_change: Click to edit
+      sync_year_data: Request sync for %{year} data
+    sync_request_notification:
+      failed_sync: There was an error when trying to sync your data. Contact support.
+  search: Search
+  see: see
+  users:
+    index:
+      actions: Actions
+      new: New user
+  warning: Warning!

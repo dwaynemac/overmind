@@ -15,7 +15,7 @@
       <th></th>
       <%- (1...13).each do |m| -%>
         <th>
-          <%= Date::MONTHNAMES[m] %>
+          <%= I18n.t('date.month_names')[m] %>
         </th>
       <%- end -%>
     </tr>
