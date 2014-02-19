@@ -19,6 +19,7 @@ pt:
       master_students:    'Monitorados Maestros'
       interviews: 'Visitas'
       p_interviews: 'Visitas perfil'
+      in_professional_training: "Em formação"
   views:
     pagination:
       first: 'Primeira'
