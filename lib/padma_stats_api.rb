@@ -60,6 +60,8 @@ module PadmaStatsApi
           self.count_students(ref_date, options.merge({filter: { where: {gender: 'male'}}}))
         when :female_students
           self.count_students(ref_date, options.merge({filter: { where: {gender: 'female'}}}))
+        when :in_professional_training
+          self.count_students(ref_date, options.merge({filter: { where: {in_professional_training: true}}}))
         when :enrollments
           self.count_enrollments(ref_date,options)
         when :dropouts

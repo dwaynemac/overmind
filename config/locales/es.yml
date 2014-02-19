@@ -32,6 +32,7 @@ es:
       phonecalls: 'Llamadas'
       swasthya_students_subtotal: "SubTotal Alumnos en SwáSthya"
       conversion_rate: "Conversion"
+      in_professional_training: "En formación"
   views:
     pagination:
       first: 'Primera'

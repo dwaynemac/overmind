@@ -91,6 +91,8 @@ module KshemaApi
           professor_students: 'DocenteStudentCount',
           master_students: 'MaestroStudentCount',
 
+          in_professional_training: 'InFormationStudentCount'
+
           male_students: 'MaleStudentCount',
           female_students: 'FemaleStudentCount',
 
