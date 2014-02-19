@@ -13,6 +13,9 @@ gem 'cancan'
 # DB
 gem 'sqlite3', :group => [:development, :test]
 
+# Inplace editor
+gem 'best_in_place'
+
 group :production do
   gem 'pg'
   gem 'newrelic_rpm'
