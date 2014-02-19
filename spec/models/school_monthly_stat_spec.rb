@@ -44,6 +44,7 @@ describe SchoolMonthlyStat do
     context "with name: students" do
       context "for kshema schools" do
         before do
+          MonthlyStat.stub(:set_service).and_return 'kshema'
           School.any_instance.stub(:fetch_stat).and_return('2')
         end
         it "creates a monthly stat On school" do
@@ -57,7 +58,7 @@ describe SchoolMonthlyStat do
       end
       context "for padma2 schools" do
         before do
-          school.update_attribute :migrated_kshema_to_padma_at, Time.now
+          school.stub(:account).and_return(PadmaAccount.new(migrated_to_padma_on: Date.today))
           School.any_instance.stub(:count_students).and_return '2'
         end
         it "created a monthly stat On school" do
