@@ -198,7 +198,9 @@ module PadmaStatsApi
                       }
       }
       req_options.merge!({by_teacher: true}) if options[:by_teacher]
-      req_options[:filter][:level] = options[:level] if options[:level]
+      if options[:filter]
+        req_options[:filter][:level] = options[:filter][:level] if options[:filter][:level]
+      end
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/drop_outs/count", params: req_options, sslversion: :sslv3)
       parse_response(response,!options[:by_teacher])
