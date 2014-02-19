@@ -30,10 +30,12 @@ class Ability
         can :see_global, MonthlyStat
         can :see_debug_info, School
       when 'data_entry'
-        can [:read, :sync, :sync_year], School
+        # user.user explained: first user is local user, second user ir padma_user
+        accessible_account_names = user.user.padma_accounts.map(&:name)
+        can [:read, :sync, :sync_year], School, account_name: accessible_account_names
         can :create, SyncRequest
-        can [:read, :see_global, :sync, :create], MonthlyStat
-        can [:update, :destroy], MonthlyStat, service: ''
+        can [:read, :see_global, :sync, :create], MonthlyStat, school: {account_name: accessible_account_names }
+        can [:update, :destroy], MonthlyStat, service: '', school: {account_name: accessible_account_names }
       when 'council'
         can :read, Federation
         can :read, School
