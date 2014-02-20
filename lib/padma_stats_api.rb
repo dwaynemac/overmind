@@ -68,6 +68,8 @@ module PadmaStatsApi
           self.count_drop_outs(ref_date,options)
         when :dropouts_begginers
           self.count_drop_outs(ref_date,options.merge({filter: {level: 'aspirante'}}))
+        when :dropouts_intermediates
+          self.count_drop_outs(ref_date,options.merge({filter: {level: ['sádhaka', 'yôgin', 'chêla', 'graduado', 'asistente', 'docente', 'maestro']}}))
         when :demand
           self.count_communications(ref_date,options)
         when :interviews
