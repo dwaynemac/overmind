@@ -1,7 +1,15 @@
 class SchoolsSynchronizer
   
   def self.start
-    PadmaAccount.paginate.each do |account|
+    # accounts-ws doesn't actually paginate so we have
+    # all accounts here.
+    accounts = PadmaAccount.paginate
+    if accounts.nil?
+      Rails.logger.warn "couldn't run SchoolsSynchronizer, connection to accounts-ws failed."
+      return
+    end
+
+    accounts.each do |account|
       school = School.find_by_account_name(account.name)
       
       tried_to_find_by_nucleo_id = false
