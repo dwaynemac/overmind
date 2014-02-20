@@ -45,6 +45,6 @@ class SchoolsSynchronizer
   end
 
   def self.get_full_name (account)
-    account.full_name.nil? ? account.name : account.full_name
+    account.full_name.blank? ? account.name : account.full_name
   end
 end
