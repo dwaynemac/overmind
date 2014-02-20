@@ -10,8 +10,8 @@ class SchoolsSynchronizer
     end
 
     accounts.each do |account|
+
       school = School.find_by_account_name(account.name)
-      
       tried_to_find_by_nucleo_id = false
       if school.nil?
         school = School.find_by_nucleo_id(account.nucleo_id)
@@ -26,9 +26,13 @@ class SchoolsSynchronizer
                       migrated_kshema_to_padma_at: account.migrated_to_padma_on
       else
         if tried_to_find_by_nucleo_id
-          school.update_attribute(:account_name, account.name)
+          if school.account_name.blank?
+            school.update_attribute(:account_name, account.name)
+          else
+            Rails.logger.warn "School(##{school}) has account_name for one account but nucleo_id for another"
+          end
         end
-        school.update_attribute(:name, get_full_name(account))
+        school.update_attribute(:name, get_full_name(account)) if school.name.blank?
       end
     end
   end
