@@ -79,6 +79,7 @@ module KshemaApi
           enrollments: 'EnrollmentCount',
           dropouts: 'DropoutsCount',
           dropouts_begginers: 'BegginersDropoutsCount',
+          dropouts_intermediates: 'IntermediatesDropoutsCount',
 
           students: 'StudentCount',
 

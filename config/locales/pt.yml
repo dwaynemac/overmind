@@ -13,6 +13,8 @@ pt:
       enrollment_rate: '% Efetividad'
       enrollments: 'Matriculas'
       dropouts: 'Baixas'
+      dropouts_begginers: 'Baixas Iniciantes'
+      dropouts_intermediates: 'Baixas SwáShtya'
       students: 'Alunos'
       assistant_students: 'Monitorados Assistentes'
       professor_students: 'Monitorados Docentes'

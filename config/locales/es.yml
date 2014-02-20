@@ -14,6 +14,8 @@ es:
       enrollment_rate: '% Efectividad'
       enrollments: 'Matrículas'
       dropouts: 'Bajas'
+      dropouts_begginers: 'Bajas Iniciantes'
+      dropouts_intermediates: 'Bajas Intermedios'
       students: 'Alumnos'
       male_students: 'Alumnos hombres'
       female_students: 'Alumnas mujeres'

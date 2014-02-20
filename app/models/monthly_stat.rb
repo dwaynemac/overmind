@@ -16,6 +16,7 @@ class MonthlyStat < ActiveRecord::Base
   VALID_NAMES = [:enrollments,
                  :dropouts,
                  :dropouts_begginers,
+                 :dropouts_intermediates,
 
                  :students,
                  :male_students,
