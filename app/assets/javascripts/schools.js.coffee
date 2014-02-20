@@ -100,5 +100,5 @@ $(document).ready ->
 
   chart.write('chartContainer')
 
-  /* Activating Best In Place */
+  # Activating Best In Place 
   jQuery(".best_in_place").best_in_place();
