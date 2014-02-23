@@ -14,10 +14,18 @@ class MonthlyStatsController < ApplicationController
   end
 
   def create
-    if @monthly_stat.save
-      redirect_to @school, notice: t('monthly_stats.create.success')
-    else
-      render :new
+    respond_to do |format|
+      if @monthly_stat.save
+        format.html {redirect_to @school, notice: t('monthly_stats.create.success')}
+        format.json do
+          render json: {id: @monthly_stat.id}
+        end
+      else
+        format.html {render :new}
+        format.json do
+          render json: {id: @monthly_stat.id}
+        end
+      end
     end
   end
 
@@ -25,12 +33,16 @@ class MonthlyStatsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @monthly_stat.update_attributes(params[:school_monthly_stat])
+      if @monthly_stat.update_attributes(params[:monthly_stat])
         format.html {redirect_to @school, notice: t('monthly_stats.update.success')}
-        format.json { respond_with_bip(@monthly_stat) }
+        format.json do
+          render json: {id: @monthly_stat.id}
+        end
       else
         format.html {render :edit}
-        format.json { respond_with_bip(@monthly_stat) }
+        format.json do
+          render json: {id: @monthly_stat.id}
+        end
       end
     end
   end

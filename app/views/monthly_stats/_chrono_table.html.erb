@@ -21,13 +21,36 @@
     </tr>
   </thead>
   <tbody>
+  <% tabindex=0 %>
   <%- MonthlyStat::VALID_NAMES.reject{|n|n==:conversion_rate}.each do |name| -%>
     <tr>
       <th><%= t("monthly_stat.names.#{name}") %></th>
       <%- (1...13).each do |month| -%>
+        <% tabindex = tabindex + 1 %>
         <td>
           <% monthly_stat = monthly_stats[name][month] -%>
-          <%= monthly_stat.try :value %>
+          <% if monthly_stat.nil? %>
+              <%= best_in_place monthly_stat,
+                                :value,
+                                :object_name => "monthly_stat",
+                                :type => :input,
+                                :path => "/schools/#{@school.id}/monthly_stats",
+                                :post => 'true',
+                                :data => {name: name,
+                                          refdate: "#{Date.civil(@year, month, 1)}",
+                                          service: ""
+                                },
+                                :tabindex => tabindex
+              %>
+          <% else %>
+            <%= best_in_place monthly_stat,
+                              :value,
+                              :type => :input,
+                              :object_name => "monthly_stat",
+                              :path => "/schools/#{@school.id}/monthly_stats/#{monthly_stat.id}",
+                              :tabindex => tabindex
+            %>
+          <% end %>
           <%- unless monthly_stat.nil? || monthly_stat.is_a?(ReducedStat) || @school.nil? -%>
             <%= link_to('e',
                         edit_school_monthly_stat_path(school_id: @school.id, id: monthly_stat.id),
