@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/afalkear/best_in_place_post.git
+  revision: c89bf591ba747616b25ed5ec02528251760a2fbd
+  specs:
+    best_in_place (2.1.0)
+      jquery-rails
+      rails (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -34,9 +42,6 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    best_in_place (2.1.0)
-      jquery-rails
-      rails (~> 3.1)
     better_errors (0.8.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -253,7 +258,7 @@ PLATFORMS
 
 DEPENDENCIES
   accounts_client (= 0.2.1)
-  best_in_place
+  best_in_place!
   better_errors
   binding_of_caller
   cancan

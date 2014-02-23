@@ -14,7 +14,7 @@ gem 'cancan'
 gem 'sqlite3', :group => [:development, :test]
 
 # Inplace editor
-gem 'best_in_place'
+gem 'best_in_place', :github => 'afalkear/best_in_place_post'
 
 group :production do
   gem 'pg'
