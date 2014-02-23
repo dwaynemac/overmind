@@ -61,7 +61,7 @@ module PadmaStatsApi
         when :female_students
           self.count_students(ref_date, options.merge({filter: { where: {gender: 'female'}}}))
         when :in_professional_training
-          self.count_students(ref_date, options.merge({filter: { where: {in_professional_training: true}}}))
+          self.count_students(ref_date, options.merge({in_professional_training: true}))
         when :enrollments
           self.count_enrollments(ref_date,options)
         when :dropouts
@@ -128,6 +128,16 @@ module PadmaStatsApi
                       year: ref_date.year,
                       month: ref_date.month
                      }
+
+      if options[:in_professional_training]
+        req_options.merge!({
+          filter: {
+              attribute_values_at: [
+                  {attribute: 'in_professional_training', value: options[:in_professional_training]}
+              ]
+          }
+        })
+      end
 
       if options[:level]
         req_options.merge!({
