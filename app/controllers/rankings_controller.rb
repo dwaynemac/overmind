@@ -8,7 +8,10 @@ class RankingsController < ApplicationController
       scope = scope.where(schools: params[:filters]) 
     end
     
-    unless params[:column_names].nil?
+    if params[:column_names].nil?
+      @column_names = MonthlyStat::VALID_NAMES
+    else
+      @column_names = params[:column_names]
       scope = scope.where(name: params[:column_names])
     end
     
