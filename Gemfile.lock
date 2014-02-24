@@ -142,7 +142,7 @@ GEM
     nokogiri-happymapper (0.5.7)
       nokogiri (~> 1.5)
     orm_adapter (0.0.7)
-    padma-deployment (0.0.1)
+    padma-deployment (0.2.1)
       railties (>= 3.1)
     pg (0.14.0)
     pivotal-tracker (0.5.12)
