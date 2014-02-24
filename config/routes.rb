@@ -17,6 +17,7 @@ Overmind::Application.routes.draw do
     end
     resources :sync_requests, only: [:create, :update]
   end
+  resource :ranking, only: [:show]
   resources :federations
   resources :users
   resources :monthly_stats, only: [] do
