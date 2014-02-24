@@ -15,6 +15,7 @@ module StatsMatrix
     # @example @school.school_monthly_stats.where(year: 2013).to_matrix
     # @return [Hash]
     def to_matrix
+      Rails.logger.info "[DEPRECATED] StatsMatrix.to_matrix is deprecated. Matrix class should be called directly"
       Matrixer.new(self).to_matrix
     end
   end
