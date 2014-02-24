@@ -36,6 +36,10 @@ class SchoolsController < ApplicationController
     @school.teachers.each do |teacher|
       @teachers_monthly_stats[teacher.id] = @school.teacher_monthly_stats.for_year(@year).where(teacher_id: teacher.id).to_matrix
     end
+    respond_to do |format|
+      format.html
+      format.csv
+    end
   end
 
   def new

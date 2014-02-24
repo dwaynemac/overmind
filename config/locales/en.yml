@@ -11,10 +11,12 @@ en:
   destroy: 'delete'
   monthly_stat:
     names:
+      website_contact: 'Website contact'
       dropout_rate: 'Dropout Rate'
       enrollment_rate: 'Enrollment Rate'
       enrollments: 'Enrollments'
       dropouts: 'Drop Outs'
+      dropouts_begginers: 'Begginer drop outs'
       students: 'Students'
       male_students: 'Male students'
       female_students: 'Female students'
