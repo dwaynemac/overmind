@@ -1,0 +1,13 @@
+.show-on-hover{
+  display: none;
+}
+
+.toggle-views {
+  text-align: center;
+}
+
+.toggle-views:hover{
+  .show-on-hover {
+    display: inline-block;
+  }
+}
