@@ -31,3 +31,8 @@ $(document).ready ->
     el.click()
 
   $('.best_in_place').tooltip()
+
+  $('.pictos.editable').click (e)->
+    e.preventDefault()
+    if $(this).siblings().length > 0
+      $(this).parent().siblings('span').first().click()
