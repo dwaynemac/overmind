@@ -32,11 +32,16 @@
           <% if monthly_stat.nil? %>
               <%= best_in_place monthly_stat,
                                 :value,
+                                :nil => "e",
+                                :classes => "pictos editable",
                                 :object_name => "monthly_stat",
                                 :type => :input,
                                 :path => "/schools/#{@school.id}/monthly_stats",
                                 :post => 'true',
                                 :data => {name: name,
+                                          toggle: "tooltip",
+                                          "original-title" => t('edit'),
+                                          placement: "top",
                                           refdate: "#{Date.civil(@year, month, 1)}",
                                           service: ""
                                 },

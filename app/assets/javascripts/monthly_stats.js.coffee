@@ -6,6 +6,7 @@ $(document).ready ->
   $("#current_year").click ->
     $(this).hide()
     $(this).siblings("form").show()
+  
   $('.best_in_place').on 'ajax:success', (event, data) ->
     $(this).attr("data-url", $(this).attr("data-url")+"/"+data.id)
     $(this).attr("data-method", "put")
@@ -28,3 +29,5 @@ $(document).ready ->
   .focus ->
     el = $(this)
     el.click()
+
+  $('.best_in_place').tooltip()
