@@ -10,6 +10,11 @@ en:
   delete: 'delete'
   destroy: 'delete'
   monthly_stat:
+    description:
+      demand: 'Unique people that made incoming communications'
+      emails: 'Incoming emails'
+      phonecalls: 'Incoming phonecalls'
+      website_contact: 'Incoming website contacts'
     names:
       in_professional_training: 'In professional training'
       website_contact: 'Website contact'

@@ -24,7 +24,16 @@
   <%- MonthlyStat::VALID_NAMES.reject{|n|n==:conversion_rate}.each do |name| -%>
     <% unless monthly_stats[name] == {} %>
       <tr>
-        <th><%= t("monthly_stat.names.#{name}") %></th>
+        <th>
+          <%= t("monthly_stat.names.#{name}") %>
+          <% if monthly_stat_description(name) -%>
+            <span style="position:relative; float: right; cursor: help"
+               class="pictos"
+               rel="popover"
+               data-title=""
+               data-content="<%= monthly_stat_description(name) %>">?</span>
+         <% end -%>
+      </th>
         <%- (1...13).each do |month| -%>
           <td>
             <% monthly_stat = monthly_stats[name][month] -%>
