@@ -49,7 +49,10 @@ class MonthlyStatsController < ApplicationController
 
   def destroy
     @monthly_stat.destroy
-    redirect_to @school
+    respond_to do |format|
+      format.html {redirect_to @school}
+      format.js {render :layout => false}
+    end
   end
 
   def sync
