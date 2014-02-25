@@ -5,10 +5,10 @@
 
 <%- model_class = @federation.class -%>
 <div class="page-header">
+  <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, federation_url(id: @federation.id, format: 'csv', year: @year), class: 'btn btn-default', id: 'download-link' %>
   <h1>
     <%= @federation.name %>
   </h1>
-  <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, federation_url(id: @federation.id, format: 'csv', year: @year), class: 'btn btn-default' %>
 </div>
 
 <div id="chartContainer" class="chart-container"></div>
