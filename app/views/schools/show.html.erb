@@ -17,6 +17,7 @@
     </div>
   </h2>
   <%= render :partial => 'sync_request_notification' %>
+  <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, school_url(id: @school.id, format: 'csv', year: @year), class: 'btn btn-default' %>
 </div>
 
 <div id="chartContainer" class="chart-container"></div>
