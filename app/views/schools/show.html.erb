@@ -30,7 +30,9 @@
               :class => 'btn btn-primary') if can?(:create,@school.monthly_stats.new) %>
 
   <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
-    <%= render "monthly_stats/chrono_table", monthly_stats: stats, hide_year_form: true, title: Teacher.find(teacher_id).try(:full_name) %>
+    <% unless stats.values.reject(&:empty?).empty? -%>
+      <%= render "monthly_stats/chrono_table", monthly_stats: stats, hide_year_form: true, title: Teacher.find(teacher_id).try(:full_name) %>
+    <% end -%>
   <% end %>
 </div>
 
