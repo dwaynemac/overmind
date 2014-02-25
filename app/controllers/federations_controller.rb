@@ -19,6 +19,13 @@ class FederationsController < ApplicationController
     @years = (2010..Date.today.year)
     @year = params[:year] || Date.today.year
     @monthly_stats = @federation.school_monthly_stats.for_year(@year).to_matrix
+    respond_to do |format|
+      format.html
+      format.csv do
+        response.headers['Content-Disposition'] = "attachment; filename='#{@federation.name}_#{@year}.csv'"
+        render 'show.csv.erb'
+      end
+    end
   end
 
   def new
