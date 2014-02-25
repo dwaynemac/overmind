@@ -1,6 +1,6 @@
 <% require 'csv' %>
 <%= CSV.generate do |csv|
-  csv << ['']+(1...13).map{|m| Date::MONTHNAMES[m]}
+  csv << [nil]+(1...13).map{|m| Date::MONTHNAMES[m]}
   MonthlyStat::VALID_NAMES.reject{|n|n==:conversion_rate}.each do |name|
     csv << [t("monthly_stat.names.#{name}")] + (1...13).map do |month|
       monthly_stat = @school_monthly_stats[name][month]
