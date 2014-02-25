@@ -22,8 +22,7 @@ class SchoolsController < ApplicationController
       raise ActiveRecord::RecordNotFound
     end
     authorize! :read, @school
-    show
-    render action: :show
+    redirect_to @school
   end
 
   def show
