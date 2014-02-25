@@ -10,6 +10,7 @@
       <%= submit_tag(t('see'), class: 'btn') %>
     <%- end -%>
   </h1>
+  <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, global_monthly_stats_url(format: 'csv', year: @year), class: 'btn btn-default' %>
 </div>
 
 <div id="chartContainer" class="chart-container"></div>

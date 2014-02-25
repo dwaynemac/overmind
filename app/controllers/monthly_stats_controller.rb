@@ -41,5 +41,12 @@ class MonthlyStatsController < ApplicationController
     @year = params[:year] || Time.zone.today.year
     stats = MonthlyStat.for_year(@year)
     @monthly_stats = Matrixer.new(stats).to_matrix
+    respond_to do |format|
+      format.html
+      format.csv do
+        response.headers['Content-Disposition'] = "attachment; filename='#{@year}_global.csv'"
+        render 'global.csv.erb'
+      end
+    end
   end
 end
