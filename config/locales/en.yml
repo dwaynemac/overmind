@@ -40,6 +40,8 @@ en:
       demand: 'Demans'
       emails: 'Emails'
       phonecalls: 'PhoneCalls'
+      conversion_rate: 'Convertion rate'
+      conversion_count: 'Converted'
   monthly_stats:
     chrono_table:
       evasion_calculation: 'Calculo de la evasion'
