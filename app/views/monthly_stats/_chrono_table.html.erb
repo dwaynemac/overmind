@@ -39,6 +39,9 @@
         <% tabindex = tabindex + 1 %>
         <td class="toggle-views">
           <% monthly_stat = monthly_stats[name][month] -%>
+          <% if @school.nil? -%>
+            <%= monthly_stat.try :value %>
+          <% else -%>
           <% if monthly_stat.nil? %>
               <%= best_in_place monthly_stat,
                                 :value,
@@ -97,6 +100,7 @@
               <%- end -%>
             </span>
           <%- end -%>
+        <% end -%>
         </td>
       <%- end -%>
     </tr>
