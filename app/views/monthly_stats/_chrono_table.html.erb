@@ -61,18 +61,22 @@
                                 :tabindex => tabindex
               %>
           <% else %>
-            <%= best_in_place monthly_stat,
-                              :value,
-                              :type => :input,
-                              :object_name => "monthly_stat",
-                              :path => "/schools/#{@school.id}/monthly_stats/#{monthly_stat.id}",
-                              :data => {
-                                          toggle: "tooltip",
-                                          "original-title" => t('edit'),
-                                          placement: "top"
-                                },
-                              :tabindex => tabindex
-            %>
+            <% if monthly_stat.service.blank? -%>
+              <%= best_in_place monthly_stat,
+                                :value,
+                                :type => :input,
+                                :object_name => "monthly_stat",
+                                :path => "/schools/#{@school.id}/monthly_stats/#{monthly_stat.id}",
+                                :data => {
+                                            toggle: "tooltip",
+                                            "original-title" => t('edit'),
+                                            placement: "top"
+                                  },
+                                :tabindex => tabindex
+              %>
+            <% else -%>
+              <%= monthly_stat.value %>
+            <% end -%>
           <% end %>
           <%- unless monthly_stat.nil? || monthly_stat.is_a?(ReducedStat) || @school.nil? -%>
             <span class="show-on-hover">
