@@ -43,8 +43,9 @@
           <% if @school.nil? -%>
             <%= monthly_stat.try :value %>
           <% else -%>
-            <% if monthly_stat.nil? && (ref_date.end_of_month < Date.today) %>
-              <%= best_in_place monthly_stat,
+            <% if monthly_stat.nil? %>
+              <% if ref_date.end_of_month < Date.today -%>
+                <%= best_in_place monthly_stat,
                                 :value,
                                 :nil => "e",
                                 :classes => "pictos editable",
@@ -59,8 +60,8 @@
                                           refdate: "#{ref_date}",
                                           service: ""
                                 },
-                                :tabindex => tabindex
-              %>
+                                :tabindex => tabindex %>
+              <% end -%>
           <% else %>
             <% if monthly_stat.service.blank? -%>
               <%= best_in_place monthly_stat,
