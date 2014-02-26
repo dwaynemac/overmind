@@ -105,7 +105,8 @@ module KshemaApi
           emails: "EmailsCount",
           phonecalls: "PhonecallsCount",
 
-          conversion_rate: "TelevisitToVisitRate"
+          conversion_rate: "TelevisitToVisitRate",
+          conversion_count: "TelevisitToVisitAbsolute"
       }
       transform_name[name.to_sym]
     end

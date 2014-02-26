@@ -36,7 +36,7 @@ class MonthlyStat < ActiveRecord::Base
                  :interviews, :p_interviews,
                  :emails, :phonecalls,
                  :website_contact,
-                 :conversion_rate
+                 :conversion_rate, :conversion_count
   ]
   RATES = [:dropout_rate, :enrollment_rate] # reduced values.
 

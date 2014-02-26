@@ -84,6 +84,36 @@ module PadmaStatsApi
           self.count_communications(ref_date, options.merge({filter: { media: 'website_contact'}}))
         when :conversion_rate
           self.get_conversion_rate(ref_date,options)
+        when :conversion_count
+          self.get_conversion_count(ref_date,options)
+      end
+    end
+
+    # @param ref_date [Date]
+    # @param options [Hash]
+    def get_conversion_count(ref_date, options={})
+      req_options = { app_key: ENV['crm_key'],
+                      year: ref_date.year,
+                      month: ref_date.month,
+                      absolute_value: true
+      }
+      if options[:by_teacher]
+        req_options.merge!({by_teacher: true})
+      end
+
+
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options, sslversion: :sslv3)
+
+      res = parse_response(response,!options[:by_teacher])
+      if res
+        if options[:by_teacher]
+          res.each do |h|
+            h['value'] = h['value'].to_i
+          end
+          res
+        else
+          res.to_i
+        end
       end
     end
 

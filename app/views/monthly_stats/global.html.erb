@@ -3,6 +3,7 @@
 <%- end -%>
 
 <div class="page-header">
+  <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, global_monthly_stats_url(format: 'csv', year: @year), class: 'btn btn-default', id: 'download-link' %>
   <h1>
     <span id="current_year" title="<%= t('schools.show.click_to_change') %>"><%= @year %></span>
     <%= form_tag nil, method: 'GET', class: 'form-inline', id: 'set-year', style: 'display: none'  do -%>

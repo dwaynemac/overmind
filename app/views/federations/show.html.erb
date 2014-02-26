@@ -5,17 +5,9 @@
 
 <%- model_class = @federation.class -%>
 <div class="page-header">
+  <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, federation_url(id: @federation.id, format: 'csv', year: @year), class: 'btn btn-default', id: 'download-link' %>
   <h1>
     <%= @federation.name %>
-    <%- if can?(:update, @federation) -%>
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                  edit_federation_path(@federation), :class => 'btn btn-mini' %>
-      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                  federation_path(@federation),
-                  :method => 'delete',
-                  :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                  :class => 'btn btn-danger btn-mini' %>
-    <%- end -%>
   </h1>
 </div>
 

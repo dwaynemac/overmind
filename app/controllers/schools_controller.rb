@@ -22,8 +22,7 @@ class SchoolsController < ApplicationController
       raise ActiveRecord::RecordNotFound
     end
     authorize! :read, @school
-    show
-    render action: :show
+    redirect_to @school
   end
 
   def show
@@ -35,6 +34,13 @@ class SchoolsController < ApplicationController
     @teachers_monthly_stats = {}
     @school.teachers.each do |teacher|
       @teachers_monthly_stats[teacher.id] = @school.teacher_monthly_stats.for_year(@year).where(teacher_id: teacher.id).to_matrix
+    end
+    respond_to do |format|
+      format.html
+      format.csv do
+        response.headers['Content-Disposition'] = "attachment; filename='#{@school.account_name}_#{@year}.csv'"
+        render 'show.csv.erb'
+      end
     end
   end
 
