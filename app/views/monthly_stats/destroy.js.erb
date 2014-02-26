@@ -1,0 +1,6 @@
+var parent_node = $("#monthly-stat-<%= @monthly_stat.id %>").parents('td')[0]
+while(parent_node.firstChild){
+  parent_node.removeChild(parent_node.firstChild)
+}
+
+parent_node.innerHTML = '<span class="best_in_place pictos editable" data-url="/schools/<%= @monthly_stat.school_id %>/monthly_stats" data-object="monthly_stat" data-attribute="value" data-nil="e" data-type="input" data-method="post" data-name="<%= @monthly_stat.name %>" data-toggle="tooltip" data-original-title="editar" data-placement="top" data-refdate="<%= @monthly_stat.ref_date %>" data-service="">e</span>'
