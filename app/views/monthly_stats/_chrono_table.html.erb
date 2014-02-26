@@ -36,13 +36,14 @@
         <% end -%>
       </th>
       <%- (1...13).each do |month| -%>
+        <% ref_date = Date.civil(@year,month,1) -%>
         <% tabindex = tabindex + 1 %>
         <td class="toggle-views">
           <% monthly_stat = monthly_stats[name][month] -%>
           <% if @school.nil? -%>
             <%= monthly_stat.try :value %>
           <% else -%>
-          <% if monthly_stat.nil? %>
+            <% if monthly_stat.nil? && (ref_date.end_of_month < Date.today) %>
               <%= best_in_place monthly_stat,
                                 :value,
                                 :nil => "e",
@@ -55,7 +56,7 @@
                                           toggle: "tooltip",
                                           "original-title" => t('edit'),
                                           placement: "top",
-                                          refdate: "#{Date.civil(@year, month, 1)}",
+                                          refdate: "#{ref_date}",
                                           service: ""
                                 },
                                 :tabindex => tabindex
