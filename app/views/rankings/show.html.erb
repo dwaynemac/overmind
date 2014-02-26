@@ -13,7 +13,7 @@
       <tr>
         <th> <%= school.name %> </th>
         <% @column_names.each do |name| %>
-          <th> <%= stats_hash[name] %></th>
+          <th> <%= stats_hash[name.to_s].value if not stats_hash[name.to_s].nil?%></th>
         <% end %>
       </tr>
     <% end %>
