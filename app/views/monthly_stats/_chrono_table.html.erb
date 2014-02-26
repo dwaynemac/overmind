@@ -36,7 +36,7 @@
         <% end -%>
       </th>
       <%- (1...13).each do |month| -%>
-        <% ref_date = Date.civil(@year,month,1) -%>
+        <% ref_date = Date.civil(@year.to_i,month,1) -%>
         <% tabindex = tabindex + 1 %>
         <td class="toggle-views">
           <% monthly_stat = monthly_stats[name][month] -%>
