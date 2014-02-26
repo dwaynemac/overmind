@@ -34,7 +34,7 @@ class Ability
         accessible_account_names = user.user.padma_accounts.map(&:name)
         can [:read, :sync, :sync_year], School, account_name: accessible_account_names
         can :create, SyncRequest
-        can [:read, :see_global, :sync, :create], MonthlyStat, school: {account_name: accessible_account_names }
+        can [:read, :sync, :create], MonthlyStat, school: {account_name: accessible_account_names }
         can [:update, :destroy], MonthlyStat, service: '', school: {account_name: accessible_account_names }
       when 'council'
         can :read, Federation
