@@ -1,5 +1,11 @@
 module ApplicationHelper
 
+
+  # Adds given files to end of body tag
+  def javascript(*files)
+    content_for(:body_end) { javascript_include_tag(*files) }
+  end
+
   def li(controller,current_controller)
     opts = {}
     opts = opts.merge(class: 'active') if controller == current_controller

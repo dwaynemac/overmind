@@ -44,7 +44,8 @@
       <!-- Javascripts
       ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
-      <%= javascript_include_tag "application" %>
+      <%# each controller includes application.js and it's own  -%>
+      <%= javascript_include_tag "application", controller_name %>
       <%# TODO use js I18n, see CRM -%>
       <div style="display: none;">
         <!-- i18n -->
@@ -55,5 +56,6 @@
         ></span>
       </div>
     </div>
+    <%= yield(:body_end) %>
   </body>
 </html>
