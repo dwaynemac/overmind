@@ -1,4 +1,7 @@
 class RankingsController < ApplicationController
+  
+  DEFAULT_COLUMN_NAMES = [:students, :enrollments, :dropouts, :demand, :interviews] 
+
   def show
 
     date = params[:date] || Date.today.end_of_month
@@ -9,7 +12,7 @@ class RankingsController < ApplicationController
     end
     
     if params[:column_names].nil?
-      @column_names = MonthlyStat::VALID_NAMES
+      @column_names = DEFAULT_COLUMN_NAMES
     else
       @column_names = params[:column_names]
       scope = scope.where(name: params[:column_names])
@@ -24,4 +27,5 @@ class RankingsController < ApplicationController
       end
     end
   end
+
 end
