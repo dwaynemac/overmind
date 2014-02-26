@@ -82,3 +82,6 @@ en:
     index:
       teachers: "Teachers"
   warning: "Warning!"
+  ranking:
+    title: "Ranking"
+    name: "Name"

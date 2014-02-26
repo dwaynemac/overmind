@@ -314,3 +314,6 @@ es:
       new: "Nueva federación"
       teachers: "Instructores"
   warning: "¡Atención!"
+  ranking:
+    title: "Ranking"
+    name: "Nombre"
