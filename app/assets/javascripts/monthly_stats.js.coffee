@@ -1,8 +1,14 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+# //= require amcharts
+# //= require charts/summary
+# //= require charts/monitoreados
+#
 $(document).ready ->
   $("#current_year").tooltip({placement: 'right'})
   $("#current_year").click ->
     $(this).hide()
     $(this).siblings("form").show()
+
+  $('.pictos.editable').click (e)->
+    e.preventDefault()
+    if $(this).siblings().length > 0
+      $(this).parent().siblings('span').first().click()

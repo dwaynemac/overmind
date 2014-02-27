@@ -32,10 +32,9 @@ class Ability
       when 'data_entry'
         # user.user explained: first user is local user, second user ir padma_user
         accessible_account_names = user.user.padma_accounts.map(&:name)
-        can [:read, :sync, :sync_year], School, account_name: accessible_account_names
-        can :create, SyncRequest
-        can [:read, :see_global, :sync, :create], MonthlyStat, school: {account_name: accessible_account_names }
-        can [:update, :destroy], MonthlyStat, service: '', school: {account_name: accessible_account_names }
+        can [:read], School, account_name: accessible_account_names
+        can :read, MonthlyStat, school: { account_name: accessible_account_names }
+        can [:create, :update, :destroy], MonthlyStat, service: '', school: {account_name: accessible_account_names }
       when 'council'
         can :read, Federation
         can :read, School
@@ -46,14 +45,15 @@ class Ability
         can :read, Federation, id: user.federation_id
         can :read, School, federation_id: user.federation_id
         can :read, MonthlyStat, school: { federation_id: user.federation_id }
-      else
-        if user.padma_enabled?
-          can [:sync,:sync_year,:read,:see_detail], School, account_name: user.enabled_accounts.map(&:name)
-          if School.accessible_by(self).count == 1
-            can :read_only_one, School
-          end
-          can [:sync,:read], MonthlyStat, school: {account_name: user.enabled_accounts.map(&:name) }
-        end
+    end
+
+    if user.padma_enabled?
+      # Users have these permitions on top of those specific to their role.
+      can [:sync,:sync_year,:read,:see_detail], School, account_name: user.enabled_accounts.map(&:name)
+      if School.accessible_by(self).count == 1
+        can :read_only_one, School
+      end
+      can :manage, MonthlyStat, school: {account_name: user.enabled_accounts.map(&:name) }
     end
   end
 end

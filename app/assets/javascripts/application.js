@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery.tablesorter
-//= require rankings
-//= require_tree .
+//= require bootstrap
+//= require best_in_place
+//= require best_in_place.purr
