@@ -52,7 +52,7 @@ class Ability
           if School.accessible_by(self).count == 1
             can :read_only_one, School
           end
-          can [:sync,:read], MonthlyStat, school: {account_name: user.enabled_accounts.map(&:name) }
+          can :manage, MonthlyStat, school: {account_name: user.enabled_accounts.map(&:name) }
         end
     end
   end
