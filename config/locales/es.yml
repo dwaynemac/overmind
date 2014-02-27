@@ -1,40 +1,44 @@
 # encoding: utf-8
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 es:
   see: "ver"
   edit: "editar"
   delete: 'eliminar'
   destroy: 'eliminar'
   search: 'buscar'
+  warning: "¡Atención!"
   monthly_stat:
+    description:
+      demand: 'Cantidad de personas que se contactaron con la escuela.'
+      emails: 'Emails entrantes'
+      phonecalls: 'Llamadas entrantes'
+      website_contact: 'Contactos via website entrantes'
     names:
+      aspirante_students: "Alumnos iniciantes"
+      assistant_students: 'Monitoreados Asistentes'
+      chela_students: "Chêlas"
+      conversion_count: 'Conversiones (#)'
+      conversion_rate: "Conversion (%)"
+      demand: 'Procura'
       dropout_rate: '% Evasión'
-      enrollment_rate: '% Efectividad'
-      enrollments: 'Matrículas'
       dropouts: 'Bajas'
       dropouts_begginers: 'Bajas Iniciantes'
       dropouts_intermediates: 'Bajas Intermedios'
-      students: 'Alumnos'
-      male_students: 'Alumnos hombres'
-      female_students: 'Alumnas mujeres'
-      aspirante_students: "Alumnos iniciantes"
-      sadhaka_students: "Sádhakas"
-      yogin_students: "Yôgins"
-      chela_students: "Chêlas"
-      graduado_students: "Alumnos Graduados"
-      assistant_students: 'Monitoreados Asistentes'
-      professor_students: 'Monitoreados Docentes'
-      master_students:    'Monitoreados Maestros'
-      interviews: 'Visitas'
-      p_interviews: 'Visitas perfil'
-      demand: 'Procura'
       emails: 'Emails'
-      phonecalls: 'Llamadas'
-      swasthya_students_subtotal: "SubTotal Alumnos en SwáSthya"
-      conversion_rate: "Conversion"
+      enrollment_rate: '% Efectividad'
+      enrollments: 'Matrículas'
+      female_students: 'Alumnas mujeres'
+      graduado_students: "Alumnos Graduados"
       in_professional_training: "En formación"
+      interviews: 'Visitas'
+      male_students: 'Alumnos hombres'
+      master_students:    'Monitoreados Maestros'
+      p_interviews: 'Visitas perfil'
+      phonecalls: 'Llamadas'
+      professor_students: 'Monitoreados Docentes'
+      sadhaka_students: "Sádhakas"
+      students: 'Alumnos'
+      swasthya_students_subtotal: "SubTotal Alumnos en SwáSthya"
+      yogin_students: "Yôgins"
   views:
     pagination:
       first: 'Primera'
@@ -46,14 +50,14 @@ es:
       month: "%b %Y"
   schools:
     index:
+      actions: 'Acciones'
       last_registered_stat: "Esta column muestra el último registro de cada escuela"
+      new: "Nueva escuela"
       not_syncing: "Sin sincronización configurada"
       students: 'Alumnos'
-      actions: 'Acciones'
-      title: "Escuelas"
-      new: "Nueva escuela"
-      teachers: "Instructores"
       synced_at: "Última sincronización"
+      teachers: "Instructores"
+      title: "Escuelas"
     show:
       sync_last_months: "Sincronizar últimos meses"
       sync_year_data: "Solicitar sincronización de datos del %{year}"
@@ -313,4 +317,3 @@ es:
       actions: "Acciones"
       new: "Nueva federación"
       teachers: "Instructores"
-  warning: "¡Atención!"
