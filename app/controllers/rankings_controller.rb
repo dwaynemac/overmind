@@ -4,6 +4,8 @@ class RankingsController < ApplicationController
 
   def show
 
+    authorize! :read, :rankings
+
     date = params[:date] || Date.today.end_of_month
     scope = SchoolMonthlyStat.select([:name, :value, :school_id]).includes(:school).where(ref_date: date)
     

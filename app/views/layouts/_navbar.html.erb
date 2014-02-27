@@ -70,6 +70,12 @@
           <%= link_to t('.users'), users_path %>
         </li>
       <% end -%>
+
+      <% if can?(:read, :rankings) -%>
+        <li class="<%= 'active' if controller_name == 'rankings' %>">
+          <%= link_to t('.ranking'), ranking_path %>
+        </li>
+      <% end -%>
     </ul>
     <form class="navbar-form navbar-right navbar-input-group" role="search" action="<%= schools_path %>" id="navbar-search" method="get">
       <div class="form-group">
