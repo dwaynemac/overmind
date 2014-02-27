@@ -6,7 +6,7 @@ class RankingsController < ApplicationController
 
     authorize! :read, :rankings
 
-    date = params[:date] || Date.today.end_of_month
+    date = params[:date] || 1.month.ago.end_of_month.to_date
     scope = SchoolMonthlyStat.select([:name, :value, :school_id]).includes(:school).where(ref_date: date)
     
     unless params[:filters].nil?
