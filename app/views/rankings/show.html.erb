@@ -1,4 +1,32 @@
 <h2><%= t('ranking.title') %></h2>
+
+<%= form_tag("/ranking", method: :get) do %>
+  <%= label_tag 'federations_check_boxes', t('ranking.federations') %>
+  <% @federations.each do |fed| %>
+    <label class="checkbox">
+      <%= check_box_tag "filters[federation_id][]", fed.id, true %> <%= fed.name %>
+    </label>
+  <% end %>
+
+  <%= label_tag 'column_names_check_boxes', t('ranking.columns') %>
+  <% MonthlyStat::VALID_NAMES.each do |name| %>
+    <label class="checkbox-inline">
+      <% if !@column_names.find_index(name.to_s).nil?%>
+        <%= check_box_tag "column_names[]", name, true %> <%= t(name) %>
+      <% else %>
+        <%= check_box_tag "column_names[]", name, false %> <%= t(name) %>
+      <% end %>
+    </label>
+  <% end %>
+  
+  <%= label_tag 'date_field_tag', t('ranking.date') %>
+  <%= month_field_tag "date"%>
+
+  
+  
+  <button type="submit" class="btn btn-default">Submit</button> 
+<% end %>
+
 <table id="ranking_table" class="table table-striped table-bordered table-condensed tablesorter-blue">
   <thead>
     <tr>

@@ -21,6 +21,7 @@ class RankingsController < ApplicationController
     end
     
     @matrix = RankingMatrix.new(scope).matrix
+    @federations = Federation.all
     
     respond_to do |format|
       format.html
