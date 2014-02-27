@@ -1,6 +1,7 @@
 $(document).ready ->
   $('td').on 'ajax:success','.best_in_place', (event, data) ->
     $(this).removeClass("editable")
+    $(this).closest('td').effect('highlight')
     $(this).attr("data-url", $(this).attr("data-url")+"/"+data.id)
     $(this).attr("data-method", "put")
   
