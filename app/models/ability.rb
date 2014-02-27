@@ -46,14 +46,15 @@ class Ability
         can :read, Federation, id: user.federation_id
         can :read, School, federation_id: user.federation_id
         can :read, MonthlyStat, school: { federation_id: user.federation_id }
-      else
-        if user.padma_enabled?
-          can [:sync,:sync_year,:read,:see_detail], School, account_name: user.enabled_accounts.map(&:name)
-          if School.accessible_by(self).count == 1
-            can :read_only_one, School
-          end
-          can :manage, MonthlyStat, school: {account_name: user.enabled_accounts.map(&:name) }
-        end
+    end
+
+    if user.padma_enabled?
+      # Users have these permitions on top of those specific to their role.
+      can [:sync,:sync_year,:read,:see_detail], School, account_name: user.enabled_accounts.map(&:name)
+      if School.accessible_by(self).count == 1
+        can :read_only_one, School
+      end
+      can :manage, MonthlyStat, school: {account_name: user.enabled_accounts.map(&:name) }
     end
   end
 end
