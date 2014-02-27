@@ -11,7 +11,7 @@
   <tbody>
     <% @matrix.each do |school, stats_hash| %> 
       <tr>
-        <th> <%= school.name %> </th>
+        <th> <%= link_to_if can?(:read, school), school.name, school %> </th>
         <% @column_names.each do |name| %>
           <th> <%= stats_hash[name.to_s].value if not stats_hash[name.to_s].nil?%></th>
         <% end %>
