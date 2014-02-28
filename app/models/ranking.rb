@@ -15,26 +15,10 @@ class Ranking
   def initialize(attributes)
     attributes = {} if attributes.nil?
   
-    @date = attributes.fetch( :date , nil)
-    if attributes[:date]
-      @date = attributes[:date]
-    else
-      if attributes["date(1i)"] && attributes["date(2i)"]
-        @date = Date.new(attributes["date(1i)"].to_i, attributes["date(2i)"].to_i, 1)
-      else
-        @date = 1.month.ago.end_of_month.to_date
-      end
-    end
-
-    @federation_ids = attributes.fetch(:federation_ids , Federation.pluck(:id))
-    if @federation_ids.first.is_a?(String)
-      @federation_ids = @federation_ids.map(&:to_i)
-    end
-
-    @column_names = attributes.fetch( :column_names , DEFAULT_COLUMN_NAMES)
-    if @column_names.first.is_a?(String)
-      @column_names = @column_names.map(&:to_sym)
-    end
+    set_date(attributes)
+    set_federation_ids(attributes)
+    set_column_names(attributes)
+    
   end
 
   def matrix
@@ -60,5 +44,34 @@ class Ranking
 
   def persisted?
     false
+  end
+
+  private
+
+  def set_date(attributes)
+    @date = attributes.fetch( :date , nil)
+    if attributes[:date]
+      @date = attributes[:date]
+    else
+      if attributes["date(1i)"] && attributes["date(2i)"]
+        @date = Date.new(attributes["date(1i)"].to_i, attributes["date(2i)"].to_i, 1)
+      else
+        @date = 1.month.ago.end_of_month.to_date
+      end
+    end
+  end
+
+  def set_federation_ids(attributes)
+    @federation_ids = attributes.fetch(:federation_ids , Federation.pluck(:id))
+    if @federation_ids.first.is_a?(String)
+      @federation_ids = @federation_ids.map(&:to_i)
+    end
+  end
+
+  def set_column_names(attributes)
+    @column_names = attributes.fetch( :column_names , DEFAULT_COLUMN_NAMES)
+    if @column_names.first.is_a?(String)
+      @column_names = @column_names.map(&:to_sym)
+    end
   end
 end
