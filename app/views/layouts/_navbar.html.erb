@@ -71,7 +71,7 @@
         </li>
       <% end -%>
 
-      <% if can?(:read, :rankings) -%>
+      <% if can?(:read, Ranking) -%>
         <li class="<%= 'active' if controller_name == 'rankings' %>">
           <%= link_to t('.ranking'), ranking_path %>
         </li>

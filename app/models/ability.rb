@@ -21,12 +21,12 @@ class Ability
     cannot :manage, :all
     cannot :sync, School
     cannot :see_global, MonthlyStat
-    cannot :read, :rankings
+    cannot :read, Ranking
 
     case user.role
       when 'admin'
         can :manage, :all
-        can :read, :rankings
+        can :read, Ranking
         can :sync, School
         can :create, SyncRequest
         can :see_global, MonthlyStat
@@ -42,13 +42,13 @@ class Ability
         can :read, School
         can :read, MonthlyStat
         can :see_global, MonthlyStat
-        can :read, :rankings
+        can :read, Ranking
       when 'president'
         can :read_only_one, Federation
         can :read, Federation, id: user.federation_id
         can :read, School, federation_id: user.federation_id
         can :read, MonthlyStat, school: { federation_id: user.federation_id }
-        can :read, :rankings
+        can :read, Ranking
     end
 
     if user.padma_enabled?

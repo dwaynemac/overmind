@@ -15,7 +15,7 @@
     <div class="form-group">
       <% row_of_names.each do |name| %>
       <label class="checkbox-inline col-sm-offset-1">
-        <% if !@column_names.find_index(name.to_s).nil?%>
+        <% if !@ranking.column_names.find_index(name.to_s).nil?%>
           <%= check_box_tag "column_names[]", name, true %> <%= t("monthly_stat.names.#{name}") %>
         <% else %>
           <%= check_box_tag "column_names[]", name, false %> <%= t("monthly_stat.names.#{name}") %>
@@ -27,11 +27,11 @@
   
   <%= label_tag 'date_field_tag', t('ranking.date'), {class: 'control-label'} %>
     <div class="form-group">
-      <%= select_month  @date, {}, {class: 'col-sm-offset-1 form-control'}
+      <%= select_month  @ranking.date, {}, {class: 'col-sm-offset-1 form-control'}
       %>
     </div> 
     <div class="form-group">
-      <%= select_year  @date, {}, {class: 'col-sm-offset-1 form-control'}
+      <%= select_year  @ranking.date, {}, {class: 'col-sm-offset-1 form-control'}
       %>
     </div> 
   
@@ -44,21 +44,19 @@
   <thead>
     <tr>
       <th> <%= t('ranking.name') %> </th>
-      <% @column_names.each do |name| %>
+      <% @ranking.column_names.each do |name| %>
         <th> <%= t("monthly_stat.names.#{name}") %> </th>
       <% end %>
     </tr>
   </thead>
   <tbody>
-    <% @matrix.each do |school, stats_hash| %> 
+    <% @ranking.matrix.each do |school, stats_hash| %> 
       <tr>
         <th> <%= link_to_if can?(:read, school), school.name, school %> </th>
-        <% @column_names.each do |name| %>
+        <% @ranking.column_names.each do |name| %>
           <th> <%= stats_hash[name.to_s].value if not stats_hash[name.to_s].nil?%></th>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-

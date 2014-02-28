@@ -1,31 +1,12 @@
 class RankingsController < ApplicationController
-  
-  DEFAULT_COLUMN_NAMES = ['students', 'enrollments', 'dropouts', 'demand', 'interviews'] 
 
   def show
+    @ranking = Ranking.new(params[:ranking])
+    authorize! :read, @ranking
 
-    authorize! :read, :rankings
-    if params[:date].nil?
-      @date = 1.month.ago.end_of_month.to_date
-    else
-      @date = Date.new(params[:date][:year].to_i, params[:date][:month].to_i, 1).end_of_month.to_date
-    end
-    scope = SchoolMonthlyStat.select([:name, :value, :school_id]).includes(:school).where(ref_date: @date)
-    @missing_schools = School.select([:name]).where("id NOT IN ('#{scope.map(&:school_id).join("','")}')")
+    @matrix = @ranking.matrix
 
-
-    unless params[:filters].nil?
-      scope = scope.where(schools: params[:filters]) 
-    end
-    
-    if params[:column_names].nil?
-      @column_names = DEFAULT_COLUMN_NAMES
-    else
-      @column_names = params[:column_names]
-      scope = scope.where(name: params[:column_names])
-    end
-    
-    @matrix = RankingMatrix.new(scope).matrix
+    @missing_schools = School.select([:name]).where("id NOT IN ('#{@ranking.school_ids.join("','")}')")
     @federations = Federation.all
     
     respond_to do |format|
