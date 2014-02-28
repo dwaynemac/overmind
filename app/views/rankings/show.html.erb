@@ -2,7 +2,7 @@
 
 <%= form_for @ranking, url: ranking_path, method: :put, class: "form-horizontal" do |f| %>
   <%= t('ranking.date') %>
-  <div class="form-group">
+  <div class="form-group form-inline">
     <%= f.date_select :date, {discard_day: true}, { class: 'form-control' } %>
   </div> 
 
