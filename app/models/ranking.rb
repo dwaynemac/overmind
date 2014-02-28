@@ -39,9 +39,6 @@ class Ranking
     @school_ids ||= stats.map(&:school_id)
   end
 
-  # ================
-  #
-
   def persisted?
     false
   end
