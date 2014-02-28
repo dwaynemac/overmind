@@ -14,7 +14,7 @@ class Ranking
   def initialize(attributes)
     attributes = {} if attributes.nil?
     @date = attributes.fetch( :date , nil)
-    @federation_ids = attributes.fetch( :federation_ids , nil)
+    @federation_ids = attributes.fetch( :federation_ids , Federation.pluck(:id))
     @column_names = attributes.fetch( :column_names , DEFAULT_COLUMN_NAMES)
   end
 
