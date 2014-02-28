@@ -58,17 +58,18 @@
   </tbody>
 </table>
 
-
-<p class="text-danger">
-  <span>
-    <%= t('ranking.missing_schools') %>
-  </span>
-</p>
-<% @missing_schools.each_slice(10) do |row_of_missing_schools| %>
-  <ul class="list-inline">
-    <% row_of_missing_schools.each do |school|%>
-      <li> <p class="col-sm-offset-1"> <%= school.name %> </p> </li>
-    <% end %>
-  </ul>
-<% end %>
+<div class="panel panel-danger">
+  <div class="panel-heading"><%= t('ranking.missing_schools') %></div>
+  <div class="panel-body">
+    <table class="table table-striped table-bordered table-condensed">
+      <% @missing_schools.each_slice(3) do |schools_row| %>
+        <tr>
+          <% schools_row.each do |school| -%>
+            <td><%= link_to_if can?(:read, school), school.name, school %></td>
+          <% end -%>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
 
