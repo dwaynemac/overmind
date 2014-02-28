@@ -10,11 +10,15 @@ class RankingsController < ApplicationController
     @federations = Federation.all
     
     respond_to do |format|
-      format.html
+      format.html { render action: :show }
       format.json do
         render json: @matrix
       end
     end
+  end
+
+  def update
+    show
   end
 
 end

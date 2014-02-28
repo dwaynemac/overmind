@@ -1,45 +1,42 @@
 <h2><%= t('ranking.title') %></h2>
 
-<%= form_tag("/ranking", {method: :get, class: 'form-horizontal'})  do %>
-    <%= label_tag 'federations_checkboxes', t('ranking.federations'), {class: 'control-label' } %>
+<%= form_for @ranking, url: ranking_path, method: :put, class: "form-horizontal" do |f| %>
+  Date
     <div class="form-group">
-      <% @federations.each do |fed| %>
-        <label class="checkbox-inline col-sm-offset-1">
-          <%= check_box_tag "filters[federation_id][]", fed.id, true %> <%= fed.name %>
-        </label>
-    <% end %>
-  </div>
+      <%= select_month @ranking.date, {}, {class: 'col-sm-offset-1 form-control'}
+      %>
+    </div> 
+    <div class="form-group">
+      <%= select_year @ranking.date, {}, {class: 'col-sm-offset-1 form-control'}
+      %>
+    </div> 
+  
 
-  <%= label_tag 'column_names_check_boxes', t('ranking.columns') %>
-  <% MonthlyStat::VALID_NAMES.each_slice(5).to_a.each do |row_of_names| %>
+  Federations
+  <% @federations.each_slice(4).to_a.each do |feds_row| -%>
     <div class="form-group">
-      <% row_of_names.each do |name| %>
-      <label class="checkbox-inline col-sm-offset-1">
-        <% if !@ranking.column_names.find_index(name.to_s).nil?%>
-          <%= check_box_tag "column_names[]", name, true %> <%= t("monthly_stat.names.#{name}") %>
-        <% else %>
-          <%= check_box_tag "column_names[]", name, false %> <%= t("monthly_stat.names.#{name}") %>
-        <% end %>
-      </label>
-      <% end %>
+      <% feds_row.each do |fed| -%>
+        <label class="checkbox-inline col-sm-offset-1">
+          <%= f.check_box 'federation_ids', {multiple: true, checked: true}, fed.id, false %> <%= fed.name %>
+        </label>
+      <% end -%>
     </div>
-  <% end %>
-  
-  <%= label_tag 'date_field_tag', t('ranking.date'), {class: 'control-label'} %>
+  <% end -%>
+
+  Columns
+  <% Ranking::VALID_COLUMNS.each_slice(4).to_a.each do |row_of_names| -%>
     <div class="form-group">
-      <%= select_month  @ranking.date, {}, {class: 'col-sm-offset-1 form-control'}
-      %>
-    </div> 
-    <div class="form-group">
-      <%= select_year  @ranking.date, {}, {class: 'col-sm-offset-1 form-control'}
-      %>
-    </div> 
-  
+      <% row_of_names.each do |name|-%>
+        <label class="checkbox-inline col-sm-offset-1">
+          <%= f.check_box :column_names, {multiple: true, checked: true}, name, false %> <%= t("monthly_stat.names.#{name}") %>
+        </label>
+      <% end -%>
+    </div>
+  <% end -%>
     <div class="form-group">
       <button type="submit" class="btn btn-primary col-sm-offset-0"><%= t('submit') %></button> 
     </div>
-<% end %>
-
+<% end -%>
 <table id="ranking_table" class="table table-striped table-bordered table-condensed tablesorter-blue">
   <thead>
     <tr>

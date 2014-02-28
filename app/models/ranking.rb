@@ -1,13 +1,20 @@
 class Ranking
 
-  DEFAULT_COLUMN_NAMES = ['students', 'enrollments', 'dropouts', 'demand', 'interviews'] 
+  extend  ActiveModel::Naming
+  extend  ActiveModel::Translation
+  include ActiveModel::Validations
+  include ActiveModel::Conversion
 
-  attr_accessor :filters, :column_names
+  DEFAULT_COLUMN_NAMES = ['students', 'enrollments', 'dropouts', 'demand', 'interviews'] 
+  VALID_COLUMNS = MonthlyStat::VALID_NAMES
+
+  attr_accessor :federation_ids,
+                :column_names
 
   def initialize(attributes)
     attributes = {} if attributes.nil?
     @date = attributes.fetch( :date , nil)
-    @filters = attributes.fetch( :filters , nil)
+    @federation_ids = attributes.fetch( :federation_ids , nil)
     @column_names = attributes.fetch( :column_names , DEFAULT_COLUMN_NAMES)
   end
 
@@ -19,7 +26,7 @@ class Ranking
     unless @stats
       scope = SchoolMonthlyStat.select([:name, :value, :school_id]).includes(:school).where(ref_date: date)
       scope = scope.where(name: @column_names)
-      scope = scope.where(schools: @filters) unless @filters.nil?
+      scope = scope.where(schools: { federation_id: @federation_ids}) unless @federation_ids.nil?
       @stats = scope
     end
     @stats
@@ -35,5 +42,12 @@ class Ranking
     else
       Date.new(@date[:year].to_i, @date[:month].to_i, 1).end_of_month
     end
+  end
+
+  # ================
+  #
+
+  def persisted?
+    false
   end
 end
