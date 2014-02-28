@@ -17,7 +17,7 @@
     <div class="form-group">
       <% feds_row.each do |fed| -%>
         <label class="checkbox-inline col-sm-offset-1">
-          <%= f.check_box 'federation_ids', {multiple: true, checked: true}, fed.id, false %> <%= fed.name %>
+          <%= f.check_box 'federation_ids', {multiple: true, checked: federation_selected?(fed.id,@ranking)}, fed.id, false %> <%= fed.name %>
         </label>
       <% end -%>
     </div>
