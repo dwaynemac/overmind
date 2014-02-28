@@ -5,7 +5,7 @@ class Ranking
   include ActiveModel::Validations
   include ActiveModel::Conversion
 
-  DEFAULT_COLUMN_NAMES = ['students', 'enrollments', 'dropouts', 'demand', 'interviews'] 
+  DEFAULT_COLUMN_NAMES = [:students, :enrollments, :dropouts, :demand, :interviews] 
   VALID_COLUMNS = MonthlyStat::VALID_NAMES
 
   attr_accessor :federation_ids,
@@ -21,6 +21,9 @@ class Ranking
     end
 
     @column_names = attributes.fetch( :column_names , DEFAULT_COLUMN_NAMES)
+    if @column_names.first.is_a?(String)
+      @column_names = @column_names.map(&:to_sym)
+    end
   end
 
   def matrix

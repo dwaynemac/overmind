@@ -28,7 +28,7 @@
     <div class="form-group">
       <% row_of_names.each do |name|-%>
         <label class="checkbox-inline col-sm-offset-1">
-          <%= f.check_box :column_names, {multiple: true, checked: true}, name, false %> <%= t("monthly_stat.names.#{name}") %>
+          <%= f.check_box :column_names, {multiple: true, checked: column_name_selected?(name,@ranking)}, name, false %> <%= t("monthly_stat.names.#{name}") %>
         </label>
       <% end -%>
     </div>
