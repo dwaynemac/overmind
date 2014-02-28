@@ -5,14 +5,15 @@ class RankingsController < ApplicationController
   def show
 
     authorize! :read, :rankings
-
     if params[:date].nil?
       @date = 1.month.ago.end_of_month.to_date
     else
       @date = Date.new(params[:date][:year].to_i, params[:date][:month].to_i, 1).end_of_month.to_date
     end
     scope = SchoolMonthlyStat.select([:name, :value, :school_id]).includes(:school).where(ref_date: @date)
-    
+    @missing_schools = School.select([:name]).where("id NOT IN ('#{scope.map(&:school_id).join("','")}')")
+
+
     unless params[:filters].nil?
       scope = scope.where(schools: params[:filters]) 
     end
