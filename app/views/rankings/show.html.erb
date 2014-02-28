@@ -2,15 +2,9 @@
 
 <%= form_for @ranking, url: ranking_path, method: :put, class: "form-horizontal" do |f| %>
   <%= t('ranking.date') %>
-    <div class="form-group">
-      <%= select_month @ranking.date, {}, {class: 'col-sm-offset-1 form-control'}
-      %>
-    </div> 
-    <div class="form-group">
-      <%= select_year @ranking.date, {}, {class: 'col-sm-offset-1 form-control'}
-      %>
-    </div> 
-  
+  <div class="form-group">
+    <%= f.date_select :date, {discard_day: true}, { class: 'form-control' } %>
+  </div> 
 
   <%= t('ranking.federations') %>
   <% @federations.each_slice(4).to_a.each do |feds_row| -%>

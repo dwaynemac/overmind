@@ -9,11 +9,22 @@ class Ranking
   VALID_COLUMNS = MonthlyStat::VALID_NAMES
 
   attr_accessor :federation_ids,
-                :column_names
+                :column_names,
+                :date
 
   def initialize(attributes)
     attributes = {} if attributes.nil?
+  
     @date = attributes.fetch( :date , nil)
+    if attributes[:date]
+      @date = attributes[:date]
+    else
+      if attributes["date(1i)"] && attributes["date(2i)"]
+        @date = Date.new(attributes["date(1i)"].to_i, attributes["date(2i)"].to_i, 1)
+      else
+        @date = 1.month.ago.end_of_month.to_date
+      end
+    end
 
     @federation_ids = attributes.fetch(:federation_ids , Federation.pluck(:id))
     if @federation_ids.first.is_a?(String)
@@ -42,14 +53,6 @@ class Ranking
 
   def school_ids
     @school_ids ||= stats.map(&:school_id)
-  end
-
-  def date
-    if @date.nil?
-      1.month.ago.end_of_month.to_date
-    else
-      Date.new(@date[:year].to_i, @date[:month].to_i, 1).end_of_month
-    end
   end
 
   # ================
