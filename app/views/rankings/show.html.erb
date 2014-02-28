@@ -16,9 +16,9 @@
       <% row_of_names.each do |name| %>
       <label class="checkbox-inline col-sm-offset-1">
         <% if !@column_names.find_index(name.to_s).nil?%>
-          <%= check_box_tag "column_names[]", name, true %> <%= t(name) %>
+          <%= check_box_tag "column_names[]", name, true %> <%= t("monthly_stat.names.#{name}") %>
         <% else %>
-          <%= check_box_tag "column_names[]", name, false %> <%= t(name) %>
+          <%= check_box_tag "column_names[]", name, false %> <%= t("monthly_stat.names.#{name}") %>
         <% end %>
       </label>
       <% end %>
@@ -36,7 +36,7 @@
     </div> 
   
     <div class="form-group">
-      <button type="submit" class="btn btn-primary col-sm-offset-0">Submit</button> 
+      <button type="submit" class="btn btn-primary col-sm-offset-0"><%= t('submit') %></button> 
     </div>
 <% end %>
 
@@ -45,7 +45,7 @@
     <tr>
       <th> <%= t('ranking.name') %> </th>
       <% @column_names.each do |name| %>
-        <th> <%= t(name) %> </th>
+        <th> <%= t("monthly_stat.names.#{name}") %> </th>
       <% end %>
     </tr>
   </thead>
@@ -60,3 +60,5 @@
     <% end %>
   </tbody>
 </table>
+
+
