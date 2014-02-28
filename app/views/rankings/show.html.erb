@@ -1,30 +1,43 @@
 <h2><%= t('ranking.title') %></h2>
 
-<%= form_tag("/ranking", method: :get) do %>
-  <%= label_tag 'federations_check_boxes', t('ranking.federations') %>
-  <% @federations.each do |fed| %>
-    <label class="checkbox">
-      <%= check_box_tag "filters[federation_id][]", fed.id, true %> <%= fed.name %>
-    </label>
-  <% end %>
+<%= form_tag("/ranking", {method: :get, class: 'form-horizontal'})  do %>
+    <%= label_tag 'federations_checkboxes', t('ranking.federations'), {class: 'control-label' } %>
+    <div class="form-group">
+      <% @federations.each do |fed| %>
+        <label class="checkbox-inline col-sm-offset-1">
+          <%= check_box_tag "filters[federation_id][]", fed.id, true %> <%= fed.name %>
+        </label>
+    <% end %>
+  </div>
 
   <%= label_tag 'column_names_check_boxes', t('ranking.columns') %>
-  <% MonthlyStat::VALID_NAMES.each do |name| %>
-    <label class="checkbox-inline">
-      <% if !@column_names.find_index(name.to_s).nil?%>
-        <%= check_box_tag "column_names[]", name, true %> <%= t(name) %>
-      <% else %>
-        <%= check_box_tag "column_names[]", name, false %> <%= t(name) %>
+  <% MonthlyStat::VALID_NAMES.each_slice(5).to_a.each do |row_of_names| %>
+    <div class="form-group">
+      <% row_of_names.each do |name| %>
+      <label class="checkbox-inline col-sm-offset-1">
+        <% if !@column_names.find_index(name.to_s).nil?%>
+          <%= check_box_tag "column_names[]", name, true %> <%= t(name) %>
+        <% else %>
+          <%= check_box_tag "column_names[]", name, false %> <%= t(name) %>
+        <% end %>
+      </label>
       <% end %>
-    </label>
+    </div>
   <% end %>
   
-  <%= label_tag 'date_field_tag', t('ranking.date') %>
-  <%= month_field_tag "date"%>
-
+  <%= label_tag 'date_field_tag', t('ranking.date'), {class: 'control-label'} %>
+    <div class="form-group">
+      <%= select_month  @date, {}, {class: 'col-sm-offset-1 form-control'}
+      %>
+    </div> 
+    <div class="form-group">
+      <%= select_year  @date, {}, {class: 'col-sm-offset-1 form-control'}
+      %>
+    </div> 
   
-  
-  <button type="submit" class="btn btn-default">Submit</button> 
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary col-sm-offset-0">Submit</button> 
+    </div>
 <% end %>
 
 <table id="ranking_table" class="table table-striped table-bordered table-condensed tablesorter-blue">

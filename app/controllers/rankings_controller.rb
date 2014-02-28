@@ -1,13 +1,17 @@
 class RankingsController < ApplicationController
   
-  DEFAULT_COLUMN_NAMES = [:students, :enrollments, :dropouts, :demand, :interviews] 
+  DEFAULT_COLUMN_NAMES = ['students', 'enrollments', 'dropouts', 'demand', 'interviews'] 
 
   def show
 
     authorize! :read, :rankings
 
-    date = params[:date] || 1.month.ago.end_of_month.to_date
-    scope = SchoolMonthlyStat.select([:name, :value, :school_id]).includes(:school).where(ref_date: date)
+    if params[:date].nil?
+      @date = 1.month.ago.end_of_month.to_date
+    else
+      @date = Date.new(params[:date][:year].to_i, params[:date][:month].to_i, 1).end_of_month.to_date
+    end
+    scope = SchoolMonthlyStat.select([:name, :value, :school_id]).includes(:school).where(ref_date: @date)
     
     unless params[:filters].nil?
       scope = scope.where(schools: params[:filters]) 
