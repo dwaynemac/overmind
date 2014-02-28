@@ -12,7 +12,7 @@
     </div> 
   
 
-  Federations
+  <%= t('ranking.federations') %>
   <% @federations.each_slice(4).to_a.each do |feds_row| -%>
     <div class="form-group">
       <% feds_row.each do |fed| -%>
@@ -23,7 +23,7 @@
     </div>
   <% end -%>
 
-  Columns
+  <%= t('ranking.columns')%>
   <% Ranking::VALID_COLUMNS.each_slice(4).to_a.each do |row_of_names| -%>
     <div class="form-group">
       <% row_of_names.each do |name|-%>

@@ -321,3 +321,6 @@ es:
     title: "Ranking"
     name: "Nombre"
     missing_schools: "Las siguientes escuelas no fueron incluidas por que no tienen datos en el mes seleccionado:"
+    date: "Fecha"
+    column: "Columnas"
+    federations: "Federaciones"
