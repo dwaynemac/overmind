@@ -54,10 +54,17 @@ class Ability
     if user.padma_enabled?
       # Users have these permitions on top of those specific to their role.
       can [:sync,:sync_year,:read,:see_detail], School, account_name: user.enabled_accounts.map(&:name)
-      if School.accessible_by(self).count == 1
+      accessible_schools = School.accessible_by(self)
+      if accessible_schools.count == 1
         can :read_only_one, School
       end
+      accessible_federations = accessible_schools.map(&:federation_id)
+      can :read, Federation, id: accessible_federations
+      if accessible_federations.count == 1
+        can :read_only_one, Federation
+      end
       can :manage, MonthlyStat, school: {account_name: user.enabled_accounts.map(&:name) }
+      cannot :see_global, MonthlyStat # previous can :manage grants :see_global
     end
   end
 end
