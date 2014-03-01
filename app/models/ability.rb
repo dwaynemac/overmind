@@ -23,6 +23,23 @@ class Ability
     cannot :see_global, MonthlyStat
     cannot :read, Ranking
 
+    if user.padma_enabled?
+      # Users have these permitions on top of those specific to their role.
+      can [:sync,:sync_year,:read,:see_detail], School, account_name: user.enabled_accounts.map(&:name)
+      accessible_schools = School.accessible_by(self)
+      if accessible_schools.count == 1
+        can :read_only_one, School
+      end
+      accessible_federations = accessible_schools.map(&:federation_id)
+      can :read, Federation, id: accessible_federations
+      if accessible_federations.count == 1
+        can :read_only_one, Federation
+      end
+      can :manage, MonthlyStat, school: {account_name: user.enabled_accounts.map(&:name) }
+      cannot :see_global, MonthlyStat # previous can :manage grants :see_global
+      can :read, Ranking
+    end
+
     case user.role
       when 'admin'
         can :manage, :all
@@ -30,7 +47,6 @@ class Ability
         can :sync, School
         can :create, SyncRequest
         can :see_global, MonthlyStat
-        can :see_debug_info, School
       when 'data_entry'
         # user.user explained: first user is local user, second user ir padma_user
         accessible_account_names = user.user.padma_accounts.map(&:name)
@@ -49,23 +65,6 @@ class Ability
         can :read, School, federation_id: user.federation_id
         can :read, MonthlyStat, school: { federation_id: user.federation_id }
         can :read, Ranking
-    end
-
-    if user.padma_enabled?
-      # Users have these permitions on top of those specific to their role.
-      can [:sync,:sync_year,:read,:see_detail], School, account_name: user.enabled_accounts.map(&:name)
-      accessible_schools = School.accessible_by(self)
-      if accessible_schools.count == 1
-        can :read_only_one, School
-      end
-      accessible_federations = accessible_schools.map(&:federation_id)
-      can :read, Federation, id: accessible_federations
-      if accessible_federations.count == 1
-        can :read_only_one, Federation
-      end
-      can :manage, MonthlyStat, school: {account_name: user.enabled_accounts.map(&:name) }
-      cannot :see_global, MonthlyStat # previous can :manage grants :see_global
-      can :read, Ranking
     end
   end
 end

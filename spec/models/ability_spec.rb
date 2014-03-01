@@ -7,6 +7,10 @@ describe Ability do
     it "should be able to manage all" do
       ability.can?(:manage,:all).should be_true
     end
+    it "can read all federations" do
+      3.times{create(:federation)}
+      Federation.accessible_by(ability).count.should == 3
+    end
   end
 
   describe "council" do
