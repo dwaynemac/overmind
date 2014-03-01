@@ -56,7 +56,7 @@ class SchoolMonthlyStat < MonthlyStat
       when 'crm'
         school.fetch_stat_from_crm(self.name,ref_date)
       else
-        raise 'Unknown service'
+        raise "Unknown service : #{service}"
     end
   end
 

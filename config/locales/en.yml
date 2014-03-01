@@ -1,5 +1,3 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
   see: "see"
@@ -9,6 +7,7 @@ en:
   search: "Search"
   delete: 'delete'
   destroy: 'delete'
+  warning: "Warning!"
   monthly_stat:
     description:
       demand: 'Unique people that made incoming communications'
@@ -16,34 +15,35 @@ en:
       phonecalls: 'Incoming phonecalls'
       website_contact: 'Incoming website contacts'
     names:
-      in_professional_training: 'In professional training'
-      website_contact: 'Website contact'
+      aspirante_students: "Beginner Students"
+      assistant_students: 'Assistant Students'
+      chela_students: "Chêlas"
+      conversion_count: 'Converted'
+      conversion_rate: 'Convertion rate'
+      demand: 'Demans'
       dropout_rate: 'Dropout Rate'
-      enrollment_rate: 'Enrollment Rate'
-      enrollments: 'Enrollments'
       dropouts: 'Drop Outs'
       dropouts_begginers: 'Begginer drop outs'
       dropouts_intermediates: 'SwáSthya drop outs'
-      students: 'Students'
-      male_students: 'Male students'
-      female_students: 'Female students'
-      aspirante_students: "Beginner Students"
-      sadhaka_students: "Sádhakas"
-      yogin_students: "Yôgins"
-      chela_students: "Chêlas"
-      graduado_students: "Graduated Students"
-      assistant_students: 'Assistant Students'
-      professor_students: 'Professor Students'
-      master_students:    'Master Students'
-      interviews: 'Interviews'
-      p_interviews: 'P Interviews'
-      demand: 'Demans'
       emails: 'Emails'
+      enrollment_rate: 'Enrollment Rate'
+      enrollments: 'Enrollments'
+      female_students: 'Female students'
+      graduado_students: "Graduated Students"
+      in_professional_training: 'In professional training'
+      interviews: 'Interviews'
+      male_students: 'Male students'
+      master_students:    'Master Students'
+      p_interviews: 'P Interviews'
       phonecalls: 'PhoneCalls'
-      conversion_rate: 'Convertion rate'
-      conversion_count: 'Converted'
+      professor_students: 'Professor Students'
+      sadhaka_students: "Sádhakas"
+      students: 'Students'
+      website_contact: 'Website contact'
+      yogin_students: "Yôgins"
   monthly_stats:
     chrono_table:
+      title: 'Monthly statistics'
       evasion_calculation: 'Calculo de la evasion'
       evasion_explanation: 'Esta evasion es calculada a partir de valores absolutos. Dividiendo el TOTAL de bajas por el TOTAL de alumnos. No es el promedio de las evasiones'
       efectividad_calculation: "Cálculo de la efectividad"
@@ -61,20 +61,28 @@ en:
       month: "%b %Y"
   schools:
     index:
+      actions: 'Actions'
       last_registered_stat: "This column show last registered number for each school"
+      new: "New school"
       not_syncing: "No sync service configured"
       students: "Students"
-      title: "Schools"
-      new: "New school"
-      teachers: "Teachers"
       synced_at: "Last synced at"
+      teachers: "Teachers"
+      title: "Schools"
     show:
+      sync_last_months: "Sync last months"
       sync_year_data: "Request sync for %{year} data"
+      sync_now_year_data: "Prioritize my sync for year %{year}"
       click_to_change: "Click to edit"
     search_form:
       show_only_w_account_name_blank: "Only schools without account name"
+    sync_year:
+      queued: "Your sync will start in the next minutes."
+      couldnt_queue_sync: "We could schedule our sync."
     sync_request_notification:
+      pending_sync: "Your sync is already scheduled. We'll start it in a few minutes"
       failed_sync: "There was an error when trying to sync your data. Contact support."
+    sync_request_notification_running_sync: "We are syncing your data right now. (%{progress}%)"
   layouts:
     navbar:
       global: 'Global'
@@ -92,4 +100,14 @@ en:
   federations:
     index:
       teachers: "Teachers"
-  warning: "Warning!"
+      schools_count: "Amount of schools"
+      students_count: "Amount of students"
+      actions: "Actions"
+      new: "New federation"
+  ranking:
+    title: "Ranking"
+    name: "Name"
+    missing_schools: "The following schools weren't included in the ranking table because they don't have data for this month:"
+    date: "Date"
+    federations: "Federations"
+    columns: "Columns"

@@ -20,6 +20,7 @@ group :production do
   gem 'pg'
   gem 'newrelic_rpm'
   gem 'newrelic-typhoeus'
+  gem 'appsignal'
 end
 
 gem 'logical_model', '~> 0.5.10'
@@ -36,7 +37,7 @@ group :assets do
   gem 'jquery-rails'
   gem "execjs"
   gem 'less-rails-bootstrap', '~> 3.0.6'
-  gem "therubyracer"
+  gem "therubyracer", '>= 0.11'
 end
 
 group :development, :test do

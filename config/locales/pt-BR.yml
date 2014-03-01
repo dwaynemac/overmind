@@ -1,0 +1,327 @@
+pt-BR:
+  see: "ver"
+  edit: "alterar"
+  delete: 'apagar'
+  destroy: 'apagar'
+  search: 'pesquisa'
+  warning: "Atençāon!"
+  monthly_stats:
+    chrono_table:
+      title: "Estatísticas mensais"
+      evasion_calculation: "Cálculo da evasāo"
+      evasion_explanation: "Esta evasāo é calculada a partir de valores absolutos. Dividindo o TOTAL de evasōes pelo TOTAL de alunos. Nāo é a média das evasōes"
+      efectividad_calculation: "Cálculo da efetividade"
+      efectividad_explanation: "Esta efectividad é calculada a partir de valores absolutos. Dividiendo o TOTAL de matriculas pelo TOTAL de visitas. Nāo é a média das efetividades."
+      conversion_calculation: "Cálculo da conversāo total"
+      conversion_explanation: "Esta taixa de conversāo é a média das taixas de conversāo das escoelas"
+    form:
+      manual_edition_disable_sync: "As estadísticas registradas manualmente no se syncronizam com outros sistemas."
+  federations:
+    index:
+      schools_count: "Número de escolas"
+      students_count: "Número de alunos"
+      actions: "Açōes"
+      new: "Nova federçāo"
+      teachers: "Instrutores"
+  ranking:
+    title: "Ranking"
+    name: "Nome"
+    missing_schools: "Estas escolas nāo foram colocadas no ranking porque nāo tem dados no mes selecionado."
+    date: "Data"
+    column: "Colunas"
+    federations: "Federaçōes"
+  monthly_stat:
+    description:
+      demand: 'Número de pessoas que contactaram a escola'
+      emails: 'Emails recebidos'
+      phonecalls: 'Chamadas recebidas'
+      website_contact: 'Contatos via website recebidos'
+    names:
+      aspirante_students: "Alunos iniciantes"
+      assistant_students: 'Monitorados Asistentes'
+      chela_students: "Chêlas"
+      conversion_count: 'Conversāo (#)'
+      conversion_rate: "Conversāo (%)"
+      demand: 'Procura'
+      dropout_rate: '% Evasāo'
+      dropouts: 'Evasōes'
+      dropouts_begginers: 'Evasōes de Iniciantes'
+      dropouts_intermediates: 'Evasōes de Intermedios'
+      emails: 'Emails'
+      enrollment_rate: '% Efetividade'
+      enrollments: 'Matrículas'
+      female_students: 'Alunas mulheres'
+      graduado_students: "Alunos Graduados"
+      in_professional_training: "Em formaçāo"
+      interviews: 'Visitas'
+      male_students: 'Alunos homens'
+      master_students:    'Monitorados Mestres'
+      p_interviews: 'Visitas perfil'
+      phonecalls: 'Chamadas'
+      professor_students: 'Monitorados Docentes'
+      sadhaka_students: "Sádhakas"
+      students: 'Alunos'
+      swasthya_students_subtotal: "SubTotal Alunos em SwáSthya"
+      yogin_students: "Yôgins"
+  views:
+    pagination:
+      first: 'Primeira'
+      previous: 'Anterior'
+      next: 'Seguinte'
+      last: 'Última'
+  date:
+    formats:
+      month: "%b %Y"
+  schools:
+    index:
+      actions: 'Açōes'
+      last_registered_stat: "Esta colun utiliza o último registro de cada escola"
+      new: "Nova escola"
+      not_syncing: "Sem sincronizaçāo automática."
+      students: 'Alunos'
+      synced_at: "Última sincronizaçāo"
+      teachers: "Instrutores"
+      title: "Escolas"
+    show:
+      sync_last_months: "Sincronizar últimos meses"
+      sync_year_data: "Solicitar sincronizaçāo de dados do %{year}"
+      sync_now_year_data: "Priorizar minha sincronización do %{year}"
+      click_to_change: "Clique aqui para alterar o ano"
+    search_form:
+      show_only_w_account_name_blank: "Só escolas sem PADMA."
+    sync_year:
+      queued: "Sincronizaçāo programada para os próximos minutos."
+      couldnt_queue_sync: "Nāo conseguimos sincroniçar os dados"
+    sync_request_notification:
+      pending_sync: "Sincronizaçāo programada, começará nos próximos minutos."
+      failed_sync: "Error na sincronizaçāo. Contate ao support padma@metododerose.org."
+    sync_request_notification_running_sync: "Estamos sincroniçando estes dados neste momento. (%{progress}%)"
+  layouts:
+    navbar:
+      global: 'Global'
+      federations: 'Federaçōes'
+      schools: 'Escolas'
+      users: 'Usuários'
+  date:
+    abbr_day_names:
+    - Dom
+    - Seg
+    - Ter
+    - Qua
+    - Qui
+    - Sex
+    - Sáb
+    abbr_month_names:
+    -
+    - Jan
+    - Fev
+    - Mar
+    - Abr
+    - Mai
+    - Jun
+    - Jul
+    - Ago
+    - Set
+    - Out
+    - Nov
+    - Dez
+    day_names:
+    - Domingo
+    - Segunda
+    - Terça
+    - Quarta
+    - Quinta
+    - Sexta
+    - Sábado
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%d de %B de %Y'
+      short: ! '%d de %B'
+    month_names:
+    -
+    - Janeiro
+    - Fevereiro
+    - Março
+    - Abril
+    - Maio
+    - Junho
+    - Julho
+    - Agosto
+    - Setembro
+    - Outubro
+    - Novembro
+    - Dezembro
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: aproximadamente 1 hora
+        other: aproximadamente %{count} horas
+      about_x_months:
+        one: aproximadamente 1 mês
+        other: aproximadamente %{count} meses
+      about_x_years:
+        one: aproximadamente 1 ano
+        other: aproximadamente %{count} anos
+      almost_x_years:
+        one: quase 1 ano
+        other: quase %{count} anos
+      half_a_minute: meio minuto
+      less_than_x_minutes:
+        one: menos de um minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: mais de 1 ano
+        other: mais de %{count} anos
+      x_days:
+        one: 1 dia
+        other: ! '%{count} dias'
+      x_minutes:
+        one: 1 minuto
+        other: ! '%{count} minutos'
+      x_months:
+        one: 1 mês
+        other: ! '%{count} meses'
+      x_seconds:
+        one: 1 segundo
+        other: ! '%{count} segundos'
+    prompts:
+      day: Dia
+      hour: Hora
+      minute: Minuto
+      month: Mês
+      second: Segundo
+      year: Ano
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: deve ser aceito
+      blank: não pode ficar em branco
+      present: deve ficar em branco
+      confirmation: não é igual a %{attribute}
+      empty: não pode ficar vazio
+      equal_to: deve ser igual a %{count}
+      even: deve ser par
+      exclusion: não está disponível
+      greater_than: deve ser maior que %{count}
+      greater_than_or_equal_to: deve ser maior ou igual a %{count}
+      inclusion: não está incluído na lista
+      invalid: não é válido
+      less_than: deve ser menor que %{count}
+      less_than_or_equal_to: deve ser menor ou igual a %{count}
+      not_a_number: não é um número
+      not_an_integer: não é um número inteiro
+      odd: deve ser ímpar
+      record_invalid: ! 'A validação falhou: %{errors}'
+      restrict_dependent_destroy:
+        one: "Não é possível excluir o registro pois existe um %{record} dependente"
+        many: "Não é possível excluir o registro pois existem %{record} dependentes"
+      taken: já está em uso
+      too_long: ! 'é muito longo (máximo: %{count} caracteres)'
+      too_short: ! 'é muito curto (mínimo: %{count} caracteres)'
+      wrong_length: não possui o tamanho esperado (%{count} caracteres)
+    template:
+      body: ! 'Por favor, verifique o(s) seguinte(s) campo(s):'
+      header:
+        one: ! 'Não foi possível gravar %{model}: 1 erro'
+        other: ! 'Não foi possível gravar %{model}: %{count} erros.'
+  helpers:
+    select:
+      prompt: Por favor selecione
+    submit:
+      create: Criar %{model}
+      submit: Salvar %{model}
+      update: Atualizar %{model}
+  number:
+    currency:
+      format:
+        delimiter: .
+        format: ! '%u %n'
+        precision: 2
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: R$
+    format:
+      delimiter: .
+      precision: 3
+      separator: ! ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion:
+            one: bilhão
+            other: bilhões
+          million:
+            one: milhão
+            other: milhões
+          quadrillion:
+            one: quatrilhão
+            other: quatrilhões
+          thousand: mil
+          trillion:
+            one: trilhão
+            other: trilhões
+          unit: ''
+      format:
+        delimiter: .
+        precision: 2
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: .
+    precision:
+      format:
+        delimiter: .
+  support:
+    array:
+      last_word_connector: ! ' e '
+      two_words_connector: ! ' e '
+      words_connector: ! ', '
+  time:
+    am: ''
+    formats:
+      default: ! '%a, %d de %B de %Y, %H:%M:%S %z'
+      long: ! '%d de %B de %Y, %H:%M'
+      short: ! '%d de %B, %H:%M'
+    pm: ''
+  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  activemodel:
+    errors:
+      <<: *errors
+  activerecord:
+    attributes:
+      user:
+        username: 'Username'
+        federation_id: 'Federaçāo'
+        role: 'Rol'
+        locale: 'Idioma'
+        created_at: 'Creado em'
+      school:
+        name: 'Nome'
+        federation_id: 'Federaçāo'
+        account_name: 'Conta PADMA'
+      federation:
+        name: 'Nome'
+    errors:
+      <<: *errors

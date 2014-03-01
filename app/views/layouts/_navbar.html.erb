@@ -43,6 +43,12 @@
     <ul class="nav navbar-nav">
       <%= link_to image_tag('logo_30px.png'), root_url, class: "navbar-brand" %>
 
+      <% if can?(:read, Ranking) -%>
+        <li class="<%= 'active' if controller_name == 'rankings' %>">
+          <%= link_to t('.ranking'), ranking_path %>
+        </li>
+      <% end -%>
+
       <% if can?(:see_global,MonthlyStat) -%>
         <li class="<%= 'active' if controller_name == 'monthly_stats' %>">
           <%= link_to t('.global'), global_monthly_stats_path %>
@@ -60,9 +66,18 @@
       <% end -%>
 
       <% if can?(:read, School) -%>
-        <li class="<%= 'active' if controller_name == 'schools' %>">
-          <%= link_to t('.schools'), schools_path %>    
-        </li>
+        <% if can?(:read_only_one,School) -%>
+          <% school = School.accessible_by(current_ability).first -%>
+          <% if school -%>
+            <li class="<%= 'active' if controller_name == 'schools' %>">
+              <%= link_to school.name, school  %>
+            </li>
+          <% end -%>
+        <% else -%>
+          <li class="<%= 'active' if controller_name == 'schools' %>">
+            <%= link_to t('.schools'), schools_path %>    
+          </li>
+        <% end -%>
       <% end -%>
 
       <% if can?(:manage,User) -%>
@@ -70,6 +85,7 @@
           <%= link_to t('.users'), users_path %>
         </li>
       <% end -%>
+
     </ul>
     <form class="navbar-form navbar-right navbar-input-group" role="search" action="<%= schools_path %>" id="navbar-search" method="get">
       <div class="form-group">
