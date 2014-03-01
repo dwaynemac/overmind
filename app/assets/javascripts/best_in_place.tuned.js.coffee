@@ -1,10 +1,14 @@
 $(document).ready ->
-  $('.best_in_place').on 'ajax:success', (event, data) ->
+  $('td').on 'ajax:success','.best_in_place', (event, data) ->
     $(this).removeClass("editable")
+    $(this).closest('td').effect('highlight')
     $(this).attr("data-url", $(this).attr("data-url")+"/"+data.id)
     $(this).attr("data-method", "put")
   
-  $('.best_in_place').on 'keydown', 'input', (e) ->
+  $('td').on 'ajax:error','.best_in_place', (event, data) ->
+    $(this).closest('td').effect('highlight', {color: '#FF0000'})
+
+  $('td').on 'keydown', '.best_in_place','input', (e) ->
     keyCode = e.keyCode || e.which
 
     if (keyCode == 9)

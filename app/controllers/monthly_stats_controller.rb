@@ -23,7 +23,7 @@ class MonthlyStatsController < ApplicationController
       else
         format.html {render :new}
         format.json do
-          render json: {id: @monthly_stat.id}
+          render json: @monthly_stat.errors.full_messages, :status => :unprocessable_entity
         end
       end
     end
@@ -41,7 +41,7 @@ class MonthlyStatsController < ApplicationController
       else
         format.html {render :edit}
         format.json do
-          render json: {id: @monthly_stat.id}
+          render json: @monthly_stat.errors.full_messages, :status => :unprocessable_entity
         end
       end
     end
