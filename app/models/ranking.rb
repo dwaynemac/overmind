@@ -33,7 +33,6 @@ class Ranking
   end
 
   def matrix
-    debugger
     @matrix ||= RankingMatrix.new(stats).matrix
   end
 

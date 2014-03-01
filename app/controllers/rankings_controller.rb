@@ -1,11 +1,14 @@
 class RankingsController < ApplicationController
 
   def show
-    @ranking = Ranking.new(params[:ranking])
-    authorize! :read, @ranking
+    authorize! :read, Ranking
 
-    # account_name needed to avoid exception
-    @federations = Federation.all
+    @federations = Federation.accessible_by(current_ability)
+    
+    if params[:ranking].nil?
+      params[:ranking] = { federation_ids: @federations.pluck(:id) }
+    end
+    @ranking = Ranking.new params[:ranking]
     
     respond_to do |format|
       format.html { render action: :show }
@@ -16,7 +19,6 @@ class RankingsController < ApplicationController
   end
 
   def update
-    debugger
     show
   end
 
