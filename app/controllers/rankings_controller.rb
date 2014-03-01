@@ -6,7 +6,8 @@ class RankingsController < ApplicationController
 
     @matrix = @ranking.matrix
 
-    @missing_schools = School.select([:id, :name]).where("id NOT IN ('#{@ranking.school_ids.join("','")}')")
+    # account_name needed to avoid exception
+    @missing_schools = School.select([:id, :name, :account_name]).where("id NOT IN ('#{@ranking.school_ids.join("','")}')")
     @federations = Federation.all
     
     respond_to do |format|
