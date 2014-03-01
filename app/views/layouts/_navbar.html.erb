@@ -66,14 +66,18 @@
       <% end -%>
 
       <% if can?(:read, School) -%>
-        <li class="<%= 'active' if controller_name == 'schools' %>">
-          <% if can?(:read_only_one,School) -%>
-            <% school = School.accessible_by(current_ability).first -%>
-            <%= link_to school.name, school  %>
-          <% else -%>
-            <%= link_to t('.schools'), schools_path %>    
+        <% if can?(:read_only_one,School) -%>
+          <% school = School.accessible_by(current_ability).first -%>
+          <% if school -%>
+            <li class="<%= 'active' if controller_name == 'schools' %>">
+              <%= link_to school.name, school  %>
+            </li>
           <% end -%>
-        </li>
+        <% else -%>
+          <li class="<%= 'active' if controller_name == 'schools' %>">
+            <%= link_to t('.schools'), schools_path %>    
+          </li>
+        <% end -%>
       <% end -%>
 
       <% if can?(:manage,User) -%>
