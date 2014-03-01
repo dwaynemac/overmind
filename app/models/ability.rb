@@ -19,8 +19,8 @@ class Ability
     @user = user || User.new
 
     block_all_permitions
-    role_specific_permitions
     user_with_enabled_padma_accounts_permitions
+    role_specific_permitions
 
   end
 

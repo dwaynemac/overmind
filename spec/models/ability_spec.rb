@@ -6,13 +6,14 @@ describe Ability do
   let(:ability){Ability.new(user)}
 
   describe "admin" do
-    let(:user){create(:user,role: 'admin')}
+    let(:federation){create(:federation)}
+    let(:user){create(:user,role: 'admin', federation: federation)}
     it "should be able to manage all" do
       it_can(:manage,:all)
     end
     it "can read all federations" do
       3.times{create(:federation)}
-      Federation.accessible_by(ability).count.should == 3
+      ability.federations.count.should == 4
     end
   end
 
