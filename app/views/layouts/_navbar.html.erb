@@ -57,7 +57,7 @@
 
       <% if can?(:read, Federation) -%>
         <li class="<%= 'active' if controller_name == 'federations' %>">
-          <% if current_user.federation.present? && can?(:read_only_one,Federation) -%>
+          <% if current_user.federation.present? && current_ability.federations.count == 1 -%>
             <%= link_to current_user.federation.name, current_user.federation %>
           <% else -%>
             <%= link_to t('.federations'), federations_path -%>
@@ -66,13 +66,11 @@
       <% end -%>
 
       <% if can?(:read, School) -%>
-        <% if can?(:read_only_one,School) -%>
-          <% school = School.accessible_by(current_ability).first -%>
-          <% if school -%>
-            <li class="<%= 'active' if controller_name == 'schools' %>">
-              <%= link_to school.name, school  %>
-            </li>
-          <% end -%>
+        <% if current_ability.schools.count == 1 -%>
+          <li class="<%= 'active' if controller_name == 'schools' %>">
+            <% school = current_ability.schools.first -%>
+            <%= link_to school.name, school  %>
+          </li>
         <% else -%>
           <li class="<%= 'active' if controller_name == 'schools' %>">
             <%= link_to t('.schools'), schools_path %>    
