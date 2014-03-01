@@ -1,32 +1,30 @@
 <h2><%= t('ranking.title') %></h2>
 
 <%= form_for @ranking, url: ranking_path, method: :put, class: "form-horizontal" do |f| %>
-  <%= t('ranking.date') %>
+  <h4><%= t('ranking.date') %></h4>
   <div class="form-group form-inline">
     <%= f.date_select :date, {discard_day: true}, { class: 'form-control' } %>
   </div> 
 
-  <%= t('ranking.federations') %>
-  <% @federations.each_slice(4).to_a.each do |feds_row| -%>
-    <div class="form-group">
-      <% feds_row.each do |fed| -%>
-        <label class="checkbox-inline col-sm-offset-1">
-          <%= f.check_box 'federation_ids', {multiple: true, checked: federation_selected?(fed.id,@ranking)}, fed.id, false %> <%= fed.name %>
-        </label>
-      <% end -%>
-    </div>
+  <h4><%= t('ranking.federations') %></h4>
+  <div class="btn-group form-group" data-toggle="buttons">
+  <% @federations.each do |fed| -%>
+    <label class="checkbox-inline col-sm-offset-1 btn btn-default btn-sm">
+      <%= f.check_box 'federation_ids', {multiple: true, checked: federation_selected?(fed.id,@ranking)}, fed.id, false %> <%= fed.name %>
+    </label>
   <% end -%>
+  </div>
 
-  <%= t('ranking.columns')%>
+  <h4><%= t('ranking.columns')%></h4>
+  <div class="btn-group input-group" data-toggle="buttons">
   <% Ranking::VALID_COLUMNS.each_slice(4).to_a.each do |row_of_names| -%>
-    <div class="form-group">
       <% row_of_names.each do |name|-%>
-        <label class="checkbox-inline col-sm-offset-1">
+        <label class="checkbox-inline col-sm-offset-1 btn btn-default btn-sm">
           <%= f.check_box :column_names, {multiple: true, checked: column_name_selected?(name,@ranking)}, name, false %> <%= t("monthly_stat.names.#{name}") %>
         </label>
       <% end -%>
-    </div>
   <% end -%>
+  </div>
     <div class="form-group">
       <button type="submit" class="btn btn-primary col-sm-offset-0"><%= t('submit') %></button> 
     </div>
