@@ -65,6 +65,7 @@ class Ability
       end
       can :manage, MonthlyStat, school: {account_name: user.enabled_accounts.map(&:name) }
       cannot :see_global, MonthlyStat # previous can :manage grants :see_global
+      can :read, Ranking
     end
   end
 end
