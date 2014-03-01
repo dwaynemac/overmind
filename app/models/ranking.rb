@@ -8,6 +8,17 @@ class Ranking
   DEFAULT_COLUMN_NAMES = [:students, :enrollments, :dropouts, :demand, :interviews] 
   VALID_COLUMNS = MonthlyStat::VALID_NAMES
 
+  COLUMNS_FOR_VIEW = [
+   [:students, :enrollments, :dropouts],
+   [:dropouts_begginers, :dropouts_intermediates],
+   [:male_students, :female_students],
+   [:aspirante_students, :sadhaka_students, :yogin_students,
+    :chela_students, :graduado_students, :assistantxe_students,
+    :professor_students, :master_students],
+   [:demand, :interviews, :p_interviews, :emails, :phonecalls, :website_contact],
+   [:conversion_rate, :conversion_count]
+  ]
+
   attr_accessor :federation_ids,
                 :column_names,
                 :date

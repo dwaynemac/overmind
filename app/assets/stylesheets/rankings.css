@@ -1,6 +1,9 @@
 .btn-group {
   margin: 15px;
 }
+#options-panel .panel-heading {
+  cursor: pointer;
+}
 
 
 /*************
