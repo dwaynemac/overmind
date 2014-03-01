@@ -33,17 +33,15 @@ class Ranking
   end
 
   def matrix
+    debugger
     @matrix ||= RankingMatrix.new(stats).matrix
   end
 
   def stats
-    unless @stats
-      scope = SchoolMonthlyStat.select([:name, :value, :school_id]).includes(:school).where(ref_date: date)
-      scope = scope.where(name: @column_names)
-      scope = scope.where(schools: { federation_id: @federation_ids}) unless @federation_ids.nil?
-      @stats = scope
-    end
-    @stats
+    scope = SchoolMonthlyStat.select([:name, :value, :school_id]).includes(:school).where(ref_date: date)
+    scope = scope.where(name: @column_names)
+    scope = scope.where(schools: { federation_id: @federation_ids}) unless @federation_ids.nil?
+    scope
   end
 
   def missing_schools
@@ -67,10 +65,10 @@ class Ranking
   def set_date(attributes)
     @date = attributes.fetch( :date , nil)
     if attributes[:date]
-      @date = attributes[:date]
+      @date = attributes[:date].end_of_month
     else
       if attributes["date(1i)"] && attributes["date(2i)"]
-        @date = Date.new(attributes["date(1i)"].to_i, attributes["date(2i)"].to_i, 1)
+        @date = Date.new(attributes["date(1i)"].to_i, attributes["date(2i)"].to_i, 1).end_of_month
       else
         @date = 1.month.ago.end_of_month.to_date
       end

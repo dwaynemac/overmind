@@ -4,8 +4,6 @@ class RankingsController < ApplicationController
     @ranking = Ranking.new(params[:ranking])
     authorize! :read, @ranking
 
-    @matrix = @ranking.matrix
-
     # account_name needed to avoid exception
     @federations = Federation.all
     
@@ -18,6 +16,7 @@ class RankingsController < ApplicationController
   end
 
   def update
+    debugger
     show
   end
 
