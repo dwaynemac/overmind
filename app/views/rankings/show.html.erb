@@ -63,7 +63,7 @@
   <div class="panel-heading"><%= t('ranking.missing_schools') %></div>
   <div class="panel-body">
     <table class="table table-striped table-bordered table-condensed">
-      <% @missing_schools.each_slice(3) do |schools_row| %>
+      <% @ranking.missing_schools.each_slice(3) do |schools_row| %>
         <tr>
           <% schools_row.each do |school| -%>
             <td><%= link_to_if can?(:read, school), school.name, school %></td>

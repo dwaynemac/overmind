@@ -46,6 +46,14 @@ class Ranking
     @stats
   end
 
+  def missing_schools
+    if school_ids.empty?
+      @missing_schools ||= School.all
+    else
+      @missing_schools ||= School.select([:id, :name, :account_name]).where("id NOT IN ('#{school_ids.join("','")}')")
+    end
+  end
+
   def school_ids
     @school_ids ||= stats.map(&:school_id)
   end
