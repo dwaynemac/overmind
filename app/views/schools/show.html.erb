@@ -30,7 +30,7 @@
 
   <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
     <% unless stats.values.reject(&:empty?).empty? -%>
-      <%= render "monthly_stats/chrono_table", monthly_stats: stats, hide_year_form: true, title: Teacher.find(teacher_id).try(:full_name) %>
+      <%= render "monthly_stats/chrono_table", monthly_stats: stats, teacher_stats: true, title: Teacher.find(teacher_id).try(:full_name) %>
     <% end -%>
   <% end %>
 </div>

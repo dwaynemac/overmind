@@ -1,4 +1,11 @@
 <%- model_class = MonthlyStat.new.class -%>
+<% 
+begin
+  teacher_stats
+rescue NameError
+  teacher_stats = false
+end
+-%>
 
 <% title ||= t('.title', :default => model_class.model_name.human.pluralize)%>
 <h2><%= title %></h2>
@@ -44,7 +51,7 @@
             <%= monthly_stat.try :value %>
           <% else -%>
             <% if monthly_stat.nil? %>
-              <% if ref_date.end_of_month < Date.today -%>
+              <% if in_place_create?(ref_date: ref_date, teacher_stats: teacher_stats) -%>
                 <%= best_in_place monthly_stat,
                                 :value,
                                 :nil => "e",
@@ -63,7 +70,7 @@
                                 :tabindex => tabindex %>
               <% end -%>
           <% else %>
-            <% if monthly_stat.service.blank? -%>
+            <% if in_place_edit?(monthly_stat: monthly_stat, ref_date: ref_date, teacher_stats: teacher_stats) -%>
               <%= best_in_place monthly_stat,
                                 :value,
                                 :type => :input,
@@ -82,7 +89,7 @@
           <% end %>
           <%- unless monthly_stat.nil? || monthly_stat.is_a?(ReducedStat) || @school.nil? -%>
             <span class="show-on-hover">
-              <% if can?(:edit,monthly_stat) && monthly_stat.service.blank? %>
+              <% if in_place_edit?(monthly_stat: monthly_stat, ref_date: ref_date, teacher_stats: teacher_stats) %>
                 <a href="#" rel="tooltip" data-original-title="<%= t('edit')%>" class="pictos editable">e</a>
               <% end %>
               <%= link_to('d',
