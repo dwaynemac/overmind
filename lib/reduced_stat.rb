@@ -6,4 +6,8 @@ class ReducedStat
     self.value = attributes[:value]
     self.ref_date = attributes[:ref_date]
   end
+
+  def service
+    nil
+  end
 end
