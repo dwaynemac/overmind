@@ -193,3 +193,9 @@ caption {
 	cursor: pointer;
 	background-color: #e6bf99;
 }
+
+.page-header {
+  #download-link {
+    float: right;
+  }
+}
