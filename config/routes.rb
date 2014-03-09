@@ -8,6 +8,9 @@ Overmind::Application.routes.draw do
       member do
         get 'sync'
       end
+      collection do
+        get 'sync_create'
+      end
     end
     member do
       get 'sync_year'

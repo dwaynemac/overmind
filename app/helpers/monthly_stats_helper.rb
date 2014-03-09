@@ -1,5 +1,24 @@
 module MonthlyStatsHelper
 
+  def print_value(monthly_stat)
+    v = monthly_stat.try :value
+    return '' if v.nil?
+    if monthly_stat.is_a_rate?
+      "#{v}%"
+    else
+      v
+    end
+  end
+
+  # @option options [String] stat_name
+  # @return [Boolean]
+  def can_sync_create?(options={})
+    is_local_stat = LocalStat.is_local_stat?(options[:stat_name])
+    not_teacher_stats = !options[:teacher_stats]
+    month_past = (options[:ref_date].end_of_month < Date.today)
+    is_local_stat && not_teacher_stats && month_past
+  end
+
   # @param options [Hash]
   # @option options [MonthlyStat] monthly_stat
   # @option options [String] stat_name

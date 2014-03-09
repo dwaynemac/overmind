@@ -60,6 +60,12 @@ class MonthlyStatsController < ApplicationController
     redirect_to school_path(id: @school.id, year: params[:year])
   end
 
+  def sync_create
+    ref_date = Date.parse(params[:ref_date])
+    SchoolMonthlyStat.create_from_service!(@school,params[:name],ref_date.end_of_month)
+    redirect_to school_path(id: @school.id, year: ref_date.year)
+end
+
   def global
     authorize! :see_global, MonthlyStat
     @years = 2010..Date.today.year

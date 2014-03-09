@@ -34,7 +34,7 @@ class LocalStat
   # True for all stats that are calculated locally, here, in overmind.
   # @return [Boolean]
   def self.is_local_stat?(stat_name)
-    stat_name.in?(registered_stats)
+    stat_name.to_sym.in?(registered_stats)
   end
 
   private
