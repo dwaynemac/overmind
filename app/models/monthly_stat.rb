@@ -132,12 +132,6 @@ class MonthlyStat < ActiveRecord::Base
     MonthlyStat.is_a_rate?(self.name)
   end
 
-  # True for all stats that are calculated locally, here, in overmind.
-  # @return [Boolean]
-  def self.local_stat?(stat_name)
-    stat_name.in?([])
-  end
-
   def self.is_a_rate?(name)
     name = name.to_sym
     (name == :conversion_rate) || RATES.include?(name)
