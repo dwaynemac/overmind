@@ -12,9 +12,11 @@
 class LocalStat
 
   NAMES = [
-    :begginers_dropout_rate
+    :begginers_dropout_rate,
+    :swasthya_dropout_rate
   ]
   include BegginersDropoutRate
+  include SwasthyaDropoutRate
 
   def initialize(attributes={})
     @school   = attributes[:school]
