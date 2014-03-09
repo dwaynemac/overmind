@@ -22,6 +22,7 @@ class LocalStat
     @school   = attributes[:school]
     @name     = attributes[:name]
     @ref_date = attributes[:ref_date]
+    @teacher = attributes[:teacher]
   end
 
   def value
@@ -40,7 +41,7 @@ class LocalStat
 
   def value_for(stat_name, ref_date=nil)
     ref_date = @ref_date if ref_date.nil?
-    ms = MonthlyStat.where(school_id: @school.id, ref_date: ref_date, name: stat_name)
+    ms = MonthlyStat.where(school_id: @school.id, ref_date: ref_date, name: stat_name, teacher_id: @teacher.try(:id))
     ms.first.try(:value)
   end
 
