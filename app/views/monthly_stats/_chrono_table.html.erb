@@ -51,7 +51,7 @@ end
             <%= monthly_stat.try :value %>
           <% else -%>
             <% if monthly_stat.nil? %>
-              <% if in_place_create?(ref_date: ref_date, teacher_stats: teacher_stats) -%>
+              <% if in_place_create?(ref_date: ref_date, stat_name: name, teacher_stats: teacher_stats) -%>
                 <%= best_in_place monthly_stat,
                                 :value,
                                 :nil => "e",

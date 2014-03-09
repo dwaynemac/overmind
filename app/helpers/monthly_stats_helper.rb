@@ -2,6 +2,7 @@ module MonthlyStatsHelper
 
   # @param options [Hash]
   # @option options [MonthlyStat] monthly_stat
+  # @option options [String] stat_name
   # @option options [Date] ref_date
   # @option options [Boolean] teacher_stats
   # @return [Boolean]
@@ -9,8 +10,9 @@ module MonthlyStatsHelper
     permitions = current_ability.can?(:create,MonthlyStat)
     month_past = (options[:ref_date].end_of_month < Date.today)
     not_teacher_stats = !options[:teacher_stats]
+    is_not_local_stat   = !LocalStat.is_local_stat?(options[:stat_name])
 
-    permitions && month_past && not_teacher_stats
+    permitions && month_past && not_teacher_stats && is_not_local_stat
   end
 
   # @param options [Hash]
