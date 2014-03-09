@@ -108,7 +108,9 @@ class MonthlyStat < ActiveRecord::Base
   end
 
   def self.service_for(school,stat_name,ref_date)
-    if school.account_name.blank?
+    if local_stat?(stat_name)
+      'overmind'
+    elsif school.account_name.blank?
       ''
     else
       account = school.account
@@ -128,6 +130,12 @@ class MonthlyStat < ActiveRecord::Base
 
   def is_a_rate?
     MonthlyStat.is_a_rate?(self.name)
+  end
+
+  # True for all stats that are calculated locally, here, in overmind.
+  # @return [Boolean]
+  def self.local_stat?(stat_name)
+    stat_name.in?([])
   end
 
   def self.is_a_rate?(name)

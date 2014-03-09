@@ -55,6 +55,9 @@ class SchoolMonthlyStat < MonthlyStat
         school.fetch_stat(self.name,ref_date)
       when 'crm'
         school.fetch_stat_from_crm(self.name,ref_date)
+      when 'overmind'
+        ls = LocalStat.new(name: self.name, ref_date: ref_date, school: school)
+        ls.value
       else
         raise "Unknown service : #{service}"
     end
