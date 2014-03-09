@@ -23,9 +23,10 @@ module MonthlyStatsHelper
     service_blank = options[:monthly_stat].service.blank?
     month_past = (options[:ref_date].end_of_month < Date.today)
     is_not_reduced_stat = !options[:monthly_stat].is_a?(ReducedStat)
+    is_not_local_stat   = !LocalStat.is_local_stat?(options[:monthly_stat].name)
     not_teacher_stats = !options[:teacher_stats]
 
-    permitions && service_blank && month_past && is_not_reduced_stat && not_teacher_stats
+    permitions && service_blank && month_past && is_not_reduced_stat && not_teacher_stats && is_not_local_stat
   end
 
 end
