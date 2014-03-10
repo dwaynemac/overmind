@@ -22,6 +22,7 @@ class LocalStat
     @school   = attributes[:school]
     @name     = attributes[:name]
     @ref_date = attributes[:ref_date]
+    @ref_date = @ref_date.end_of_month if @ref_date
     @teacher = attributes[:teacher]
   end
 
