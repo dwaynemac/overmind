@@ -80,6 +80,7 @@ class TeacherMonthlyStat < MonthlyStat
   # @param ref_date [Date]
   # @return [Array<Hash>]
   def self.get_remote_values(school,name,service,ref_date)
+    return nil if service.blank?
     case service
       when 'kshema'
         school.fetch_stat(name,ref_date,by_teacher: true)
