@@ -13,15 +13,17 @@ class MonthlyStat < ActiveRecord::Base
 
   attr_accessible :value, :name, :school_id, :ref_date, :service, :account_name, :id   # account name is an accessor, delegated to School.
 
-  VALID_NAMES = [:enrollments,
+  VALID_NAMES = [
+                 :students,
+                 :enrollments,
                  :dropouts,
+
                  :dropouts_begginers,
                  :dropouts_intermediates,
 
                  :begginers_dropout_rate,
                  :swasthya_dropout_rate,
 
-                 :students,
                  :male_students,
                  :female_students,
 
