@@ -1,5 +1,11 @@
 namespace :sync do
 
+  desc 'It doesnt really stop excecution. It just changes state running -> paused'
+  task :pause_all => :environment do
+    puts "Pausing running workers"
+    SyncRequest.where(state: 'running').update_all(state: 'paused')
+  end
+
   desc 'Sync worker, will constantly poll for pending sync_requests'
   task :worker => :environment do
     puts "Starting sync:worker"
