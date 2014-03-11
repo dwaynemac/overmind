@@ -3,7 +3,7 @@ module MonthlyStatsHelper
   def print_value(monthly_stat)
     v = monthly_stat.try :value
     return '' if v.nil?
-    if monthly_stat.is_a_rate?
+    if !monthly_stat.is_a?(ReducedStat) && monthly_stat.is_a_rate?
       "#{v}%"
     else
       v
