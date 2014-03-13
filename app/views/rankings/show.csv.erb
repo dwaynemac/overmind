@@ -8,7 +8,7 @@
     line = []
     line << school.name
     @ranking.column_names.each do |name|
-      line << (stats_hash[name.to_s].nil? ? 'unknown' : stats_hash[name.to_s].value)
+      line << (stats_hash[name.to_s].nil? ? nil : stats_hash[name.to_s].value)
     end
     csv << line
   end
