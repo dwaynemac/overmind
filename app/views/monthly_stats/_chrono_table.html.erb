@@ -48,10 +48,10 @@ end
         <td class="toggle-views">
           <% monthly_stat = monthly_stats[name][month] -%>
           <% if @school.nil? -%>
-            <%= monthly_stat.try :value %>
+            <%= print_value(monthly_stat) %>
           <% else -%>
             <% if monthly_stat.nil? %>
-              <% if in_place_create?(ref_date: ref_date, teacher_stats: teacher_stats) -%>
+              <% if in_place_create?(ref_date: ref_date, stat_name: name, teacher_stats: teacher_stats) -%>
                 <%= best_in_place monthly_stat,
                                 :value,
                                 :nil => "e",
@@ -68,6 +68,12 @@ end
                                           service: ""
                                 },
                                 :tabindex => tabindex %>
+              <% elsif can_sync_create?(ref_date: ref_date, stat_name: name, teacher_stats: teacher_stats) -%>
+                <%= link_to('r',
+                            sync_create_school_monthly_stats_path(name: name, school_id: @school.id, ref_date: ref_date),
+                            rel: 'tooltip',
+                            data: {'original-title' => "calculate"},
+                            :class => 'pictos red') %>
               <% end -%>
           <% else %>
             <% if in_place_edit?(monthly_stat: monthly_stat, ref_date: ref_date, teacher_stats: teacher_stats) -%>
@@ -84,7 +90,7 @@ end
                                 :tabindex => tabindex
               %>
             <% else -%>
-              <%= monthly_stat.value %>
+              <%= print_value monthly_stat %>
             <% end -%>
           <% end %>
           <%- unless monthly_stat.nil? || monthly_stat.is_a?(ReducedStat) || @school.nil? -%>

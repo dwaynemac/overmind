@@ -13,12 +13,17 @@ class MonthlyStat < ActiveRecord::Base
 
   attr_accessible :value, :name, :school_id, :ref_date, :service, :account_name, :id   # account name is an accessor, delegated to School.
 
-  VALID_NAMES = [:enrollments,
+  VALID_NAMES = [
+                 :students,
+                 :enrollments,
                  :dropouts,
+
                  :dropouts_begginers,
                  :dropouts_intermediates,
 
-                 :students,
+                 :begginers_dropout_rate,
+                 :swasthya_dropout_rate,
+
                  :male_students,
                  :female_students,
 
@@ -108,7 +113,9 @@ class MonthlyStat < ActiveRecord::Base
   end
 
   def self.service_for(school,stat_name,ref_date)
-    if school.account_name.blank?
+    if LocalStat.is_local_stat?(stat_name)
+      'overmind'
+    elsif school.account_name.blank?
       ''
     else
       account = school.account
@@ -132,7 +139,7 @@ class MonthlyStat < ActiveRecord::Base
 
   def self.is_a_rate?(name)
     name = name.to_sym
-    (name == :conversion_rate) || RATES.include?(name)
+    name.in?([:conversion_rate, :begginers_dropout_rate, :swasthya_dropout_rate]) || RATES.include?(name)
   end
 
   private

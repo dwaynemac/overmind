@@ -23,6 +23,8 @@ es:
       dropouts: 'Bajas'
       dropouts_begginers: 'Bajas Iniciantes'
       dropouts_intermediates: 'Bajas Intermedios'
+      begginers_dropout_rate: 'Evasion de iniciantes'
+      swasthya_dropout_rate: 'Evasion de intermedios'
       emails: 'Emails'
       enrollment_rate: '% Efectividad'
       enrollments: 'Matrículas'
