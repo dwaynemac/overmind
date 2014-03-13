@@ -1,9 +1,12 @@
 <% require 'csv' %>
 
 <%= CSV.generate do |csv|
-  csv << @ranking.column_names.map{|name| t("monthly_stat.names.#{name}")}
+  header = @ranking.column_names.map{|name| t("monthly_stat.names.#{name}")}
+  header.unshift(t('ranking.name'))
+  csv <<  header
   @ranking.matrix.each do |school, stats_hash|
     line = []
+    line << school.name
     @ranking.column_names.each do |name|
       line << (stats_hash[name.to_s].nil? ? 'unknown' : stats_hash[name.to_s].value)
     end
