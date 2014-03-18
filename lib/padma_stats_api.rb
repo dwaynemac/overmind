@@ -60,6 +60,8 @@ module PadmaStatsApi
           self.count_students(ref_date, options.merge({filter: { where: {gender: 'male'}}}))
         when :female_students
           self.count_students(ref_date, options.merge({filter: { where: {gender: 'female'}}}))
+        when :students_average_age
+          self.students_average_age(ref_date, options)
         when :in_professional_training
           self.count_students(ref_date, options.merge({in_professional_training: true}))
         when :enrollments
@@ -203,6 +205,52 @@ module PadmaStatsApi
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options, sslversion: :sslv3)
       parse_response(response,!options[:by_teacher])
+    end
+
+    # Fetches students average age
+    # @param ref_date [Date]
+    # @param options [Hash]
+    # @option options [Hash] filter . Any valid argument for contacts-ws/search
+    # @option options [String] level. Filter by level. Valid values: aspirante, sádhaka, yôgin, chêla, graduado, asistente, docente, maestro
+    # @return [Integer]
+    def students_average_age(ref_date, options = {})
+      req_options = { app_key: ENV['crm_key'],
+                      year: ref_date.year,
+                      month: ref_date.month
+                     }
+
+      if options[:in_professional_training]
+        req_options.merge!({
+          filter: {
+              attribute_values_at: [
+                  {attribute: 'in_professional_training', value: options[:in_professional_training]}
+              ]
+          }
+        })
+      end
+
+      if options[:level]
+        req_options.merge!({
+          filter: {
+              attribute_values_at: [
+                  {attribute: 'level', value: options[:level]}
+              ]
+          }
+        })
+      end
+
+      # do this last to avoid overriding of :filter
+      # in previous merges
+      if options[:filter].is_a?(Hash)
+        if req_options[:filter]
+          req_options[:filter].merge!(options[:filter])
+        else
+          req_options[:filter] = options[:filter]
+        end
+      end
+
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/students_average_age", params: req_options, sslversion: :sslv3)
+      parse_response(response,false)
     end
 
     def count_interviews(ref_date, options={})

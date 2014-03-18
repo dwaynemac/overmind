@@ -97,6 +97,8 @@ module KshemaApi
           male_students: 'MaleStudentCount',
           female_students: 'FemaleStudentCount',
 
+          students_average_age: 'StudentsAverageAge',
+
           demand: 'ProcuraCount',
 
           interviews: 'VisitCount',

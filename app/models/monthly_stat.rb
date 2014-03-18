@@ -27,6 +27,8 @@ class MonthlyStat < ActiveRecord::Base
                  :male_students,
                  :female_students,
 
+                 :students_average_age,
+
                  :aspirante_students,  # students at Aspirante lev
                  :sadhaka_students,  # students at Sádhaka lev
                  :yogin_students,  # students at Yôgin lev
