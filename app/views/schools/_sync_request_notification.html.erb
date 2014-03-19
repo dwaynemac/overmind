@@ -39,7 +39,6 @@
 
 <%# sync label %>
 <%
-  @school.synced_at = 5.days.ago
   label_class = if @school.synced_at < 1.month.ago
       'danger'
   elsif @school.synced_at < 1.week.ago
