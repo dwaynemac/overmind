@@ -250,7 +250,7 @@ module PadmaStatsApi
       end
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/students_average_age", params: req_options, sslversion: :sslv3)
-      parse_response(response,false)
+      parse_response(response,true)
     end
 
     def count_interviews(ref_date, options={})
