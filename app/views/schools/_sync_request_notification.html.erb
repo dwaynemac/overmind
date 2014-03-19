@@ -36,3 +36,17 @@
     <% end -%>
   <%- end -%>
 <%- end -%>
+
+<%# sync label %>
+<%
+  @school.synced_at = 5.days.ago
+  label_class = if @school.synced_at < 1.month.ago
+      'danger'
+  elsif @school.synced_at < 1.week.ago
+    'warning'
+  else
+    'success'
+  end
+-%>
+<span class="label label-<%= label_class %>"><%= t('schools.index.synced_at') %> <%= l @school.synced_at, format: :short %></span>
+
