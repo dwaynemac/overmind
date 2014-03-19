@@ -25,15 +25,20 @@ class Matrixer
     matrix.each_pair do |stat_name,stats_by_month|
       stats_by_month.each_pair do |month,stats|
         if stats.size>1
-          val = stats.sum(&:value)
-          if MonthlyStat.is_a_rate?(stat_name)
-            val = val.to_f/stats.size
+          red_fn = if MonthlyStat.is_a_rate?(stat_name) || stat_name == 'students_average_age'
+            :avg
+          else
+            :sum
           end
 
-          matrix[stat_name][month] = ReducedStat.new(
-              value: val,
-              ref_date: stats.last.ref_date
+          rs = ReducedStat.new(
+            stats: stats,
+            reduce_as: red_fn
           )
+          
+          rs.value # calculate and cache value
+
+          matrix[stat_name][month] = rs
         else
           matrix[stat_name][month] = stats.first
         end
