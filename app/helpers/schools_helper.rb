@@ -13,6 +13,6 @@ module SchoolsHelper
     else
       'success'
     end
-    %[<span class="label label-#{label_class}">#{t('schools.index.synced_at')} #{l @school.synced_at, format: :short}</span>]
+    %[<span class="label label-#{label_class}">#{t('schools.index.synced_at')} #{l @school.synced_at, format: :short}</span>].html_safe
   end
 end
