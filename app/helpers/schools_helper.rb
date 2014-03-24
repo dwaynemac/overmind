@@ -1,7 +1,7 @@
 module SchoolsHelper
 
   def data_freshness_label(school)
-    label_class = if school.synced_at < 1.month.ago
+    label_class = if school.synced_at.nil? || school.synced_at < 1.month.ago
     #synced more than 1 month ago
         'danger'
     elsif school.synced_at < 1.week.ago
@@ -13,6 +13,7 @@ module SchoolsHelper
     else
       'success'
     end
-    %[<span class="label label-#{label_class}">#{t('schools.index.synced_at')} #{l @school.synced_at, format: :short}</span>].html_safe
+    msg = school.synced_at.nil?? t('schools.never_synced') : "#{t('schools.index.synced_at')} #{l(@school.synced_at, format: :short)}"
+    %[<span class="label label-#{label_class}">#{msg}</span>].html_safe
   end
 end
