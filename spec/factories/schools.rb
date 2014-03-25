@@ -3,6 +3,8 @@
 FactoryGirl.define do
   factory :school do
     sequence(:name){|n|"school#{n}"}
-    sequence(:nucleo_id){|n|"nucleo#{n}"}
+    sequence :nucleo_id do |i|
+      i 
+    end
   end
 end
