@@ -4,6 +4,7 @@ class RankingsController < ApplicationController
     authorize! :read, Ranking
 
     @federations = Federation.accessible_by(current_ability)
+    @federations = @federations.where(id: params['ranking']['federation_ids']) if params['ranking'] && params['ranking']['federation_ids']
     federation_ids = @federations.pluck(:id)
     
     if params[:ranking].nil?
