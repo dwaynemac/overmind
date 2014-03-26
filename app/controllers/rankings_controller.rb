@@ -4,7 +4,6 @@ class RankingsController < ApplicationController
     authorize! :read, Ranking
 
     @federations = Federation.accessible_by(current_ability)
-    @federations = @federations.where(id: params['ranking']['federation_ids']) if params['ranking'] && params['ranking']['federation_ids']
     federation_ids = @federations.pluck(:id)
     
     if params[:ranking].nil?
@@ -13,9 +12,9 @@ class RankingsController < ApplicationController
     @ranking = Ranking.new params[:ranking]
 
     if @ranking.school_ids.empty?
-      @missing_schools ||= School.where(federation_id: federation_ids)
+      @missing_schools ||= School.where(federation_id: params[:ranking][:federation_ids])
     else
-      @missing_schools ||= School.select([:id, :name, :account_name]).where(federation_id: federation_ids).where("id NOT IN ('#{@ranking.school_ids.join("','")}')")
+      @missing_schools ||= School.select([:id, :name, :account_name]).where(federation_id: params[:ranking][:federation_ids]).where("id NOT IN ('#{@ranking.school_ids.join("','")}')")
     end
     
     respond_to do |format|
