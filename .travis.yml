@@ -1,9 +1,0 @@
-bundler_args: --without development:production:doc:assets
-language: ruby
-rvm:
- - 1.9.3
-before_script:
- - "cp config/local_env.yml.example config/local_env.yml"
- - "bundle exec rake db:migrate RAILS_ENV=test"
-notifications:
-  webhooks: https://padma.slack.com/services/hooks/travis?token=gJvsUofQViQT1VhNDErULYVq
