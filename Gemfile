@@ -46,6 +46,8 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "guard-rspec"
   gem "libnotify"
+
+  gem 'localeapp'
 end
 
 group :doc do
