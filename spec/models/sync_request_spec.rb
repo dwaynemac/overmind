@@ -3,8 +3,17 @@ require 'spec_helper'
 describe SyncRequest do
   let(:sync_request){create(:sync_request)}
 
-  it { should validate_presence_of :school_id }
-  it { should validate_presence_of :year }
+  describe "validates presence of" do
+    before { sync_request }
+
+    it "school_id" do
+      should validate_presence_of :school_id
+    end
+    it "year" do
+      should validate_presence_of :year
+    end
+  end
+
 
   describe ".prioritized" do
     it "orders with highest priority first" do
