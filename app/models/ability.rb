@@ -59,6 +59,7 @@ class Ability
       when 'admin'
         can :read, Ranking
         can :sync, School
+        can [:create,:update], SyncRequest
         can :see_global, MonthlyStat
         can :manage, :all
       when 'data_entry'
