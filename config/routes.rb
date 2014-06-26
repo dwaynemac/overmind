@@ -4,6 +4,12 @@ Overmind::Application.routes.draw do
     match '/logout', to: "devise/cas_sessions#destroy"
   end
   resources :schools do
+    resources :reports, only: [] do
+      collection do
+        get 'pedagogic/:year/:month', to: 'reports#pedagogic_snapshot'
+        get 'marketing/:year/:month', to: 'reports#marketing_snapshot'
+      end
+    end
     resources :monthly_stats, except: [:show] do
       member do
         get 'sync'
