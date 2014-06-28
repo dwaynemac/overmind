@@ -1,113 +1,281 @@
-
 en:
-  see: "see"
-  edit: "edit"
-  confirm: "sure?"
-  cancel: "cancel"
-  search: "Search"
-  delete: 'delete'
-  destroy: 'delete'
-  warning: "Warning!"
+  see: see
+  edit: edit
+  confirm: Are you sure?
+  cancel: cancel
+  search: Search
+  delete: delete
+  destroy: delete
+  warning: Warning!
   monthly_stat:
     description:
-      demand: 'Unique people that made incoming communications'
-      emails: 'Incoming emails'
-      phonecalls: 'Incoming phonecalls'
-      website_contact: 'Incoming website contacts'
+      demand: ! 'Number of unique people that made contacted the school. '
+      emails: Incoming emails
+      phonecalls: Incoming phonecalls
+      website_contact: Incoming website contacts
     names:
-      aspirante_students: "Beginner Students"
-      assistant_students: 'Assistant Students'
-      chela_students: "Chêlas"
-      conversion_count: 'Converted'
-      conversion_rate: 'Convertion rate'
-      demand: 'Demans'
-      dropout_rate: 'Dropout Rate'
-      dropouts: 'Drop Outs'
-      dropouts_begginers: 'Begginer drop outs'
-      dropouts_intermediates: 'SwáSthya drop outs'
-      emails: 'Emails'
-      enrollment_rate: 'Enrollment Rate'
-      enrollments: 'Enrollments'
-      female_students: 'Female students'
-      graduado_students: "Graduated Students"
-      in_professional_training: 'In professional training'
-      interviews: 'Interviews'
-      male_students: 'Male students'
-      master_students:    'Master Students'
-      p_interviews: 'P Interviews'
-      phonecalls: 'PhoneCalls'
-      professor_students: 'Professor Students'
-      sadhaka_students: "Sádhakas"
-      students: 'Students'
-      website_contact: 'Website contact'
-      yogin_students: "Yôgins"
+      aspirante_students: Introductory Students
+      assistant_students: Assistant Students
+      chela_students: Chêlas
+      conversion_count: Conversion
+      conversion_rate: Convertion rate
+      demand: Demand
+      dropout_rate: Dropout Rate
+      dropouts: Drop Outs
+      dropouts_begginers: Introductory drop outs
+      dropouts_intermediates: SwáSthya drop outs
+      emails: Emails
+      enrollment_rate: Enrolment Rate
+      enrollments: ! 'Enrolments '
+      female_students: Female students
+      graduado_students: Graduate Students
+      in_professional_training: In training
+      interviews: Visits
+      male_students: Male students
+      master_students: Professor Students
+      p_interviews: Profile visits
+      phonecalls: PhoneCalls
+      professor_students: Teacher Students
+      sadhaka_students: Sádhakas
+      students: Students
+      website_contact: Website contact
+      yogin_students: Yôgins
+      begginers_dropout_rate: Dropout of Introductory
+      students_average_age: 
+      swasthya_dropout_rate: Dropout of Intermediaries
+      swasthya_students_subtotal: Subtotal of SwáSthya Students
   monthly_stats:
     chrono_table:
-      title: 'Monthly statistics'
-      evasion_calculation: 'Calculo de la evasion'
-      evasion_explanation: 'Esta evasion es calculada a partir de valores absolutos. Dividiendo el TOTAL de bajas por el TOTAL de alumnos. No es el promedio de las evasiones'
-      efectividad_calculation: "Cálculo de la efectividad"
-      efectividad_explanation: "Esta efectividad es calculada a partir de valores absolutos. Dividiendo el TOTAL de inscripciones por el TOTAL de visitas. No es el promedio de las efectividades"
-      conversion_calculation: "Conversion calculation"
-      conversion_explanation: "Conversion rate is the average of schools conversion rates."
+      title: Monthly statistics
+      evasion_calculation: Drop out calculation
+      evasion_explanation: ! 'This dropout rate is calculated from absolute values. We divide the TOTAL dropouts over the TOTAL number of students. It is not an average. '
+      efectividad_calculation: Effectiveness calculation
+      efectividad_explanation: ! 'This effectiveness is calculated from absolute values. We divide the TOTAL enrolments by the TOTAL visits. It is not an average effectiveness. '
+      conversion_calculation: Total conversion calculation
+      conversion_explanation: This conversion rate is the average of the rates of  all schools.
+      confirm: Are you sure?
     form:
-      manual_edition_disable_sync: "Manually stored statístics are not synced with other services.."
+      manual_edition_disable_sync: Manually stored statístics are not synced with other services.
   errors:
     attributes:
       ref_date:
-        not_end_of_month: "Reference date should be at the end of a month"
+        not_end_of_month: Reference date should be at the end of a month
+    messages:
+      invalid_format: Invalid format
+      retry: Something went wrong, try again in a few moments.
   date:
     formats:
-      month: "%b %Y"
+      month: ! '%b %Y'
   schools:
     index:
-      actions: 'Actions'
-      last_registered_stat: "This column show last registered number for each school"
-      new: "New school"
-      not_syncing: "No sync service configured"
-      students: "Students"
-      synced_at: "Last synced at"
-      teachers: "Teachers"
-      title: "Schools"
+      actions: Actions
+      last_registered_stat: This column shows the last registered number for each school
+      new: New school
+      not_syncing: No sync service configured
+      students: Students
+      synced_at: Last synced at
+      teachers: Instructors
+      title: Schools
     show:
-      sync_last_months: "Sync last months"
-      sync_year_data: "Request sync for %{year} data"
-      sync_now_year_data: "Prioritize my sync for year %{year}"
-      click_to_change: "Click to edit"
+      sync_last_months: Sync last months
+      sync_year_data: Request sync for %{year} data
+      sync_now_year_data: Prioritize my sync for year %{year}
+      click_to_change: Click to edit
+      back: en, helpers.links.back
+      new: en, helpers.links.new
     search_form:
-      show_only_w_account_name_blank: "Only schools without account name"
+      show_only_w_account_name_blank: Only schools without PADMA account name.
     sync_year:
-      queued: "Your sync will start in the next minutes."
-      couldnt_queue_sync: "We could schedule our sync."
+      queued: Your sync will start in the next few minutes.
+      couldnt_queue_sync: We could not schedule our sync.
     sync_request_notification:
-      pending_sync: "Your sync is already scheduled. We'll start it in a few minutes"
-      failed_sync: "There was an error when trying to sync your data. Contact support."
-    sync_request_notification_running_sync: "We are syncing your data right now. (%{progress}%)"
+      pending_sync: Your sync is already scheduled. We'll start it in a few minutes
+      failed_sync: There was an error when trying to sync your data. Contact support.
+    sync_request_notification_running_sync: We are syncing your data right now. (%{progress}%)
+    form:
+      cancel: en, helpers.links.cancel
+    never_synced: 
+    new:
+      title: New School
   layouts:
     navbar:
-      global: 'Global'
-      federations: 'Federations'
-      schools: 'Schools'
-      users: 'Users'
+      global: Global
+      federations: Federations
+      schools: Schools
+      users: Users
+      ranking: 
   users:
     index:
-      actions: "Actions"
-      new: "New user"
+      actions: Actions
+      new: New user
+      title: Users
+    create:
+      success: 
+    edit:
+      title: Edit User
+    new:
+      title: New School
+    show:
+      back: en, helpers.links.back
+      confirm: Are you sure?
+      destroy: en, helpers.links.destroy
+      edit: en, helpers.links.edit
+      title: User
   activerecord:
     attributes:
       school:
-        account_name: "Cuenta PADMA"
+        account_name: PADMA Account
+        federation_id: Federation
+        name: Name
+        nucleo_id: Nucleo
+      federation:
+        name: Name
+      school_monthly_stat:
+        value: Value
+      user:
+        created_at: Created on
+        federation_id: Federation
+        locale: Language
+        role: Role
+        username: User name
+    errors:
+      format: ! '%{attribute} %{message}'
+      full_messages:
+        format: ! '%{attribute} %{message}'
+      messages:
+        accepted: must be accepted
+        blank: cannot be left blank
+        confirmation: does not match confirmation
+        empty: cannot be left empty
+        equal_to: must be equal to %{count}
+        even: must be even
+        exclusion: it is reserved
+        greater_than: bust be larger than %{count}
+        greater_than_or_equal_to: must be larger or equal to %{count}
+        inclusion: is not included in the list
+        invalid: is not valid
+        invalid_format: Invalid format
+        less_than: must be less than %{count}
+        less_than_or_equal_to: must be less then or equal to %{count}
+        not_an_integer: must be an integer
+        not_a_number: must be a number
+        odd: must be an odd number
+        record_invalid: ! 'The validation failed: %{errors}'
+        retry: Something went wrong, retry in a few moments.
+        taken: it is already in use
+        too_long:
+          one: is too long (maximum of 1 character)
+          other: is too long (maximum of %{count} characters)
+        too_short:
+          one: is too short (minimum of 1 character)
+          other: is too short (minimum of %{count} characters)
+        wrong_length:
+          one: does not have the correct length (exactly 1 character)
+          other: does not have the correct length (exactly %{count} characters)
+      template:
+        body: ! 'There were problems on the following fields:'
+        header:
+          one: We could not save this %{model} because there was an error
+          other: We could not save this %{model} because there were %{count} errors
+    models:
+      federation: Federation
+      monthly_stat: Monthly stat
+      school: School
+      school_monthly_stat: School monthly stat
+      user: User
   federations:
     index:
-      teachers: "Teachers"
-      schools_count: "Amount of schools"
-      students_count: "Amount of students"
-      actions: "Actions"
-      new: "New federation"
+      teachers: Instructors
+      schools_count: Quantity of schools
+      students_count: Numbers of students
+      actions: Actions
+      new: New federation
+      title: Federations
   ranking:
-    title: "Ranking"
-    name: "Name"
-    missing_schools: "The following schools weren't included in the ranking table because they don't have data for this month:"
-    date: "Date"
-    federations: "Federations"
-    columns: "Columns"
+    title: Ranking
+    name: Name
+    missing_schools: ! 'The following schools weren''t included in the table because they don''t have data for the selected month:'
+    date: Date
+    federations: Federations
+    columns: Columns
+    column: Columns
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: in about 1 hour
+        other: in about %{count} hours
+      about_x_months:
+        one: in about 1 month
+        other: in about %{count} months
+      about_x_years:
+        one: in about 1 year
+        other: in about %{count} years
+  devise:
+    confirmations:
+      send_instructions: You will receive an email with instructions about how to confirm your account in a few moments.
+      send_paranoid_instructions: If your e-mail exists in our database, you will receive an email with instructions about how to confirm your account in a few moments.
+    failure:
+      inactive: Your account has not been activated yet.
+      timeout: Your session has expired, please sign in again to continue.
+    mailer:
+      reset_password_instructions:
+        subject: Password reset instructions
+    passwords:
+      send_instructions: You will receive an email with instructions about how to reset your password in a few moments.
+      send_paranoid_instructions: If your e-mail exists in our database, you will receive a password recovery link on your e-mail
+    unlocks:
+      send_instructions: You will receive an email with instructions on how to unlock your account in a few moments.
+  download: 
+  helpers:
+    actions: 
+    label:
+      school:
+        account_name: 
+        federation_id: 
+        name: 
+        nucleo_id: 
+      user:
+        federation_id: 
+        locale: 
+        role: 
+        username: 
+    links:
+      back: 
+      cancel: 
+      confirm: Are you sure?
+      destroy: 
+      edit: 
+      new: 
+    submit:
+      school:
+        create: Create School
+      user:
+        create: Create User
+        update: Update User
+    titles:
+      edit: Edit User
+      new: New School
+  number:
+    human:
+      decimal_units:
+        units:
+          unit: ''
+      format:
+        delimiter: ''
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    select:
+      prompt: Please select
+  unauthorized:
+    default: You are not authorized to access this page.
+  views:
+    pagination:
+      first: First
+      last: Last
+      next: Next
+      previous: Previous

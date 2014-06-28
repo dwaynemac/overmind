@@ -1,328 +1,410 @@
-# encoding: utf-8
 es:
-  see: "ver"
-  edit: "editar"
-  delete: 'eliminar'
-  destroy: 'eliminar'
-  search: 'buscar'
-  warning: "¡Atención!"
+  see: ver
+  edit: editar
+  delete: eliminar
+  destroy: eliminar
+  search: buscar
+  warning: ¡Atención!
   monthly_stat:
     description:
-      demand: 'Cantidad de personas que se contactaron con la escuela.'
-      emails: 'Emails entrantes'
-      phonecalls: 'Llamadas entrantes'
-      website_contact: 'Contactos via website entrantes'
+      demand: Cantidad de personas que se contactaron con la escuela.
+      emails: Emails entrantes
+      phonecalls: Llamadas entrantes
+      website_contact: Contactos via website entrantes
     names:
-      aspirante_students: "Alumnos iniciantes"
-      assistant_students: 'Monitoreados Asistentes'
-      chela_students: "Chêlas"
-      conversion_count: 'Conversiones (#)'
-      conversion_rate: "Conversion (%)"
-      demand: 'Procura'
-      dropout_rate: '% Evasión'
-      dropouts: 'Bajas'
-      dropouts_begginers: 'Bajas Iniciantes'
-      dropouts_intermediates: 'Bajas Intermedios'
-      begginers_dropout_rate: 'Evasion de iniciantes'
-      swasthya_dropout_rate: 'Evasion de intermedios'
-      emails: 'Emails'
-      enrollment_rate: '% Efectividad'
-      enrollments: 'Matrículas'
-      female_students: 'Alumnas mujeres'
-      graduado_students: "Alumnos Graduados"
-      in_professional_training: "En formación"
-      interviews: 'Visitas'
-      male_students: 'Alumnos hombres'
-      master_students:    'Monitoreados Maestros'
-      p_interviews: 'Visitas perfil'
-      phonecalls: 'Llamadas'
-      professor_students: 'Monitoreados Docentes'
-      sadhaka_students: "Sádhakas"
-      students: 'Alumnos'
-      swasthya_students_subtotal: "SubTotal Alumnos en SwáSthya"
-      yogin_students: "Yôgins"
+      aspirante_students: Alumnos iniciantes
+      assistant_students: Monitoreados Asistentes
+      chela_students: Chêlas
+      conversion_count: Conversiones (#)
+      conversion_rate: Conversion (%)
+      demand: Procura
+      dropout_rate: ! '% Evasión'
+      dropouts: Bajas
+      dropouts_begginers: Bajas Iniciantes
+      dropouts_intermediates: Bajas Intermedios
+      begginers_dropout_rate: Evasion de iniciantes
+      swasthya_dropout_rate: Evasion de intermedios
+      emails: Emails
+      enrollment_rate: ! '% Efectividad'
+      enrollments: Matrículas
+      female_students: Alumnas mujeres
+      graduado_students: Alumnos Graduados
+      in_professional_training: En formación
+      interviews: Visitas
+      male_students: Alumnos hombres
+      master_students: Monitoreados Maestros
+      p_interviews: Visitas perfil
+      phonecalls: Llamadas
+      professor_students: Monitoreados Docentes
+      sadhaka_students: Sádhakas
+      students: Alumnos
+      swasthya_students_subtotal: SubTotal Alumnos en SwáSthya
+      yogin_students: Yôgins
+      students_average_age: 
   views:
     pagination:
-      first: 'Primera'
-      previous: 'Anterior'
-      next: 'Siguiente'
-      last: 'Última'
+      first: Primera
+      previous: Anterior
+      next: Siguiente
+      last: Última
   date:
     formats:
-      month: "%b %Y"
+      default: ! '%d/%m/%Y'
+      short: ! '%d de %b'
+      long: ! '%d de %B de %Y'
+    day_names:
+    - domingo
+    - lunes
+    - martes
+    - miércoles
+    - jueves
+    - viernes
+    - sábado
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
+    month_names:
+    - 
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
+    abbr_month_names:
+    - 
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    order:
+    - :day
+    - :month
+    - :year
   schools:
     index:
-      actions: 'Acciones'
-      last_registered_stat: "Esta column muestra el último registro de cada escuela"
-      new: "Nueva escuela"
-      not_syncing: "Sin sincronización configurada"
-      students: 'Alumnos'
-      synced_at: "Última sincronización"
-      teachers: "Instructores"
-      title: "Escuelas"
+      actions: Acciones
+      last_registered_stat: Esta column muestra el último registro de cada escuela
+      new: Nueva escuela
+      not_syncing: Sin sincronización configurada
+      students: Alumnos
+      synced_at: Última sincronización
+      teachers: Instructores
+      title: Escuelas
     show:
-      sync_last_months: "Sincronizar últimos meses"
-      sync_year_data: "Solicitar sincronización de datos del %{year}"
-      sync_now_year_data: "Priorizar la sincronización de mis datos del %{year}"
-      click_to_change: "Click aqui para modificar el año"
+      sync_last_months: Sincronizar últimos meses
+      sync_year_data: Solicitar sincronización de datos del %{year}
+      sync_now_year_data: Priorizar la sincronización de mis datos del %{year}
+      click_to_change: Click aqui para modificar el año
+      back: 
+      new: 
     search_form:
-      show_only_w_account_name_blank: "Sólo escuelas sin cuenta PADMA configurada."
+      show_only_w_account_name_blank: Sólo escuelas sin cuenta PADMA configurada.
     sync_year:
-      queued: "Sincronización programada para los próximos minutos."
-      couldnt_queue_sync: "No se pudo programar la sincronización de datos"
+      queued: Sincronización programada para los próximos minutos.
+      couldnt_queue_sync: No se pudo programar la sincronización de datos
     sync_request_notification:
-      pending_sync: "Ya esta programada la sincronización de estos datos. Puede demorar varios minutos."
-      failed_sync: "Hubo un error durante la sincronización de datos. Contacte al soporte técnico."
-    sync_request_notification_running_sync: "En este momento estamos sincronizando estos datos. (%{progress}%)"
+      pending_sync: Ya esta programada la sincronización de estos datos. Puede demorar varios minutos.
+      failed_sync: Hubo un error durante la sincronización de datos. Contacte al soporte técnico.
+    sync_request_notification_running_sync: En este momento estamos sincronizando estos datos. (%{progress}%)
+    form:
+      cancel: 
+    never_synced: 
+    new:
+      title: 
   layouts:
     navbar:
-      global: 'Global'
-      federations: 'Federaciones'
-      schools: 'Escuelas'
-      users: 'Usuarios'
-  date:
-    formats:
-      default: "%d/%m/%Y"
-      short: "%d de %b"
-      long: "%d de %B de %Y"
-
-    day_names:
-      - domingo
-      - lunes
-      - martes
-      - miércoles
-      - jueves
-      - viernes
-      - sábado
-    abbr_day_names:
-      - dom
-      - lun
-      - mar
-      - mié
-      - jue
-      - vie
-      - sáb
-
-    month_names:
-      - ~
-      - enero
-      - febrero
-      - marzo
-      - abril
-      - mayo
-      - junio
-      - julio
-      - agosto
-      - septiembre
-      - octubre
-      - noviembre
-      - diciembre
-    abbr_month_names:
-      - ~
-      - ene
-      - feb
-      - mar
-      - abr
-      - may
-      - jun
-      - jul
-      - ago
-      - sep
-      - oct
-      - nov
-      - dic
-    order:
-      - :day
-      - :month
-      - :year
+      global: Global
+      federations: Federaciones
+      schools: Escuelas
+      users: Usuarios
+      ranking: Ranking
   time:
     formats:
-      default: "%A, %d de %B de %Y %H:%M:%S %z"
-      short: "%d de %b %H:%M"
-      long: "%d %b %Y a las %H:%M"
-    am: "am"
-    pm: "pm"
+      default: ! '%A, %d de %B de %Y %H:%M:%S %z'
+      short: ! '%d de %b %H:%M'
+      long: ! '%d %b %Y a las %H:%M'
+    am: am
+    pm: pm
   support:
     array:
-      words_connector: ", "
-      two_words_connector: " y "
-      last_word_connector: ", y "
+      words_connector: ! ', '
+      two_words_connector: ! ' y '
+      last_word_connector: ! ', y '
     select:
-      prompt: "Por favor seleccione"
+      prompt: Por favor seleccione
   number:
     format:
-      separator: "."
-      delimiter: ","
+      separator: .
+      delimiter: ! ','
       precision: 3
       significant: false
       strip_insignificant_zeros: false
     currency:
       format:
-        format: "%n %u"
-        unit: "€"
-        separator: "."
-        delimiter: ","
+        format: ! '%n %u'
+        unit: €
+        separator: .
+        delimiter: ! ','
         precision: 2
         significant: false
         strip_insignificant_zeros: false
     percentage:
       format:
-        delimiter: ""
+        delimiter: ''
     precision:
       format:
-        delimiter: ""
+        delimiter: ''
     human:
       format:
-        delimiter: ""
+        delimiter: ''
         precision: 1
         significant: true
         strip_insignificant_zeros: true
       storage_units:
-        format: "%n %u"
+        format: ! '%n %u'
         units:
           byte:
-            one:   "Byte"
-            other: "Bytes"
-          kb: "KB"
-          mb: "MB"
-          gb: "GB"
-          tb: "TB"
+            one: Byte
+            other: Bytes
+          kb: KB
+          mb: MB
+          gb: GB
+          tb: TB
       decimal_units:
-        format: "%n %u"
+        format: ! '%n %u'
         units:
-          unit: ""
-          thousand: "mil"
-          million: "millón"
-          billion: "mil millones"
-          trillion: "billón"
-          quadrillion: "mil billones"
+          unit: ''
+          thousand: mil
+          million: millón
+          billion: mil millones
+          trillion: billón
+          quadrillion: mil billones
   datetime:
     distance_in_words:
-      half_a_minute: "medio minuto"
+      half_a_minute: medio minuto
       less_than_x_seconds:
-        one:  "menos de 1 segundo"
-        other: "menos de %{count} segundos"
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
       x_seconds:
-        one:  "1 segundo"
-        other: "%{count} segundos"
+        one: 1 segundo
+        other: ! '%{count} segundos'
       less_than_x_minutes:
-        one:  "menos de 1 minuto"
-        other: "menos de %{count} minutos"
+        one: menos de 1 minuto
+        other: menos de %{count} minutos
       x_minutes:
-        one:  "1 minuto"
-        other: "%{count} minutos"
+        one: 1 minuto
+        other: ! '%{count} minutos'
       about_x_hours:
-        one:  "alrededor de 1 hora"
-        other: "alrededor de %{count} horas"
+        one: alrededor de 1 hora
+        other: alrededor de %{count} horas
       x_days:
-        one:  "1 día"
-        other: "%{count} días"
+        one: 1 día
+        other: ! '%{count} días'
       about_x_months:
-        one:  "alrededor de 1 mes"
-        other: "alrededor de %{count} meses"
+        one: alrededor de 1 mes
+        other: alrededor de %{count} meses
       x_months:
-        one:  "1 mes"
-        other: "%{count} meses"
+        one: 1 mes
+        other: ! '%{count} meses'
       about_x_years:
-        one:  "alrededor de 1 año"
-        other: "alrededor de %{count} años"
+        one: alrededor de 1 año
+        other: alrededor de %{count} años
       over_x_years:
-        one:  "más de 1 año"
-        other: "más de %{count} años"
+        one: más de 1 año
+        other: más de %{count} años
       almost_x_years:
-        one: "casi 1 año"
-        other: "casi %{count} años"
+        one: casi 1 año
+        other: casi %{count} años
     prompts:
-      year:   "Año"
-      month:  "Mes"
-      day:    "Día"
-      hour:   "Hora"
-      minute: "Minutos"
-      second: "Segundos"
+      year: Año
+      month: Mes
+      day: Día
+      hour: Hora
+      minute: Minutos
+      second: Segundos
   helpers:
     select:
-      prompt: "Por favor seleccione"
+      prompt: Por favor seleccione
     submit:
-      create: 'Crear %{model}'
-      update: 'Actualizar %{model}'
-      submit: 'Guardar %{model}'
+      create: Crear %{model}
+      update: Actualizar %{model}
+      submit: Guardar %{model}
+      school:
+        create: 
+      user:
+        create: 
+        update: 
+    actions: 
+    label:
+      school:
+        account_name: 
+        federation_id: 
+        name: 
+        nucleo_id: 
+      user:
+        federation_id: 
+        locale: 
+        role: 
+        username: 
+    links:
+      back: 
+      cancel: 
+      confirm: 
+      destroy: 
+      edit: 
+      new: 
+    titles:
+      edit: 
+      new: 
   errors:
     attributes:
       ref_date:
-        not_end_of_month: "La fecha de referncia debe ser a fin de mes."
-    format: "%{attribute} %{message}"
-    messages: &errors_messages
-      inclusion: "no está incluido en la lista"
-      exclusion: "está reservado"
-      invalid: "no es válido"
-      confirmation: "no coincide con la confirmación"
-      accepted: "debe ser aceptado"
-      empty: "no puede estar vacío"
-      blank: "no puede estar en blanco"
-      too_long: "es demasiado largo (%{count} caracteres máximo)"
-      too_short: "es demasiado corto (%{count} caracteres mínimo)"
-      wrong_length: "no tiene la longitud correcta (%{count} caracteres exactos)"
-      not_a_number: "no es un número"
-      not_an_integer: "debe ser un entero"
-      greater_than: "debe ser mayor que %{count}"
-      greater_than_or_equal_to: "debe ser mayor que o igual a %{count}"
-      equal_to: "debe ser igual a %{count}"
-      less_than: "debe ser menor que %{count}"
-      less_than_or_equal_to: "debe ser menor que o igual a %{count}"
-      odd: "debe ser impar"
-      even: "debe ser par"
-      taken: "ya está en uso"
-      invalid_format: "Formato invalido"
-      retry: 'Algo anduvo mal, reintente en unos instantes.'
+        not_end_of_month: La fecha de referncia debe ser a fin de mes.
+    format: ! '%{attribute} %{message}'
+    messages:
+      inclusion: no está incluido en la lista
+      exclusion: está reservado
+      invalid: no es válido
+      confirmation: no coincide con la confirmación
+      accepted: debe ser aceptado
+      empty: no puede estar vacío
+      blank: no puede estar en blanco
+      too_long: es demasiado largo (%{count} caracteres máximo)
+      too_short: es demasiado corto (%{count} caracteres mínimo)
+      wrong_length: no tiene la longitud correcta (%{count} caracteres exactos)
+      not_a_number: no es un número
+      not_an_integer: debe ser un entero
+      greater_than: debe ser mayor que %{count}
+      greater_than_or_equal_to: debe ser mayor que o igual a %{count}
+      equal_to: debe ser igual a %{count}
+      less_than: debe ser menor que %{count}
+      less_than_or_equal_to: debe ser menor que o igual a %{count}
+      odd: debe ser impar
+      even: debe ser par
+      taken: ya está en uso
+      invalid_format: Formato invalido
+      retry: Algo anduvo mal, reintente en unos instantes.
   activerecord:
     attributes:
       user:
-        username: 'Nombre de usuario'
-        federation_id: 'Federación'
-        role: 'Rol'
-        locale: 'Idioma'
-        created_at: 'Creado el'
+        username: Nombre de usuario
+        federation_id: Federación
+        role: Rol
+        locale: Idioma
+        created_at: Creado el
       school:
-        name: 'Nombre'
-        federation_id: 'Federación'
-        account_name: 'Cuenta PADMA'
+        name: Nombre
+        federation_id: Federación
+        account_name: Cuenta PADMA
+        nucleo_id: 
       federation:
-        name: 'Nombre'
+        name: Nombre
+      school_monthly_stat:
+        value: 
     errors:
       template:
         header:
-          one:   "No se pudo guardar este/a %{model} porque se encontró 1 error"
-          other:  "No se pudo guardar este/a %{model} porque se encontraron %{count} errores"
-        # The variable :count is also available
-        body: "Se encontraron problemas con los siguientes campos:"
+          one: No se pudo guardar este/a %{model} porque se encontró 1 error
+          other: No se pudo guardar este/a %{model} porque se encontraron %{count} errores
+        body: ! 'Se encontraron problemas con los siguientes campos:'
       messages:
-        taken: "ya está en uso"
-        record_invalid: "La validación falló: %{errors}"
-        <<: *errors_messages
+        taken: ya está en uso
+        record_invalid: ! 'La validación falló: %{errors}'
+        inclusion: no está incluido en la lista
+        exclusion: está reservado
+        invalid: no es válido
+        confirmation: no coincide con la confirmación
+        accepted: debe ser aceptado
+        empty: no puede estar vacío
+        blank: no puede estar en blanco
+        too_long: es demasiado largo (%{count} caracteres máximo)
+        too_short: es demasiado corto (%{count} caracteres mínimo)
+        wrong_length: no tiene la longitud correcta (%{count} caracteres exactos)
+        not_a_number: no es un número
+        not_an_integer: debe ser un entero
+        greater_than: debe ser mayor que %{count}
+        greater_than_or_equal_to: debe ser mayor que o igual a %{count}
+        equal_to: debe ser igual a %{count}
+        less_than: debe ser menor que %{count}
+        less_than_or_equal_to: debe ser menor que o igual a %{count}
+        odd: debe ser impar
+        even: debe ser par
+        invalid_format: Formato invalido
+        retry: Algo anduvo mal, reintente en unos instantes.
       full_messages:
-        format: "%{attribute} %{message}"
+        format: ! '%{attribute} %{message}'
+      format: ! '%{attribute} %{message}'
+    models:
+      federation: 
+      monthly_stat: 
+      school: 
+      school_monthly_stat: 
+      user: 
   monthly_stats:
     chrono_table:
-      title: "Estadísticas mensuales"
-      evasion_calculation: "Cálculo de la evasion"
-      evasion_explanation: "Esta evasión es calculada a partir de valores absolutos. Dividiendo el TOTAL de bajas por el TOTAL de alumnos. No es el promedio de las evasiones"
-      efectividad_calculation: "Cálculo de la efectividad"
-      efectividad_explanation: "Esta efectividad es calculada a partir de valores absolutos. Dividiendo el TOTAL de inscripciones por el TOTAL de visitas. No es el promedio de las efectividades"
-      conversion_calculation: "Cálculo de la conversion total"
-      conversion_explanation: "Esta tasa de conversion es el promedio de las tasas de conversion de las escuelas."
+      title: Estadísticas mensuales
+      evasion_calculation: Cálculo de la evasion
+      evasion_explanation: Esta evasión es calculada a partir de valores absolutos. Dividiendo el TOTAL de bajas por el TOTAL de alumnos. No es el promedio de las evasiones
+      efectividad_calculation: Cálculo de la efectividad
+      efectividad_explanation: Esta efectividad es calculada a partir de valores absolutos. Dividiendo el TOTAL de inscripciones por el TOTAL de visitas. No es el promedio de las efectividades
+      conversion_calculation: Cálculo de la conversion total
+      conversion_explanation: Esta tasa de conversion es el promedio de las tasas de conversion de las escuelas.
+      confirm: 
     form:
-      manual_edition_disable_sync: "Las estadísticas registradas manualmente no se syncronizarán con otros sistemas."
+      manual_edition_disable_sync: Las estadísticas registradas manualmente no se syncronizarán con otros sistemas.
   federations:
     index:
-      schools_count: "Cantidad de escuelas"
-      students_count: "Cantidad de alumnos"
-      actions: "Acciones"
-      new: "Nueva federación"
-      teachers: "Instructores"
+      schools_count: Cantidad de escuelas
+      students_count: Cantidad de alumnos
+      actions: Acciones
+      new: Nueva federación
+      teachers: Instructores
+      title: 
   ranking:
-    title: "Ranking"
-    name: "Nombre"
-    missing_schools: "Las siguientes escuelas no fueron incluidas por que no tienen datos en el mes seleccionado:"
-    date: "Fecha"
-    column: "Columnas"
-    federations: "Federaciones"
+    title: Ranking
+    name: Nombre
+    missing_schools: ! 'Las siguientes escuelas no fueron incluidas por que no tienen datos en el mes seleccionado:'
+    date: Fecha
+    column: Columnas
+    federations: Federaciones
+    columns: Columnas
+  download: descargar
+  unauthorized:
+    default: 
+  users:
+    create:
+      success: 
+    edit:
+      title: 
+    index:
+      title: 
+    new:
+      title: 
+    show:
+      back: 
+      confirm: 
+      destroy: 
+      edit: 
+      title: 
+  cancel: cancelar
+  confirm: confirmar

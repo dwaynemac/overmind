@@ -1,0 +1,480 @@
+fr:
+  activerecord:
+    attributes:
+      federation:
+        name: 
+      school:
+        account_name: 
+        federation_id: 
+        name: 
+        nucleo_id: 
+      school_monthly_stat:
+        value: 
+      user:
+        created_at: 
+        federation_id: 
+        locale: 
+        role: 
+        username: 
+    errors:
+      format: ! '%{attribute} %{message}'
+      full_messages:
+        format: 
+      messages:
+        accepted: 
+        blank: 
+        confirmation: 
+        empty: 
+        equal_to: 
+        even: 
+        exclusion: 
+        greater_than: 
+        greater_than_or_equal_to: 
+        inclusion: 
+        invalid: 
+        invalid_format: 
+        less_than: 
+        less_than_or_equal_to: 
+        not_an_integer: 
+        not_a_number: 
+        odd: 
+        present: 
+        record_invalid: 
+        restrict_dependent_destroy: 
+        retry: 
+        taken: 
+        too_long: 
+        too_short: 
+        wrong_length: 
+      template:
+        body: 
+        header: 
+    models:
+      federation: 
+      monthly_stat: 
+      school: 
+      school_monthly_stat: 
+      user: 
+  cancel: 
+  confirm: 
+  date:
+    abbr_day_names:
+    - dim
+    - lun
+    - mar
+    - mer
+    - jeu
+    - ven
+    - sam
+    abbr_month_names:
+    - 
+    - jan.
+    - fév.
+    - mar.
+    - avr.
+    - mai
+    - juin
+    - juil.
+    - août
+    - sept.
+    - oct.
+    - nov.
+    - déc.
+    day_names:
+    - dimanche
+    - lundi
+    - mardi
+    - mercredi
+    - jeudi
+    - vendredi
+    - samedi
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%e %B %Y'
+      month: 
+      short: ! '%e %b'
+    month_names:
+    - 
+    - janvier
+    - février
+    - mars
+    - avril
+    - mai
+    - juin
+    - juillet
+    - août
+    - septembre
+    - octobre
+    - novembre
+    - décembre
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: environ une heure
+        other: environ %{count} heures
+      about_x_months:
+        one: environ un mois
+        other: environ %{count} mois
+      about_x_years:
+        one: environ un an
+        other: environ %{count} ans
+      almost_x_years:
+        one: presqu'un an
+        other: presque %{count} ans
+      half_a_minute: une demi-minute
+      less_than_x_minutes:
+        one: moins d'une minute
+        other: moins de %{count} minutes
+        zero: moins d'une minute
+      less_than_x_seconds:
+        one: moins d'une seconde
+        other: moins de %{count} secondes
+        zero: moins d'une seconde
+      over_x_years:
+        one: plus d'un an
+        other: plus de %{count} ans
+      x_days:
+        one: ! '%{count} jour'
+        other: ! '%{count} jours'
+      x_minutes:
+        one: ! '%{count} minute'
+        other: ! '%{count} minutes'
+      x_months:
+        one: ! '%{count} mois'
+        other: ! '%{count} mois'
+      x_seconds:
+        one: ! '%{count} seconde'
+        other: ! '%{count} secondes'
+    prompts:
+      day: Jour
+      hour: Heure
+      minute: Minute
+      month: Mois
+      second: Seconde
+      year: Année
+  delete: 
+  destroy: 
+  devise:
+    confirmations:
+      confirmed: 
+      send_instructions: 
+      send_paranoid_instructions: 
+    failure:
+      already_authenticated: 
+      inactive: 
+      invalid: 
+      invalid_token: 
+      locked: 
+      timeout: 
+      unauthenticated: 
+      unconfirmed: 
+    mailer:
+      confirmation_instructions:
+        subject: 
+      reset_password_instructions:
+        subject: 
+      unlock_instructions:
+        subject: 
+    omniauth_callbacks:
+      failure: 
+      success: 
+    passwords:
+      send_instructions: 
+      send_paranoid_instructions: 
+      updated: 
+      updated_not_active: 
+    registrations:
+      destroyed: 
+      inactive_signed_up: 
+      reasons:
+        inactive: 
+        locked: 
+        unconfirmed: 
+      signed_up: 
+      updated: 
+    sessions:
+      signed_in: 
+      signed_out: 
+    unlocks:
+      send_instructions: 
+      send_paranoid_instructions: 
+      unlocked: 
+  download: 
+  edit: 
+  errors:
+    attributes:
+      ref_date:
+        not_end_of_month: 
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: doit être accepté(e)
+      already_confirmed: 
+      blank: doit être rempli(e)
+      confirmation: ne concorde pas avec la confirmation
+      empty: doit être rempli(e)
+      equal_to: doit être égal à %{count}
+      even: doit être pair
+      exclusion: n'est pas disponible
+      expired: 
+      greater_than: doit être supérieur à %{count}
+      greater_than_or_equal_to: doit être supérieur ou égal à %{count}
+      inclusion: n'est pas inclus(e) dans la liste
+      invalid: n'est pas valide
+      invalid_format: 
+      less_than: doit être inférieur à %{count}
+      less_than_or_equal_to: doit être inférieur ou égal à %{count}
+      not_an_integer: doit être un nombre entier
+      not_a_number: n'est pas un nombre
+      not_found: 
+      not_locked: 
+      not_saved: 
+      odd: doit être impair
+      present: 
+      record_invalid: ! 'La validation a échoué : %{errors}'
+      restrict_dependent_destroy: 
+      retry: 
+      taken: n'est pas disponible
+      too_long:
+        one: est trop long (pas plus d'un caractère)
+        other: est trop long (pas plus de %{count} caractères)
+      too_short:
+        one: est trop court (au moins un caractère)
+        other: est trop court (au moins %{count} caractères)
+      wrong_length:
+        one: ne fait pas la bonne longueur (doit comporter un seul caractère)
+        other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
+    template:
+      body: ! 'Veuillez vérifier les champs suivants : '
+      header:
+        one: ! 'Impossible d''enregistrer ce(tte) %{model} : %{count} erreur'
+        other: ! 'Impossible d''enregistrer ce(tte) %{model} : %{count} erreurs'
+  federations:
+    index:
+      actions: 
+      new: 
+      schools_count: 
+      students_count: 
+      teachers: 
+      title: 
+  helpers:
+    actions: 
+    label:
+      school:
+        account_name: 
+        federation_id: 
+        name: 
+        nucleo_id: 
+      user:
+        federation_id: 
+        locale: 
+        role: 
+        username: 
+    links:
+      back: 
+      cancel: 
+      confirm: 
+      destroy: 
+      edit: 
+      new: 
+    select:
+      prompt: Veuillez sélectionner
+    submit:
+      create: Créer un(e) %{model}
+      school:
+        create: 
+      submit: Enregistrer ce(tte) %{model}
+      update: Modifier ce(tte) %{model}
+      user:
+        create: 
+        update: 
+    titles:
+      edit: 
+      new: 
+  layouts:
+    navbar:
+      federations: 
+      global: 
+      ranking: 
+      schools: 
+      users: 
+  monthly_stat:
+    description:
+      demand: 
+      emails: 
+      phonecalls: 
+      website_contact: 
+    names:
+      aspirante_students: 
+      assistant_students: 
+      begginers_dropout_rate: 
+      chela_students: 
+      conversion_count: 
+      conversion_rate: 
+      demand: 
+      dropout_rate: 
+      dropouts: 
+      dropouts_begginers: 
+      dropouts_intermediates: 
+      emails: 
+      enrollment_rate: 
+      enrollments: 
+      female_students: 
+      graduado_students: 
+      in_professional_training: 
+      interviews: 
+      male_students: 
+      master_students: 
+      phonecalls: 
+      p_interviews: 
+      professor_students: 
+      sadhaka_students: 
+      students: 
+      students_average_age: 
+      swasthya_dropout_rate: 
+      swasthya_students_subtotal: 
+      website_contact: 
+      yogin_students: 
+  monthly_stats:
+    chrono_table:
+      confirm: 
+      conversion_calculation: 
+      conversion_explanation: 
+      efectividad_calculation: 
+      efectividad_explanation: 
+      evasion_calculation: 
+      evasion_explanation: 
+      title: 
+    form:
+      manual_edition_disable_sync: 
+  number:
+    currency:
+      format:
+        delimiter: ! ' '
+        format: ! '%n %u'
+        precision: 2
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: €
+    format:
+      delimiter: ! ' '
+      precision: 3
+      separator: ! ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: milliard
+          million: million
+          quadrillion: million de milliards
+          thousand: millier
+          trillion: billion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 2
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: octet
+            other: octets
+          gb: Go
+          kb: ko
+          mb: Mo
+          tb: To
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  ranking:
+    column: 
+    columns: 
+    date: 
+    federations: 
+    missing_schools: 
+    name: 
+    title: 
+  schools:
+    form:
+      cancel: 
+    index:
+      actions: 
+      last_registered_stat: 
+      new: 
+      not_syncing: 
+      students: 
+      synced_at: 
+      teachers: 
+      title: 
+    never_synced: 
+    new:
+      title: 
+    search_form:
+      show_only_w_account_name_blank: 
+    show:
+      back: 
+      click_to_change: 
+      new: 
+      sync_last_months: 
+      sync_now_year_data: 
+      sync_year_data: 
+    sync_request_notification:
+      failed_sync: 
+      pending_sync: 
+    sync_request_notification_running_sync: 
+    sync_year:
+      couldnt_queue_sync: 
+      queued: 
+  search: 
+  see: 
+  support:
+    array:
+      last_word_connector: ! ' et '
+      two_words_connector: ! ' et '
+      words_connector: ! ', '
+    select:
+      prompt: 
+  time:
+    am: am
+    formats:
+      default: ! '%d %B %Y %H:%M:%S'
+      long: ! '%A %d %B %Y %H:%M'
+      short: ! '%d %b %H:%M'
+    pm: pm
+  unauthorized:
+    default: 
+  users:
+    create:
+      success: 
+    edit:
+      title: 
+    index:
+      actions: 
+      new: 
+      title: 
+    new:
+      title: 
+    show:
+      back: 
+      confirm: 
+      destroy: 
+      edit: 
+      title: 
+  views:
+    pagination:
+      first: 
+      last: 
+      next: 
+      previous: 
+  warning: 
