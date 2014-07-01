@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-
+  layout 'reports'
   def marketing_snapshot
   end
 

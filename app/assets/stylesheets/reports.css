@@ -1,8 +1,13 @@
-body {
+/*
+ *= require application
+ 
+*/
+
+.main-content {
 	font: 12px/15px 'Lato', sans-serif;
 	color: #8a8ea5;
 	margin: 0;
-	//background: #222;
+	background: #222;
 	min-width: 1285px;
 }
 img { border: none; }
@@ -13,11 +18,12 @@ a {
 a:hover { text-decoration: underline; }
 #wrapper {
 	margin: 0 auto;
-	max-width: 1285px;
+	max-width: 100%;
 }
 #main {
 	overflow: hidden;
 	padding: 0 0 0 0;
+	width: 100%;
 }
 #header {
 	overflow: hidden;
@@ -28,12 +34,12 @@ a:hover { text-decoration: underline; }
 	width: 8.6%;
 }
 #main #content {
-	width: 91.3%;
-	float: left;
+	width: 100%;
 	background: #e6e7f0;
 	border-radius: 5px;
-	padding: 0;
+	padding: 0px 6px 0px 10px;
 	overflow: hidden;
+	margin: 0 auto;
 }
 #main #content .manu {
 	width: 100%;
@@ -42,8 +48,8 @@ a:hover { text-decoration: underline; }
 #content .snapshort-holder {
 	overflow: hidden;
 	background: #f8f9fe;
-	margin: 11px 31px;
-	border-radius: 3px;
+	margin: 0 10px 0 0;
+  border-radius: 3px;
 }
 #main #content .heading {
 	background: #FFF;
@@ -73,7 +79,7 @@ a:hover { text-decoration: underline; }
 	border: 1px solid #e9edf1;
 	border-radius: 3px;
 	overflow: hidden;
-	margin: 0 4px;
+	margin: 0 8.1px;
 }
 #content .four-column .column .img-holder {
 	width: 100%;
@@ -144,7 +150,7 @@ a:hover { text-decoration: underline; }
 #content .two-column .column .percentage:after {
 	content: '';
 	position: absolute;
-	background: url(/assets/images/Untitled-1.png) no-repeat;
+	background: url(/assets/reports/Untitled-1.png) no-repeat;
 	height: 112px;
 	width: 56px;
 	top: 0;
@@ -190,6 +196,7 @@ a:hover { text-decoration: underline; }
 .snapshort-holder .graph-area {
 	overflow: hidden;
 	padding: 0 30px;
+	width: 100%;
 }
 #content .date {
 	float: right;
@@ -203,7 +210,7 @@ a:hover { text-decoration: underline; }
 	background: #FFF;
 }
 #content .date .previ {
-	background: url(/assets/images/prei-bg_10.jpg) no-repeat 0 50%;
+	background: url(/assets/reports/prei-bg_10.jpg) no-repeat 0 50%;
 	text-indent: -9999px;
 	width: 7px;
 	height: 14px;
@@ -211,7 +218,7 @@ a:hover { text-decoration: underline; }
 	float: left;
 }
 #content .date .next {
-	background: url(/assets/images/next-bg_12.jpg) no-repeat 100% 50%;
+	background: url(/assets/reports/next-bg_12.jpg) no-repeat 100% 50%;
 	text-indent: -99999px;
 	width: 7px;
 	height: 14px;
@@ -234,7 +241,7 @@ a:hover { text-decoration: underline; }
 	background: #FFF;
 }
 #content .refresh .arrow {
-	background: url(/assets/images/refresh-bg_14.jpg) no-repeat;
+	background: url(/assets/reports/refresh-bg_14.jpg) no-repeat;
 	text-indent: -99999px;
 	display: block;
 	height: 14px;
@@ -247,14 +254,12 @@ a:hover { text-decoration: underline; }
 	text-align: center;
 	margin: 0 -6px;
 }
-.four-column-area div:first-child{
-	margin-left: 2% !important;
-}
+
 #content .four-column-area .column-area {
 	background: #fff;
 	border: 1px solid #e9edf1;
 	border-radius: 3px;
-	width: 23.6%;
+	width: 22.6%;
 	margin: 0 5px 40px;
 	padding: 0;
 	display: inline-block;
@@ -330,14 +335,16 @@ a:hover { text-decoration: underline; }
 }
 .distribution-area .student-distribution {
 	float: right;
-	width: 59.5%;
+	width: 58.5%;
+	margin-right: 5px;
 	border-radius: 3px;
 }
-.distribution-area .student-distribution .distribution { background: url(/assets/images/pattren.jpg); }
+.distribution-area .student-distribution .distribution { background: url(/assets/reports/pattren.jpg); }
 .distribution-area .main-distribution {
 	float: left;
 	width: 39.5%;
 	border-radius: 3px;
+	margin-left: 5px;
 }
 .distribution-area .distribution {
 	overflow: hidden;
@@ -358,10 +365,10 @@ a:hover { text-decoration: underline; }
 }
 .distribution-area .distribution .distribution-list.add:after {
 	content: '';
-	background: url(/assets/images/saparator4.jpg) no-repeat;
+	background: url(/assets/reports/saparator4.jpg) no-repeat;
 	height: 1px;
 	width: 169px;
-	left: -120px;
+	left: -198px;
 	top: 65%;
 	position: absolute;
 }
@@ -371,36 +378,36 @@ a:hover { text-decoration: underline; }
 	list-style: none;
 	overflow: hidden;
 	;
-	background: url(/assets/images/saparator.jpg) no-repeat 0 11px;
+	background: url(/assets/reports/saparator.jpg) no-repeat 0 11px;
 	font-size: 16px;
 	line-height: 20px;
 	color: #726d6d;
 }
 .distribution-area .distribution ul li {
 	position: relative;
-	background: url(/assets/images/bg-list.png) no-repeat 0 11px;
+	background: url(/assets/reports/bg-list.png) no-repeat 0 11px;
 	padding: 3px 0 4px 50px;
-	font-size: 11px;
+	font-size: 17px;
 }
 .distribution-area .distribution ul li:after {
 	content: '';
-	background: url(/assets/images/ico5.png) no-repeat;
+	background: url(/assets/reports/ico5.png) no-repeat;
 	height: 20px;
 	width: 20px;
 	position: absolute;
 	top: 2px;
 	left: 15px;
 }
-.distribution-area .distribution ul li.femail:after { background: url(/assets/images/ico6.png) no-repeat; }
+.distribution-area .distribution ul li.femail:after { background: url(/assets/reports/ico6.png) no-repeat; }
 .distribution-area .distribution ul li.average:after {
-	background: url(/assets/images/saparator3.jpg) no-repeat;
+	background: url(/assets/reports/saparator3.jpg) no-repeat;
 	height: 35px;
 	width: 30px;
 	top: 2px;
 	left: 27px;
 }
-.distribution-area .distribution ul li.begginer:after { background: url(/assets/images/ico7.png) no-repeat; }
-.distribution-area .distribution ul li.graduate:after { background: url(/assets/images/ico8.png) no-repeat; }
+.distribution-area .distribution ul li.begginer:after { background: url(/assets/reports/ico7.png) no-repeat; }
+.distribution-area .distribution ul li.graduate:after { background: url(/assets/reports/ico8.png) no-repeat; }
 .distribution-area .distribution ul li.average { margin: 52px 0 0 0; }
 .distribution-area .distribution ul li span {
 	font-size: 23px;
@@ -415,9 +422,9 @@ a:hover { text-decoration: underline; }
 }
 .distribution-area .distribution .distribution-list.add ul {
 	margin: 0 0 0;
-	background: url(/assets/images/saparator5.png) no-repeat 0 11px;
+	background: url(/assets/reports/saparator5.png) no-repeat 0 11px;
 	position: relative;
-	left: -17px;
+	left: -95px;
 }
 .distribution-area .distribution ul li strong {
 	font-weight: normal;
@@ -555,8 +562,8 @@ body { min-width: 320px; }
 #content .two-column-area .column-area .headline h3,  #content .four-column-area .column-area .headline h3 { font-size: 18px; }
 .four-column-area .column-area .num-area .num { font-size: 52px; }
 .distribution-area .student-distribution, .distribution-area .main-distribution {
-	width: 100%;
 	margin: 0 0 10px;
+
 }
 }
 
@@ -621,4 +628,57 @@ body { min-width: 320px; }
 }
 *, *:before, *:after {
     -moz-box-sizing: content-box !important;
+}
+.ui-slider .ui-slider-handle {
+    cursor: default;
+    height: 1.2em !important;
+    position: absolute;
+    width: 15px;
+    z-index: 2;
+}
+.middle-container {
+	//background: #E6E7F0;;
+	//margin: -20px -20px 0;
+  padding: 0;
+  min-height: 569px;
+}
+
+@media screen and (min-width:300px) and (max-width:700px){
+	.distribution-area .student-distribution, .distribution-area .main-distribution {
+		width: 100%;
+	}
+	body {
+    min-width: inherit;
+	}
+	.distribution-area .distribution .distribution-list.add ul {
+    left: 0px;
+	}
+}
+
+@media screen and (min-width: 701px) and (max-width: 1000px){
+	.distribution-area .distribution .distribution-list.add ul {
+    left: 0px;
+	}
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .ui-slider-horizontal .ui-slider-range {
+    	height: 117% !important;
+    }
+    
+    #content .snapshort-holder {
+    	margin: 0 -6px 0 0;
+    }
+    
+    *, *:before, *:after {
+    	box-sizing: content-box;
+    }
+
+    .distribution-area .student-distribution .headline{
+    	width: 88%;
+    }
+    .distribution-area .student-distribution .distribution{
+      width: 92%;	
+    }
+
 }
