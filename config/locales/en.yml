@@ -94,9 +94,9 @@ en:
     sync_request_notification_running_sync: We are syncing your data right now. (%{progress}%)
     form:
       cancel: en, helpers.links.cancel
-    never_synced: 
     new:
       title: New School
+    never_synced: 
   layouts:
     navbar:
       global: Global
@@ -178,11 +178,11 @@ en:
           one: We could not save this %{model} because there was an error
           other: We could not save this %{model} because there were %{count} errors
     models:
-      federation: Federation
       monthly_stat: Monthly stat
       school: School
-      school_monthly_stat: School monthly stat
+      federation: Federation
       user: User
+      school_monthly_stat: School monthly stat
   federations:
     index:
       teachers: Instructors
@@ -228,6 +228,13 @@ en:
   download: 
   helpers:
     actions: 
+    links:
+      back: 
+      confirm: Are you sure?
+      destroy: 
+      edit: 
+      new: 
+      cancel: 
     label:
       school:
         account_name: 
@@ -239,13 +246,6 @@ en:
         locale: 
         role: 
         username: 
-    links:
-      back: 
-      cancel: 
-      confirm: Are you sure?
-      destroy: 
-      edit: 
-      new: 
     submit:
       school:
         create: Create School
@@ -271,11 +271,42 @@ en:
   support:
     select:
       prompt: Please select
-  unauthorized:
-    default: You are not authorized to access this page.
   views:
     pagination:
       first: First
       last: Last
       next: Next
       previous: Previous
+  unauthorized:
+    default: You are not authorized to access this page.
+  monthly_snapshot:
+    marketing:
+      monthly_snapshot: Monthly Snapshot
+      emails&contacts: Emails & Contacts
+      calls_received: Calls received
+      visits: Visits
+      non_profile: Non-Profile
+      profile: Profile
+      subscriptions: Subscriptions
+      convertion_rate: Convertion Rate
+      remote_contacts_became_visit: Remote Contacts Became Visit
+      visit_became_subscriptions: Visit Became Subscriptions
+      total_successful_rate: Total Successful Rate
+      total_demand: Total demand
+      Total_Demand: Total Demand
+    pedagogic:
+      monthly_snapshot: Monthly Snapshot
+      successful_enrollments: Successful Enrollments
+      total_dropouts: Total Dropouts
+      total_students: Total Students
+      growth_or_decrease: Growth or Decrease
+      distribution_male_&_female: Distribution Male & Female
+      male: Male
+      female: Female
+      average_student: Average Student
+      year: YEAR
+      total_of_students: Total of Students
+      begginer: Begginer
+      graduate: Graduate
+      senior: Senior
+

@@ -3,21 +3,23 @@
     <div id="content">
         <div class="snapshort-holder">
           <div class="heading">
-            <h1>Monthly Snapshot</h1>
+            <h1><%= t("monthly_snapshot.pedagogic.monthly_snapshot") %></h1>
             <div class="date-area">
               <div class="refresh"><a href="#" class="arrow">arrow</a></div>
               <div class="date">
-                <a href="#" class="previ"></a> <span class="year">May</span><a href="#" class="next"></a> 
+                <a href="#" class="previ"></a> 
+                <span class="year"><%= set_current_month_and_year %></span>
+                <a href="#" class="next"></a> 
               </div>
             </div>
           </div>
           <div class="four-column-area">
             <div class="column-area">
               <div class="headline">
-                <h3>Successful Enrollments </h3>
+                <h3><%= t("monthly_snapshot.pedagogic.successful_enrollments") %></h3>
               </div>
               <div class="num-area">
-                <span class="num">3,568</span>
+                <span class="num"><%= number_with_delimiter(@enrollments) %> </span>
                 <div class="img-holder"> 
                   <%= image_tag("reports/icon5_03.png", height: '37', width: '197')%>
                 </div>
@@ -25,20 +27,20 @@
             </div>
             <div class="column-area">
               <div class="headline">
-                <h3>Total Dropouts</h3>
+                <h3><%= t("monthly_snapshot.pedagogic.total_dropouts") %></h3>
               </div>
               <div class="num-area">
-                <span class="num">2,568</span>
+                <span class="num"><%= number_with_delimiter(@dropouts) %></span>
                 <div class="img-holder"> 
                   <%= image_tag("reports/icon6_03.png", height: '37', width: '197')%> </div>
                 </div>
             </div>
             <div class="column-area">
               <div class="headline">
-                <h3>Total Students</h3>
+                <h3><%= t("monthly_snapshot.pedagogic.total_students") %></h3>
               </div>
               <div class="num-area">
-                <span class="num">1,236</span>
+                <span class="num"><%= number_with_delimiter(@students) %></span>
                 <div class="img-holder"> 
                   <%= image_tag("reports/icon7_03.png", height: '37', width: '197')%> 
                 </div>
@@ -46,10 +48,10 @@
             </div>
             <div class="column-area">
               <div class="headline">
-                <h3>Growth or Decrease </h3>
+                <h3><%= t("monthly_snapshot.pedagogic.growth_or_decrease") %> </h3>
               </div>
               <div class="num-area">
-                <span class="num">+3</span>
+                <span class="num"><%= set_growth_rate(@growth) %></span>
                 <div class="img-holder"> 
                   <%= image_tag("reports/icon8_03.png", height: '37', width: '197')%> 
                 </div>
@@ -62,7 +64,7 @@
         <section class="distribution-area">
           <div class="main-distribution">
             <div class="headline">
-              <h2>Distribution Male &amp; female</h2>
+              <h2><%= t("monthly_snapshot.pedagogic.distribution_male_&_female") %></h2>
             </div>
             <div class="distribution">
               <div class="placeholder">
@@ -70,16 +72,25 @@
               </div>
               <div class="distribution-list">
                 <ul>
-                  <li class="mail">70 % Male</li>
-                  <li class="femail">30 % Female</li>
-                  <li class="average">Average Student <span>18 YEAR</span></li>
+                  <li class="mail">
+                    <%= @male_students%> % 
+                    <%= t("monthly_snapshot.pedagogic.male") %>
+                  </li>
+                  <li class="femail">
+                    <%= @female_students %> % 
+                    <%= t("monthly_snapshot.pedagogic.female") %>
+                  </li>
+                  <li class="average">
+                    <%= t("monthly_snapshot.pedagogic.average_student") %> 
+                    <span><%= @students_avg_age %> <%= t("monthly_snapshot.pedagogic.year") %></span>
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="student-distribution">
             <div class="headline">
-              <h2>Total of Students </h2>
+              <h2><%= t("monthly_snapshot.pedagogic.total_of_students") %> </h2>
             </div>
             <div class="distribution">
               <div class="placeholder">
@@ -87,9 +98,18 @@
               </div>
               <div class="distribution-list add">
                 <ul>
-                  <li class="begginer">Begginer <strong>25 %</strong> </li>
-                  <li class="graduate">Graduate <strong>25 %</strong> </li>
-                  <li class="senior">Senior <strong>50 %</strong> </li>
+                  <li class="begginer">
+                    <%= t("monthly_snapshot.pedagogic.begginer") %>
+                    <strong><%= @begginer %> %</strong> 
+                  </li>
+                  <li class="graduate">
+                    <%= t("monthly_snapshot.pedagogic.graduate") %> 
+                    <strong><%= @graduate %> %</strong> 
+                  </li>
+                  <li class="senior">
+                    <%= t("monthly_snapshot.pedagogic.senior") %> 
+                    <strong><%= @senior %> %</strong> 
+                  </li>
                 </ul>
               </div>
             </div>
@@ -99,9 +119,15 @@
     </div>    
   </div>
 </div>
-
-
-
-
-
+<script>
+  function pedagogic_chart_data() {
+    return <%= pedagogic_chart_data %>
+  }
+  function distribution_pie_chart_data() {
+    return <%= distribution_pie_chart_data %>
+  }
+  function students_pie_chart_data() {
+    return <%= students_pie_chart_data %>
+  }
+</script>
 
