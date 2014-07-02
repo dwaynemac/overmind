@@ -680,5 +680,9 @@ body { min-width: 320px; }
     .distribution-area .student-distribution .distribution{
       width: 92%;	
     }
+}
 
+#srch-term {
+	height: 0%;
+  width: 87%;
 }
