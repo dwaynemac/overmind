@@ -44,6 +44,7 @@ en:
       students_average_age: 
       swasthya_dropout_rate: Dropout of Intermediaries
       swasthya_students_subtotal: Subtotal of SwáSthya Students
+      assistantxe_students: 
   monthly_stats:
     chrono_table:
       title: Monthly statistics
@@ -103,7 +104,7 @@ en:
       federations: Federations
       schools: Schools
       users: Users
-      ranking: 
+      ranking: Ranking
   users:
     index:
       actions: Actions
@@ -225,7 +226,7 @@ en:
       send_paranoid_instructions: If your e-mail exists in our database, you will receive a password recovery link on your e-mail
     unlocks:
       send_instructions: You will receive an email with instructions on how to unlock your account in a few moments.
-  download: 
+  download: download
   helpers:
     actions: 
     links:
@@ -281,19 +282,19 @@ en:
     default: You are not authorized to access this page.
   monthly_snapshot:
     marketing:
-      monthly_snapshot: Monthly Snapshot
-      emails&contacts: Emails & Contacts
-      calls_received: Calls received
-      visits: Visits
-      non_profile: Non-Profile
-      profile: Profile
-      subscriptions: Subscriptions
-      convertion_rate: Convertion Rate
-      remote_contacts_became_visit: Remote Contacts Became Visit
-      visit_became_subscriptions: Visit Became Subscriptions
-      total_successful_rate: Total Successful Rate
-      total_demand: Total demand
-      Total_Demand: Total Demand
+      monthly_snapshot: 
+      emails&contacts: 
+      calls_received: 
+      visits: 
+      non_profile: 
+      profile: 
+      subscriptions: 
+      convertion_rate: 
+      remote_contacts_became_visit: 
+      visit_became_subscriptions: 
+      total_successful_rate: 
+      total_demand: 
+      Total_Demand: 
     pedagogic:
       monthly_snapshot: Monthly Snapshot
       successful_enrollments: Successful Enrollments
@@ -309,4 +310,10 @@ en:
       begginer: Begginer
       graduate: Graduate
       senior: Senior
-
+      total_of_begginer: 
+      total_of_graduate: 
+      total_of_senior: 
+  rankings:
+    show:
+      options: 
+  submit: 

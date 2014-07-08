@@ -201,7 +201,7 @@ pt-PT:
       send_instructions: 
       send_paranoid_instructions: 
       unlocked: 
-  download: 
+  download: download
   edit: 
   errors:
     attributes:
@@ -290,7 +290,7 @@ pt-PT:
     navbar:
       federations: 
       global: 
-      ranking: 
+      ranking: Ranking
       schools: 
       users: 
   monthly_stat:
@@ -330,6 +330,7 @@ pt-PT:
       swasthya_students_subtotal: 
       website_contact: 
       yogin_students: 
+      assistantxe_students: 
   monthly_stats:
     chrono_table:
       confirm: 
@@ -478,3 +479,26 @@ pt-PT:
       next: 
       previous: 
   warning: 
+  monthly_snapshot:
+    marketing:
+      calls_received: 
+      convertion_rate: 
+      emails&contacts: 
+      monthly_snapshot: 
+      non_profile: 
+      profile: 
+      remote_contacts_became_visit: 
+      subscriptions: 
+      total_demand: 
+      Total_Demand: 
+      total_successful_rate: 
+      visit_became_subscriptions: 
+      visits: 
+    pedagogic:
+      total_of_begginer: 
+      total_of_graduate: 
+      total_of_senior: 
+  rankings:
+    show:
+      options: 
+  submit: 

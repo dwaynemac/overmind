@@ -67,6 +67,7 @@ pt-BR:
       swasthya_students_subtotal: SubTotal Alunos em SwáSthya
       yogin_students: Yôgins
       students_average_age: 
+      assistantxe_students: 
   views:
     pagination:
       first: Primeira
@@ -209,11 +210,11 @@ pt-BR:
       year: Ano
   errors:
     format: ! '%{attribute} %{message}'
-    messages: &78518290
+    messages: &87634790
       restrict_dependent_destroy:
         one: Não é possível excluir o registro pois existe um %{record} dependente
         many: Não é possível excluir o registro pois existem %{record} dependentes
-    template: &78516960
+    template: &87634200
       header:
         one: ! 'Não foi possível gravar %{model}: 1 erro'
         other: ! 'Não foi possível gravar %{model}: %{count} erros.'
@@ -320,8 +321,8 @@ pt-BR:
     pm: ''
   activemodel:
     errors:
-      messages: *78518290
-      template: *78516960
+      messages: *87634790
+      template: *87634200
   activerecord:
     attributes:
       user:
@@ -341,8 +342,8 @@ pt-BR:
         value: 
     errors:
       format: ! '%{attribute} %{message}'
-      messages: *78518290
-      template: *78516960
+      messages: *87634790
+      template: *87634200
     models:
       federation: 
       monthly_stat: 
@@ -367,3 +368,26 @@ pt-BR:
       destroy: 
       edit: 
       title: 
+  monthly_snapshot:
+    marketing:
+      calls_received: 
+      convertion_rate: 
+      emails&contacts: 
+      monthly_snapshot: 
+      non_profile: 
+      profile: 
+      remote_contacts_became_visit: 
+      subscriptions: 
+      total_demand: 
+      Total_Demand: 
+      total_successful_rate: 
+      visit_became_subscriptions: 
+      visits: 
+    pedagogic:
+      total_of_begginer: 
+      total_of_graduate: 
+      total_of_senior: 
+  rankings:
+    show:
+      options: 
+  submit: 
