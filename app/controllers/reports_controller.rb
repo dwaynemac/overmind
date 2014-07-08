@@ -7,13 +7,13 @@ class ReportsController < ApplicationController
   before_filter :set_stats_scope
   
   def marketing_snapshot
-    @televisits = 2564 
+    @emails = get_value(:emails) + get_value(:website_contact)
     @calls = get_value :phonecalls
-    @visits = 1860
-    @fp = 189
-    @perfil = 1600
-    @enrollments = 1129
-    @convertion = 10
+    @visits = get_value :interviews
+    @perfil = get_value :p_interviews
+    @fp = @visits - @perfil
+    @enrollments = get_value :enrollments
+    @convertion = get_value :conversion_rate
     @demand = get_value :demand
   end
 
