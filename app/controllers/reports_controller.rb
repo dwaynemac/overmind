@@ -1,42 +1,72 @@
 class ReportsController < ApplicationController
   layout 'reports'
+
+  load_and_authorize_resource :school
+
+  before_filter :set_ref_date
+  before_filter :set_stats_scope
   
   def marketing_snapshot
-    @televisits = 2564
-    @calls = 2000
+    @televisits = 2564 
+    @calls = get_value :phonecalls
     @visits = 1860
     @fp = 189
     @perfil = 1600
     @enrollments = 1129
     @convertion = 10
-    @demand = 300
+    @demand = get_value :demand
   end
 
   def pedagogic_snapshot
-    
     #widget
-    @enrollments = 3568
-    @dropouts = 2568
-    @students = 1236
-    @growth = 3
+    @enrollments = get_value :enrollments
+    @dropouts = get_value :dropouts
+    @students = get_value :students
+    @growth = @enrollments - @dropouts
     
     #graph
-    @begginers = 600
-    @sadhakas = 400
-    @yogins = 500
-    @chelas = 200
-    @graduados = 300
-    @assistants = 250
-    @professors = 420
+    @begginers = get_value :aspirante_students
+    @sadhakas = get_value :sadhaka_students
+    @yogins = get_value :yogin_students
+    @chelas = get_value :chela_students
+    @graduados = get_value :graduado_students
+    @assistants = get_value :assistant_students
+    @professors = get_value :professor_students
     
     #left pie chart
-    @male_students = 30
-    @female_students = 70
-    @students_avg_age = 18
+    males = get_value :male_students
+    females = get_value :female_students
+    if males+females > 0
+      @male_students = (males.to_f/(males+females)).round(2)
+      @female_students = (females.to_f/(males+females)).round(2)
+    else
+      @male_students = 0
+      @female_students = 0
+    end
+
+    @students_avg_age = get_value :students_avg_age
+
     
     #right pie chart
     @begginer = 60
     @graduate = 30
     @senior = 10
+  end
+
+  private
+
+  def set_ref_date
+    @year = params[:year].try(:to_i)
+    @month = params[:month].try(:to_i)
+
+    @ref_date = Date.civil(@year,@month,1).end_of_month
+  end
+
+  def set_stats_scope
+    @scope = @school.monthly_stats.where(ref_date: @ref_date)
+  end
+  
+  def get_value(stat_name)
+    (@scope.where(name: stat_name).first.try(:value)) || 0
   end
 end

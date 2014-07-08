@@ -87,7 +87,7 @@ class MonthlyStat < ActiveRecord::Base
   end
 
   def cache_teachers_count
-    # TODO dont run if this stat is not :assistante_students, etc
+    # TODO dont run if this stat is not :assistant_students, etc
     self.school.cache_last_teachers_count
   end
 
