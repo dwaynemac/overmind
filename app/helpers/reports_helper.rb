@@ -65,9 +65,9 @@ module ReportsHelper
   end
 
   def current_report
-    if params[:action] = "marketing_snapshot"
+    if params[:action] == "marketing_snapshot"
       "marketing"
-    elsif params[:action] = "pedagogic_snapshot"  
+    elsif params[:action] == "pedagogic_snapshot"  
       "pedagogic"
     end    
   end  
