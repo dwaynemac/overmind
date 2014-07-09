@@ -35,6 +35,40 @@ module ReportsHelper
   end
 
   def set_current_month_and_year
-    Date.today.strftime("%b %y")
-  end    
+    DateTime.new(params[:year].to_i, params[:month].to_i ,1).strftime("%b %y")
+  end
+
+  def set_prev_month_url
+    current_year = params[:year].to_i
+    current_month = params[:month].to_i
+    if current_month == 1
+      prev_month = 12
+      prev_year = current_year - 1
+    else
+      prev_month = current_month - 1
+      prev_year = current_year  
+    end    
+    "/schools/#{params[:school_id]}/reports/#{current_report}/#{prev_year}/#{prev_month}"
+  end
+
+  def set_next_month_url
+    current_year = params[:year].to_i
+    current_month = params[:month].to_i
+    if current_month == 12
+      next_month = 1
+      next_year = current_year + 1
+    else
+      next_month = current_month + 1
+      next_year = current_year  
+    end
+    "/schools/#{params[:school_id]}/reports/#{current_report}/#{next_year}/#{next_month}"
+  end
+
+  def current_report
+    if params[:action] = "marketing_snapshot"
+      "marketing"
+    elsif params[:action] = "pedagogic_snapshot"  
+      "pedagogic"
+    end    
+  end  
 end

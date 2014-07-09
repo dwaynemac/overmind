@@ -6,9 +6,9 @@
           <h1><%= t("monthly_snapshot.marketing.monthly_snapshot") %></h1>
           <div class="date-area">
             <div class="refresh"> <a href="#" class="arrow">arrow</a> </div>
-            <div class="date"> <a href="#" class="previ"></a> 
+            <div class="date"> <%= link_to "", set_prev_month_url, class:'previ' %> 
               <span class="year"><%= set_current_month_and_year %></span> 
-              <a href="#" class="next"></a> 
+              <%= link_to "", set_next_month_url, class:'next' %>
             </div>
           </div>
         </div>
