@@ -293,6 +293,8 @@ pt-PT:
       ranking: Ranking
       schools: 
       users: 
+      marketing_snapshot: 
+      pedagogic_snapshot: 
   monthly_stat:
     description:
       demand: 

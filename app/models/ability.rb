@@ -42,6 +42,7 @@ class Ability
     cannot :sync, School
     cannot :see_global, MonthlyStat
     cannot :read, Ranking
+    cannot :read, :reports
   end
 
   def user_with_enabled_padma_accounts_permitions
@@ -51,6 +52,7 @@ class Ability
       can :read, Federation, id: user_federation_ids
       can :manage, MonthlyStat, school: {account_name: enabled_account_names }
       can :read, Ranking
+      can :read, :reports
     end
   end
 

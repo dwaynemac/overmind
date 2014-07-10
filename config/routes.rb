@@ -6,8 +6,8 @@ Overmind::Application.routes.draw do
   resources :schools do
     resources :reports, only: [] do
       collection do
-        get 'pedagogic/:year/:month', to: 'reports#pedagogic_snapshot'
-        get 'marketing/:year/:month', to: 'reports#marketing_snapshot'
+        get 'pedagogic/:year/:month', to: 'reports#pedagogic_snapshot', as: :pdg
+        get 'marketing/:year/:month', to: 'reports#marketing_snapshot', as: :mkt
       end
     end
     resources :monthly_stats, except: [:show] do

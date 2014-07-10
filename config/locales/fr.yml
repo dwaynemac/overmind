@@ -301,6 +301,8 @@ fr:
       ranking: 
       schools: 
       users: 
+      marketing_snapshot: 
+      pedagogic_snapshot: 
   monthly_stat:
     description:
       demand: 

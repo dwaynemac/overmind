@@ -7,6 +7,8 @@ class ReportsController < ApplicationController
   before_filter :set_stats_scope
   
   def marketing_snapshot
+    authorize! :read, :reports
+
     @emails = get_value(:emails) + get_value(:website_contact)
     @calls = get_value :phonecalls
     @visits = get_value :interviews
@@ -18,6 +20,8 @@ class ReportsController < ApplicationController
   end
 
   def pedagogic_snapshot
+    authorize! :read, :reports
+
     #widget
     @enrollments = get_value :enrollments
     @dropouts = get_value :dropouts

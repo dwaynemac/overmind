@@ -105,6 +105,8 @@ en:
       schools: Schools
       users: Users
       ranking: Ranking
+      marketing_snapshot: 
+      pedagogic_snapshot: 
   users:
     index:
       actions: Actions

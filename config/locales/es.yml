@@ -139,6 +139,8 @@ es:
       schools: Escuelas
       users: Usuarios
       ranking: Ranking
+      marketing_snapshot: Resumen MKT
+      pedagogic_snapshot: Resumen PDG
   time:
     formats:
       default: ! '%A, %d de %B de %Y %H:%M:%S %z'

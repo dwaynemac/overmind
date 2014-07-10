@@ -165,6 +165,8 @@ pt-BR:
       schools: Escolas
       users: Usuários
       ranking: Ranking
+      marketing_snapshot: Resumo MKT
+      pedagogic_snapshot: Resumo PDG
   datetime:
     distance_in_words:
       about_x_hours:
@@ -210,11 +212,11 @@ pt-BR:
       year: Ano
   errors:
     format: ! '%{attribute} %{message}'
-    messages: &-629113278
+    messages: &-629040158
       restrict_dependent_destroy:
         one: Não é possível excluir o registro pois existe um %{record} dependente
         many: Não é possível excluir o registro pois existem %{record} dependentes
-    template: &-629113728
+    template: &-629040528
       header:
         one: ! 'Não foi possível gravar %{model}: 1 erro'
         other: ! 'Não foi possível gravar %{model}: %{count} erros.'
@@ -321,8 +323,8 @@ pt-BR:
     pm: ''
   activemodel:
     errors:
-      messages: *-629113278
-      template: *-629113728
+      messages: *-629040158
+      template: *-629040528
   activerecord:
     attributes:
       user:
@@ -342,8 +344,8 @@ pt-BR:
         value: 
     errors:
       format: ! '%{attribute} %{message}'
-      messages: *-629113278
-      template: *-629113728
+      messages: *-629040158
+      template: *-629040528
     models:
       federation: 
       monthly_stat: 
@@ -370,43 +372,43 @@ pt-BR:
       title: 
   monthly_snapshot:
     marketing:
-      calls_received: 
-      convertion_rate: 
+      calls_received: Telephonemas
+      convertion_rate: Taixa de conversāo
       emails&contacts: 
-      monthly_snapshot: 
-      non_profile: 
-      profile: 
-      remote_contacts_became_visit: 
-      subscriptions: 
-      total_demand: 
-      Total_Demand: 
-      total_successful_rate: 
-      visit_became_subscriptions: 
-      visits: 
-      emails_contacts: 
+      monthly_snapshot: Resumo mensal de marketing
+      non_profile: NP
+      profile: Perfil
+      remote_contacts_became_visit: Conversāo de televisita em visita
+      subscriptions: Matriculas
+      total_demand: Procura
+      Total_Demand: Procura
+      total_successful_rate: Taixa de conversāo
+      visit_became_subscriptions: Efetividade
+      visits: Visitas
+      emails_contacts: Emalis recebidos
     pedagogic:
-      total_of_begginer: 
-      total_of_graduate: 
-      total_of_senior: 
-      average_student: 
-      begginer: 
-      distribution_male_&_female: 
-      female: 
-      graduate: 
-      growth_or_decrease: 
-      male: 
-      monthly_snapshot: 
-      senior: 
-      successful_enrollments: 
-      total_dropouts: 
-      total_of_students: 
-      total_students: 
-      year: 
+      total_of_begginer: Distribuçāo de alunos
+      total_of_graduate: Graduados
+      total_of_senior: Assistentes
+      average_student: Edad promédio
+      begginer: Iniciantes
+      distribution_male_&_female: Distribuçāo de alunos
+      female: Mulheres
+      graduate: Graduados
+      growth_or_decrease: Diferença
+      male: Homens
+      monthly_snapshot: Resumo mensal pedagogico
+      senior: senior
+      successful_enrollments: Matriculas
+      total_dropouts: Evasōes
+      total_of_students: Alunos
+      total_students: Alunos
+      year: Ano
       chart_labels:
-        assistante: 
-        begginer: 
-        graduate: 
-        proffesor: 
+        assistante: Assistentes
+        begginer: Iniciantes
+        graduate: Graduados
+        proffesor: Professores
   rankings:
     show:
       options: 
