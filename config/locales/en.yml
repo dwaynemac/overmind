@@ -295,24 +295,30 @@ en:
       total_successful_rate: 
       total_demand: 
       Total_Demand: 
+      emails_contacts: 
     pedagogic:
-      monthly_snapshot: Monthly Snapshot
-      successful_enrollments: Successful Enrollments
-      total_dropouts: Total Dropouts
-      total_students: Total Students
-      growth_or_decrease: Growth or Decrease
-      distribution_male_&_female: Distribution Male & Female
-      male: Male
-      female: Female
-      average_student: Average Student
-      year: YEAR
-      total_of_students: Total of Students
-      begginer: Begginer
-      graduate: Graduate
-      senior: Senior
+      monthly_snapshot: 
+      successful_enrollments: 
+      total_dropouts: 
+      total_students: 
+      growth_or_decrease: 
+      distribution_male_&_female: 
+      male: 
+      female: 
+      average_student: 
+      year: 
+      total_of_students: 
+      begginer: 
+      graduate: 
+      senior: 
       total_of_begginer: 
       total_of_graduate: 
       total_of_senior: 
+      chart_labels:
+        assistante: 
+        begginer: 
+        graduate: 
+        proffesor: 
   rankings:
     show:
       options: 

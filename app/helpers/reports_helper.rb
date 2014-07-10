@@ -1,7 +1,21 @@
+# encoding: utf-8
 module ReportsHelper
   def set_growth_rate growth
     growth < 0 ? growth : "+"+growth.to_s
   end  
+
+  def pedagogic_chart_labels
+    chart_labels = {
+                    'begginear'=> t('monthly_snapshot.pedagogic.chart_labels.begginer'),
+                    'sadhakas'=> 'sádhakas',
+                    'yogins'=> 'yôgins',
+                    'chelas'=> 'chêlas',
+                    'graduate'=> t('monthly_snapshot.pedagogic.chart_labels.graduate'),
+                    'assistant'=> t('monthly_snapshot.pedagogic.chart_labels.assistante'),
+                    'professor'=> t('monthly_snapshot.pedagogic.chart_labels.proffesor'),
+    }
+    chart_labels.to_json.html_safe
+  end
 
   def pedagogic_chart_data
     chart_data = {  

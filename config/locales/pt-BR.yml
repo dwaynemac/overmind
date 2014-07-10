@@ -210,11 +210,11 @@ pt-BR:
       year: Ano
   errors:
     format: ! '%{attribute} %{message}'
-    messages: &87634790
+    messages: &-629113278
       restrict_dependent_destroy:
         one: Não é possível excluir o registro pois existe um %{record} dependente
         many: Não é possível excluir o registro pois existem %{record} dependentes
-    template: &87634200
+    template: &-629113728
       header:
         one: ! 'Não foi possível gravar %{model}: 1 erro'
         other: ! 'Não foi possível gravar %{model}: %{count} erros.'
@@ -321,8 +321,8 @@ pt-BR:
     pm: ''
   activemodel:
     errors:
-      messages: *87634790
-      template: *87634200
+      messages: *-629113278
+      template: *-629113728
   activerecord:
     attributes:
       user:
@@ -342,8 +342,8 @@ pt-BR:
         value: 
     errors:
       format: ! '%{attribute} %{message}'
-      messages: *87634790
-      template: *87634200
+      messages: *-629113278
+      template: *-629113728
     models:
       federation: 
       monthly_stat: 
@@ -383,10 +383,30 @@ pt-BR:
       total_successful_rate: 
       visit_became_subscriptions: 
       visits: 
+      emails_contacts: 
     pedagogic:
       total_of_begginer: 
       total_of_graduate: 
       total_of_senior: 
+      average_student: 
+      begginer: 
+      distribution_male_&_female: 
+      female: 
+      graduate: 
+      growth_or_decrease: 
+      male: 
+      monthly_snapshot: 
+      senior: 
+      successful_enrollments: 
+      total_dropouts: 
+      total_of_students: 
+      total_students: 
+      year: 
+      chart_labels:
+        assistante: 
+        begginer: 
+        graduate: 
+        proffesor: 
   rankings:
     show:
       options: 

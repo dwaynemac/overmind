@@ -494,10 +494,30 @@ fr:
       total_successful_rate: 
       visit_became_subscriptions: 
       visits: 
+      emails_contacts: 
     pedagogic:
       total_of_begginer: 
       total_of_graduate: 
       total_of_senior: 
+      average_student: 
+      begginer: 
+      distribution_male_&_female: 
+      female: 
+      graduate: 
+      growth_or_decrease: 
+      male: 
+      monthly_snapshot: 
+      senior: 
+      successful_enrollments: 
+      total_dropouts: 
+      total_of_students: 
+      total_students: 
+      year: 
+      chart_labels:
+        assistante: 
+        begginer: 
+        graduate: 
+        proffesor: 
   rankings:
     show:
       options: 

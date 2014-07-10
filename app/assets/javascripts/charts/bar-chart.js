@@ -1,40 +1,41 @@
 var chart;
 
 var pedagogic_chart_data = pedagogic_chart_data()
+var pedagogic_chart_labels = pedagogic_chart_labels()
 
 var chartData = [
     {
-        "country": "begginear ",
+        "country": pedagogic_chart_labels["begginear"],
         "visits": pedagogic_chart_data["begginear"],
         "color": "#cfd9db"
     },
     {
-        "country": "sadhakas ",
+        "country": pedagogic_chart_labels["sadhakas"],
         "visits": pedagogic_chart_data["sadhakas"],
         "color": "#fef400"
     },
     {
-        "country": "yogins",
+        "country": pedagogic_chart_labels["yogins"],
         "visits": pedagogic_chart_data["yogins"],
         "color": "#fe5e00"
     },
     {
-        "country": "chelas",
+        "country": pedagogic_chart_labels["chelas"],
         "visits": pedagogic_chart_data["chelas"],
         "color": "#ff060a"
     },
     {
-        "country": "graduate",
+        "country": pedagogic_chart_labels["graduate"],
         "visits": pedagogic_chart_data["graduate"],
         "color": "#9500d4"
     },
     {
-        "country": "assistant teacher ",
+        "country": pedagogic_chart_labels["assistant"],
         "visits": pedagogic_chart_data["assistant"],
         "color": "#01b1e1"
     },
     {
-        "country": "professor (blue)",
+        "country": pedagogic_chart_labels["professor"],
         "visits": pedagogic_chart_data["professor"],
         "color": "#0000fe"
     },

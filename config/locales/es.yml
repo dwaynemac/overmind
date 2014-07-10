@@ -411,23 +411,43 @@ es:
   confirm: confirmar
   monthly_snapshot:
     marketing:
-      calls_received: 
-      convertion_rate: 
+      calls_received: Llamadas recibidas
+      convertion_rate: Tasa de conversión
       emails&contacts: 
-      monthly_snapshot: 
-      non_profile: 
-      profile: 
-      remote_contacts_became_visit: 
-      subscriptions: 
-      total_demand: 
-      Total_Demand: 
-      total_successful_rate: 
-      visit_became_subscriptions: 
-      visits: 
+      monthly_snapshot: Resumen mensual de marketing
+      non_profile: FP
+      profile: Perfil
+      remote_contacts_became_visit: Conversión de televisita a visita
+      subscriptions: Matrículas
+      total_demand: Procura
+      Total_Demand: Procura
+      total_successful_rate: Tasa de conversión
+      visit_became_subscriptions: Efectividad
+      visits: Visitas
+      emails_contacts: Emails recibidos
     pedagogic:
-      total_of_begginer: 
-      total_of_graduate: 
-      total_of_senior: 
+      total_of_begginer: Distribución de alumnos
+      total_of_graduate: Graduados
+      total_of_senior: Asistentes
+      average_student: Edad promedio
+      begginer: Iniciantes
+      distribution_male_&_female: Distrbución de alumnos
+      female: Mujeres
+      graduate: Graduados
+      growth_or_decrease: Diferencia
+      male: Hombres
+      monthly_snapshot: Resumen mensual pedagógico
+      senior: senior
+      successful_enrollments: Matrículas
+      total_dropouts: Evasiones
+      total_of_students: Alumnos
+      total_students: Alumnos
+      year: Año
+      chart_labels:
+        assistante: Asistentes
+        begginer: Iniciantes
+        graduate: Graduados
+        proffesor: Profesores
   rankings:
     show:
       options: 
