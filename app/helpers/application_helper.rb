@@ -1,5 +1,8 @@
 module ApplicationHelper
 
+  def current_school
+    current_ability.schools.try :first
+  end
 
   # Adds given files to end of body tag
   def javascript(*files)

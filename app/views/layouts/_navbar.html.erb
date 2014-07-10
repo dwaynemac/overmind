@@ -84,15 +84,22 @@
         </li>
       <% end -%>
 
-      <% if can?(:read,:reports) -%>
+     
+      <% if can?(:read,:reports) && current_school -%>
         <li class="<%= 'active' if controller_name == 'reports' && action_name == 'marketing_snapshot' %>">
-          <%= link_to t('.marketing_snapshot'), mkt_school_reports_path(school_id: current_ability.schools.first.id, year: Date.today.year, month: Date.today.month)%>
+        <%= link_to t('.marketing_snapshot'),
+          mkt_school_reports_path(school_id: current_school.id,
+                                  year: Date.today.year,
+                                  month: Date.today.month)%>
         </li>
       <% end -%>
 
-      <% if can?(:read,:reports) -%>
+      <% if can?(:read,:reports) && current_school -%>
         <li class="<%= 'active' if controller_name == 'reports' && action_name == 'pedagogic_snapshot' %>">
-          <%= link_to t('.pedagogic_snapshot'), pdg_school_reports_path(school_id: current_ability.schools.first.id, year: Date.today.year, month: Date.today.month)%>
+        <%= link_to t('.pedagogic_snapshot'),
+          pdg_school_reports_path(school_id: current_school.id,
+                                  year: Date.today.year,
+                                  month: Date.today.month)%>
         </li>
       <% end -%>
 
