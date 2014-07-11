@@ -41,14 +41,14 @@ class ReportsController < ApplicationController
     males = get_value :male_students
     females = get_value :female_students
     if males+females > 0
-      @male_students = (males.to_f/(males+females)).round(2)
-      @female_students = (females.to_f/(males+females)).round(2)
+      @male_students = (males.to_f/(males+females)*100).round(0)
+      @female_students = (females.to_f/(males+females)*100).round(0)
     else
       @male_students = 0
       @female_students = 0
     end
 
-    @students_avg_age = get_value :students_avg_age
+    @students_avg_age = get_value :students_average_age
 
     
     #right pie chart
