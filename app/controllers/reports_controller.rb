@@ -67,7 +67,7 @@ class ReportsController < ApplicationController
   end
 
   def set_stats_scope
-    @scope = @school.monthly_stats.where(ref_date: @ref_date)
+    @scope = @school.school_monthly_stats.where(ref_date: @ref_date)
   end
   
   def get_value(stat_name)
