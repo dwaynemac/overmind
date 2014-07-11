@@ -29,13 +29,13 @@
       <div class="middle-container">
         <div class="content">
           <div class="row">
-            <%#<div class="span2">
-              %= render 'layouts/side_bar' %
-            </div>%>
             <div class="span12">
+              <% flash.each do |name, msg| -%>
+                <%= content_tag :div, msg, class: 'alert alert-info' %>
+              <% end -%> 
+
               <%= yield %>
             </div>
-
           </div><!--/row-->
         </div><!--/content-->
 

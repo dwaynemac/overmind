@@ -57,7 +57,31 @@ class ReportsController < ApplicationController
     @senior = 10
   end
 
+  def refresh
+    authorize! :create, SyncRequest
+
+    resp = ""
+    if @school.sync_requests.in_progress.where(year: @year).count > 0
+      resp = t('schools.sync_request_notification_running_sync', progress: @school.sync_requests.in_progress.last.progress)
+    elsif @school.failed_sync_requests?(@year)
+      resp = t('schools.sync_request_notification.failed_sync')
+    elsif (sr = @school.sync_requests.where(year: @year).pending.last)
+      sr.update_attributes priority: 15
+      resp = t('schools.sync_request_notification_running_sync', progress: sr.progress)
+    else
+      sr = @school.sync_requests.create(priority: 10, year: @year, synced_upto: @month-1)
+      resp = t('schools.sync_request_notification_running_sync', progress: sr.progress)
+    end
+
+    redirect_to return_to_path, notice: resp
+  end
+
   private
+
+  def return_to_path
+    m = params[:return_to].match /(.*)_snapshot/
+    "#{school_path(@school)}/reports/#{m[1]}/#{@year}/#{@month}"
+  end
 
   def set_ref_date
     @year = params[:year].try(:to_i)

@@ -9,6 +9,7 @@
 # //= require charts/pie-chart
 
 $(document).ready ->
+
   $("#slider-range").slider
     animate: "fast"
     value: $("#amount").val()

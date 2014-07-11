@@ -1,5 +1,16 @@
 # encoding: utf-8
 module ReportsHelper
+
+  def not_upto_date
+    @school.synced_at.to_date < @ref_date
+  end
+
+  def sync_button
+    if can?(:create, SyncRequest) && @school.padma_enabled? && not_upto_date
+      %[<div class="refresh"><a href="#{refresh_school_reports_path(year: @year, month: @month, return_to: action_name)}" class="arrow">arrow</a></div>].html_safe
+    end
+  end
+
   def set_growth_rate growth
     growth < 0 ? growth : "+"+growth.to_s
   end  

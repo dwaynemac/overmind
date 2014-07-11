@@ -3,9 +3,16 @@
     <div id="content">
         <div class="snapshort-holder">
           <div class="heading">
-            <h1><%= t("monthly_snapshot.pedagogic.monthly_snapshot") %></h1>
+            <h1>
+              <%= t("monthly_snapshot.pedagogic.monthly_snapshot") %>
+              <% if not_upto_date -%>
+                <span class="label label-info">
+                  <%= "#{t('schools.index.synced_at')} #{l(@school.synced_at, format: :long)}" %>
+                </span>
+              <% end -%>
+            </h1>
             <div class="date-area">
-              <div class="refresh"><a href="#" class="arrow">arrow</a></div>
+              <%= sync_button %>
               <div class="date">
                 <%= link_to "", set_prev_month_url, class:'previ' %> 
                 <span class="year"><%= set_current_month_and_year %></span>

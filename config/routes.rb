@@ -8,6 +8,7 @@ Overmind::Application.routes.draw do
       collection do
         get 'pedagogic/:year/:month', to: 'reports#pedagogic_snapshot', as: :pdg
         get 'marketing/:year/:month', to: 'reports#marketing_snapshot', as: :mkt
+        get ':return_to/:year/:month/refresh', to: 'reports#refresh', as: :refresh
       end
     end
     resources :monthly_stats, except: [:show] do
