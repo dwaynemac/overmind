@@ -2,7 +2,13 @@
 module ReportsHelper
 
   def not_upto_date
-    @school.synced_at.nil? || @school.synced_at.to_date < @ref_date
+    unless @school.synced_at.nil?
+      if @ref_date == Date.today.end_of_month
+        @school.synced_at < Time.now-1.hour
+      else
+        @school.synced_at.to_date < @ref_date
+      end
+    end
   end
 
   def sync_button
