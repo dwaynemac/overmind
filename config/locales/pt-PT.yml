@@ -89,10 +89,10 @@ pt-PT:
     - Sexta
     - Sábado
     formats:
-      default: ! '%d/%m/%Y'
-      long: ! '%d de %B de %Y'
+      default: '%d/%m/%Y'
+      long: '%d de %B de %Y'
       month: 
-      short: ! '%d de %B'
+      short: '%d de %B'
     month_names:
     - 
     - Janeiro
@@ -137,16 +137,16 @@ pt-PT:
         other: mais de %{count} anos
       x_days:
         one: 1 dia
-        other: ! '%{count} dias'
+        other: '%{count} dias'
       x_minutes:
         one: 1 minuto
-        other: ! '%{count} minutos'
+        other: '%{count} minutos'
       x_months:
         one: 1 mês
-        other: ! '%{count} meses'
+        other: '%{count} meses'
       x_seconds:
         one: 1 segundo
-        other: ! '%{count} segundos'
+        other: '%{count} segundos'
     prompts:
       day: Dia
       hour: Hora
@@ -207,7 +207,7 @@ pt-PT:
     attributes:
       ref_date:
         not_end_of_month: 
-    format: ! '%{attribute} %{message}'
+    format: '%{attribute} %{message}'
     messages:
       accepted: tem de ser aceite
       already_confirmed: 
@@ -232,7 +232,7 @@ pt-PT:
       not_saved: 
       odd: tem de ser ímpar
       present: 
-      record_invalid: ! 'A validação falhou: %{errors}'
+      record_invalid: 'A validação falhou: %{errors}'
       restrict_dependent_destroy: 
       retry: 
       taken: não está disponível
@@ -240,10 +240,10 @@ pt-PT:
       too_short: é demasiado pequeno (o mínimo é de %{count} caracteres)
       wrong_length: comprimento errado (deve ter %{count} caracteres)
     template:
-      body: ! 'Por favor, verifique os seguintes campos:'
+      body: 'Por favor, verifique os seguintes campos:'
       header:
-        one: ! 'Não foi possível guardar %{model}: 1 erro'
-        other: ! 'Não foi possível guardar %{model}: %{count} erros'
+        one: 'Não foi possível guardar %{model}: 1 erro'
+        other: 'Não foi possível guardar %{model}: %{count} erros'
   federations:
     index:
       actions: 
@@ -349,21 +349,21 @@ pt-PT:
     currency:
       format:
         delimiter: .
-        format: ! '%u%n'
+        format: '%u%n'
         precision: 2
-        separator: ! ','
+        separator: ','
         significant: false
         strip_insignificant_zeros: false
         unit: €
     format:
       delimiter: .
       precision: 3
-      separator: ! ','
+      separator: ','
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
-        format: ! '%n %u'
+        format: '%n %u'
         units:
           billion:
             one: mil milhões
@@ -385,7 +385,7 @@ pt-PT:
         significant: true
         strip_insignificant_zeros: true
       storage_units:
-        format: ! '%n %u'
+        format: '%n %u'
         units:
           byte:
             one: Byte
@@ -443,17 +443,17 @@ pt-PT:
   see: 
   support:
     array:
-      last_word_connector: ! ', e'
-      two_words_connector: ! ' e '
-      words_connector: ! ', '
+      last_word_connector: ', e'
+      two_words_connector: ' e '
+      words_connector: ', '
     select:
       prompt: 
   time:
     am: am
     formats:
-      default: ! '%A, %d de %B de %Y, %H:%Mh'
-      long: ! '%A, %d de %B de %Y, %H:%Mh'
-      short: ! '%d/%m, %H:%M hs'
+      default: '%A, %d de %B de %Y, %H:%Mh'
+      long: '%A, %d de %B de %Y, %H:%Mh'
+      short: '%d/%m, %H:%M hs'
     pm: pm
   unauthorized:
     default: 

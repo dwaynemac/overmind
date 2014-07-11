@@ -18,14 +18,14 @@ es:
       conversion_count: Conversiones (#)
       conversion_rate: Conversion (%)
       demand: Procura
-      dropout_rate: ! '% Evasión'
+      dropout_rate: '% Evasión'
       dropouts: Bajas
       dropouts_begginers: Bajas Iniciantes
       dropouts_intermediates: Bajas Intermedios
       begginers_dropout_rate: Evasion de iniciantes
       swasthya_dropout_rate: Evasion de intermedios
       emails: Emails
-      enrollment_rate: ! '% Efectividad'
+      enrollment_rate: '% Efectividad'
       enrollments: Matrículas
       female_students: Alumnas mujeres
       graduado_students: Alumnos Graduados
@@ -50,9 +50,9 @@ es:
       last: Última
   date:
     formats:
-      default: ! '%d/%m/%Y'
-      short: ! '%d de %b'
-      long: ! '%d de %B de %Y'
+      default: '%d/%m/%Y'
+      short: '%d de %b'
+      long: '%d de %B de %Y'
     day_names:
     - domingo
     - lunes
@@ -143,31 +143,31 @@ es:
       pedagogic_snapshot: Resumen PDG
   time:
     formats:
-      default: ! '%A, %d de %B de %Y %H:%M:%S %z'
-      short: ! '%d de %b %H:%M'
-      long: ! '%d %b %Y a las %H:%M'
+      default: '%A, %d de %B de %Y %H:%M:%S %z'
+      short: '%d de %b %H:%M'
+      long: '%d %b %Y a las %H:%M'
     am: am
     pm: pm
   support:
     array:
-      words_connector: ! ', '
-      two_words_connector: ! ' y '
-      last_word_connector: ! ', y '
+      words_connector: ', '
+      two_words_connector: ' y '
+      last_word_connector: ', y '
     select:
       prompt: Por favor seleccione
   number:
     format:
       separator: .
-      delimiter: ! ','
+      delimiter: ','
       precision: 3
       significant: false
       strip_insignificant_zeros: false
     currency:
       format:
-        format: ! '%n %u'
+        format: '%n %u'
         unit: €
         separator: .
-        delimiter: ! ','
+        delimiter: ','
         precision: 2
         significant: false
         strip_insignificant_zeros: false
@@ -184,7 +184,7 @@ es:
         significant: true
         strip_insignificant_zeros: true
       storage_units:
-        format: ! '%n %u'
+        format: '%n %u'
         units:
           byte:
             one: Byte
@@ -194,7 +194,7 @@ es:
           gb: GB
           tb: TB
       decimal_units:
-        format: ! '%n %u'
+        format: '%n %u'
         units:
           unit: ''
           thousand: mil
@@ -210,25 +210,25 @@ es:
         other: menos de %{count} segundos
       x_seconds:
         one: 1 segundo
-        other: ! '%{count} segundos'
+        other: '%{count} segundos'
       less_than_x_minutes:
         one: menos de 1 minuto
         other: menos de %{count} minutos
       x_minutes:
         one: 1 minuto
-        other: ! '%{count} minutos'
+        other: '%{count} minutos'
       about_x_hours:
         one: alrededor de 1 hora
         other: alrededor de %{count} horas
       x_days:
         one: 1 día
-        other: ! '%{count} días'
+        other: '%{count} días'
       about_x_months:
         one: alrededor de 1 mes
         other: alrededor de %{count} meses
       x_months:
         one: 1 mes
-        other: ! '%{count} meses'
+        other: '%{count} meses'
       about_x_years:
         one: alrededor de 1 año
         other: alrededor de %{count} años
@@ -283,7 +283,7 @@ es:
     attributes:
       ref_date:
         not_end_of_month: La fecha de referncia debe ser a fin de mes.
-    format: ! '%{attribute} %{message}'
+    format: '%{attribute} %{message}'
     messages:
       inclusion: no está incluido en la lista
       exclusion: está reservado
@@ -329,10 +329,10 @@ es:
         header:
           one: No se pudo guardar este/a %{model} porque se encontró 1 error
           other: No se pudo guardar este/a %{model} porque se encontraron %{count} errores
-        body: ! 'Se encontraron problemas con los siguientes campos:'
+        body: 'Se encontraron problemas con los siguientes campos:'
       messages:
         taken: ya está en uso
-        record_invalid: ! 'La validación falló: %{errors}'
+        record_invalid: 'La validación falló: %{errors}'
         inclusion: no está incluido en la lista
         exclusion: está reservado
         invalid: no es válido
@@ -355,8 +355,8 @@ es:
         invalid_format: Formato invalido
         retry: Algo anduvo mal, reintente en unos instantes.
       full_messages:
-        format: ! '%{attribute} %{message}'
-      format: ! '%{attribute} %{message}'
+        format: '%{attribute} %{message}'
+      format: '%{attribute} %{message}'
     models:
       federation: 
       monthly_stat: 
@@ -386,7 +386,7 @@ es:
   ranking:
     title: Ranking
     name: Nombre
-    missing_schools: ! 'Las siguientes escuelas no fueron incluidas por que no tienen datos en el mes seleccionado:'
+    missing_schools: 'Las siguientes escuelas no fueron incluidas por que no tienen datos en el mes seleccionado:'
     date: Fecha
     column: Columnas
     federations: Federaciones
@@ -444,7 +444,7 @@ es:
       total_dropouts: Evasiones
       total_of_students: Alumnos
       total_students: Alumnos
-      year: Año
+      year: años
       chart_labels:
         assistante: Asistentes
         begginer: Iniciantes

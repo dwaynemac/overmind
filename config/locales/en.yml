@@ -9,7 +9,7 @@ en:
   warning: Warning!
   monthly_stat:
     description:
-      demand: ! 'Number of unique people that made contacted the school. '
+      demand: 'Number of unique people that made contacted the school. '
       emails: Incoming emails
       phonecalls: Incoming phonecalls
       website_contact: Incoming website contacts
@@ -26,7 +26,7 @@ en:
       dropouts_intermediates: SwáSthya drop outs
       emails: Emails
       enrollment_rate: Enrolment Rate
-      enrollments: ! 'Enrolments '
+      enrollments: 'Enrolments '
       female_students: Female students
       graduado_students: Graduate Students
       in_professional_training: In training
@@ -49,9 +49,9 @@ en:
     chrono_table:
       title: Monthly statistics
       evasion_calculation: Drop out calculation
-      evasion_explanation: ! 'This dropout rate is calculated from absolute values. We divide the TOTAL dropouts over the TOTAL number of students. It is not an average. '
+      evasion_explanation: 'This dropout rate is calculated from absolute values. We divide the TOTAL dropouts over the TOTAL number of students. It is not an average. '
       efectividad_calculation: Effectiveness calculation
-      efectividad_explanation: ! 'This effectiveness is calculated from absolute values. We divide the TOTAL enrolments by the TOTAL visits. It is not an average effectiveness. '
+      efectividad_explanation: 'This effectiveness is calculated from absolute values. We divide the TOTAL enrolments by the TOTAL visits. It is not an average effectiveness. '
       conversion_calculation: Total conversion calculation
       conversion_explanation: This conversion rate is the average of the rates of  all schools.
       confirm: Are you sure?
@@ -66,7 +66,7 @@ en:
       retry: Something went wrong, try again in a few moments.
   date:
     formats:
-      month: ! '%b %Y'
+      month: '%b %Y'
   schools:
     index:
       actions: Actions
@@ -142,9 +142,9 @@ en:
         role: Role
         username: User name
     errors:
-      format: ! '%{attribute} %{message}'
+      format: '%{attribute} %{message}'
       full_messages:
-        format: ! '%{attribute} %{message}'
+        format: '%{attribute} %{message}'
       messages:
         accepted: must be accepted
         blank: cannot be left blank
@@ -163,7 +163,7 @@ en:
         not_an_integer: must be an integer
         not_a_number: must be a number
         odd: must be an odd number
-        record_invalid: ! 'The validation failed: %{errors}'
+        record_invalid: 'The validation failed: %{errors}'
         retry: Something went wrong, retry in a few moments.
         taken: it is already in use
         too_long:
@@ -176,7 +176,7 @@ en:
           one: does not have the correct length (exactly 1 character)
           other: does not have the correct length (exactly %{count} characters)
       template:
-        body: ! 'There were problems on the following fields:'
+        body: 'There were problems on the following fields:'
         header:
           one: We could not save this %{model} because there was an error
           other: We could not save this %{model} because there were %{count} errors
@@ -197,7 +197,7 @@ en:
   ranking:
     title: Ranking
     name: Name
-    missing_schools: ! 'The following schools weren''t included in the table because they don''t have data for the selected month:'
+    missing_schools: 'The following schools weren''t included in the table because they don''t have data for the selected month:'
     date: Date
     federations: Federations
     columns: Columns

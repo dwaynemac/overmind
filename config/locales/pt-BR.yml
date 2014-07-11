@@ -46,12 +46,12 @@ pt-BR:
       conversion_count: Conversāo (#)
       conversion_rate: Conversāo (%)
       demand: Procura
-      dropout_rate: ! '% Evasāo'
+      dropout_rate: '% Evasāo'
       dropouts: Evasōes
       dropouts_begginers: Evasōes de Iniciantes
       dropouts_intermediates: Evasōes de Intermedios
       emails: Emails
-      enrollment_rate: ! '% Efetividade'
+      enrollment_rate: '% Efetividade'
       enrollments: Matrículas
       female_students: Alunas mulheres
       graduado_students: Alunos Graduados
@@ -106,9 +106,9 @@ pt-BR:
     - Sexta
     - Sábado
     formats:
-      default: ! '%d/%m/%Y'
-      long: ! '%d de %B de %Y'
-      short: ! '%d de %B'
+      default: '%d/%m/%Y'
+      long: '%d de %B de %Y'
+      short: '%d de %B'
     month_names:
     - 
     - Janeiro
@@ -193,16 +193,16 @@ pt-BR:
         other: mais de %{count} anos
       x_days:
         one: 1 dia
-        other: ! '%{count} dias'
+        other: '%{count} dias'
       x_minutes:
         one: 1 minuto
-        other: ! '%{count} minutos'
+        other: '%{count} minutos'
       x_months:
         one: 1 mês
-        other: ! '%{count} meses'
+        other: '%{count} meses'
       x_seconds:
         one: 1 segundo
-        other: ! '%{count} segundos'
+        other: '%{count} segundos'
     prompts:
       day: Dia
       hour: Hora
@@ -211,15 +211,15 @@ pt-BR:
       second: Segundo
       year: Ano
   errors:
-    format: ! '%{attribute} %{message}'
-    messages: &-629040158
+    format: '%{attribute} %{message}'
+    messages: &1
       restrict_dependent_destroy:
         one: Não é possível excluir o registro pois existe um %{record} dependente
         many: Não é possível excluir o registro pois existem %{record} dependentes
-    template: &-629040528
+    template: &2
       header:
-        one: ! 'Não foi possível gravar %{model}: 1 erro'
-        other: ! 'Não foi possível gravar %{model}: %{count} erros.'
+        one: 'Não foi possível gravar %{model}: 1 erro'
+        other: 'Não foi possível gravar %{model}: %{count} erros.'
   helpers:
     select:
       prompt: Por favor selecione
@@ -258,21 +258,21 @@ pt-BR:
     currency:
       format:
         delimiter: .
-        format: ! '%u %n'
+        format: '%u %n'
         precision: 2
-        separator: ! ','
+        separator: ','
         significant: false
         strip_insignificant_zeros: false
         unit: R$
     format:
       delimiter: .
       precision: 3
-      separator: ! ','
+      separator: ','
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
-        format: ! '%n %u'
+        format: '%n %u'
         units:
           billion:
             one: bilhão
@@ -294,7 +294,7 @@ pt-BR:
         significant: true
         strip_insignificant_zeros: true
       storage_units:
-        format: ! '%n %u'
+        format: '%n %u'
         units:
           byte:
             one: Byte
@@ -311,20 +311,20 @@ pt-BR:
         delimiter: .
   support:
     array:
-      last_word_connector: ! ' e '
-      two_words_connector: ! ' e '
-      words_connector: ! ', '
+      last_word_connector: ' e '
+      two_words_connector: ' e '
+      words_connector: ', '
   time:
     am: ''
     formats:
-      default: ! '%a, %d de %B de %Y, %H:%M:%S %z'
-      long: ! '%d de %B de %Y, %H:%M'
-      short: ! '%d de %B, %H:%M'
+      default: '%a, %d de %B de %Y, %H:%M:%S %z'
+      long: '%d de %B de %Y, %H:%M'
+      short: '%d de %B, %H:%M'
     pm: ''
   activemodel:
     errors:
-      messages: *-629040158
-      template: *-629040528
+      messages: *1
+      template: *2
   activerecord:
     attributes:
       user:
@@ -343,9 +343,9 @@ pt-BR:
       school_monthly_stat:
         value: 
     errors:
-      format: ! '%{attribute} %{message}'
-      messages: *-629040158
-      template: *-629040528
+      format: '%{attribute} %{message}'
+      messages: *1
+      template: *2
     models:
       federation: 
       monthly_stat: 
@@ -403,7 +403,7 @@ pt-BR:
       total_dropouts: Evasōes
       total_of_students: Alunos
       total_students: Alunos
-      year: Ano
+      year: anos
       chart_labels:
         assistante: Assistentes
         begginer: Iniciantes
