@@ -1,6 +1,8 @@
 class ReportsController < ApplicationController
   layout 'reports'
 
+  include ReportsHelper
+
   load_and_authorize_resource :school
 
   before_filter :set_ref_date
@@ -22,39 +24,41 @@ class ReportsController < ApplicationController
   def pedagogic_snapshot
     authorize! :read, :reports
 
-    #widget
-    @enrollments = get_value :enrollments
-    @dropouts = get_value :dropouts
-    @students = get_value :students
-    @growth = @enrollments - @dropouts
-    
-    #graph
-    @begginers = get_value :aspirante_students
-    @sadhakas = get_value :sadhaka_students
-    @yogins = get_value :yogin_students
-    @chelas = get_value :chela_students
-    @graduados = get_value :graduado_students
-    @assistants = get_value :assistant_students
-    @professors = get_value :professor_students
-    
-    #left pie chart
-    males = get_value :male_students
-    females = get_value :female_students
-    if males+females > 0
-      @male_students = (males.to_f/(males+females)*100).round(0)
-      @female_students = (females.to_f/(males+females)*100).round(0)
-    else
-      @male_students = 0
-      @female_students = 0
+    unless fragment_exist? pedagogic_snapshot_cache_key
+      #widget
+      @enrollments = get_value :enrollments
+      @dropouts = get_value :dropouts
+      @students = get_value :students
+      @growth = @enrollments - @dropouts
+      
+      #graph
+      @begginers = get_value :aspirante_students
+      @sadhakas = get_value :sadhaka_students
+      @yogins = get_value :yogin_students
+      @chelas = get_value :chela_students
+      @graduados = get_value :graduado_students
+      @assistants = get_value :assistant_students
+      @professors = get_value :professor_students
+      
+      #left pie chart
+      males = get_value :male_students
+      females = get_value :female_students
+      if males+females > 0
+        @male_students = (males.to_f/(males+females)*100).round(0)
+        @female_students = (females.to_f/(males+females)*100).round(0)
+      else
+        @male_students = 0
+        @female_students = 0
+      end
+
+      @students_avg_age = get_value :students_average_age
+
+      
+      #right pie chart
+      @begginer = 60
+      @graduate = 30
+      @senior = 10
     end
-
-    @students_avg_age = get_value :students_average_age
-
-    
-    #right pie chart
-    @begginer = 60
-    @graduate = 30
-    @senior = 10
   end
 
   def refresh

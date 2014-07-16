@@ -1,6 +1,10 @@
 # encoding: utf-8
 module ReportsHelper
 
+  def pedagogic_snapshot_cache_key
+    [@school.synced_at,I18n.locale,'pedagogic_snapshot']
+  end
+
   def not_upto_date
     unless @school.synced_at.nil?
       if @ref_date == Date.today.end_of_month
