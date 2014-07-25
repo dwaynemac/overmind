@@ -4,6 +4,7 @@ describe RankingsController do
   describe "for admin user" do
   let(:user){create(:user,role: 'admin')}
     before do
+      PadmaUser.stub(:find).and_return PadmaUser.new username: user.username, current_account_name: 'test-acc'
       PadmaAccount.any_instance.stub('padma2_enabled?').and_return(false)
       @fedone = create(:federation,id:1)
       @fedtwo = create(:federation,id:2)
