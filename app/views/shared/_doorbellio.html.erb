@@ -1,0 +1,16 @@
+<script type="text/javascript">
+    window.doorbellOptions = {
+        appKey: 'Cz5uMducWnxE4qM1ZTWWI2RPSzDaXcFHncZUSrHPZy0HxoCQjeUT5EBz5iFOBjue',
+        <%= generate_secure_doorbell_signature() %>
+        email: '<%= current_user.email %>',
+        hideEmail: true,
+        properties: {
+          username: '<%= current_user.username %>',
+          account_name: '<%= current_user.padma.current_account_name %>',
+          url: '<%= request.original_url %>'
+        }
+    };
+    (function(d, t) {
+        var g = d.createElement(t);g.id = 'doorbellScript';g.type = 'text/javascript';g.async = true;g.src = 'https://doorbell.io/button/262';(d.getElementsByTagName('head')[0]||d.getElementsByTagName('body')[0]).appendChild(g);
+    }(document, 'script'));
+</script>  
