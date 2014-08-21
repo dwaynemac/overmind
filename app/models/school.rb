@@ -145,6 +145,9 @@ class School < ActiveRecord::Base
     (diff(ref_date,stat_name) == 0)
   end
 
+  def relative_students_count?
+    self.count_students_relative_to_value && self.count_students_relative_to_date
+  end
   private
 
   # @param year [Integer]

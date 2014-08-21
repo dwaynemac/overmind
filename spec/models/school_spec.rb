@@ -55,4 +55,19 @@ describe School do
     end
   end
 
+  describe "#relative_students_count?" do
+    subject{ school.relative_students_count? }
+    context "if school has relative value and date" do
+      let(:school){create(:school,
+                          count_students_relative_to_value: 1,
+                          count_students_relative_to_date: Date.today
+                         )}
+      it { should be_true }
+    end
+    context "if schools does NOT have relative value or date" do
+      let(:school){create(:school)}
+      it { should be_false }
+    end
+  end
+
 end

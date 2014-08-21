@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130913162409) do
+ActiveRecord::Schema.define(:version => 20140820221146) do
 
   create_table "federations", :force => true do |t|
     t.string   "name"
@@ -35,14 +35,16 @@ ActiveRecord::Schema.define(:version => 20130913162409) do
   create_table "schools", :force => true do |t|
     t.string   "name"
     t.integer  "federation_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "nucleo_id"
     t.integer  "last_students_count"
     t.string   "account_name"
     t.integer  "last_teachers_count"
     t.datetime "synced_at"
     t.datetime "migrated_kshema_to_padma_at"
+    t.integer  "count_students_relative_to_value"
+    t.date     "count_students_relative_to_date"
   end
 
   create_table "schools_teachers", :force => true do |t|

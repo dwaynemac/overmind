@@ -203,6 +203,13 @@ module PadmaStatsApi
         end
       end
 
+      if relative_students_count?
+        req_options[:relative_to] = {
+          date: count_students_relative_to_date,
+          value: count_students_relative_to_value
+        }
+      end
+
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options, sslversion: :sslv3)
       parse_response(response,!options[:by_teacher])
     end
