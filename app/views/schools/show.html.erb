@@ -22,16 +22,27 @@
 
 <div id="chartContainer" class="chart-container"></div>
 
-<div id="stats">
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><a href="#global" role="tab" data-toggle="tab">Global</a></li>
+  <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
+  <li><a href="#<%= teacher_id %>" role="tab" data-toggle="tab"><%= Teacher.find(teacher_id).try(:full_name) %></a></li>
+  <%- end %>
+</ul>
+
+<div id="stats" class="tab-content">
+  <div class="tab-pane active" id="global">
   <%= render 'monthly_stats/chrono_table', monthly_stats: @school_monthly_stats %>
   <%= link_to(t('.new', :default => t("helpers.links.new")),
               new_school_monthly_stat_path(school_id: @school.id),
               :class => 'btn btn-primary') if can?(:create,@school.monthly_stats.new) %>
-
+  </div>
   <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
+    <div class="tab-pane" id="<%= teacher_id %>">
     <% unless stats.values.reject(&:empty?).empty? -%>
       <%= render "monthly_stats/chrono_table", monthly_stats: stats, teacher_stats: true, title: Teacher.find(teacher_id).try(:full_name) %>
     <% end -%>
+    </div>
   <% end %>
 </div>
 
