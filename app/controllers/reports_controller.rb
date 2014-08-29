@@ -24,7 +24,7 @@ class ReportsController < ApplicationController
   def pedagogic_snapshot
     authorize! :read, :reports
 
-    unless fragment_exist? pedagogic_snapshot_cache_key
+    unless fragment_exist? pedagogic_snapshot_cache_key(params[:year],params[:month])
       #widget
       @enrollments = get_value :enrollments
       @dropouts = get_value :dropouts

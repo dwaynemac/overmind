@@ -1,8 +1,8 @@
 # encoding: utf-8
 module ReportsHelper
 
-  def pedagogic_snapshot_cache_key
-    [@school.synced_at,I18n.locale,'pedagogic_snapshot']
+  def pedagogic_snapshot_cache_key(year,month)
+    [@school.synced_at,I18n.locale,year,month,'pedagogic_snapshot']
   end
 
   def not_upto_date
