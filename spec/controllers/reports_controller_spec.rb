@@ -10,10 +10,11 @@ shared_examples "receives params from url" do
 end
 
 describe ReportsController do
+  
+  let!(:school){ create(:school, account_name: 'nunez') }
 
   let(:user){create(:user,role: 'admin')}
   before do
-    create :school
     PadmaAccount.any_instance.stub('padma2_enabled?').and_return(false)
     sign_in(user)
   end
@@ -27,9 +28,22 @@ describe ReportsController do
     it_behaves_like "receives params from url"
     it { should respond_with 200 }
   end
+
   describe "GET /schools/:id/pedagogic/:year/:month" do
     before do
       get :pedagogic_snapshot, school_id: 1, year: 2014, month: 6
+    end
+    it_behaves_like "receives params from url"
+    it { should respond_with 200 }
+  end
+
+  describe "GET /schools/:account_name/pedagogic/:year/:month" do
+    before do
+      PadmaAccount.should_receive(:find).with(school.account_name)
+        .and_return PadmaAccount.new(account_name: school.account_name)
+      get :pedagogic_snapshot, school_id: school.account_name,
+                               year: 2014,
+                               month: 6
     end
     it_behaves_like "receives params from url"
     it { should respond_with 200 }

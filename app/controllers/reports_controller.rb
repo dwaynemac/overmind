@@ -3,7 +3,8 @@ class ReportsController < ApplicationController
 
   include ReportsHelper
 
-  load_and_authorize_resource :school
+  before_filter :load_school
+  authorize_resource :school
 
   before_filter :set_ref_date
   before_filter :set_stats_scope
@@ -81,6 +82,20 @@ class ReportsController < ApplicationController
   end
 
   private
+
+  def load_school
+    if School.exists?(params[:school_id])
+      @school = School.find(params[:school_id])
+    else
+      @school = School.where(account_name: params[:school_id]).try :first
+    end
+
+    if @school.nil?
+      raise ActiveRecord::RecordNotFound
+    end
+
+    @school
+  end
 
   def return_to_path
     m = params[:return_to].match /(.*)_snapshot/
