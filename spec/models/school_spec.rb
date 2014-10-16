@@ -69,5 +69,4 @@ describe School do
       it { should be_false }
     end
   end
-
 end

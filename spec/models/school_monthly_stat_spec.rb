@@ -65,6 +65,10 @@ describe SchoolMonthlyStat do
         it "created a monthly stat On school" do
           expect{SchoolMonthlyStat.create_from_service!(school,:students,Date.today)}.to change{school.monthly_stats.count}.by(1)
         end
+        it "works with date in variable" do
+          ref = Date.civil(2014,10,31)
+          expect{SchoolMonthlyStat.create_from_service!(school,:students,ref)}.to change{school.monthly_stats.count}.by(1)
+        end
         it "uses PADMA Modules APi" do
           # for indexing
           SchoolMonthlyStat.create_from_service!(school,:students,Date.today)
