@@ -13,9 +13,6 @@ gem 'cancan'
 # DB
 gem 'sqlite3', :group => [:development, :test]
 
-# Localization
-gem 'localeapp'
-
 # Inplace editor
 gem 'best_in_place', :github => 'afalkear/best_in_place_post'
 
