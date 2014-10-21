@@ -391,6 +391,7 @@ es:
     column: Columnas
     federations: Federaciones
     columns: Columnas
+    sample_size: Media calculada sobre valores de %{size} meses.
   download: descargar
   unauthorized:
     default: 

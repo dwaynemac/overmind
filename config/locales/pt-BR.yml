@@ -33,6 +33,7 @@ pt-BR:
     column: Colunas
     federations: Federaçōes
     columns: Columnas
+    sample_size: Media obtida de %{size} mêses.
   monthly_stat:
     description:
       demand: Número de pessoas que contactaram a escola
