@@ -13,7 +13,8 @@
     <%= form_for @ranking, url: ranking_path, method: :put, class: "form-horizontal" do |f| %>
       <h4><%= t('ranking.date') %></h4>
       <div class="form-group form-inline">
-        <%= f.date_select :date, {discard_day: true}, { class: 'form-control' } %>
+        <%= f.date_select :ref_since, {discard_day: true}, { class: 'form-control' } %>
+        <%= f.date_select :ref_until, {discard_day: true}, { class: 'form-control' } %>
       </div> 
 
       <h4><%= t('ranking.federations') %></h4>

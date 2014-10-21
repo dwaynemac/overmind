@@ -21,12 +21,15 @@ class Ranking
 
   attr_accessor :federation_ids,
                 :column_names,
-                :date
+                :ref_since,
+                :ref_until
 
-  def initialize(attributes)
+  validate :valid_date_period
+
+  def initialize(attributes=nil)
     attributes = {} if attributes.nil?
-  
-    set_date(attributes)
+
+    set_dates(attributes)
     set_federation_ids(attributes)
     set_column_names(attributes)
     
@@ -37,10 +40,17 @@ class Ranking
   end
 
   def stats
-    scope = SchoolMonthlyStat.select([:name, :value, :school_id]).includes(:school).where(ref_date: date)
-    scope = scope.where(name: @column_names)
+    scope = SchoolMonthlyStat.select([:name, :value, :school_id])
+                             .includes(:school)
+                             .where(ref_date: (ref_since.to_date..ref_until.to_date))
+                             .where(name: @column_names)
     scope = scope.where(schools: { federation_id: @federation_ids}) unless @federation_ids.nil?
-    scope
+
+    scope.all.group_by(&:school).map do |school, stats|
+      stats.group_by(&:name).map do |name, stats|
+        ReducedStat.new(school: school, stats: stats, name: name, reduce_as: :avg)
+      end
+    end.flatten
   end
 
   def school_ids
@@ -53,17 +63,27 @@ class Ranking
 
   private
 
-  def set_date(attributes)
-    @date = attributes.fetch( :date , nil)
-    if attributes[:date]
-      @date = attributes[:date].end_of_month
-    else
-      if attributes["date(1i)"] && attributes["date(2i)"]
-        @date = Date.new(attributes["date(1i)"].to_i, attributes["date(2i)"].to_i, 1).end_of_month
-      else
-        @date = 1.month.ago.end_of_month.to_date
-      end
+  def valid_date_period
+    if self.ref_since && self.ref_until <= self.ref_since
+      errors.add(:ref_until, t('ranking.validations.ref_until'))
     end
+  end
+
+  def set_dates(attributes)
+    [:ref_since, :ref_until].each do |ref|
+      val = if attributes[ref]
+        attributes[ref]
+      elsif attributes["#{ref}(1i)"] && attributes["#{ref}(2i)"]
+        Date.new(attributes["#{ref}(1i)"].to_i,
+                 attributes["#{ref}(2i)"].to_i,
+                 1).end_of_month
+      end
+      self.send("#{ref}=", val)
+    end
+
+    # defaults
+    self.ref_since = 1.year.ago.end_of_month.to_date if self.ref_since.nil?
+    self.ref_until = 1.month.ago.end_of_month.to_date if self.ref_until.nil?
   end
 
   def set_federation_ids(attributes)
