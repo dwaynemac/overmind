@@ -8,8 +8,9 @@ class ReducedStat
     self.name = attributes[:name] || stats.try(:first).try(:name)
     self.ref_date = attributes[:ref_date] || stats.try(:first).try(:ref_date)
     self.reduce_as = attributes[:reduce_as] || :sum
-    self.size = attributes[:stats].try(:size)
+    self.size = attributes[:stats].try(:size) || 0
     @value = attributes[:value]
+    self
   end
 
   def value 
@@ -19,6 +20,10 @@ class ReducedStat
       when :avg
         self.stats.sum(&:value).to_f / self.stats.size
     end
+  end
+
+  def school_id
+    self.school.try(:id)
   end
 
   def service
