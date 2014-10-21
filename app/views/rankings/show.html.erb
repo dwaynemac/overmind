@@ -57,7 +57,7 @@
       <tr>
         <th> <%= link_to_if can?(:read, school), school.name, school %> </th>
         <% @ranking.column_names.each do |name| %>
-          <th> <%= stats_hash[name.to_s].value if not stats_hash[name.to_s].nil?%></th>
+          <td> <%= stats_hash[name.to_s].value if not stats_hash[name.to_s].nil?%></td>
         <% end %>
       </tr>
     <% end %>
