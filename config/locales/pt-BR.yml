@@ -28,7 +28,7 @@ pt-BR:
   ranking:
     title: Ranking
     name: Nome
-    missing_schools: Estas escolas nāo foram colocadas no ranking porque nāo tem dados no mes selecionado.
+    missing_schools: Estas escolas nāo foram colocadas no ranking porque nāo tem dados no período selecionado.
     date: Data
     column: Colunas
     federations: Federaçōes

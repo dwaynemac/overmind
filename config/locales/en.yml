@@ -197,7 +197,7 @@ en:
   ranking:
     title: Ranking
     name: Name
-    missing_schools: 'The following schools weren''t included in the table because they don''t have data for the selected month:'
+    missing_schools: 'The following schools weren''t included in the table because they don''t have data for the selected period:'
     date: Date
     federations: Federations
     columns: Columns
