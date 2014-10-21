@@ -1,6 +1,6 @@
 # Used for Derived Stats
 class ReducedStat
-  attr_accessor :ref_date, :name, :stats, :name, :reduce_as, :school, :size
+  attr_accessor :ref_date, :name, :stats, :name, :reduce_as, :school
 
   def initialize(attributes)
     self.school = attributes[:school]
@@ -8,7 +8,6 @@ class ReducedStat
     self.name = attributes[:name] || stats.try(:first).try(:name)
     self.ref_date = attributes[:ref_date] || stats.try(:first).try(:ref_date)
     self.reduce_as = attributes[:reduce_as] || :sum
-    self.size = attributes[:stats].try(:size) || 0
     @value = attributes[:value]
     self
   end
@@ -18,8 +17,12 @@ class ReducedStat
       when :sum
         self.stats.sum(&:value)
       when :avg
-        self.stats.sum(&:value).to_f / self.stats.size
+        self.stats.sum(&:value).to_f / self.size
     end
+  end
+
+  def size
+    @size ||= self.stats.try(:size) || 0
   end
 
   def school_id
