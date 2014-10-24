@@ -209,4 +209,5 @@ Devise.setup do |config|
 
   config.cas_base_url    = "https://metododerose.org:8443"
   config.cas_create_user = true
+  config.cas_enable_single_sign_out = true
 end
