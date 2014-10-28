@@ -11,25 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140820221146) do
+ActiveRecord::Schema.define(:version => 20141028004320) do
 
   create_table "federations", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "nucleo_id"
+    t.string    "name"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
+    t.integer   "nucleo_id"
   end
 
   create_table "monthly_stats", :force => true do |t|
-    t.date     "ref_date"
-    t.integer  "school_id"
-    t.string   "name"
-    t.integer  "value"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "service"
-    t.integer  "teacher_id"
-    t.string   "type"
+    t.date      "ref_date"
+    t.integer   "school_id"
+    t.string    "name"
+    t.integer   "value"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
+    t.string    "service"
+    t.integer   "teacher_id"
+    t.string    "type"
   end
 
   create_table "schools", :force => true do |t|
@@ -52,6 +52,16 @@ ActiveRecord::Schema.define(:version => 20140820221146) do
     t.integer "school_id"
   end
 
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
   create_table "sync_requests", :force => true do |t|
     t.integer  "school_id"
     t.integer  "year"
@@ -70,12 +80,12 @@ ActiveRecord::Schema.define(:version => 20140820221146) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.integer  "federation_id"
-    t.string   "role"
-    t.string   "locale"
+    t.string    "username"
+    t.timestamp "created_at",    :null => false
+    t.timestamp "updated_at",    :null => false
+    t.integer   "federation_id"
+    t.string    "role"
+    t.string    "locale"
   end
 
   add_index "users", ["username"], :name => "index_users_on_username", :unique => true
