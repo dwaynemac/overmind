@@ -6,7 +6,7 @@ gem 'rails', '3.2.8'
 
 # CAS authentication
 gem 'devise', '1.5.0'
-gem 'devise_cas_authenticatable', '1.0.0.alpha13'
+gem 'devise_cas_authenticatable', '~> 1.3'
 # Authorization
 gem 'cancan'
 
