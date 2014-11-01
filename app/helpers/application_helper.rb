@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def generate_secure_doorbell_signature()
-      jsonp_secret = 'ekXywafGmn8g60VpE1UclaFPAt4cSBzl2Cpf5gNHCIhZtN6XWWZ088SZQiP48qI5'
+      jsonp_secret = ENV['doorbellio_key']
       timestamp = Time.now.to_i
       token = SecureRandom.hex(50)
 
