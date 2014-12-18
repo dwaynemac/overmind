@@ -5,7 +5,7 @@ class Ranking
   include ActiveModel::Validations
   include ActiveModel::Conversion
 
-  DEFAULT_COLUMN_NAMES = [:students, :enrollments, :dropouts, :demand, :interviews] 
+  DEFAULT_COLUMN_NAMES = [:students, :enrollment_rate, :dropout_rate, :demand, :interviews] 
   VALID_COLUMNS = MonthlyStat::VALID_NAMES
 
   COLUMNS_FOR_VIEW = [
