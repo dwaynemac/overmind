@@ -185,28 +185,5 @@ end
     </tr>
   <%-	end %>
 
-  <% unless monthly_stats[:enrollment_rate] == {} %>
-    <tr>
-      <th>
-        <%= t('monthly_stat.names.enrollment_rate') %>
-        <%- if !monthly_stats[:enrollments].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !monthly_stats[:interviews].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
-          <a style="position:relative; float: right;"
-             rel="popover"
-             href="#"
-             class="pictos"
-             data-title="<%= t('monthly_stats.chrono_table.efectividad_calculation') %>"
-             data-content="<%= t('monthly_stats.chrono_table.efectividad_explanation') %>">?</a>
-        <%- end -%>
-      </th>
-      <%- (1...13).each do |month| -%>
-        <td>
-          <%= v = monthly_stats[:enrollment_rate][month].try :value
-              number_with_precision v*100, precision: 0 if v
-          %>
-          <%= '%' if v %>
-        </td>
-      <%- end -%>
-    </tr>
-  <%-	end %>
   </tbody>
 </table>

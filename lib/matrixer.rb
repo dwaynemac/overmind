@@ -47,26 +47,11 @@ class Matrixer
 
     matrix.symbolize_keys!
 
-    matrix = add_enrollment_rate(matrix)
     matrix = add_dropout_rate(matrix)
     add_swasthya_students_subtotal(matrix)
   end
 
   private
-
-  # @param matrix [Hash]
-  # @return [Hash] matrix with enrollment_rate added.
-  def add_enrollment_rate(matrix)
-    matrix[:enrollment_rate] = {}
-    matrix[:enrollments].each_key do |month|
-      interviews = matrix[:p_interviews][month].try(:value)
-      if interviews && interviews > 0
-        enrollments = matrix[:enrollments][month].try(:value) || 0
-        matrix[:enrollment_rate][month] = ReducedStat.new(value: enrollments.to_f / interviews.to_f)
-      end
-    end
-    matrix
-  end
 
   # @param matrix [Hash]
   # @return [Ha6sh] matrix with dropout_rate added
