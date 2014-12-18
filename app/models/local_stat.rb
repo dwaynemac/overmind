@@ -1,6 +1,6 @@
 ##
-#
-# Stats that are calculated locally in overmind.
+# LocalStat calculates locally. This class is the stat calculator.
+# It is called from MonthlyStat when service is 'overmind'
 #
 # Calculation's are written in separate modules and included. All calculation
 # methods must have a method "calculate_#{stat_name}" that returns stats value
@@ -9,14 +9,20 @@
 #
 # value_for(stat_name) is also available for calculations
 #
+# ADDIND NEW LOCAL STATS:
+#   - add name to NAMES constant
+#   - write module and include it here
+#   - module show have method "calculate_{stat_name}" that returns stat value
 class LocalStat
 
   NAMES = [
     :begginers_dropout_rate,
-    :swasthya_dropout_rate
+    :swasthya_dropout_rate,
+    :enrollment_rate
   ]
   include BegginersDropoutRate
   include SwasthyaDropoutRate
+  include EnrollmentRate
 
   def initialize(attributes={})
     @school   = attributes[:school]
