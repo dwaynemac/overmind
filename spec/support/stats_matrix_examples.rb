@@ -43,13 +43,16 @@ shared_examples_for "a stats matrix" do
         @stud_nov = create(:monthly_stat, school: s, ref_date: Date.civil(2012,11,3), value: 2, name: 'students')
         @drop_dec = create(:monthly_stat, school: s, ref_date: Date.civil(2012,12,3), value: 1, name: 'dropouts')
 
+        SchoolMonthlyStat.create_from_service!(s,:dropout_rate,Date.civil(2012,1,3))
+        SchoolMonthlyStat.create_from_service!(s,:dropout_rate,Date.civil(2012,12,3))
+
         @matrix = s.monthly_stats.for_year(2012).to_matrix
       end
       it "should set matrix[:dropout_rate][1] to januaries dropout rate" do
-        @matrix[:dropout_rate][1].value.should == 0.25
+        @matrix[:dropout_rate][1].value.should == 25
       end
       it "should set matrix[:dropout_rate][12] to december dropout rate" do
-        @matrix[:dropout_rate][12].value.should == 0.5
+        @matrix[:dropout_rate][12].value.should == 50
       end
     end
     describe "enrollment_rate" do

@@ -8,3 +8,17 @@ task :update_services => :environment do
     end
   end
 end
+
+task :calculate_enrollment_rate => :environment do
+  MonthlyStat.where(name: :enrollments).each do |ms|
+    Rails.logger.debug "calculating enrollment_rate for school #{ms.school.id} on #{ms.ref_date}"
+    SchoolMonthlyStat.create_from_service!(ms.school, :enrollment_rate, ms.ref_date)
+  end
+end
+
+task :calculate_dropout_rate => :environment do
+  MonthlyStat.where(name: :dropouts).each do |ms|
+    Rails.logger.debug "calculating dropout_rate for school #{ms.school.id} on #{ms.ref_date}"
+    SchoolMonthlyStat.create_from_service!(ms.school, :dropout_rate, ms.ref_date)
+  end
+end
