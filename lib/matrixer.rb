@@ -1,3 +1,7 @@
+# Matrixer
+#
+# This class creates a matrix for easily navigate through stats
+# in the view and render the table
 class Matrixer
 
   # @param [ActiveRecord::Relation]
@@ -47,7 +51,7 @@ class Matrixer
 
     matrix.symbolize_keys!
 
-    matrix = add_dropout_rate(matrix)
+    #matrix = add_dropout_rate(matrix)
     add_swasthya_students_subtotal(matrix)
   end
 

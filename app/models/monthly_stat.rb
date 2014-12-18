@@ -25,6 +25,7 @@ class MonthlyStat < ActiveRecord::Base
                  :swasthya_dropout_rate,
 
                  :enrollment_rate,
+                 :dropout_rate,
 
                  :male_students,
                  :female_students,
@@ -47,7 +48,6 @@ class MonthlyStat < ActiveRecord::Base
                  :website_contact,
                  :conversion_rate, :conversion_count
   ]
-  RATES = [:dropout_rate] # reduced values.
 
   belongs_to :school
 
@@ -143,7 +143,7 @@ class MonthlyStat < ActiveRecord::Base
 
   def self.is_a_rate?(name)
     name = name.to_sym
-    name.in?([:conversion_rate, :begginers_dropout_rate, :swasthya_dropout_rate, :enrollment_rate]) || RATES.include?(name)
+    name.in?([:conversion_rate, :begginers_dropout_rate, :swasthya_dropout_rate, :enrollment_rate, :dropout_rate])
   end
 
   private

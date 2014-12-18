@@ -53,7 +53,7 @@
       <div style="display: none;">
         <!-- i18n -->
         <span id="stats-names"
-          <%- (MonthlyStat::VALID_NAMES+MonthlyStat::RATES).each do |name| -%>
+          <%- (MonthlyStat::VALID_NAMES).each do |name| -%>
             data-<%= name %>="<%= t "monthly_stat.names.#{name}" %>"
           <%- end -%>
         ></span>
