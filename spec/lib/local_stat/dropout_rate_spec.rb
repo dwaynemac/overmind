@@ -14,7 +14,7 @@ describe "dropout rate" do
   describe "if school has 0 students on prev month" do
     let!(:interviews){create(:monthly_stat,
                              school: school,
-                             ref_date: ref_date-1.month,
+                             ref_date: (ref_date-1.month).end_of_month,
                              name: :students,
                              value: 0
                             )}
@@ -26,7 +26,7 @@ describe "dropout rate" do
   describe "if school has students on prev month" do
     let!(:interviews){create(:monthly_stat,
                              school: school,
-                             ref_date: ref_date-1.month,
+                             ref_date: (ref_date-1.month).end_of_month,
                              name: :students,
                              value: 10
                             )}
