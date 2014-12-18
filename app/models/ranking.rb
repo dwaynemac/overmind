@@ -10,6 +10,7 @@ class Ranking
 
   COLUMNS_FOR_VIEW = [
    [:students, :enrollments, :dropouts],
+   [:enrollment_rate],
    [:dropouts_begginers, :dropouts_intermediates, :begginers_dropout_rate, :swasthya_dropout_rate],
    [:male_students, :female_students],
    [:aspirante_students, :sadhaka_students, :yogin_students,
