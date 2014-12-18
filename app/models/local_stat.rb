@@ -18,11 +18,13 @@ class LocalStat
   NAMES = [
     :begginers_dropout_rate,
     :swasthya_dropout_rate,
-    :enrollment_rate
+    :enrollment_rate,
+    :dropout_rate
   ]
   include BegginersDropoutRate
   include SwasthyaDropoutRate
   include EnrollmentRate
+  include DropoutRate
 
   def initialize(attributes={})
     @school   = attributes[:school]
@@ -46,6 +48,8 @@ class LocalStat
 
   private
 
+  # @param stat_name
+  # @param ref_date
   def value_for(stat_name, ref_date=nil)
     ref_date = @ref_date if ref_date.nil?
     ms = MonthlyStat.where(school_id: @school.id, ref_date: ref_date, name: stat_name, teacher_id: @teacher.try(:id))
