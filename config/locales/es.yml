@@ -32,6 +32,7 @@ es:
       in_professional_training: En formación
       interviews: Visitas
       male_students: Alumnos hombres
+      male_students_rate: '% Alumnos hombres'
       master_students: Monitoreados Maestros
       p_interviews: Visitas perfil
       phonecalls: Llamadas
