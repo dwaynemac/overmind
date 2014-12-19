@@ -47,14 +47,27 @@ describe "enrollment rate" do
       end
     end
     describe "and enrollments" do
-      let!(:enrollments){create(:monthly_stat,
-                               school: school,
-                               ref_date: ref_date,
-                               name: :enrollments,
-                               value: 1
-                              )}
-      it "returns enrollments/interviews % as an integer" do
-        expect(local_stat.value).to eq 10
+      describe "if enrollmets < interviews" do
+        let!(:enrollments){create(:monthly_stat,
+                                 school: school,
+                                 ref_date: ref_date,
+                                 name: :enrollments,
+                                 value: 1
+                                )}
+        it "returns enrollments/interviews % as an integer" do
+          expect(local_stat.value).to eq 10
+        end
+      end
+      describe "if enrollments > interviews" do
+        let!(:enrollments){create(:monthly_stat,
+                                 school: school,
+                                 ref_date: ref_date,
+                                 name: :enrollments,
+                                 value: 11
+                                )}
+        it "returns nil" do
+          expect(local_stat.value).to be_nil
+        end
       end
     end
   end
