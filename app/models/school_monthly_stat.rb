@@ -4,6 +4,8 @@ class SchoolMonthlyStat < MonthlyStat
 
   validate :teacher_id_should_be_nil
 
+  # If stat exists in DB it will recalculate its value.
+  # If it doesnt exist it will calculate value and store it
   def self.sync_from_service!(school,name,ref_date)
     ms = school.school_monthly_stats.where(name: name, ref_date: ref_date)
     if ms.empty?

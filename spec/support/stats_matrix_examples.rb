@@ -43,13 +43,16 @@ shared_examples_for "a stats matrix" do
         @stud_nov = create(:monthly_stat, school: s, ref_date: Date.civil(2012,11,3), value: 2, name: 'students')
         @drop_dec = create(:monthly_stat, school: s, ref_date: Date.civil(2012,12,3), value: 1, name: 'dropouts')
 
+        SchoolMonthlyStat.create_from_service!(s,:dropout_rate,Date.civil(2012,1,3))
+        SchoolMonthlyStat.create_from_service!(s,:dropout_rate,Date.civil(2012,12,3))
+
         @matrix = s.monthly_stats.for_year(2012).to_matrix
       end
       it "should set matrix[:dropout_rate][1] to januaries dropout rate" do
-        @matrix[:dropout_rate][1].value.should == 0.25
+        @matrix[:dropout_rate][1].value.should == 25
       end
       it "should set matrix[:dropout_rate][12] to december dropout rate" do
-        @matrix[:dropout_rate][12].value.should == 0.5
+        @matrix[:dropout_rate][12].value.should == 50
       end
     end
     describe "enrollment_rate" do
@@ -57,15 +60,17 @@ shared_examples_for "a stats matrix" do
         create(:monthly_stat, school: s, ref_date: Date.civil(2012,4,2), value: 2, name: 'p_interviews')
         create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,2), value: 16, name: 'interviews')
         create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,2), value: 8, name: 'p_interviews')
+        SchoolMonthlyStat.create_from_service!(s,:enrollment_rate,Date.civil(2012,4,2))
+        SchoolMonthlyStat.create_from_service!(s,:enrollment_rate,Date.civil(2012,1,2))
 
         @matrix = s.monthly_stats.to_matrix
       end
       it "should cosider P interviews, not total" do
-        @matrix[:enrollment_rate][1].value.should_not == 0.25
-        @matrix[:enrollment_rate][1].value.should == 0.5
+        @matrix[:enrollment_rate][1].value.should_not == 25
+        @matrix[:enrollment_rate][1].value.should == 50
       end
       it "should set matrix[:enrollment_rate][4] to april enrollment rate" do
-        @matrix[:enrollment_rate][4].value.should == 0.5
+        @matrix[:enrollment_rate][4].value.should == 50
       end
     end
     it "shouldnt raise expection when scoped to federation" do
