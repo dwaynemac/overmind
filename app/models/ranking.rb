@@ -12,7 +12,7 @@ class Ranking
    [:students, :enrollments, :dropouts],
    [:enrollment_rate, :dropout_rate],
    [:dropouts_begginers, :dropouts_intermediates, :begginers_dropout_rate, :swasthya_dropout_rate],
-   [:male_students, :female_students],
+   [:male_students, :female_students, :male_students_rate],
    [:aspirante_students, :sadhaka_students, :yogin_students,
     :chela_students, :graduado_students, :assistantxe_students,
     :professor_students, :master_students],

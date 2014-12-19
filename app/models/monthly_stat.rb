@@ -30,6 +30,8 @@ class MonthlyStat < ActiveRecord::Base
                  :male_students,
                  :female_students,
 
+                 :male_students_rate,
+
                  :students_average_age,
 
                  :aspirante_students,  # students at Aspirante lev
