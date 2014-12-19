@@ -22,3 +22,10 @@ task :calculate_dropout_rate => :environment do
     SchoolMonthlyStat.create_from_service!(ms.school, :dropout_rate, ms.ref_date)
   end
 end
+
+task :calculate_male_students_rate => :environment do
+  MonthlyStat.where(name: :male_students).each do |ms|
+    Rails.logger.debug "calculating male_students for school #{ms.school.id} on #{ms.ref_date}"
+    SchoolMonthlyStat.create_from_service!(ms.school, :male_students_rate, ms.ref_date)
+  end
+end
