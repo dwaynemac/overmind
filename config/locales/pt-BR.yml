@@ -55,6 +55,8 @@ pt-BR:
       dropouts: Evasōes
       dropouts_begginers: Evasōes de Iniciantes
       dropouts_intermediates: Evasōes de Intermedios
+      begginers_dropout_rate: "% Evasāo iniciantes"
+      swastya_dropout_rate: "% Evasāo intermedios"
       emails: Emails
       enrollment_rate: '% Efetividade'
       enrollments: Matrículas
