@@ -20,11 +20,11 @@ class LocalStat
     :aspirante_students_rate,
     :sadhaka_students_rate,
     :yogin_students_rate,
-    :chela_students_rate
+    :chela_students_rate,
     :begginers_dropout_rate,
     :swasthya_dropout_rate,
     :enrollment_rate,
-    :dropout_rate,
+    :dropout_rate
   ]
   include BegginersDropoutRate
   include SwasthyaDropoutRate
