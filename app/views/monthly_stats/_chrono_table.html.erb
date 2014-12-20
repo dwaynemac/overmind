@@ -136,29 +136,6 @@ end
       <%- end -%>
     </tr>
   <%- end -%>
-  <% unless monthly_stats[:dropout_rate] == {} %>
-    <tr>
-      <th>
-        <%= t('monthly_stat.names.dropout_rate') %>
-        <%- if !monthly_stats[:dropouts].select{|month,stat|stat.is_a?(ReducedStat)}.empty? || !monthly_stats[:students].select{|month,stat|stat.is_a?(ReducedStat)}.empty?  -%>
-          <a style="position:relative; float: right;"
-             rel="popover"
-             href="#"
-             class="pictos"
-             data-title="<%= t('monthly_stats.chrono_table.evasion_calculation') %>"
-             data-content="<%= t('monthly_stats.chrono_table.evasion_explanation') %>">?</a>
-        <%- end -%>
-      </th>
-        <%- (1...13).each do |month| -%>
-          <td>
-            <%= v = monthly_stats[:dropout_rate][month].try :value
-                number_with_precision(v*100,precision:0) if v
-            -%>
-            <%= '%' if v %>
-          </td>
-        <%- end -%>
-    </tr>
-  <%-	end %>
 
   <% unless monthly_stats[:conversion_rate] == {} %>
     <tr>
