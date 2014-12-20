@@ -12,6 +12,10 @@ es:
       phonecalls: Llamadas entrantes
       website_contact: Contactos via website entrantes
     names:
+      aspirante_students_rate: '% Iniciantes'
+      sadhaka_students_rate: '% Sádhakas'
+      yogin_students_rate: '% Yôgins'
+      chela_students_rate: '% Chêlas'
       aspirante_students: Alumnos iniciantes
       assistant_students: Monitoreados Asistentes
       chela_students: Chêlas
@@ -41,7 +45,7 @@ es:
       students: Alumnos
       swasthya_students_subtotal: SubTotal Alumnos en SwáSthya
       yogin_students: Yôgins
-      students_average_age: 
+      students_average_age: Promedio de edad
       assistantxe_students: 
   views:
     pagination:

@@ -42,6 +42,12 @@ class MonthlyStat < ActiveRecord::Base
                  :assistant_students, # students at Assistant lev
                  :professor_students, # students at Professor level.
                  :master_students, # students at Master level.
+
+                 :aspirante_students_rate,
+                 :sadhaka_students_rate,
+                 :yogin_students_rate,
+                 :chela_students_rate,
+
                  :in_professional_training,
 
                  :demand,
@@ -145,7 +151,20 @@ class MonthlyStat < ActiveRecord::Base
 
   def self.is_a_rate?(name)
     name = name.to_sym
-    name.in?([:conversion_rate, :begginers_dropout_rate, :swasthya_dropout_rate, :enrollment_rate, :dropout_rate])
+    name.in?([
+      :conversion_rate,
+      :begginers_dropout_rate,
+      :swasthya_dropout_rate,
+      :enrollment_rate,
+      :dropout_rate,
+
+      :male_students_rate,
+
+      :aspirante_students_rate,
+      :sadhaka_students_rate,
+      :yogin_students_rate,
+      :chela_students_rate
+    ])
   end
 
   private

@@ -16,6 +16,11 @@ class Ranking
    [:aspirante_students, :sadhaka_students, :yogin_students,
     :chela_students, :graduado_students, :assistantxe_students,
     :professor_students, :master_students],
+   [:aspirante_students_rate,
+    :sadhaka_students_rate,
+    :yogin_students_rate,
+    :chela_students_rate
+   ],
    [:demand, :interviews, :p_interviews, :emails, :phonecalls, :website_contact],
    [:conversion_rate, :conversion_count]
   ]

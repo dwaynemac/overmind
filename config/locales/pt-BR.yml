@@ -41,6 +41,10 @@ pt-BR:
       phonecalls: Chamadas recebidas
       website_contact: Contatos via website recebidos
     names:
+      aspirante_students_rate: '% Iniciantes'
+      sadhaka_students_rate: '% Sádhakas'
+      yogin_students_rate: '% Yôgins'
+      chela_students_rate: '% Chêlas'
       aspirante_students: Alunos iniciantes
       assistant_students: Monitorados Asistentes
       chela_students: Chêlas
