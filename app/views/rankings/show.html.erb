@@ -64,6 +64,7 @@
               <span data-toggle="tooltip" data-placement="top"
                 title="<%= t('ranking.sample_size', size: stats_hash[name.to_s].size) %>">
                 <%= number_with_precision stats_hash[name.to_s].value, precision: MonthlyStat.is_a_rate?(name)? 2 : 0 %>
+                <%= '%' if MonthlyStat.is_a_rate?(name) %>
               </span>
             </td>
           <% end -%>
