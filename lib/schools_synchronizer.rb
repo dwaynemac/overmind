@@ -32,7 +32,8 @@ class SchoolsSynchronizer
             Rails.logger.warn "School(##{school}) has account_name for one account but nucleo_id for another"
           end
         end
-        school.update_attribute(:name, get_full_name(account)) if school.name.blank?
+        school.update_attributes(name: get_full_name(account),
+                                 federation_id: get_federation_id(account)) if school.name.blank?
       end
     end
   end
