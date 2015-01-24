@@ -30,6 +30,7 @@ end
   <tbody>
   <% tabindex=0 %>
   <%- MonthlyStat::VALID_NAMES.reject{|n|n==:conversion_rate}.each do |name| -%>
+    <% next if teacher_stats && monthly_stats[name].empty? -%>
     <tr>
       <th>
         <%= t("monthly_stat.names.#{name}") %>
