@@ -20,6 +20,9 @@ class TeacherMonthlyStat < MonthlyStat
       :enrollments,
       :dropouts,
 
+      :enrollment_rate,
+      :dropout_rate,
+
       :demand,
       :interviews, :p_interviews,
       :emails, :phonecalls,
