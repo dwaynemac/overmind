@@ -71,8 +71,13 @@ class LocalStat
     }
     NAMES.each do |local_stat_name|
       SchoolMonthlyStat.where(name: dependency[local_stat_name]).each do |ms|
-        Rails.logger.debug "calculating #{local_stat_name} for school #{ms.school.id} on #{ms.ref_date}"
+        Rails.logger.debug "calculating #{local_stat_name} for school #{ms.school_id} on #{ms.ref_date}"
         SchoolMonthlyStat.create_from_service!(ms.school, local_stat_name, ms.ref_date)
+      end
+      TeacherMonthlyStat.where(name: dependency[local_stat_name]).each do |ms|
+        Rails.logger.debug "calculating #{local_stat_name} for teacher #{ms.teacher_id} on #{ms.ref_date}"
+        value = TeacherMonthlyStat.calculate_local_value(ms.school,ms.teacher,local_stat_name,ms.ref_date)
+        TeacherMonthlyStat.create_or_update(ms.school,ms.teacher,local_stat_name,ms.ref_date,value) if value
       end
     end
   end
