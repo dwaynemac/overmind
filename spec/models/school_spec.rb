@@ -43,6 +43,7 @@ describe School do
           {full_name: 'Name', padma_username: 'username', value: '3'},
           {full_name: 'Name2', padma_username: 'username5', value: '3'}
                                                              ])
+      TeacherMonthlyStat.stub(:calculate_local_value).and_return('1')
     end
     it "should create stats for each month for each stat name" do
       n = MonthlyStat::VALID_NAMES.size * 12
