@@ -40,6 +40,7 @@ pt-BR:
       emails: Emails recebidos
       phonecalls: Chamadas recebidas
       website_contact: Contatos via website recebidos
+      dropout_rate: "O % de evasāo é calculado dividindo as evasōes do mes pelos alunos no fechamento do mês anterior."
     names:
       aspirante_students_rate: '% Iniciantes'
       sadhaka_students_rate: '% Sádhakas'
