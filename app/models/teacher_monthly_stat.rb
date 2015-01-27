@@ -68,6 +68,7 @@ class TeacherMonthlyStat < MonthlyStat
   end
 
   def self.create_or_update(school,teacher,name,ref_date,value)
+    return nil if school.nil? || teacher.nil?
     existing = self.where(school_id: school.id,
                           teacher_id: teacher.id,
                           name: name,

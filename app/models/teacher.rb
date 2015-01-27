@@ -3,7 +3,7 @@ class Teacher < ActiveRecord::Base
 
   has_and_belongs_to_many :schools
 
-  has_many :monthly_stats
+  has_many :monthly_stats, dependent: :destroy
 
   validates_uniqueness_of :username, allow_nil: true, allow_blank: true
 
