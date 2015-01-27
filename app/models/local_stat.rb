@@ -57,7 +57,8 @@ class LocalStat
     stat_name.to_sym.in?(registered_stats)
   end
 
-  def self.calculate_all
+  def self.calculate_all(options={})
+
     dependency = {
       male_students_rate: :male_students,
       aspirante_students_rate: :aspirante_students,
@@ -69,12 +70,35 @@ class LocalStat
       enrollment_rate: :enrollments,
       dropout_rate: :dropouts
     }
+
     NAMES.each do |local_stat_name|
-      SchoolMonthlyStat.where(name: dependency[local_stat_name]).each do |ms|
+      dependencies = SchoolMonthlyStat.where(name: dependency[local_stat_name])
+      if options[:account_name]
+        s = School.where(account_name: options[:account_name]).first
+        dependencies = dependencies.where(school_id: s.id) if s
+      end
+      if options[:from]
+        dependencies = dependencies.where("ref_date > ?", options[:from])
+      end
+      if options[:to]
+        dependencies = dependencies.where("ref_date < ?", options[:to])
+      end
+      dependencies.each do |ms|
         Rails.logger.debug "calculating #{local_stat_name} for school #{ms.school_id} on #{ms.ref_date}"
         SchoolMonthlyStat.create_from_service!(ms.school, local_stat_name, ms.ref_date)
       end
-      TeacherMonthlyStat.where(name: dependency[local_stat_name]).each do |ms|
+      teacher_dependencies = TeacherMonthlyStat.where(name: dependency[local_stat_name])
+      if options[:account_name]
+        s = School.where(account_name: options[:account_name]).first
+        teacher_dependencies = teacher_dependencies.where(school_id: s.id) if s
+      end
+      if options[:from]
+        teacher_dependencies = teacher_dependencies.where("ref_date > ?", options[:from])
+      end
+      if options[:to]
+        teacher_dependencies = teacher_dependencies.where("ref_date < ?", options[:to])
+      end
+      teacher_dependencies.each do |ms|
         Rails.logger.debug "calculating #{local_stat_name} for teacher #{ms.teacher_id} on #{ms.ref_date}"
         value = TeacherMonthlyStat.calculate_local_value(ms.school,ms.teacher,local_stat_name,ms.ref_date)
         TeacherMonthlyStat.create_or_update(ms.school,ms.teacher,local_stat_name,ms.ref_date,value) if value
