@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :teacher do
-    username "MyString"
+    sequence(:username) { |i| "user#{i}" }
     full_name "MyString"
   end
 end

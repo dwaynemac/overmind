@@ -12,6 +12,25 @@ describe Teacher do
   it { should have_many :monthly_stats }
   it { should validate_uniqueness_of :username }
 
+  describe "when destroyed" do
+    let!(:teacher){create(:teacher)}
+    let!(:school){create(:school)}
+    before do
+      (1..12).each do |i|
+        TeacherMonthlyStat.create!(school_id: school.id,
+                                 teacher_id: teacher.id,
+                                 name: 'enrollment_rate',
+                                 value: 1,
+                                 ref_date: Date.civil(2010,i,1))
+      end
+    end
+    it "destroys all stats too" do
+      teacher.destroy
+
+      expect(TeacherMonthlyStat.count).to eq 0
+    end
+  end
+
   describe ".smart_find" do
     let(:school){create(:school)}
     context "when matching by username" do
