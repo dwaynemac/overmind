@@ -49,11 +49,13 @@
         </li>
       <% end -%>
 
-      <% if can?(:see_global,MonthlyStat) -%>
-        <li class="<%= 'active' if controller_name == 'monthly_stats' %>">
-          <%= link_to t('.global'), global_monthly_stats_path %>
-        </li>
-      <% end -%>
+      
+      <%# if can?(:see_global,MonthlyStat) -%>
+        <!-- 
+        <li class="<%# 'active' if controller_name == 'monthly_stats' %>">
+          <%# link_to t('.global'), global_monthly_stats_path %>
+        </li> -->
+      <%# end -%>
 
       <% if can?(:read, Federation) -%>
         <li class="<%= 'active' if controller_name == 'federations' %>">
