@@ -1,5 +1,11 @@
 module ApplicationHelper
 
+  def current_school
+    if current_user && !current_user.account_name.blank?
+      @current_school ||= School.find_by_account_name(current_user.account_name)
+    end
+  end
+
   # Adds given files to end of body tag
   def javascript(*files)
     content_for(:body_end) { javascript_include_tag(*files) }
