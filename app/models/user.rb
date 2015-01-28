@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   LOCALES = %W(es en pt)
 
   def account_name
-    self.padma.current_account_name
+    self.padma.try :current_account_name
   end
 
   def account_name_changed?
