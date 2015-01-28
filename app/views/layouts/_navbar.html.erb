@@ -67,22 +67,10 @@
         </li>
       <% end -%>
 
-      <% if can?(:read, School) -%>
-        <% if current_ability.schools.count == 1 -%>
-          <li class="<%= 'active' if controller_name == 'schools' %>">
-            <% school = current_ability.schools.first -%>
-            <%= link_to school.name, school  %>
-          </li>
-        <% else -%>
-          <li class="<%= 'active' if controller_name == 'schools' %>">
-            <%= link_to t('.schools'), schools_path %>    
-          </li>
-        <% end -%>
-      <% end -%>
-
-      <% if can?(:manage,User) -%>
-        <li class="<%= 'active' if controller_name == 'users' %>">
-          <%= link_to t('.users'), users_path %>
+      
+      <% if current_school && can?(:read, current_school) -%>
+        <li class="<%= 'active' if controller_name == 'schools' && action_name == 'show' %>">
+          <%= link_to t('.current_school_general_indices'), current_school  %>
         </li>
       <% end -%>
 
@@ -94,6 +82,19 @@
                                   month: Date.today.month)%>
         </li>
       <% end -%>
+
+      <% if can?(:manage, School) -%>
+        <li class="<%= 'active' if controller_name == 'schools' && action_name == 'index' %>">
+          <%= link_to t('.schools'), schools_path %>    
+        </li>
+      <% end -%>
+
+      <% if can?(:manage,User) -%>
+        <li class="<%= 'active' if controller_name == 'users' %>">
+          <%= link_to t('.users'), users_path %>
+        </li>
+      <% end -%>
+
 
     </ul>
     <form class="navbar-form navbar-right navbar-input-group" role="search" action="<%= schools_path %>" id="navbar-search" method="get">

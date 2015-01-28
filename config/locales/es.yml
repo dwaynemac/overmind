@@ -142,6 +142,7 @@ es:
     navbar:
       global: Global
       federations: Federaciones
+      current_school_general_indices: Indices generales
       schools: Escuelas
       users: Usuarios
       ranking: Ranking

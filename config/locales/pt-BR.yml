@@ -171,6 +171,7 @@ pt-BR:
     navbar:
       global: Global
       federations: Federaçōes
+      current_school_general_indices: Indices gerais
       schools: Escolas
       users: Usuários
       ranking: Ranking
