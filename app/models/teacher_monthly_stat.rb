@@ -2,6 +2,8 @@ class TeacherMonthlyStat < MonthlyStat
   attr_accessible :teacher_id
   belongs_to :teacher
 
+  # IMPORTANT
+  # Stats are synced in THIS order
   STATS_BY_TEACHER = [
       :students,
 
@@ -20,11 +22,13 @@ class TeacherMonthlyStat < MonthlyStat
       :enrollments,
       :dropouts,
 
+      :p_interviews,
+
       :enrollment_rate,
       :dropout_rate,
 
       :demand,
-      :interviews, :p_interviews,
+      :interviews,
       :emails, :phonecalls,
 
       :conversion_rate

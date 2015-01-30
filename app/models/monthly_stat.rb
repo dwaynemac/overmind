@@ -13,19 +13,17 @@ class MonthlyStat < ActiveRecord::Base
 
   attr_accessible :value, :name, :school_id, :ref_date, :service, :account_name, :id   # account name is an accessor, delegated to School.
 
+  # IMPORTANT
+  # Stats are synced in THIS order
   VALID_NAMES = [
                  :students,
-                 :enrollments,
+
                  :dropouts,
+                 :dropout_rate, # depends of :dropouts and :students of previous month
 
-                 :dropouts_begginers,
-                 :dropouts_intermediates,
-
-                 :begginers_dropout_rate,
-                 :swasthya_dropout_rate,
-
-                 :enrollment_rate,
-                 :dropout_rate,
+                 :enrollments,
+                 :p_interviews,
+                 :enrollment_rate, # dependes of :enrollments and :p_interviews
 
                  :male_students,
                  :female_students,
@@ -43,6 +41,12 @@ class MonthlyStat < ActiveRecord::Base
                  :professor_students, # students at Professor level.
                  :master_students, # students at Master level.
 
+                 :dropouts_begginers,
+                 :dropouts_intermediates,
+
+                 :begginers_dropout_rate,
+                 :swasthya_dropout_rate,
+
                  :aspirante_students_rate,
                  :sadhaka_students_rate,
                  :yogin_students_rate,
@@ -51,7 +55,7 @@ class MonthlyStat < ActiveRecord::Base
                  :in_professional_training,
 
                  :demand,
-                 :interviews, :p_interviews,
+                 :interviews,
                  :emails, :phonecalls,
                  :website_contact,
                  :conversion_rate, :conversion_count
