@@ -111,7 +111,7 @@ end
                           :remote => true,
                           :id => "monthly-stat-#{monthly_stat.id}",
                           :class => 'pictos red deletable') %>
-              <%- unless monthly_stat.service.blank? -%>
+              <%- if can_sync_update?(monthly_stat) -%>
                 <%= link_to('r',
                             sync_school_monthly_stat_path(id: monthly_stat, school_id: @school.id, year: @year),
                             rel: 'tooltip',

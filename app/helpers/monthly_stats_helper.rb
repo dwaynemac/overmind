@@ -10,6 +10,14 @@ module MonthlyStatsHelper
     end
   end
 
+  def can_sync_update?(stat)
+    if stat.is_a?(TeacherMonthlyStat)
+      LocalStat.is_local_stat?(stat.name)
+    else
+      stat.service.present?
+    end
+  end
+  
   # @option options [String] stat_name
   # @return [Boolean]
   def can_sync_create?(options={})
