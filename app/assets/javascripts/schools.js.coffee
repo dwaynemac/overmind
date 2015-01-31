@@ -15,4 +15,4 @@ $(document).ready ->
   hideTooltip = () ->
     $("#current_year").tooltip('hide')
 
-  setTimeout( hideTooltip, 5000 )
+  setTimeout( hideTooltip, 15000 )
