@@ -72,7 +72,8 @@ IntercomRails.config do |config|
     name: Proc.new { |padma_account| padma_account.name },
     full_name: Proc.new{ |padma_account| padma_account.full_name },
     enabled: Proc.new { |padma_account| padma_account.enabled },
-    migrated_at: Proc.new { |padma_account| padma_account.migrated_to_padma_on.try(:to_time).try(:to_i) }
+    migrated_at: Proc.new { |padma_account| padma_account.migrated_to_padma_on.try(:to_time).try(:to_i) },
+    created_at: Proc.new {|_| nil } # created_at should only be sent by accounts-ws
   }
 
   # == Company Plan name
