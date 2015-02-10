@@ -10,6 +10,8 @@ gem 'devise_cas_authenticatable', '~> 1.3'
 # Authorization
 gem 'cancan'
 
+gem 'intercom-rails'
+
 # DB
 gem 'sqlite3', :group => [:development, :test]
 
