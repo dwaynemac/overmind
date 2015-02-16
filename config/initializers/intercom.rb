@@ -44,7 +44,7 @@ IntercomRails.config do |config|
   #
   config.user.custom_data = {
     user_id: Proc.new { |user| user.username },
-    language_override: Proc.new { |user| user.locale },
+    language_override: Proc.new { |user| user.locale.try(:first,2) },
     name: Proc.new { |user| user.username.split('.').join(' ').titleize if user.username },
     created_at: Proc.new {|user| nil } # created_at should only be sent by accounts-ws
   }
