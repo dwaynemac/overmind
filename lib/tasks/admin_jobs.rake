@@ -27,7 +27,7 @@ task :recalculate_local_rates => :environment do
       :sadhaka_students_rate,
       :yogin_students_rate,
       :chela_students_rate
-    ]).each do |sm|
+    ]).find_each do |sm|
       puts "recalculating school_monthly_stat #{sm.name} for #{sm.ref_date} for #{sm.school.account_name}"
       sm.update_from_service!
   end
@@ -44,7 +44,7 @@ task :recalculate_local_rates => :environment do
       :sadhaka_students_rate,
       :yogin_students_rate,
       :chela_students_rate
-    ]).each do |tm|
+    ]).find_each do |tm|
         puts "recalculating teacher monthly stat #{tm.name} for #{tm.ref_date} for #{tm.teacher.name} on  #{tm.school.account_name}"
         value = TeacherMonthlyStat.calculate_local_value(tm.school,tm.teacher,tm.name,tm.ref_date)
         tm.update_attribute :value, value
