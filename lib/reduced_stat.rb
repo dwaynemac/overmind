@@ -32,4 +32,8 @@ class ReducedStat
   def service
     nil
   end
+
+  def is_a_rate?
+    MonthlyStat.is_a_rate?(self.name)
+  end
 end
