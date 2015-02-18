@@ -14,7 +14,7 @@ task :calculate_local_stats => :environment do
 end
 
 task :recalculate_local_rates => :environment do
-  SchoolMonthlyStat.where(service: 'overmind').where(name: [
+  SchoolMonthlyStat.where(service: 'overmind').where("value <= 100").where(name: [
       :conversion_rate,
       :begginers_dropout_rate,
       :swasthya_dropout_rate,
@@ -31,7 +31,7 @@ task :recalculate_local_rates => :environment do
       puts "recalculating school_monthly_stat #{sm.name} for #{sm.ref_date} for #{sm.school.account_name}"
       sm.update_from_service!
   end
-  TeacherMonthlyStat.where(service: 'overmind').where(name: [
+  TeacherMonthlyStat.where(service: 'overmind').where("value <= 100").where(name: [
       :conversion_rate,
       :begginers_dropout_rate,
       :swasthya_dropout_rate,
