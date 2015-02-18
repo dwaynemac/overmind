@@ -5,7 +5,7 @@ module MonthlyStatsHelper
     return '' if v.nil?
     if !monthly_stat.is_a?(ReducedStat) && monthly_stat.is_a_rate?
       # rates are represented as 'cents' in integer.
-      "#{number_with_precision(v.to_f/100, precision: 2)}%"
+      "#{number_with_precision(v.to_f/100, precision: 2, strip_insignificant_zeros: true)}%"
     else
       v
     end
