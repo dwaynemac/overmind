@@ -9,7 +9,7 @@ class LocalStat
           value_for(stat, (@ref_date-1.month).end_of_month)||0
       end
       if d && s && s!=0
-        d*100 / s
+        d*10000.0 / s
       end
     end
 

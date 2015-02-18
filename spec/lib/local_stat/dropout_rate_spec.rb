@@ -53,8 +53,8 @@ describe "dropout rate" do
                                name: :dropouts,
                                value: 1
                               )}
-      it "returns dropouts/students % as an integer" do
-        expect(local_stat.value).to eq 10
+      it "returns dropouts/students % as an integer (cents)" do
+        expect(local_stat.value).to eq 1000
       end
     end
   end

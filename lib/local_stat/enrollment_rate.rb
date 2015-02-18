@@ -6,8 +6,8 @@ class LocalStat
       i = value_for(:p_interviews)
 
       if i && e && i > 0
-        v = ((e.to_f / i.to_f)*100).to_i
-        (v>100)? nil : v
+        v = ((e.to_f / i.to_f)*10000).to_i
+        (v>10000)? nil : v
       else
         nil
       end

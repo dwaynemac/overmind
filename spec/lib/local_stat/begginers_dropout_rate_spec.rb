@@ -17,12 +17,12 @@ describe "begginers dropout rate" do
       describe "and dropouts_begginers for chosen month" do
         before {create(:monthly_stat, school: school, ref_date: ref_date, name: :dropouts_begginers, value: 1)}
 
-        it  { local_stat.value.should == 50 }
+        it  { local_stat.value.should == 5000 }
 
         describe SchoolMonthlyStat do
           it "uses LocalStat for :begginers_dropout_rate" do
             ms = SchoolMonthlyStat.create_from_service!(school,:begginers_dropout_rate,ref_date)
-            ms.value.should == 50
+            ms.value.should == 5000
           end
         end
       end
