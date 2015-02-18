@@ -48,11 +48,11 @@ shared_examples_for "a stats matrix" do
 
         @matrix = s.monthly_stats.for_year(2012).to_matrix
       end
-      it "should set matrix[:dropout_rate][1] to januaries dropout rate" do
-        @matrix[:dropout_rate][1].value.should == 25
+      it "should set matrix[:dropout_rate][1] to januaries dropout rate (cents)" do
+        @matrix[:dropout_rate][1].value.should == 2500
       end
-      it "should set matrix[:dropout_rate][12] to december dropout rate" do
-        @matrix[:dropout_rate][12].value.should == 50
+      it "should set matrix[:dropout_rate][12] to december dropout rate (cents)" do
+        @matrix[:dropout_rate][12].value.should == 5000
       end
     end
     describe "enrollment_rate" do
@@ -66,11 +66,11 @@ shared_examples_for "a stats matrix" do
         @matrix = s.monthly_stats.to_matrix
       end
       it "should cosider P interviews, not total" do
-        @matrix[:enrollment_rate][1].value.should_not == 25
-        @matrix[:enrollment_rate][1].value.should == 50
+        @matrix[:enrollment_rate][1].value.should_not == 2500
+        @matrix[:enrollment_rate][1].value.should == 5000
       end
-      it "should set matrix[:enrollment_rate][4] to april enrollment rate" do
-        @matrix[:enrollment_rate][4].value.should == 50
+      it "should set matrix[:enrollment_rate][4] to april enrollment rate (cents)" do
+        @matrix[:enrollment_rate][4].value.should == 5000
       end
     end
     it "shouldnt raise expection when scoped to federation" do

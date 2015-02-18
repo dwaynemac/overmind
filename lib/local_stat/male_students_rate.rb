@@ -5,7 +5,7 @@ class LocalStat
       s = value_for(:students)
 
       if m && s && s > 0
-        ((m.to_f / s.to_f)*100).to_i
+        ((m.to_f / s.to_f)*10000).to_i
       else
         nil
       end

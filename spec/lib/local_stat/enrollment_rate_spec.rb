@@ -54,8 +54,8 @@ describe "enrollment rate" do
                                  name: :enrollments,
                                  value: 1
                                 )}
-        it "returns enrollments/interviews % as an integer" do
-          expect(local_stat.value).to eq 10
+        it "returns enrollments/interviews % as an integer (cents)" do
+          expect(local_stat.value).to eq 1000
         end
       end
       describe "if enrollments > interviews" do

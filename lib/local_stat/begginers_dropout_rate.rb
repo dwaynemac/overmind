@@ -7,7 +7,7 @@ class LocalStat
       if d.nil? || s.nil? || s == 0
         nil
       else
-        d*100 / s
+        d*10000.0 / s
       end
     end
 

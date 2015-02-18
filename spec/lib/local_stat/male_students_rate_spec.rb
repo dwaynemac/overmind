@@ -47,8 +47,8 @@ describe "male students rate" do
                            name: :male_students,
                            value: 1
                           )}
-      it "returns male / total % as integer" do
-        should eq 10
+      it "returns male / total % as integer (cents)" do
+        should eq 1000
       end
     end
   end
