@@ -1,0 +1,83 @@
+<div class="page-header">
+  <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, teacher_ranking_url(id: @teacher_ranking, format: 'csv'), class: 'btn btn-default', id: 'download-link' %>
+  <h2><%= t('ranking.title') %></h2>
+
+</div>
+
+<div id="options-panel" class="panel panel-default">
+  <div class="panel-heading" data-toggle="collapse" data-target="#options-panel .panel-body">
+    <%= t('.options') %>
+    <span class="glyphicon glyphicon-collapse-down pull-right"></span>
+  </div>
+  <div class="panel-body collapse">
+    <%= form_for @teacher_ranking, url: teacher_ranking_path, method: :put, class: "form-horizontal" do |f| %>
+      <h4><%= t('ranking.date') %></h4>
+      <div class="form-group form-inline">
+        <%= f.date_select :ref_since, {discard_day: true}, { class: 'form-control' } %>
+        <%= f.date_select :ref_until, {discard_day: true}, { class: 'form-control' } %>
+      </div> 
+
+      <h4><%= t('ranking.federations') %></h4>
+      <div class="btn-group form-group" data-toggle="buttons">
+      <% @federations.each do |fed| -%>
+        <label class="checkbox-inline col-sm-offset-1 btn btn-default btn-sm">
+          <%= f.check_box 'federation_ids', {multiple: true, checked: federation_selected?(fed.id,@teacher_ranking)}, fed.id, false %> <%= fed.name %>
+        </label>
+      <% end -%>
+      </div>
+
+      <h4><%= t('ranking.schools') %></h4>
+      <div class="btn-group form-group" data-toggle="buttons">
+      <% @schools.each do |school| -%>
+        <label class="checkbox-inline col-sm-offset-1 btn btn-default btn-sm">
+          <%= f.check_box 'school_ids', {multiple: true, checked: school_selected?(school.id,@teacher_ranking)}, school.id, false %> <%= school.name %>
+        </label>
+      <% end -%>
+      </div>
+
+      <h4><%= t('ranking.columns')%></h4>
+      <% Ranking::COLUMNS_FOR_VIEW.each do |row_of_names| -%>
+        <div class="btn-group input-group" data-toggle="buttons">
+          <% row_of_names.each do |name|-%>
+            <label class="btn btn-default btn-sm">
+              <%= f.check_box :column_names, {multiple: true, checked: column_name_selected?(name,@teacher_ranking)}, name, false %> <%= t("monthly_stat.names.#{name}") %>
+            </label>
+          <% end -%>
+        </div>
+      <% end -%>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary col-sm-offset-0"><%= t('submit') %></button> 
+        </div>
+    <% end -%>
+  </div>
+</div>
+
+<table id="ranking_table" class="table table-striped table-bordered table-condensed tablesorter-blue">
+  <thead>
+    <tr>
+      <th> <%= t('ranking.name') %> </th>
+      <% @teacher_ranking.column_names.each do |name| %>
+        <th> <%= t("monthly_stat.names.#{name}") %> </th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @teacher_ranking.matrix.each do |teacher, stats_hash| %> 
+      <tr>
+        <th> <%= teacher.full_name %> </th>
+        <% @teacher_ranking.column_names.each do |name| %>
+          <% if stats_hash[name.to_s].nil? -%>
+            <td></td>
+          <% else -%>
+            <td>
+              <span data-toggle="tooltip" data-placement="top"
+                title="<%= t('ranking.sample_size', size: stats_hash[name.to_s].size) %>">
+                <%= print_value stats_hash[name.to_s] %>
+              </span>
+            </td>
+          <% end -%>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
