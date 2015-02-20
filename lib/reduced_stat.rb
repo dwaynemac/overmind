@@ -1,9 +1,10 @@
 # Used for Derived Stats
 class ReducedStat
-  attr_accessor :ref_date, :name, :stats, :name, :reduce_as, :school
+  attr_accessor :ref_date, :name, :stats, :name, :reduce_as, :school, :teacher
 
   def initialize(attributes)
     self.school = attributes[:school]
+    self.teacher = attributes[:teacher]
     self.stats = attributes[:stats]
     self.name = attributes[:name] || stats.try(:first).try(:name)
     self.ref_date = attributes[:ref_date] || stats.try(:first).try(:ref_date)
@@ -27,6 +28,10 @@ class ReducedStat
 
   def school_id
     self.school.try(:id)
+  end
+
+  def teacher_id
+    self.teacher.try(:id)
   end
 
   def service
