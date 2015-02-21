@@ -7,12 +7,12 @@ class TeacherRankingsController < ApplicationController
     federation_ids = @federations.pluck(:id)
     
     @schools = School.accessible_by(current_ability)
-    school_ids = @federations.pluck(:id)
+    school_ids = @schools.pluck(:id)
 
     if params[:teacher_ranking].nil?
       params[:teacher_ranking] = { federation_ids: federation_ids, school_ids: school_ids }
     end
-    
+
     @teacher_ranking = TeacherRanking.new params[:teacher_ranking]
     
     respond_to do |format|
