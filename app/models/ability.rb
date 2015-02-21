@@ -42,6 +42,7 @@ class Ability
     cannot :sync, School
     cannot :see_global, MonthlyStat
     cannot :read, Ranking
+    cannot :read, TeacherRanking
     cannot :read, :reports
   end
 
@@ -52,6 +53,7 @@ class Ability
       can :read, Federation, id: user_federation_ids
       can :manage, MonthlyStat, school: {account_name: enabled_account_names }
       can :read, Ranking
+      can :read, TeacherRanking
       can :read, :reports
     end
   end
@@ -60,6 +62,7 @@ class Ability
     case @user.role
       when 'admin'
         can :read, Ranking
+        can :read, TeacherRanking
         can :sync, School
         can [:create,:update], SyncRequest
         can :see_global, MonthlyStat
@@ -74,12 +77,14 @@ class Ability
         can :read, MonthlyStat
         can :see_global, MonthlyStat
         can :read, Ranking
+        can :read, TeacherRanking
       when 'president'
         can :read_only_one, Federation
         can :read, Federation, id: @user.federation_id
         can :read, School, federation_id: @user.federation_id
         can :read, MonthlyStat, school: { federation_id: @user.federation_id }
         can :read, Ranking
+        can :read, TeacherRanking
     end
   end
 
