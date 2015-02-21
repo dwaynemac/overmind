@@ -5,31 +5,25 @@ class TeacherRanking
   include ActiveModel::Validations
   include ActiveModel::Conversion
 
-  DEFAULT_COLUMN_NAMES = [:students, :enrollment_rate, :dropout_rate, :male_students_rate] 
+  DEFAULT_COLUMN_NAMES = [:students, :p_interviews, :enrollments, :enrollment_rate, :dropout_rate] 
   VALID_COLUMNS = MonthlyStat::VALID_NAMES
 
   COLUMNS_FOR_VIEW = [
    [:students, :enrollments, :dropouts],
    [:enrollment_rate, :dropout_rate],
    [:dropouts_begginers, :dropouts_intermediates, :begginers_dropout_rate, :swasthya_dropout_rate],
-   [:male_students, :female_students, :male_students_rate],
-   [:aspirante_students, :sadhaka_students, :yogin_students,
-    :chela_students, :graduado_students, :assistantxe_students,
-    :professor_students, :master_students],
-   [:aspirante_students_rate,
-    :sadhaka_students_rate,
-    :yogin_students_rate,
-    :chela_students_rate
-   ],
+   [:male_students, :female_students],
+   [:aspirante_students, :sadhaka_students, :yogin_students, :chela_students, :graduado_students, :assistant_students, :professor_students, :master_students],
    [:demand, :interviews, :p_interviews, :emails, :phonecalls, :website_contact],
-   [:conversion_rate, :conversion_count]
+   [:conversion_rate]
   ]
 
   attr_accessor :school_ids,
                 :federation_ids,
                 :column_names,
                 :ref_since,
-                :ref_until
+                :ref_until,
+                :ref_date
 
   validate :valid_date_period
 
@@ -45,6 +39,13 @@ class TeacherRanking
 
   def matrix
     @matrix ||= TeacherRankingMatrix.new(stats).matrix
+  end
+
+  def monthly_stat teacher, stat_name
+    TeacherMonthlyStat.select([:name, :value, :teacher_id])
+                             .where(:teacher_id => teacher.id)
+                             .where(ref_date: (ref_date.to_date.beginning_of_month..ref_date.end_of_month.to_date))
+                             .where(name: stat_name).first
   end
 
   def stats
@@ -80,7 +81,7 @@ class TeacherRanking
   end
 
   def set_dates(attributes)
-    [:ref_since, :ref_until].each do |ref|
+    [:ref_since, :ref_until, :ref_date].each do |ref|
       val = if attributes[ref]
         attributes[ref]
       elsif attributes["#{ref}(1i)"] && attributes["#{ref}(2i)"]
@@ -92,8 +93,9 @@ class TeacherRanking
     end
 
     # defaults
-    self.ref_since = 1.year.ago.end_of_month.to_date if self.ref_since.nil?
+    self.ref_since = 4.months.ago.end_of_month.to_date if self.ref_since.nil?
     self.ref_until = 1.month.ago.end_of_month.to_date if self.ref_until.nil?
+    self.ref_date = Date.today if self.ref_date.nil?
   end
 
   def set_school_ids(attributes)
