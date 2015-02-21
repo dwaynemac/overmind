@@ -83,6 +83,13 @@
         </li>
       <% end -%>
 
+      <% if can?(:read, TeacherRanking) -%>
+        <li class="<%= 'active' if controller_name == 'reports' && action_name == 'pedagogic_snapshot' %>">
+        <%= link_to t('.teacher_ranking'), teacher_ranking_path %>
+        </li>
+      <% end -%>
+
+
       <% if can?(:manage, School) -%>
         <li class="<%= 'active' if controller_name == 'schools' && action_name == 'index' %>">
           <%= link_to t('.schools'), schools_path %>    
