@@ -62,8 +62,8 @@
   <thead>
     <tr>
       <th></th>
-      <th colspan="<%= @teacher_ranking.column_names.size %>">Month</th>
-      <th colspan="<%= @teacher_ranking.column_names.size %>">Average</th>
+      <th style="text-align: center;" colspan="<%= @teacher_ranking.column_names.size %>"><%= l(@teacher_ranking.ref_date, :format => "%B") %></th>
+      <th style="text-align: center;" colspan="<%= @teacher_ranking.column_names.size %>"><%= l(@teacher_ranking.ref_since, :format => "%B") %> - <%= l(@teacher_ranking.ref_until, :format => "%B") %></th>
     </tr>
     <tr>
       <th> <%= t('ranking.name') %> </th>
