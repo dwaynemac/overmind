@@ -76,13 +76,14 @@
     </tr>
   </thead>
   <tbody>
+    <% monthly_stats =  @teacher_ranking.monthly_stats %>
     <% @teacher_ranking.matrix.each do |teacher, stats_hash| %>
       <% if teacher %>
       <tr>
         <th> <%= teacher.try(:full_name) %> </th>
         <% @teacher_ranking.column_names.each do |name| %>
           <%
-            monthly_stat = @teacher_ranking.monthly_stat(teacher, name)
+            monthly_stat = monthly_stats[teacher].detect {|ms| ms.name == name.to_s}
           %>
           <td>
               <span>
