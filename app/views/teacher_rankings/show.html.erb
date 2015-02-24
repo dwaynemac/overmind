@@ -76,9 +76,9 @@
     </tr>
   </thead>
   <tbody>
-    <% @teacher_ranking.matrix.each do |teacher, stats_hash| %> 
+    <% @teacher_ranking.matrix.each do |teacher, stats_hash| %>
       <tr>
-        <th> <%= teacher.full_name %> </th>
+        <th> <%= teacher.try(:full_name) %> </th>
         <% @teacher_ranking.column_names.each do |name| %>
           <%
             monthly_stat = @teacher_ranking.monthly_stat(teacher, name)
