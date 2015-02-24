@@ -146,6 +146,7 @@ es:
       schools: Escuelas
       users: Usuarios
       ranking: Ranking
+      teacher_ranking: Instructores
       marketing_snapshot: Resumen MKT
       pedagogic_snapshot: Resumen PDG
   time:

@@ -83,9 +83,9 @@
         </li>
       <% end -%>
 
-      <% if false && can?(:read, TeacherRanking) -%>
+      <% if can?(:read, TeacherRanking) -%>
         <li class="<%= 'active' if controller_name == 'reports' && action_name == 'pedagogic_snapshot' %>">
-        <%= link_to t('.teacher_ranking'), teacher_ranking_path %>
+        <%= link_to t('.teacher_ranking'), school_teacher_ranking_path(@school.id) %>
         </li>
       <% end -%>
 
