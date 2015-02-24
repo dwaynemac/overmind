@@ -81,10 +81,9 @@
       <% if teacher %>
       <tr>
         <th> <%= teacher.try(:full_name) %> </th>
+        <% teacher_monthly_stats = monthly_stats[teacher] %>
         <% @teacher_ranking.column_names.each do |name| %>
-          <%
-            monthly_stat = monthly_stats[teacher].detect {|ms| ms.name == name.to_s}
-          %>
+          <% monthly_stat = teacher_monthly_stats.detect {|ms| ms.name == name.to_s} unless teacher_monthly_stats.blank? %>
           <td>
               <span>
                 <%= print_value monthly_stat %>
