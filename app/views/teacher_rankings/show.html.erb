@@ -77,6 +77,7 @@
   </thead>
   <tbody>
     <% @teacher_ranking.matrix.each do |teacher, stats_hash| %>
+      <% if teacher %>
       <tr>
         <th> <%= teacher.try(:full_name) %> </th>
         <% @teacher_ranking.column_names.each do |name| %>
@@ -102,6 +103,7 @@
           <% end -%>
         <% end %>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
