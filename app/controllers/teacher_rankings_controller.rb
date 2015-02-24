@@ -17,10 +17,10 @@ class TeacherRankingsController < ApplicationController
     end
     
     if params[:teacher_ranking].nil?
-      params[:teacher_ranking] = { federation_ids: [@federation.id], school_ids: [@school.id] }
+      params[:teacher_ranking] = {}
     end
 
-    @teacher_ranking = TeacherRanking.new params[:teacher_ranking]
+    @teacher_ranking = TeacherRanking.new params[:teacher_ranking].merge({ federation_ids: [@federation.id], school_ids: [@school.id] })
     
     respond_to do |format|
       format.html { render action: :show }
