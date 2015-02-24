@@ -26,6 +26,7 @@ Overmind::Application.routes.draw do
       match "/pa/:account_name", to: 'schools#show_by_name'
     end
     resources :sync_requests, only: [:create, :update]
+    resource :teacher_ranking, only: [:show, :update]
   end
   resource :ranking, only: [:show, :update]
   resource :teacher_ranking, only: [:show, :update]

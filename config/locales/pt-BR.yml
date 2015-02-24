@@ -34,6 +34,14 @@ pt-BR:
     federations: Federaçōes
     columns: Columnas
     sample_size: Media obtida de %{size} mêses.
+  teacher_ranking:
+    title: Estadísticas dos instrutores
+    options: Opções
+    date: Mês para analisar
+    date_range: Período para calculo da media
+    schools: Escolas
+    monthly_stats_for: Dados para o mês de %{month}
+    average_stats_for: Media de %{start_month} a %{end_month}
   monthly_stat:
     description:
       demand: Número de pessoas que contactaram a escola

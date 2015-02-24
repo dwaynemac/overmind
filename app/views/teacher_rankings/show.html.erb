@@ -1,17 +1,18 @@
 <div class="page-header">
   <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, teacher_ranking_url(id: @teacher_ranking, format: 'csv'), class: 'btn btn-default', id: 'download-link' %>
-  <h2><%= t('ranking.title') %></h2>
+  <h2><%= t('teacher_ranking.title') %></h2>
 
 </div>
 
 <div id="options-panel" class="panel panel-default">
   <div class="panel-heading" data-toggle="collapse" data-target="#options-panel .panel-body">
-    <%= t('.options') %>
+    <%= t('teacher_ranking.options') %>
     <span class="glyphicon glyphicon-collapse-down pull-right"></span>
   </div>
   <div class="panel-body collapse">
-    <%= form_for @teacher_ranking, url: teacher_ranking_path, method: :put, class: "form-horizontal" do |f| %>
-      <h4><%= t('ranking.date') %></h4>
+    <% url = @school.present? ? school_teacher_ranking_path(@school) : teacher_ranking_path %>
+    <%= form_for @teacher_ranking, url: url, method: :put, class: "form-horizontal" do |f| %>
+      <h4><%= t('teacher_ranking.date') %></h4>
       <div class="form-group form-inline">
         <%= f.date_select :ref_date, {discard_day: true}, { class: 'form-control' } %>
       </div> 
@@ -21,7 +22,7 @@
         <%= f.date_select :ref_since, {discard_day: true}, { class: 'form-control' } %>
         <%= f.date_select :ref_until, {discard_day: true}, { class: 'form-control' } %>
       </div> 
-      <% if @federations.size > 1 %>
+      <% if @federations.present? && @federations.size > 1 %>
       <h4><%= t('ranking.federations') %></h4>
       <div class="btn-group form-group" data-toggle="buttons">
       <% @federations.each do |fed| -%>
@@ -31,8 +32,8 @@
       <% end -%>
       </div>
       <% end %>
-      <% if @schools.size > 1 %>
-      <h4><%= t('ranking.schools') %></h4>
+      <% if @schools.present? && @schools.size > 1 %>
+      <h4><%= t('teacher_ranking.schools') %></h4>
       <div class="btn-group form-group" data-toggle="buttons">
       <% @schools.each do |school| -%>
         <label class="checkbox-inline col-sm-offset-1 btn btn-default btn-sm">
@@ -62,8 +63,8 @@
   <thead>
     <tr>
       <th></th>
-      <th style="text-align: center;" colspan="<%= @teacher_ranking.column_names.size %>"><%= l(@teacher_ranking.ref_date, :format => "%B") %></th>
-      <th style="text-align: center;" colspan="<%= @teacher_ranking.column_names.size %>"><%= l(@teacher_ranking.ref_since, :format => "%B") %> - <%= l(@teacher_ranking.ref_until, :format => "%B") %></th>
+      <th style="text-align: center;" colspan="<%= @teacher_ranking.column_names.size %>"><%= t("teacher_ranking.monthly_stats_for", :month => l(@teacher_ranking.ref_date, :format => "%B"))  %></th>
+      <th style="text-align: center;" colspan="<%= @teacher_ranking.column_names.size %>"><%= t("teacher_ranking.average_stats_for", :start_month => l(@teacher_ranking.ref_since, :format => "%B"), :end_month => l(@teacher_ranking.ref_until, :format => "%B")) %></th>
     </tr>
     <tr>
       <th> <%= t('ranking.name') %> </th>

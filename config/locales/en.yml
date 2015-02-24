@@ -202,6 +202,14 @@ en:
     federations: Federations
     columns: Columns
     column: Columns
+  teacher_ranking:
+    title: Teacher Stats
+    options: Options
+    date: Month for analisys
+    date_range: Date range for average calculation
+    schools: Schools
+    monthly_stats_for: Stats for %{month}
+    average_stats_for: Average stats from %{start_month} to %{end_mo<% @federations.each do |fed| -%>nth}
   datetime:
     distance_in_words:
       about_x_hours:
