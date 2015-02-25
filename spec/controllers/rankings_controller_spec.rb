@@ -8,6 +8,7 @@ describe RankingsController do
       PadmaAccount.any_instance.stub('padma2_enabled?').and_return(false)
       @fedone = create(:federation,id:1)
       @fedtwo = create(:federation,id:2)
+      @school = create(:school, :account_name => 'test-acc')
       sign_in(user)
     end
     describe "#show" do

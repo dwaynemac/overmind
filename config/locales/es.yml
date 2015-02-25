@@ -146,6 +146,7 @@ es:
       schools: Escuelas
       users: Usuarios
       ranking: Ranking
+      teacher_ranking: Instructores
       marketing_snapshot: Resumen MKT
       pedagogic_snapshot: Resumen PDG
   time:
@@ -399,6 +400,14 @@ es:
     federations: Federaciones
     columns: Columnas
     sample_size: Media calculada sobre valores de %{size} meses.
+  teacher_ranking:
+    title: Estadisticas de los instructores
+    options: Opciones
+    date: Mes a analizar
+    date_range: Período para calculo del promedio
+    schools: Escuelas
+    monthly_stats_for: Datos del mes de %{month}
+    average_stats_for: Promedio de %{start_month} a %{end_month}
   download: descargar
   unauthorized:
     default: 

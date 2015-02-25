@@ -41,11 +41,16 @@ class TeacherRanking
     @matrix ||= TeacherRankingMatrix.new(stats).matrix
   end
 
-  def monthly_stat teacher, stat_name
-    TeacherMonthlyStat.select([:name, :value, :teacher_id])
-                             .where(:teacher_id => teacher.id)
+  def monthly_stats
+    scope = TeacherMonthlyStat.select([:name, :value, :teacher_id])
+                             .includes(:school)
+                             .includes(:teacher)
                              .where(ref_date: (ref_date.to_date.beginning_of_month..ref_date.end_of_month.to_date))
-                             .where(name: stat_name).first
+                             .where(name: @column_names)
+    scope = scope.where(schools: { federation_id: @federation_ids }) unless @federation_ids.nil?
+    scope = scope.where(schools: { id: @school_ids }) unless @school_ids.nil?
+    
+    scope.all.group_by(&:teacher)
   end
 
   def stats

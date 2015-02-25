@@ -3,17 +3,24 @@ class TeacherRankingsController < ApplicationController
   def show
     authorize! :read, TeacherRanking
 
-    @federations = Federation.accessible_by(current_ability)
-    federation_ids = @federations.pluck(:id)
-    
-    @schools = School.accessible_by(current_ability)
-    school_ids = @schools.pluck(:id)
-
-    if params[:teacher_ranking].nil?
-      params[:teacher_ranking] = { federation_ids: federation_ids, school_ids: school_ids }
+    if params[:school_id]
+      @school = School.find(params[:school_id])
+    else
+      @school = School.find_by_account_name(current_user.account_name)
     end
 
-    @teacher_ranking = TeacherRanking.new params[:teacher_ranking]
+    @federation = @school.federation if @school
+
+    unless params[:school_id]
+      @federations = Federation.accessible_by(current_ability)
+      @schools = School.accessible_by(current_ability)
+    end
+    
+    if params[:teacher_ranking].nil?
+      params[:teacher_ranking] = {}
+    end
+
+    @teacher_ranking = TeacherRanking.new params[:teacher_ranking].merge({ federation_ids: [@federation.id], school_ids: [@school.id] })
     
     respond_to do |format|
       format.html { render action: :show }
