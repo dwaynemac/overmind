@@ -22,7 +22,7 @@ group :production do
   gem 'pg'
   gem 'newrelic_rpm'
   gem 'newrelic-typhoeus'
-  gem 'appsignal'
+  gem 'appsignal', '>= 0.9.4'
 end
 
 gem 'logical_model', '~> 0.5.10'
