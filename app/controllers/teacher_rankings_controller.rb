@@ -48,6 +48,10 @@ class TeacherRankingsController < ApplicationController
       @school = School.find_by_account_name(current_user.account_name)
     end
 
+    if @school.nil?
+      raise ActiveRecord::RecordNotFound
+    end
+
     @school
   end
 
