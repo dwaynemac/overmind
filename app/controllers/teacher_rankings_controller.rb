@@ -1,6 +1,6 @@
 class TeacherRankingsController < ApplicationController
 
-  before_filter :load_school, only: [:show]
+  before_filter :load_school
 
   def show
     authorize! :read, TeacherRanking
@@ -17,7 +17,8 @@ class TeacherRankingsController < ApplicationController
       params[:teacher_ranking] = {}
     end
 
-    @teacher_ranking = TeacherRanking.new params[:teacher_ranking].merge({ federation_ids: [@federation.try(:id)], school_ids: [@school.id] })
+    @teacher_ranking = TeacherRanking.new params[:teacher_ranking].merge({ federation_ids: [@federation.try(:id)],
+                                                                           school_ids: [@school.id] })
     
     respond_to do |format|
       format.html { render action: :show }
