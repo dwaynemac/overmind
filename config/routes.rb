@@ -44,5 +44,6 @@ Overmind::Application.routes.draw do
     end
   end
 
-  root to: 'schools#index'
+ root to: 'schools#index'
+ match 'message_door', to: 'message_door#catch'
 end

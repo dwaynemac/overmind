@@ -57,6 +57,7 @@ class SyncRequest < ActiveRecord::Base
   end
 
   # @param safe [Boolean] if true, exceptions will be catched and logged without raising (true)
+  # @return [String] state 
   def start(safe=true)
     return unless school.present? && year.present? && month.present?
     return if finished? || failed?
