@@ -1,5 +1,5 @@
 class TeacherMonthlyStat < MonthlyStat
-  attr_accessible :teacher_id
+  attr_accessible :teacher_id, :teacher_username
   belongs_to :teacher
 
   # IMPORTANT
@@ -33,6 +33,14 @@ class TeacherMonthlyStat < MonthlyStat
 
       :conversion_rate
   ]
+
+  def teacher_username=(username)
+    self.teacher = Teacher.smart_find(username,'',self.school)
+  end
+
+  def teacher_username
+    self.teacher.try(:username)
+  end
 
   ##
   # Will fetch all stats in STATS_BY_TEACHER from corresponding service (according to school)

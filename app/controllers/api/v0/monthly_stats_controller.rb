@@ -50,7 +50,11 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
       @monthly_stat.value = params[:monthly_stat][:value]
       @monthly_stat.service = params[:monthly_stat][:service]
     else
-      @monthly_stat = MonthlyStat.new(params[:monthly_stat])
+      if is_a_teacher_stat?
+        @monthly_stat = TeacherMonthlyStat.new(params[:monthly_stat])
+      else
+        @monthly_stat = MonthlyStat.new(params[:monthly_stat])
+      end
     end
     if @monthly_stat.save!
       render json: {id: @monthly_stat.id}, status: 201
@@ -90,12 +94,21 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
 
   private
 
+  def is_a_teacher_stat?
+    params[:monthly_stat] && params[:monthly_stat][:teacher_username].present?
+  end
+
   # Finds MonthlyStat duplicate
   # @param [Hash] attributes
   # @return [MonthlyStat]
   def find_this_stat(attributes)
     school = School.find_by_account_name(attributes[:account_name])
-    MonthlyStat.where(name: attributes[:name], ref_date: attributes[:ref_date], school_id: school.try(:id)).first
+    @teacher = Teacher.smart_find(attributes[:teacher_username],'',school) if attributes[:teacher_username]
+    MonthlyStat.where(name: attributes[:name],
+                      ref_date: attributes[:ref_date],
+                      school_id: school.try(:id),
+                      teacher_id: @teacher.try(:id)
+                     ).first
   end
 
 end
