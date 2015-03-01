@@ -16,7 +16,7 @@ namespace :sync do
 
           scope = SyncRequest.pending.order('priority desc')
           h = Time.now.hour
-          scope = scope.not_night_only if !(h > 2 && h < 5)
+          scope = scope.not_night_only if !(h > 0 && h < 6)
 
           sr = scope.first
           if sr
