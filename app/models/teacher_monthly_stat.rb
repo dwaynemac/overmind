@@ -49,7 +49,7 @@ class TeacherMonthlyStat < MonthlyStat
     unless service.blank?
       new_value = case service
       when 'overmind'
-        TeacherMonthlyStat.calculate_local_value(school,teacher,stat_name,ref_date)
+        TeacherMonthlyStat.calculate_local_value(school,teacher,name,ref_date)
       end
       if new_value && new_value.to_i != self.value.to_i
         self.update_attributes value: new_value
