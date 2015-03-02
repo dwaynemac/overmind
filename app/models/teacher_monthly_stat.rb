@@ -42,6 +42,23 @@ class TeacherMonthlyStat < MonthlyStat
     self.teacher.try(:username)
   end
 
+  # updates value
+  # IMPORTANT - currently only works for local_stats
+  # @return [Integer] new value
+  def update_from_service!
+    unless service.blank?
+      new_value = case service
+      when 'overmind'
+        TeacherMonthlyStat.calculate_local_value(school,teacher,stat_name,ref_date)
+      end
+      if new_value && new_value.to_i != self.value.to_i
+        self.update_attributes value: new_value
+      else
+        nil
+      end
+    end
+  end
+
   ##
   # Will fetch all stats in STATS_BY_TEACHER from corresponding service (according to school)
   # for month of ref_date.
