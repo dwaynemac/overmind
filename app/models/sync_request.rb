@@ -56,8 +56,8 @@ class SyncRequest < ActiveRecord::Base
 
     new_attributes = {}
     if syncable_month?(sync_month)
-      school.sync_teacher_monthly_stats(year,sync_month)
       school.sync_school_month_stats(year,sync_month,{update_existing: true, skip_synced_at_setting: true})
+      school.sync_teacher_monthly_stats(year,sync_month)
 
       # save progress and state
       new_attributes[:synced_upto] = sync_month
