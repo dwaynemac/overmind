@@ -22,7 +22,7 @@ namespace :sync do
           if sr
             i = 0
             until sr.finished? || sr.failed? || i>12 do
-              puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.synced_upto+1}, pr: #{sr.priority}"
+              puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.month}, pr: #{sr.priority}"
               sr.start
               i += 1
             end
@@ -79,30 +79,9 @@ namespace :sync do
     if today.day == 1
       School.all.each do |school|
         if school.padma_enabled?
-          SyncRequest.create(school_id: school.id, year: today.year, priority: 5, synced_upto: (today.month<2)? 0 : today.month-2)
+          SyncRequest.create(school_id: school.id, year: today.year, priority: 5, month: today.month-1)
+          SyncRequest.create(school_id: school.id, year: today.year, priority: 5, month: today.month)
         end
-      end
-    end
-  end
-
-  desc "Queues syncs for current year, only on mondays."
-  task :sunday_stats_sync => :environment do
-    today = Date.today
-    if today.wday == 0
-      School.all.each do |school|
-        if school.padma_enabled?
-          SyncRequest.create(school_id: school.id, year: today.year, priority: 2, synced_upto: (today.month<2)? 0 : today.month-2)
-        end
-      end
-    end
-  end
-
-  desc "Queues syncs for current year."
-  task :current_year => :environment do
-    today = Date.today
-    School.all.each do |school|
-      if school.padma_enabled?
-        SyncRequest.create(school_id: school.id, year: today.year)
       end
     end
   end
