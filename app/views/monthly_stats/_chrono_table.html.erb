@@ -31,8 +31,9 @@ end
                                                     year: @year,
                                                     month: m}),
                         method: 'POST',
+                        rel: 'tooltip',
                         data: {'original-title' => t('monthly_stats.chrono_table.sync_month')},
-                        :class => 'tooltip pictos red show-on-hover') %>
+                        :class => ':pictos red show-on-hover') %>
           <% end -%>
         </th>
       <%- end -%>
