@@ -27,6 +27,7 @@ end
             <%= link_to('r',
                         school_sync_requests_path(school_id: @school.id,
                                                   sync_request: {
+                                                    priority: 10,
                                                     year: @year,
                                                     month: m}),
                         method: 'POST',
