@@ -4,5 +4,6 @@ FactoryGirl.define do
   factory :sync_request do
     school
     year 2013
+    month 1
   end
 end
