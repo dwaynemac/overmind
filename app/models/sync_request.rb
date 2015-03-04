@@ -24,6 +24,7 @@ class SyncRequest < ActiveRecord::Base
             numericality: { greater_than: 0,
                             less_than: 13 }
   
+  validate :valid_ref_date
   validate :only_one_unfinished_per_school_per_month
 
   before_validation :set_defaults
@@ -115,6 +116,14 @@ class SyncRequest < ActiveRecord::Base
   end
 
   private
+  
+  def valid_ref_date
+    if year && month
+      if Date.civil(year.to_i,month.to_i,1).end_of_month > Time.zone.now.to_date.end_of_month
+        self.errors.add(:month, 'can sync future months')
+      end
+    end
+  end
 
   def only_one_unfinished_per_school_per_month
     return if self.persisted?

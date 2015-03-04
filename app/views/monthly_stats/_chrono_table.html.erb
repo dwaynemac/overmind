@@ -21,8 +21,19 @@ end
     <tr>
       <th></th>
       <%- (1...13).each do |m| -%>
-        <th>
+        <th class="toggle-views">
           <%= Date::MONTHNAMES[m] %>
+          <%- if can_sync_month?(m)  -%>
+            <%= link_to('r',
+                        school_sync_requests_path(school_id: @school.id,
+                                                  sync_request: {
+                                                    year: @year,
+                                                    month: m}),
+                        method: 'POST',
+                        rel: 'tooltip',
+                        data: {'original-title' => "calculate"},
+                        :class => 'pictos red show-on-hover') %>
+          <% end -%>
         </th>
       <%- end -%>
     </tr>

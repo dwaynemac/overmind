@@ -13,6 +13,10 @@ module MonthlyStatsHelper
     end
   end
 
+  def can_sync_month?(month)
+   can?(:create, SyncRequest) && @school.padma_enabled? && Date.civil(@year,month,1).end_of_month <= Time.zone.today.to_date.end_of_month
+  end
+
   def can_sync_update?(stat)
     if stat.is_a?(TeacherMonthlyStat)
       LocalStat.is_local_stat?(stat.name)
