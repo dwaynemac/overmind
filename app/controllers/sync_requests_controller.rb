@@ -4,16 +4,21 @@ class SyncRequestsController < ApplicationController
   load_and_authorize_resource through: :school
 
   def create
-    @sync_request = @school.sync_requests.new(params[:sync_request])
-    if @sync_request.save
-      redirect_to school_path(id: @sync_request.school_id,
-                              year: @sync_request.year),
-                              notice: I18n.t('schools.sync_year.queued')
+    @year = params[:sync_request][:year].try(:to_i)
+    if params[:sync_request][:month].nil?
+      months = (@year == Time.zone.now.year)? (1..Time.zone.now.month) : (1..12)
+      months.each do |month|
+        sr = @school.sync_requests.new(params[:sync_request])
+        sr.month = month
+        sr.save
+      end
     else
-      redirect_to school_path(id: @sync_request.school_id,
-                              year: @sync_request.year),
-                              error: I18n.t('schools.sync_year.couldnt_queue_sync')
+      @school.sync_requests.create(params[:sync_request])
     end
+
+    redirect_to school_path(id: @school.id,
+                            year: @year),
+                            notice: I18n.t('schools.sync_year.queued')
   end
 
   def update

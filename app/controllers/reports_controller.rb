@@ -66,16 +66,16 @@ class ReportsController < ApplicationController
     authorize! :create, SyncRequest
 
     resp = ""
-    if @school.sync_requests.in_progress.where(year: @year).count > 0
-      resp = t('schools.sync_request_notification_running_sync', progress: @school.sync_requests.in_progress.last.progress)
-    elsif @school.failed_sync_requests?(@year)
+    if @school.sync_requests.in_progress.where(year: @year, month: @month).count > 0
+      resp = t('schools.sync_request_notification_running_sync')
+    elsif @school.failed_sync_requests?(@year, @month)
       resp = t('schools.sync_request_notification.failed_sync')
-    elsif (sr = @school.sync_requests.where(year: @year).pending.last)
+    elsif (sr = @school.sync_requests.where(year: @year, month: @month).pending.last)
       sr.update_attributes priority: 15
-      resp = t('schools.sync_request_notification_running_sync', progress: sr.progress)
+      resp = t('schools.sync_request_notification_running_sync')
     else
-      sr = @school.sync_requests.create(priority: 10, year: @year, synced_upto: @month-1)
-      resp = t('schools.sync_request_notification_running_sync', progress: sr.progress)
+      sr = @school.sync_requests.create(priority: 10, year: @year, month: @month)
+      resp = t('schools.sync_request_notification_running_sync')
     end
 
     redirect_to return_to_path, notice: resp

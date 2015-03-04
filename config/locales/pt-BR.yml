@@ -155,9 +155,10 @@ pt-BR:
       teachers: Instrutores
       title: Escolas
     show:
-      sync_last_months: Sincronizar últimos meses
+      sync_last_months: Sincronizar últimos meses.
+      sync_current_month: Sincronizar mes atual
       sync_year_data: Solicitar sincronizaçāo de dados do %{year}
-      sync_now_year_data: Priorizar minha sincronización do %{year}
+      sync_current_month_now: Sincornizar meus dados do mes atual agora.
       click_to_change: Clique aqui para alterar o ano
       back: 
       new: 
@@ -169,7 +170,7 @@ pt-BR:
     sync_request_notification:
       pending_sync: Sincronizaçāo programada, começará nos próximos minutos.
       failed_sync: Error na sincronizaçāo. Contate ao support padma@metododerose.org.
-    sync_request_notification_running_sync: Estamos sincroniçando estes dados neste momento. (%{progress}%)
+    sync_request_notification_running_sync: Estamos sincroniçando estes dados neste momento.
     form:
       cancel: 
     never_synced: 

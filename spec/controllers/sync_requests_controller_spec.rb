@@ -14,17 +14,36 @@ describe SyncRequestsController do
   end
 
   describe "#create" do
-    def do_request
-      post :create, school_id: @school.id, sync_request: { year: 2013, priority: 10 }
-    end
+    context "when month is specified" do
+      def do_request
+        post :create, school_id: @school.id, sync_request: { year: 2013, month: 3, priority: 10 }
+      end
+      it "creates a new sync_request" do
+        expect{do_request}.to change{SyncRequest.count}.by 1
+      end
 
-    it "creates a new sync_request" do
-      expect{do_request}.to change{SyncRequest.count}.by 1
+      it "redirects to schools#show" do
+        do_request
+        response.should redirect_to school_path(@school.id, year: 2013)
+      end
     end
-
-    it "redirects to schools#show" do
-      do_request
-      response.should redirect_to school_path(@school.id, year: 2013)
+    context "when month is not specified" do
+      context "if year is current" do
+        def do_request
+          post :create, school_id: @school.id, sync_request: { year: Time.zone.now.year, priority: 10 }
+        end
+        it "creates sync_request for past and current months" do
+          expect{do_request}.to change{SyncRequest.count}.by Time.zone.now.month
+        end
+      end
+      context "if year is past" do
+        def do_request
+          post :create, school_id: @school.id, sync_request: { year: Time.zone.now.year-1, priority: 10 }
+        end
+        it "creates sync_request for each month" do
+          expect{do_request}.to change{SyncRequest.count}.by 12
+        end
+      end
     end
   end
 

@@ -119,8 +119,9 @@ es:
       title: Escuelas
     show:
       sync_last_months: Sincronizar últimos meses
+      sync_current_month: Sincronizar mes actual
       sync_year_data: Solicitar sincronización de datos del %{year}
-      sync_now_year_data: Priorizar la sincronización de mis datos del %{year}
+      sync_current_month_now: Sincronizar los datos del mes actual ahora.
       click_to_change: Click aqui para modificar el año
       back: 
       new: 
@@ -132,7 +133,7 @@ es:
     sync_request_notification:
       pending_sync: Ya esta programada la sincronización de estos datos. Puede demorar varios minutos.
       failed_sync: Hubo un error durante la sincronización de datos. Contacte al soporte técnico.
-    sync_request_notification_running_sync: En este momento estamos sincronizando estos datos. (%{progress}%)
+    sync_request_notification_running_sync: En este momento estamos sincronizando estos datos.
     form:
       cancel: 
     never_synced: 

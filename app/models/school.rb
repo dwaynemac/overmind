@@ -25,23 +25,15 @@ class School < ActiveRecord::Base
   ##
   # Checks if this schools has pending sync_requests
   # @return [Boolean]
-  def pending_sync_requests?(year=nil)
-    scope = sync_requests
-    if year
-      scope = scope.where(year: year)
-    end
-    scope.pending.count > 0
+  def pending_sync_requests?(year=nil, month= nil)
+    sync_requests.on_ref_date({year: year, month: month}).pending.count > 0
   end
 
   ##
   # Checks if this schools has failed sync_requests
   # @return [Boolean]
-  def failed_sync_requests?(year=nil)
-    scope = sync_requests
-    if year
-      scope = scope.where(year: year)
-    end
-    scope.failed.count > 0
+  def failed_sync_requests?(year=nil, month= nil)
+    sync_requests.on_ref_date({year: year, month: month}).failed.count > 0
   end
 
   ##

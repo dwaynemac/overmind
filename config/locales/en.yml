@@ -79,8 +79,9 @@ en:
       title: Schools
     show:
       sync_last_months: Sync last months
+      sync_current_month: Sync current month
       sync_year_data: Request sync for %{year} data
-      sync_now_year_data: Prioritize my sync for year %{year}
+      sync_current_month_now: Sync my current month's data now.
       click_to_change: Click to edit
       back: en, helpers.links.back
       new: en, helpers.links.new
@@ -92,7 +93,7 @@ en:
     sync_request_notification:
       pending_sync: Your sync is already scheduled. We'll start it in a few minutes
       failed_sync: There was an error when trying to sync your data. Contact support.
-    sync_request_notification_running_sync: We are syncing your data right now. (%{progress}%)
+    sync_request_notification_running_sync: We are syncing your data right now.
     form:
       cancel: en, helpers.links.cancel
     new:

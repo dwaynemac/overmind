@@ -44,6 +44,17 @@ class SyncRequest < ActiveRecord::Base
   scope :night_only, where("priority IS NULL OR priority < 5")
   scope :not_night_only, where("NOT (priority IS NULL OR priority < 5)")
 
+  def self.on_ref_date(options={})
+    scope = self.scoped
+    if options[:year]
+      scope = scope.where(year: options[:year])
+    end
+    if options[:month]
+      scope = scope.where(month: options[:month])
+    end
+    scope
+  end
+
   # @param safe [Boolean] if true, exceptions will be catched and logged without raising (true)
   def start(safe=true)
     return unless school.present? && year.present? && month.present?
