@@ -8,6 +8,7 @@ pt-BR:
   monthly_stats:
     chrono_table:
       title: Estatísticas mensais
+      sync_month: Atualizar índices deste mes.
       evasion_calculation: Cálculo da evasāo
       evasion_explanation: Esta evasāo é calculada a partir de valores absolutos. Dividindo o TOTAL de evasōes pelo TOTAL de alunos. Nāo é a média das evasōes
       efectividad_calculation: Cálculo da efetividade
