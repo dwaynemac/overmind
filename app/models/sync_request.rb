@@ -103,12 +103,6 @@ class SyncRequest < ActiveRecord::Base
     state == 'finished'
   end
 
-  # @return [Integer] porcentage of progress
-  def progress
-    end_month = (self.year < Time.now.year)? 12 : Time.now.month
-    (synced_upto*100/end_month).to_i
-  end
-
   # Return if this syncRequest should be run only at night.
   # @return [Boolean]
   def night_only?
