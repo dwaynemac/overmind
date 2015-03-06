@@ -43,7 +43,7 @@
       </div>
       <% end %>
       <h4><%= t('ranking.columns')%></h4>
-      <% Ranking::COLUMNS_FOR_VIEW.each do |row_of_names| -%>
+      <% TeacherRanking::COLUMNS_FOR_VIEW.each do |row_of_names| -%>
         <div class="btn-group input-group" data-toggle="buttons">
           <% row_of_names.each do |name|-%>
             <label class="btn btn-default btn-sm">
