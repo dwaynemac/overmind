@@ -22,11 +22,10 @@ class MessageDoorController < ApplicationController
     if params[:secret_key] == ENV['messaging_key']
       if @data.present? && @school.present? && !@ref_dates.empty?
         @ref_dates.each do |ref_date|
-          SyncRequest.create!(school_id: @school.id,
-                              year: ref_date.year,
-                              month: ref_date.month,
-                              priority: calculate_priority(ref_date)
-                             )
+          SyncRequest.create(school_id: @school.id,
+                             year: ref_date.year,
+                             month: ref_date.month,
+                             priority: calculate_priority(ref_date))
         end
         render json: "received", status: 200
       else
