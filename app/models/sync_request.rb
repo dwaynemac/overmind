@@ -64,10 +64,9 @@ class SyncRequest < ActiveRecord::Base
 
     update_attribute :state, 'running'
 
-    new_attributes = {}
     if syncable_month?(month)
-      school.sync_school_month_stats(year,month,{update_existing: true, skip_synced_at_setting: true})
-      school.sync_teacher_monthly_stats(year,month)
+      sync_school_stats
+      sync_teachers_stats
     end
 
     update_attributes(state: 'finished')
@@ -81,6 +80,20 @@ class SyncRequest < ActiveRecord::Base
       state
     else
       raise e
+    end
+  end
+
+  def sync_school_stats
+    ref = ref_date(year,month)
+    MonthlyStat::VALID_NAMES.each do |name|
+      SchoolMonthlyStat.sync_from_service!(school,name,ref)
+    end
+  end
+
+  def sync_teachers_stats
+    ref = ref_date(year,month)
+    TeacherMonthlyStat::STATS_BY_TEACHER.each do |name|
+      TeacherMonthlyStat.sync_school_from_service(school,name,ref)
     end
   end
 
@@ -114,7 +127,7 @@ class SyncRequest < ActiveRecord::Base
   
   def valid_ref_date
     if year && month
-      if Date.civil(year.to_i,month.to_i,1).end_of_month > Time.zone.now.to_date.end_of_month
+      if ref_date(year,month).end_of_month > Time.zone.now.to_date.end_of_month
         self.errors.add(:month, 'can sync future months')
       end
     end
@@ -138,5 +151,12 @@ class SyncRequest < ActiveRecord::Base
     self.state = 'ready' if state.nil?
     self.month = 1 if month.nil?
     self.priority = 0 if priority.nil?
+  end
+
+  # @param year [Integer]
+  # @param month [Integer]
+  # @return Date
+  def ref_date(year,month)
+    Date.civil(year.to_i,month.to_i,1)
   end
 end
