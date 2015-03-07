@@ -18,6 +18,31 @@ describe MessageDoorController do
   describe "catch" do
     context "with valid secret_key" do
       let(:sk){ENV['messaging_secret']}
+
+      context "if sync already queued" do
+
+        let(:key_name){ 'subscription_change' }
+        let(:data){{type: 'Enrollment',contact_id: '1234',
+                    changed_at: '2014-8-23',
+                    account_name: 'recoleta',
+        }}
+        before do
+          SyncRequest.create!( school_id: recoleta.id,
+                               year: 2014,
+                               month: 8)
+        end
+        let(:data){{type: 'Enrollment',contact_id: '1234',
+                    changed_at: '2014-8-23',
+                    changed_at_was: '2014-9-1',
+                    account_name: 'recoleta',
+        }}
+        it "wont queue another" do
+          expect{ request(key_name,sk,data) }.not_to change {
+            SyncRequest.count
+          }
+        end
+      end
+
       %W(subscription_change destroyed_subscription_change).each do |key_name|
         context "for key_name #{key_name}" do
           let(:key_name){key_name}
