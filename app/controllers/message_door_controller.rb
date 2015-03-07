@@ -5,6 +5,9 @@ class MessageDoorController < ApplicationController
   skip_before_filter :pre_check_access
   skip_before_filter :set_locale
 
+  before_filter :decode_data
+  before_filter :set_ref_dates
+  before_filter :load_school
 
   ##
   #
@@ -17,10 +20,51 @@ class MessageDoorController < ApplicationController
   # @argument secret_key [String]
   def catch
     if params[:secret_key] == ENV['messaging_key']
-      # ..
-      render json: "received", status: 200
+      if @data.present? && @school.present? && !@ref_dates.empty?
+        @ref_dates.each do |ref_date|
+          SyncRequest.create!(school_id: @school.id,
+                              year: ref_date.year,
+                              month: ref_date.month)
+        end
+        render json: "received", status: 200
+      else
+        render json: "data insuficient", status: 400
+      end
     else
       render json: "wrong secret_key", status: 401
+    end
+  end
+
+  private
+
+  def decode_data
+    @data = ActiveSupport::JSON.decode(params[:data]).symbolize_keys!
+  end
+
+  def set_ref_dates
+    return if @data.nil?
+    @ref_dates = []
+
+    case params[:key_name]
+    when 'subscription_change', 'destroyed_subscription_change'
+      @ref_dates << @data[:changed_at].to_date if @data[:changed_at]
+    when 'updated_subscription_change'
+      @ref_dates << @data[:changed_at].to_date if @data[:changed_at]
+      @ref_dates << @data[:changed_at_was].to_date if @data[:changed_at_was]
+    when 'communication', 'destroyed_communication'
+      @ref_dates << @data[:communicated_at].to_date if @data[:communicated_at]
+    when 'updated_communication'
+      @ref_dates << @data[:communicated_at].to_date if @data[:communicated_at]
+      @ref_dates << @data[:communicated_at_was].to_date if @data[:communicated_at_was]
+    end
+  end
+
+  def load_school
+    return if @data.nil?
+    
+    account_name = @data[:account_name]
+    if account_name
+      @school = School.find_by_account_name(account_name)
     end
   end
 

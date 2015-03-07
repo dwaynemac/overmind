@@ -9,19 +9,36 @@ describe MessageDoorController do
          data: ActiveSupport::JSON.encode(data)
   end
 
+  before do
+    SyncRequest.destroy_all
+  end
+
+  let!(:recoleta){ create(:school, account_name: 'recoleta') }
+
   describe "catch" do
     context "with valid secret_key" do
       let(:sk){ENV['messaging_secret']}
       %W(subscription_change destroyed_subscription_change).each do |key_name|
-        context "for key_name #{key_name}" do
+        context "for key_name #{key_name}", :focus do
           let(:key_name){key_name}
           let(:data){{type: 'Enrollment',contact_id: '1234',
                       changed_at: '2014-8-23',
                       account_name: 'recoleta',
           }}
           before { request(key_name,sk,data) }
-          it "syncs changed_at month"
-          it "syncs account_name"
+          it "syncs changed_at month" do
+            ref_date = data[:changed_at].to_date
+            sr = SyncRequest.last
+            expect(sr).not_to be_nil
+            expect(sr.year).to eq ref_date.year
+            expect(sr.month).to eq ref_date.month
+          end
+          it "syncs account_name" do
+            ref_date = data[:changed_at].to_date
+            sr = SyncRequest.last
+            expect(sr).not_to be_nil
+            expect(sr.school).to eq recoleta
+          end
           it { should respond_with 200 }
         end
       end
