@@ -30,9 +30,33 @@ class TeacherMonthlyStat < MonthlyStat
       :demand,
       :interviews,
       :emails, :phonecalls,
+      :website_contact,
 
       :conversion_rate
   ]
+
+  def self.stats_for_event(event)
+    ret = []
+    if event =~ /interview/
+      ret << :p_interviews
+      ret << :enrollment_rate
+      ret << :interviews
+    end
+    if event =~ /phone_call/
+      ret << :phonecalls
+    end
+    if event =~ /email/
+      ret << :emails
+    end
+    if event =~ /website_contact/
+      ret << :website_contact
+    end
+    if event =~ /communication/
+      ret << :demand
+      ret << :conversion_rate
+    end
+    ret
+  end
 
   def teacher_username=(username)
     self.teacher = Teacher.smart_find(username,'',self.school)

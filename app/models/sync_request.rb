@@ -11,7 +11,7 @@
 #                    syncs requestes by user through web have high priority
 #
 class SyncRequest < ActiveRecord::Base
-  attr_accessible :school_id, :year, :month, :state, :synced_at
+  attr_accessible :school_id, :year, :month, :state, :synced_at, :filter_by_event
 
   attr_accessible :priority
 
@@ -85,14 +85,14 @@ class SyncRequest < ActiveRecord::Base
 
   def sync_school_stats
     ref = ref_date(year,month)
-    MonthlyStat::VALID_NAMES.each do |name|
+    school_stat_names.each do |name|
       SchoolMonthlyStat.sync_from_service!(school,name,ref)
     end
   end
 
   def sync_teachers_stats
     ref = ref_date(year,month)
-    TeacherMonthlyStat::STATS_BY_TEACHER.each do |name|
+    teacher_stat_names.each do |name|
       TeacherMonthlyStat.sync_school_from_service(school,name,ref)
     end
   end
@@ -158,5 +158,23 @@ class SyncRequest < ActiveRecord::Base
   # @return Date
   def ref_date(year,month)
     Date.civil(year.to_i,month.to_i,1)
+  end
+
+  def school_stat_names
+    self.filter_by_event = self.filter_by_event.try(:to_s)
+    if self.filter_by_event.nil? || SchoolMonthlyStat.stats_for_event(self.filter_by_event).nil?
+      MonthlyStat::VALID_NAMES
+    else
+      SchoolMonthlyStat.stats_for_event(self.filter_by_event)
+    end
+  end
+
+  def teacher_stat_names
+    self.filter_by_event = self.filter_by_event.try(:to_s)
+    if self.filter_by_event.nil? || TeacherMonthlyStat.stats_for_event(self.filter_by_event).nil?
+      TeacherMonthlyStat::STATS_BY_TEACHER
+    else
+      TeacherMonthlyStat.stats_for_event(self.filter_by_event)
+    end
   end
 end

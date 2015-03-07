@@ -74,35 +74,8 @@ describe SyncRequest do
     end
   end
 
-  def should_call_to_sync_month(n)
-    sync_request.school.should_receive(:sync_school_month_stats).with( sync_request.year,
-      n,
-      {update_existing: true, skip_synced_at_setting: true}
-    )
-    sync_request.school.should_receive(:sync_teacher_monthly_stats).with(sync_request.year,n)
-  end
-
-  def should_not_call_to_sync_month(n)
-    sync_request.school.should_not_receive(:sync_school_month_stats).with(sync_request.year,n, {update_existing: true} )
-    sync_request.school.should_not_receive(:sync_teacher_monthly_stats).with(sync_request.year,n)
-  end
-
   describe "#start" do
-
-    it "syncs selected year-month" do
-      sync_request
-      should_call_to_sync_month(sync_request.month)
-      sync_request.start
-    end
-
-    it "wont sync other months" do
-      sync_request
-      should_not_call_to_sync_month(sync_request.month+1)
-      sync_request.start
-    end
-
     it "sets state to finished" do
-      should_call_to_sync_month(sync_request.month) # here for stubs
       sync_request.start
       sync_request.reload.should be_finished
     end

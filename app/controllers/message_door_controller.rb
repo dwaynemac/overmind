@@ -25,6 +25,7 @@ class MessageDoorController < ApplicationController
           SyncRequest.create(school_id: @school.id,
                              year: ref_date.year,
                              month: ref_date.month,
+                             filter_by_event: event_filter_name,
                              priority: calculate_priority(ref_date))
         end
         render json: "received", status: 200
@@ -58,6 +59,19 @@ class MessageDoorController < ApplicationController
       @ref_dates << @data[:communicated_at].to_date if @data[:communicated_at]
       @ref_dates << @data[:communicated_at_was].to_date if @data[:communicated_at_was]
     end
+  end
+
+  def event_filter_name
+    efn = ""
+
+    case params[:key_name]
+    when /communication/
+      efn << 'communication'
+      efn << ":#{@data[:media]}" if @data[:media]
+      efn << ":#{@data[:media_was]}" if @data[:media_was]
+    end
+
+    efn
   end
 
   def load_school

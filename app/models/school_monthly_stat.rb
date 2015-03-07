@@ -3,6 +3,27 @@ class SchoolMonthlyStat < MonthlyStat
   attr_protected :teacher_id
 
   validate :teacher_id_should_be_nil
+  
+  def self.stats_for_event(event)
+    ret  = []
+
+    if event =~ /interview/
+      ret << :p_interviews
+      ret << :enrollment_rate
+      ret << :interviews
+    end
+    ret << :phonecalls if event =~ /phone_call/
+    ret << :emails if event =~ /email/
+    ret << :website_contact if event =~ /website_contact/
+    
+    if event =~ /communication/
+      ret << :demand
+      ret << :conversion_count
+      ret << :conversion_rate
+    end
+
+    ret
+  end
 
   # If stat exists in DB it will recalculate its value.
   # If it doesnt exist it will calculate value and store it

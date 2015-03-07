@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150303213027) do
+ActiveRecord::Schema.define(:version => 20150307201243) do
 
   create_table "federations", :force => true do |t|
     t.string    "name"
@@ -66,10 +66,11 @@ ActiveRecord::Schema.define(:version => 20150303213027) do
     t.integer  "school_id"
     t.integer  "year"
     t.string   "state"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "priority"
     t.integer  "month"
+    t.string   "filter_by_event"
   end
 
   create_table "teachers", :force => true do |t|
