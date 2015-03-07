@@ -24,7 +24,9 @@ class MessageDoorController < ApplicationController
         @ref_dates.each do |ref_date|
           SyncRequest.create!(school_id: @school.id,
                               year: ref_date.year,
-                              month: ref_date.month)
+                              month: ref_date.month,
+                              priority: calculate_priority(ref_date)
+                             )
         end
         render json: "received", status: 200
       else
@@ -66,6 +68,10 @@ class MessageDoorController < ApplicationController
     if account_name
       @school = School.find_by_account_name(account_name)
     end
+  end
+
+  def calculate_priority(ref_date)
+    (ref_date < Date.today.beginning_of_month)? 4 : 12
   end
 
 end
