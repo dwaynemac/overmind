@@ -33,6 +33,7 @@ class MessageDoorController < ApplicationController
         render json: "data insuficient", status: 400
       end
     else
+      Rails.logger.info "expected #{ENV['messaging_key']} but got #{params['secret_key']}"
       render json: "wrong secret_key", status: 401
     end
   end
