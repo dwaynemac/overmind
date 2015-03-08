@@ -1,4 +1,4 @@
 accounts_key: "secret"
 crm_key: "secret"
 api_key: 'some-secret-key'
-doorbellio_key: secret
+messaging_key: secret
