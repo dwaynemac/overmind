@@ -19,7 +19,7 @@ class MessageDoorController < ApplicationController
   # @argument data [String] JSON encoded
   # @argument secret_key [String]
   def catch
-    if params[:secret_key] == ENV['messaging_key']
+    if valid_secret_key?
       if @data.present? && @school.present? && !@ref_dates.empty?
         @ref_dates.each do |ref_date|
           SyncRequest.create(school_id: @school.id,
@@ -38,6 +38,10 @@ class MessageDoorController < ApplicationController
   end
 
   private
+
+  def valid_secret_key?
+    (params[:secret_key] == ENV['messaging_key']) || (params['secret_key'] == ENV['messaging_key'])
+  end
 
   def decode_data
     @data = ActiveSupport::JSON.decode(params[:data]).symbolize_keys!
