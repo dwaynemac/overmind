@@ -92,6 +92,43 @@ describe SyncRequest do
         sync_request.state.should == 'failed'
       end
     end
+
+    describe "if filter_by_event is nil" do
+      before do
+        sync_request.update_attribute(:filter_by_event,nil)
+      end
+      it "syncs all stats" do
+        MonthlyStat::VALID_NAMES.each do |sn|
+          SchoolMonthlyStat.should_receive('sync_from_service!')
+                           .with(anything,sn,anything)
+        end
+        sync_request.start
+      end
+    end
+    describe "if filter_by_event is ''" do
+      before do
+        sync_request.update_attribute(:filter_by_event,'')
+      end
+      it "syncs all stats" do
+        MonthlyStat::VALID_NAMES.each do |sn|
+          SchoolMonthlyStat.should_receive('sync_from_service!')
+                           .with(anything,sn,anything)
+        end
+        sync_request.start
+      end
+    end
+    describe "if filter_by_event is 'communication" do
+      before do
+        sync_request.update_attribute(:filter_by_event,'communication')
+      end
+      it "syncs all stats" do
+        SchoolMonthlyStat.stats_for_event('communication').each do |sn|
+          SchoolMonthlyStat.should_receive('sync_from_service!')
+                           .with(anything,sn,anything)
+        end
+        sync_request.start
+      end
+    end
   end
 
   describe "#nigh_only?" do

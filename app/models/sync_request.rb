@@ -157,12 +157,12 @@ class SyncRequest < ActiveRecord::Base
   # @param month [Integer]
   # @return Date
   def ref_date(year,month)
-    Date.civil(year.to_i,month.to_i,1)
+    Date.civil(year.to_i,month.to_i,1).end_of_month
   end
 
   def school_stat_names
     self.filter_by_event = self.filter_by_event.try(:to_s)
-    if self.filter_by_event.nil? || SchoolMonthlyStat.stats_for_event(self.filter_by_event).nil?
+    if self.filter_by_event.blank? || SchoolMonthlyStat.stats_for_event(self.filter_by_event).nil?
       MonthlyStat::VALID_NAMES
     else
       SchoolMonthlyStat.stats_for_event(self.filter_by_event)
@@ -171,7 +171,7 @@ class SyncRequest < ActiveRecord::Base
 
   def teacher_stat_names
     self.filter_by_event = self.filter_by_event.try(:to_s)
-    if self.filter_by_event.nil? || TeacherMonthlyStat.stats_for_event(self.filter_by_event).nil?
+    if self.filter_by_event.blank? || TeacherMonthlyStat.stats_for_event(self.filter_by_event).nil?
       TeacherMonthlyStat::STATS_BY_TEACHER
     else
       TeacherMonthlyStat.stats_for_event(self.filter_by_event)
