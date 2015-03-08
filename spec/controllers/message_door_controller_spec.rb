@@ -17,10 +17,8 @@ describe MessageDoorController do
 
   describe "catch" do
     context "with valid secret_key" do
-      let(:sk){ENV['messaging_secret']}
-
+      let(:sk){'secret'}
       context "if sync already queued" do
-
         let(:key_name){ 'subscription_change' }
         let(:data){{type: 'Enrollment',contact_id: '1234',
                     changed_at: '2014-8-23',
@@ -31,11 +29,6 @@ describe MessageDoorController do
                                year: 2014,
                                month: 8)
         end
-        let(:data){{type: 'Enrollment',contact_id: '1234',
-                    changed_at: '2014-8-23',
-                    changed_at_was: '2014-9-1',
-                    account_name: 'recoleta',
-        }}
         it "wont queue another" do
           expect{ request(key_name,sk,data) }.not_to change {
             SyncRequest.count
