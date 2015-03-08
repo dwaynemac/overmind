@@ -20,8 +20,6 @@ gem 'best_in_place', :github => 'afalkear/best_in_place_post'
 
 group :production do
   gem 'pg'
-  gem 'newrelic_rpm'
-  gem 'newrelic-typhoeus'
   gem 'appsignal', '>= 0.9.4'
 end
 

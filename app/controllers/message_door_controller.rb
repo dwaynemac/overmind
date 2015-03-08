@@ -33,7 +33,7 @@ class MessageDoorController < ApplicationController
         render json: "data insuficient", status: 400
       end
     else
-      Rails.logger.info "expected #{ENV['messaging_key']} but got #{params['secret_key']}"
+      Rails.logger.info "expected #{ENV['messaging_secret']} but got #{params['secret_key']}"
       render json: "wrong secret_key", status: 401
     end
   end
@@ -41,7 +41,7 @@ class MessageDoorController < ApplicationController
   private
 
   def valid_secret_key?
-    (params[:secret_key] == ENV['messaging_key']) || (params['secret_key'] == ENV['messaging_key'])
+    (params['secret_key'] == ENV['messaging_secret'])
   end
 
   def decode_data
