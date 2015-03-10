@@ -73,13 +73,12 @@ namespace :sync do
     end
   end
 
-  desc "Queues syncs for current year, only on the 1st of the month."
+  desc "Queues syncs for current month, only on the 1st of the month."
   task :first_day_of_month_stats_sync => :environment do
     today = Date.today
     if today.day == 1
       School.all.each do |school|
         if school.padma_enabled?
-          SyncRequest.create(school_id: school.id, year: today.year, priority: 5, month: today.month-1)
           SyncRequest.create(school_id: school.id, year: today.year, priority: 5, month: today.month)
         end
       end
