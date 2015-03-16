@@ -299,7 +299,7 @@ module PadmaStatsApi
         req_options[:filter][:level] = options[:filter][:level] if options[:filter][:level]
       end
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/drop_outs/count", params: req_options, sslversion: :sslv3)
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/drop_outs/count", params: req_options)
       parse_response(response,!options[:by_teacher])
     end
 
