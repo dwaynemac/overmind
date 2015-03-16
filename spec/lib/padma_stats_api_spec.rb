@@ -13,8 +13,8 @@ describe PadmaStatsApi do
                          )}
       it "calls CRM with relative_to" do
         Typhoeus::Request.should_receive(:get).with(an_instance_of(String),
-                                      params: hash_including(:relative_to),
-                                      sslversion: :sslv3).and_return mocked_response
+                                      params: hash_including(:relative_to)
+                                      ).and_return mocked_response
         monthly_stat.get_remote_value
       end
     end
@@ -22,8 +22,8 @@ describe PadmaStatsApi do
       let(:school){create(:school)}
       it "calls CRM with relative_to" do
         Typhoeus::Request.should_receive(:get).with(an_instance_of(String),
-                                      params: hash_not_including(:relative_to),
-                                      sslversion: :sslv3).and_return mocked_response
+                                      params: hash_not_including(:relative_to)
+                                      ).and_return mocked_response
         monthly_stat.get_remote_value
       end
     end
