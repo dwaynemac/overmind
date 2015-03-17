@@ -1,13 +1,13 @@
 <%- content_for :title do -%>
-<%= @school.name %>
+  <%= @school.name %>
+<%- end -%>
+<%- content_for :breadcrum do -%>
+  <%= t(".year_stats") %> - <%= @school.name %>
 <%- end -%>
 
 <%- model_class = @school.class -%>
 <div class="page-header">
   <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, school_url(id: @school.id, format: 'csv', year: @year), class: 'btn btn-default', id: 'download-link' %>
-  <h1>
-    <%= @school.name %>
-  </h1>
   <h2>
     <div>
       <span id="current_year" title="<%= t('schools.show.click_to_change') %>"><%= @year %></span>

@@ -19,15 +19,41 @@
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
   </head>
   <body>
+
+    <%= content_for :header_submenu do %>
+      <% if can?(:read, Federation) -%>
+        <h2>
+          <% if current_user.federation.present? && current_ability.federations.count == 1 -%>
+            <%= link_to current_user.federation.name, current_user.federation %>
+          <% else -%>
+            <%= link_to t('layouts.navbar.federations'), federations_path -%>
+          <% end -%>
+        </h2>
+      <% end -%>
+      <% if can?(:manage, School) -%>
+        <h2>
+          <%= link_to t('layouts.navbar.schools'), schools_path %>    
+        </h2>
+      <% end -%>
+      <% if can?(:manage,User) -%>
+        <h2>
+          <%= link_to t('layouts.navbar.users'), users_path %>
+        </h2>
+      <% end -%>
+      <%# if can?(:see_global,MonthlyStat) -%>
+        <!-- 
+        <h2>
+          <%# link_to t('.global'), global_monthly_stats_path %>
+        </h2> -->
+      <%# end -%>
+    <% end -%>
+
     <%= render 'layouts/header' %>
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="content">
             <div class="row">
-              <%#<div class="span2">
-                %= render 'layouts/side_bar' %
-              </div>%>
               <div class="col-md-12">
                   <%= yield %>
                 </div>

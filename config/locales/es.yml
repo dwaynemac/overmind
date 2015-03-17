@@ -118,6 +118,7 @@ es:
       teachers: Instructores
       title: Escuelas
     show:
+      year_stats: Histórico anual
       sync_last_months: Sincronizar últimos meses
       sync_current_month: Sincronizar mes actual
       sync_year_data: Solicitar sincronización de datos del %{year}
