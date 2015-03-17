@@ -104,7 +104,7 @@ module PadmaStatsApi
       end
 
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options, sslversion: :sslv3)
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options)
 
       res = parse_response(response,!options[:by_teacher])
       if res
@@ -131,7 +131,7 @@ module PadmaStatsApi
       end
 
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options, sslversion: :sslv3)
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options)
 
       res = parse_response(response,!options[:by_teacher])
       if res
@@ -210,7 +210,7 @@ module PadmaStatsApi
         }
       end
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options, sslversion: :sslv3)
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
       parse_response(response,!options[:by_teacher])
     end
 
@@ -256,7 +256,7 @@ module PadmaStatsApi
         end
       end
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/students_average_age", params: req_options, sslversion: :sslv3)
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/students_average_age", params: req_options)
       parse_response(response,true)
     end
 
@@ -279,7 +279,7 @@ module PadmaStatsApi
       end
       req_options.merge!({by_teacher: true}) if options[:by_teacher]
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/communications/count", params: req_options, sslversion: :sslv3)
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/communications/count", params: req_options)
       parse_response(response,!options[:by_teacher])
     end
 
@@ -299,7 +299,7 @@ module PadmaStatsApi
         req_options[:filter][:level] = options[:filter][:level] if options[:filter][:level]
       end
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/drop_outs/count", params: req_options, sslversion: :sslv3)
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/drop_outs/count", params: req_options)
       parse_response(response,!options[:by_teacher])
     end
 
@@ -313,7 +313,7 @@ module PadmaStatsApi
       }
       req_options.merge!({by_teacher: true}) if options[:by_teacher]
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/enrollments/count", params: req_options, sslversion: :sslv3)
+      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/enrollments/count", params: req_options)
       parse_response(response,!options[:by_teacher])
     end
   end
