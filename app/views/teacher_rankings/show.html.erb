@@ -1,9 +1,8 @@
 <%- breadcrum t("teacher_ranking.title") -%>
 
 <div class="page-header">
-  <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, teacher_ranking_url(id: @teacher_ranking, format: 'csv'), class: 'btn btn-default', id: 'download-link' %>
-  <h2><%= t('schools.index.teachers') %></h2>
-
+  <%# link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, teacher_ranking_url(id: @teacher_ranking, format: 'csv'), class: 'btn btn-default', id: 'download-link' %>
+  <h2><%= t('teacher_ranking.title') %></h2>
 </div>
 
 <div id="options-panel" class="panel panel-default">
