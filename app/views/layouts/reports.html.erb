@@ -24,41 +24,45 @@
     
   </head>
   <body>
-    <div class="row">
-      <%= render 'layouts/navbar' %>
-      <div class="middle-container">
-        <div class="content">
-          <div class="row">
-            <div class="span12">
-              <% flash.each do |name, msg| -%>
-                <%= content_tag :div, msg, class: 'alert alert-info' %>
-              <% end -%> 
+    <%= render 'layouts/header' %>
+    <div class="reports-container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="middle-container">
+            <div class="content">
+              <div class="row">
+                <div class="col-md-12">
+                  <% flash.each do |name, msg| -%>
+                    <%= content_tag :div, msg, class: 'alert alert-info' %>
+                  <% end -%> 
 
-              <%= yield %>
-            </div>
-          </div><!--/row-->
-        </div><!--/content-->
+                  <%= yield %>
+                </div>
+              </div><!--/row-->
+            </div><!--/content-->
 
-        <footer>
-          <p>&copy; PADMA 2014</p>
-        </footer>
-      </div>  
-    
-      <!-- Javascripts
-      ================================================== -->
-      <!-- Placed at the end of the document so the pages load faster -->
-      <%# each controller includes application.js and it's own  -%>
-      <%= javascript_include_tag "application", controller_name %>
-      <%# TODO use js I18n, see CRM -%>
-      <div style="display: none;">
-        <!-- i18n -->
-        <span id="stats-names"
-          <%- (MonthlyStat::VALID_NAMES).each do |name| -%>
-            data-<%= name %>="<%= t "monthly_stat.names.#{name}" %>"
-          <%- end -%>
-        ></span>
+            <footer>
+              <p>&copy; PADMA 2014</p>
+            </footer>
+          </div>  
+        </div>
+      
+        <!-- Javascripts
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <%# each controller includes application.js and it's own  -%>
+        <%= javascript_include_tag "application", controller_name %>
+        <%# TODO use js I18n, see CRM -%>
+        <div style="display: none;">
+          <!-- i18n -->
+          <span id="stats-names"
+            <%- (MonthlyStat::VALID_NAMES).each do |name| -%>
+              data-<%= name %>="<%= t "monthly_stat.names.#{name}" %>"
+            <%- end -%>
+          ></span>
+        </div>
       </div>
+      <%= yield(:body_end) %>
     </div>
-    <%= yield(:body_end) %>
   </body>
 </html>

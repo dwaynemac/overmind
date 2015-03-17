@@ -19,40 +19,42 @@
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
   </head>
   <body>
-    <div class="row">
-      <%= render 'layouts/navbar' %>
-      <div class="container">
-        <div class="content">
-          <div class="row">
-            <%#<div class="span2">
-              %= render 'layouts/side_bar' %
-            </div>%>
-            <div class="span12">
-                <%= yield %>
-              </div>
+    <%= render 'layouts/header' %>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="content">
+            <div class="row">
+              <%#<div class="span2">
+                %= render 'layouts/side_bar' %
+              </div>%>
+              <div class="col-md-12">
+                  <%= yield %>
+                </div>
 
-          </div><!--/row-->
-        </div><!--/content-->
+            </div><!--/row-->
+          </div><!--/content-->
 
-        <footer>
-          <p>&copy; PADMA 2014</p>
-        </footer>
+          <footer>
+            <p>&copy; PADMA 2014</p>
+          </footer>
+        </div>
 
-      </div> <!-- /container -->
-    
-      <!-- Javascripts
-      ================================================== -->
-      <!-- Placed at the end of the document so the pages load faster -->
-      <%# each controller includes application.js and it's own  -%>
-      <%= javascript_include_tag "application", controller_name %>
-      <%# TODO use js I18n, see CRM -%>
-      <div style="display: none;">
-        <!-- i18n -->
-        <span id="stats-names"
-          <%- (MonthlyStat::VALID_NAMES).each do |name| -%>
-            data-<%= name %>="<%= t "monthly_stat.names.#{name}" %>"
-          <%- end -%>
-        ></span>
+      
+        <!-- Javascripts
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <%# each controller includes application.js and it's own  -%>
+        <%= javascript_include_tag "application", controller_name %>
+        <%# TODO use js I18n, see CRM -%>
+        <div style="display: none;">
+          <!-- i18n -->
+          <span id="stats-names"
+            <%- (MonthlyStat::VALID_NAMES).each do |name| -%>
+              data-<%= name %>="<%= t "monthly_stat.names.#{name}" %>"
+            <%- end -%>
+          ></span>
+        </div>
       </div>
     </div>
 
