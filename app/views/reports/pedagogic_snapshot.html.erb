@@ -1,3 +1,4 @@
+<%- breadcrum t("monthly_snapshot.pedagogic.monthly_snapshot") -%>
 <%= cache pedagogic_snapshot_cache_key(@year,@month) do %>
 <div id="wrapper">
   <div id="main">
@@ -5,7 +6,6 @@
         <div class="snapshort-holder">
           <div class="heading">
             <h1>
-              <%= t("monthly_snapshot.pedagogic.monthly_snapshot") %>
               <% if not_upto_date && @school.synced_at -%>
                 <span class="label label-info">
                   <%= "#{t('schools.index.synced_at')} #{l(@school.synced_at, format: :long)}" %>

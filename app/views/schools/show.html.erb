@@ -1,9 +1,7 @@
 <%- content_for :title do -%>
   <%= @school.name %>
 <%- end -%>
-<%- content_for :breadcrum do -%>
-  <%= t(".year_stats") %> - <%= @school.name %>
-<%- end -%>
+<%- breadcrum "#{t(".year_stats")} - #{@school.name}" -%>
 
 <%- model_class = @school.class -%>
 <div class="page-header">
