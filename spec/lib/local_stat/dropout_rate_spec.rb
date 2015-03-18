@@ -5,16 +5,10 @@ describe "dropout rate" do
   let(:ref_date){Date.today.end_of_month}
   let(:local_stat){LocalStat.new(school: school, ref_date: ref_date, name: :dropout_rate)}
 
-  describe "if school has no students stat on prev month" do
-    it "returns nil" do
-      expect(local_stat.value).to be_nil
-    end
-  end
-
-  describe "if school has 0 students on prev month" do
+  describe "if school has 0 students on cur month" do
     let!(:interviews){create(:monthly_stat,
                              school: school,
-                             ref_date: (ref_date-1.month).end_of_month,
+                             ref_date: ref_date,
                              name: :students,
                              value: 0
                             )}
@@ -23,12 +17,12 @@ describe "dropout rate" do
     end
   end
 
-  describe "if school has students on prev month" do
+  describe "if school has students on cur month" do
     let!(:interviews){create(:monthly_stat,
                              school: school,
-                             ref_date: (ref_date-1.month).end_of_month,
+                             ref_date: ref_date,
                              name: :students,
-                             value: 10
+                             value: 9
                             )}
     describe "but no dropouts stat" do
       it "returns nil" do
