@@ -6,13 +6,13 @@ describe "begginers dropout rate" do
   let(:ref_date){Date.today.end_of_month}
   let(:local_stat){LocalStat.new(school: school, ref_date: ref_date, name: :begginers_dropout_rate)}
 
-  describe "if schools has stat 'aspirante_students' for previous month" do
+  describe "if schools has stat 'aspirante_students' for current month" do
     describe "of value: 0" do
-      before {create(:monthly_stat, school: school, ref_date: ref_date - 1.month, name: :aspirante_sudents, value: 0)}
+      before {create(:monthly_stat, school: school, ref_date: ref_date, name: :aspirante_sudents, value: 0)}
       it { local_stat.value.should be_nil }
     end
     describe "of value: 1" do
-      before {create(:monthly_stat, school: school, ref_date: ref_date - 1.month, name: :aspirante_students, value: 2)}
+      before {create(:monthly_stat, school: school, ref_date: ref_date, name: :aspirante_students, value: 1)}
 
       describe "and dropouts_begginers for chosen month" do
         before {create(:monthly_stat, school: school, ref_date: ref_date, name: :dropouts_begginers, value: 1)}
@@ -37,7 +37,7 @@ describe "begginers dropout rate" do
 
   describe "if school has no 'aspirante_students' for previous month" do
     describe "but has dropouts_begginers for chosen month" do
-      before {create(:monthly_stat, school: school, ref_date: ref_date - 1.month, name: :aspirante_students, value: 2)}
+      before {create(:monthly_stat, school: school, ref_date: ref_date, name: :aspirante_students, value: 2)}
       it { local_stat.value.should be_nil }
     end
     describe "and no dropouts_begginer for chosen month" do
