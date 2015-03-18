@@ -19,40 +19,68 @@
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
   </head>
   <body>
-    <div class="row">
-      <%= render 'layouts/navbar' %>
-      <div class="container">
-        <div class="content">
-          <div class="row">
-            <%#<div class="span2">
-              %= render 'layouts/side_bar' %
-            </div>%>
-            <div class="span12">
-                <%= yield %>
-              </div>
 
-          </div><!--/row-->
-        </div><!--/content-->
+    <%= content_for :header_submenu do %>
+      <% if can?(:read, Federation) -%>
+        <h2>
+          <% if current_user.federation.present? && current_ability.federations.count == 1 -%>
+            <%= link_to current_user.federation.name, current_user.federation %>
+          <% else -%>
+            <%= link_to t('layouts.navbar.federations'), federations_path -%>
+          <% end -%>
+        </h2>
+      <% end -%>
+      <% if can?(:manage, School) -%>
+        <h2>
+          <%= link_to t('layouts.navbar.schools'), schools_path %>    
+        </h2>
+      <% end -%>
+      <% if can?(:manage,User) -%>
+        <h2>
+          <%= link_to t('layouts.navbar.users'), users_path %>
+        </h2>
+      <% end -%>
+      <%# if can?(:see_global,MonthlyStat) -%>
+        <!-- 
+        <h2>
+          <%# link_to t('.global'), global_monthly_stats_path %>
+        </h2> -->
+      <%# end -%>
+    <% end -%>
 
-        <footer>
-          <p>&copy; PADMA 2014</p>
-        </footer>
+    <%= render 'layouts/header' %>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="content">
+            <div class="row">
+              <div class="col-md-12">
+                  <%= yield %>
+                </div>
 
-      </div> <!-- /container -->
-    
-      <!-- Javascripts
-      ================================================== -->
-      <!-- Placed at the end of the document so the pages load faster -->
-      <%# each controller includes application.js and it's own  -%>
-      <%= javascript_include_tag "application", controller_name %>
-      <%# TODO use js I18n, see CRM -%>
-      <div style="display: none;">
-        <!-- i18n -->
-        <span id="stats-names"
-          <%- (MonthlyStat::VALID_NAMES).each do |name| -%>
-            data-<%= name %>="<%= t "monthly_stat.names.#{name}" %>"
-          <%- end -%>
-        ></span>
+            </div><!--/row-->
+          </div><!--/content-->
+
+          <footer>
+            <p>&copy; PADMA 2014</p>
+          </footer>
+        </div>
+
+      
+        <!-- Javascripts
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <%# each controller includes application.js and it's own  -%>
+        <%= javascript_include_tag "application", controller_name %>
+        <%# TODO use js I18n, see CRM -%>
+        <div style="display: none;">
+          <!-- i18n -->
+          <span id="stats-names"
+            <%- (MonthlyStat::VALID_NAMES).each do |name| -%>
+              data-<%= name %>="<%= t "monthly_stat.names.#{name}" %>"
+            <%- end -%>
+          ></span>
+        </div>
       </div>
     </div>
 

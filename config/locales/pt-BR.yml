@@ -49,7 +49,7 @@ pt-BR:
       emails: Emails recebidos
       phonecalls: Chamadas recebidas
       website_contact: Contatos via website recebidos
-      dropout_rate: "O % de evasāo é calculado dividindo as evasōes do mes pelos alunos no fechamento do mês anterior."
+      dropout_rate: "O % de evasāo é calculado dividindo as evasōes do mes pelos alunos + evasōes."
     names:
       aspirante_students_rate: '% Iniciantes'
       sadhaka_students_rate: '% Sádhakas'
@@ -156,13 +156,14 @@ pt-BR:
       teachers: Instrutores
       title: Escolas
     show:
+      year_stats: Histórico anual
       sync_last_months: Sincronizar últimos meses.
       sync_current_month: Sincronizar mes atual
       sync_year_data: Solicitar sincronizaçāo de dados do %{year}
       sync_current_month_now: Sincornizar meus dados do mes atual agora.
       click_to_change: Clique aqui para alterar o ano
-      back: 
-      new: 
+      back: voltar
+      new: novo
     search_form:
       show_only_w_account_name_blank: Só escolas sem PADMA.
     sync_year:

@@ -36,6 +36,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-rails'
   gem "execjs"
+  gem 'padma-assets', '0.1.3'
   gem 'less-rails-bootstrap', '~> 3.0.6'
   gem "therubyracer", '>= 0.11'
 end

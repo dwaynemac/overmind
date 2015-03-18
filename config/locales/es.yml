@@ -11,7 +11,7 @@ es:
       emails: Emails entrantes
       phonecalls: Llamadas entrantes
       website_contact: Contactos via website entrantes
-      dropout_rate: La evasion se calcula dividiendo las evasion del mes sobre los alumnos al cierre del mes anterior.
+      dropout_rate: La evasion se calcula dividiendo las evasion del mes sobre los alumnos + las evasiones del mes.
     names:
       aspirante_students_rate: '% Iniciantes'
       sadhaka_students_rate: '% Sádhakas'
@@ -118,6 +118,7 @@ es:
       teachers: Instructores
       title: Escuelas
     show:
+      year_stats: Histórico anual
       sync_last_months: Sincronizar últimos meses
       sync_current_month: Sincronizar mes actual
       sync_year_data: Solicitar sincronización de datos del %{year}

@@ -1,3 +1,4 @@
+<%- breadcrum t("ranking.title") -%>
 <div class="page-header">
   <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, ranking_url(id: @ranking, format: 'csv'), class: 'btn btn-default', id: 'download-link' %>
   <h2><%= t('ranking.title') %></h2>

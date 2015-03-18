@@ -11,6 +11,10 @@ module ApplicationHelper
     content_for(:body_end) { javascript_include_tag(*files) }
   end
 
+  def breadcrum(text)
+    content_for :breadcrum, text
+  end
+
   def li(controller,current_controller)
     opts = {}
     opts = opts.merge(class: 'active') if controller == current_controller

@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
     self.padma.try :current_account_name
   end
 
+  def current_account
+    PadmaAccount.find self.account_name
+  end
+
   def account_name_changed?
     false
   end

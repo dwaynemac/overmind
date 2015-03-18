@@ -5,6 +5,10 @@
   cursor: pointer;
 }
 
+button {
+	padding: 6px 12px !important;
+}
+
 
 /*************
   Blue Theme
