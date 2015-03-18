@@ -37,10 +37,10 @@ shared_examples_for "a stats matrix" do
     end
     describe "dropout_rate" do
       before do
-        @stud_dec = create(:monthly_stat, school: s, ref_date: Date.civil(2011,12,3), value: 4, name: 'students')
+        @stud_jan = create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,3), value: 3, name: 'students')
         @drop_jan = create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,3), value: 1, name: 'dropouts')
 
-        @stud_nov = create(:monthly_stat, school: s, ref_date: Date.civil(2012,11,3), value: 2, name: 'students')
+        @stud_dec = create(:monthly_stat, school: s, ref_date: Date.civil(2012,12,3), value: 1, name: 'students')
         @drop_dec = create(:monthly_stat, school: s, ref_date: Date.civil(2012,12,3), value: 1, name: 'dropouts')
 
         SchoolMonthlyStat.create_from_service!(s,:dropout_rate,Date.civil(2012,1,3))
