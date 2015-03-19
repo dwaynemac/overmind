@@ -19,7 +19,6 @@
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
   </head>
   <body>
-
     <%= content_for :header_submenu do %>
       <% if can?(:read, Federation) -%>
         <h2>
@@ -48,7 +47,9 @@
       <%# end -%>
     <% end -%>
 
-    <%= render 'layouts/header' %>
+    <% if current_user && current_user.current_account -%>     
+      <%= render 'layouts/header' %>
+    <% end -%>
     <div class="container">
       <div class="row">
         <div class="col-md-12">

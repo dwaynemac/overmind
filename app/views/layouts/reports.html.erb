@@ -24,7 +24,9 @@
     
   </head>
   <body>
-    <%= render 'layouts/header' %>
+    <% if current_user && current_user.current_account -%>
+      <%= render 'layouts/header' %>
+    <% end -%>
     <div class="reports-container">
       <div class="row">
         <div class="col-md-12">
