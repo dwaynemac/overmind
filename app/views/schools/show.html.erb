@@ -31,9 +31,6 @@
 <div id="stats" class="tab-content">
   <div class="tab-pane active" id="global">
   <%= render 'monthly_stats/chrono_table', monthly_stats: @school_monthly_stats %>
-  <%= link_to(t('.new', :default => t("helpers.links.new")),
-              new_school_monthly_stat_path(school_id: @school.id),
-              :class => 'btn btn-primary') if can?(:create,@school.monthly_stats.new) %>
   </div>
   <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
     <div class="tab-pane" id="<%= teacher_id %>">
@@ -42,11 +39,6 @@
     <% end -%>
     </div>
   <% end %>
-</div>
-
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              schools_path, :class => 'btn'  %>
 </div>
 
 <script>
