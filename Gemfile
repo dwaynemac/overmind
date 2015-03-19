@@ -17,9 +17,11 @@ gem 'sqlite3', :group => [:development, :test]
 
 # Inplace editor
 gem 'best_in_place', :github => 'afalkear/best_in_place_post'
+gem 'padma-assets', '0.1.5' # gems in assets group are not required in production (see Bundler.require in config/application.rb)
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
   gem 'appsignal', '>= 0.9.4'
 end
 
@@ -36,7 +38,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-rails'
   gem "execjs"
-  gem 'padma-assets', '0.1.5'
   gem 'less-rails-bootstrap', '~> 3.0.6'
   gem "therubyracer", '>= 0.11'
 end
