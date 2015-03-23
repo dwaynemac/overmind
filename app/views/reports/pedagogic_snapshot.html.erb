@@ -1,5 +1,5 @@
 <%- breadcrum t("monthly_snapshot.pedagogic.monthly_snapshot") -%>
-<%= cache pedagogic_snapshot_cache_key(@year,@month) do %>
+<%# cache pedagogic_snapshot_cache_key(@year,@month) do %>
 <div id="wrapper">
   <div id="main">
     <div id="content">
@@ -141,4 +141,4 @@
     return <%= students_pie_chart_data %>
   }
 </script>
-<% end -%>
+<%# end -%>
