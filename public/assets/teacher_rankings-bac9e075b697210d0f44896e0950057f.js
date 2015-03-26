@@ -1,1 +1,0 @@
-(function(){$(document).ready(function(){return $("#ranking_table").tablesorter(),$(".btn input:checked").parent(".btn").button("toggle"),$("#ranking_table td span").tooltip()})}).call(this);
