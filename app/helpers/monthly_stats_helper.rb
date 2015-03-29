@@ -14,7 +14,7 @@ module MonthlyStatsHelper
   end
 
   def can_sync_month?(month)
-   can?(:create, SyncRequest) && @school.padma_enabled? && Date.civil(@year.to_i,month.to_i,1).end_of_month <= Time.zone.today.to_date.end_of_month
+   can?(:create, SyncRequest) && @school.padma_enabled? && Date.civil(@year.to_i,month.to_i,1).end_of_month <= Time.zone.today.to_date.end_of_month if @school && @year
   end
 
   def can_sync_update?(stat)
