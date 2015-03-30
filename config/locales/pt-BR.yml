@@ -19,6 +19,8 @@ pt-BR:
     form:
       manual_edition_disable_sync: As estadísticas registradas manualmente no se syncronizam com outros sistemas.
   federations:
+    show:
+      schools: Escolas
     index:
       schools_count: Número de escolas
       students_count: Número de alunos

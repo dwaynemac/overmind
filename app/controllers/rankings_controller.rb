@@ -7,6 +7,10 @@ class RankingsController < ApplicationController
     federation_ids = @federations.pluck(:id)
     
     if params[:ranking].nil?
+      if params[:federation_id]
+        # we'r linking to a specific federation's list
+        federation_ids ? params[:federation_id]
+      end
       params[:ranking] = { federation_ids: federation_ids }
     end
     @ranking = Ranking.new params[:ranking]

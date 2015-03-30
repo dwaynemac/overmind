@@ -1,6 +1,9 @@
 <%- content_for :title do -%>
   <%= @federation.name %>
 <%- end -%>
+<%- content_for :breadcrum do -%>
+  <%= @federation.name %>
+<%- end -%>
 
 
 <%- model_class = @federation.class -%>
@@ -18,12 +21,7 @@
 <%= render 'monthly_stats/chrono_table', monthly_stats: @monthly_stats %>
 
 <div>
-  <%= link_to t('.schools'), schools_path(q: {federation_id_eq: @federation.id}), class: 'btn' %>
-</div>
-
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              federations_path, :class => 'btn'  %>
+  <%= link_to t('.schools'), ranking_path(federation_id: @federation.id}), class: 'btn btn-primary' %>
 </div>
 
 <script>
