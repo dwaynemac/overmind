@@ -41,6 +41,11 @@ Overmind::Application.routes.draw do
   namespace 'api' do
     namespace 'v0' do
       resources :monthly_stats
+      resources :sync_requests, only: [] do
+        collection do
+          post :pause_all
+        end
+      end
     end
   end
 
