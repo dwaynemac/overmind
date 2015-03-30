@@ -9,7 +9,7 @@ class RankingsController < ApplicationController
     if params[:ranking].nil?
       if params[:federation_id]
         # we'r linking to a specific federation's list
-        federation_ids ? params[:federation_id]
+        federation_ids = params[:federation_id]
       end
       params[:ranking] = { federation_ids: federation_ids }
     end
