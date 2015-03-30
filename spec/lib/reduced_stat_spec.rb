@@ -4,6 +4,8 @@ describe ReducedStat do
 
   before do
    10.times{ create(:school_monthly_stat, school: create(:school), value: 2) }
+   sms = build(:school_monthly_stat, school: create(:school), value: nil) 
+   sms.save(validate: false)
   end
 
   let(:stats){ SchoolMonthlyStat.all }

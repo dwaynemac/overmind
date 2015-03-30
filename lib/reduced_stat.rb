@@ -16,14 +16,18 @@ class ReducedStat
   def value 
     @value ||= case self.reduce_as.to_sym
       when :sum
-        self.stats.sum(&:value)
+        compacted_stats.sum(&:value)
       when :avg
-        self.stats.sum(&:value).to_f / self.size
+        compacted_stats.sum(&:value).to_f / self.size
     end
   end
 
+  def compacted_stats
+    @compacted_stats ||= stats.reject{|s| s.value.nil? }
+  end
+
   def size
-    @size ||= self.stats.try(:size) || 0
+    @size ||= compacted_stats.try(:size) || 0
   end
 
   def school_id
