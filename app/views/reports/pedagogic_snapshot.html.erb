@@ -5,13 +5,6 @@
     <div id="content">
         <div class="snapshort-holder">
           <div class="heading">
-            <h1>
-              <% if not_upto_date && @school.synced_at -%>
-                <span class="label label-info">
-                  <%= "#{t('schools.index.synced_at')} #{l(@school.synced_at, format: :long)}" %>
-                </span>
-              <% end -%>
-            </h1>
             <div class="date-area">
               <%= sync_button %>
               <div class="date">
