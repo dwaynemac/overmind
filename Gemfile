@@ -17,7 +17,7 @@ gem 'sqlite3', :group => [:development, :test]
 
 # Inplace editor
 gem 'best_in_place', :github => 'afalkear/best_in_place_post'
-gem 'padma-assets', '0.1.9' # gems in assets group are not required in production (see Bundler.require in config/application.rb)
+gem 'padma-assets', '0.1.10' # gems in assets group are not required in production (see Bundler.require in config/application.rb)
 
 group :production do
   gem 'pg'
