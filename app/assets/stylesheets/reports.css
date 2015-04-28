@@ -489,6 +489,10 @@ a:hover { text-decoration: underline; }
 .values li.ico-2:after{background: #6bccb4;}
 .values li.ico-3:after{background: #e37772;}
 .values li.ico-4:after{background: #a984c6;}
+
+.content{ max-width: 1200px; margin: 0 auto;}
+
+
 @media only screen and (max-width: 1290px) {
 body { min-width: 320px; }
 }
@@ -659,9 +663,7 @@ body { min-width: 320px; }
     	height: 117% !important;
     }
     
-    #content .snapshort-holder {
-    	margin: 0 -6px 0 0;
-    }
+  
     
     *, *:before, *:after {
     	box-sizing: content-box;
@@ -681,7 +683,7 @@ body { min-width: 320px; }
 }
 
 .reports-container {
-	width: 100%;
+	width: auto;
 	margin-left: auto;
 	margin-right: auto;
 	padding-left: 15px;
