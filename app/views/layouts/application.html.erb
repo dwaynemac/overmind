@@ -52,22 +52,14 @@
     <% if current_user && current_user.current_account -%>     
       <%= render 'layouts/header' %>
     <% end -%>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="content">
-            <div class="row">
+
+          <div class="main">
               <div class="col-md-12">
                   <%= yield %>
                 </div>
-
-            </div><!--/row-->
           </div><!--/content-->
 
-          <footer>
-            <p>&copy; PADMA 2014</p>
-          </footer>
-        </div>
+        
 
       
         <!-- Javascripts
@@ -84,8 +76,10 @@
             <%- end -%>
           ></span>
         </div>
-      </div>
-    </div>
+        
+          <footer>
+            <p>&copy; PADMA 2014</p>
+          </footer>
 
     <%= yield(:body_end) %>
   </body>
