@@ -5,16 +5,17 @@
 
 <%- model_class = @school.class -%>
 <div class="page-header">
-  <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, school_url(id: @school.id, format: 'csv', year: @year), class: 'btn btn-default', id: 'download-link' %>
+  <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, school_url(id: @school.id, format: 'csv', year: @year), class: 'btn btn-default pull-right', id: 'download-link' %>
   <h2>
-    <div>
-      <span id="current_year" title="<%= t('schools.show.click_to_change') %>"><%= @year %></span>
+    <div class='header-form-hidden'>
+      <span id="current_year" data-toggle='tooltip' data-placement='left' data-original-title="<%= t('schools.show.click_to_change') %>"><%= @year %></span>
       <%= form_tag nil, method: 'GET', class: 'form-inline', id: 'set-year'  do -%>
-        <%= select_tag( :year, options_for_select(@years,@year)) %>
-        <%= submit_tag(t('see'), class: 'btn') %>
+        <%= select_tag( :year, options_for_select(@years,@year), :class => 'form-control') %>
+        <%= submit_tag(t('see'), class: 'btn btn-default') %>
       <%- end -%>
     </div>
   </h2>
+  <!-- falta agregar el tipo de alert -->
   <%= render :partial => 'sync_request_notification' %>
 </div>
 

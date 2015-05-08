@@ -1,7 +1,7 @@
 <% @school.sync_requests.each do |sr| -%>
   <% case sr.state -%>
   <% when 'ready' -%>
-    <div class="alert">
+    <div class="alert alert-info alert-dismissible" role='alert'>
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <%= sr.month %>/<%= sr.year %> - <%= t('schools.sync_request_notification.pending_sync') %>
     </div>
@@ -14,12 +14,12 @@
       <% end -%>
     <% end -%>
   <% when 'running' -%>
-    <div class="alert">
+    <div class="alert alert-info alert-dismissible" role='alert'>
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <%= sr.month %>/<%= sr.year %> - <%= t('schools.sync_request_notification_running_sync') %>
     </div>
   <% when 'failed' -%>
-    <div class="alert">
+    <div class="alert alert-danger alert-dismissible" role='alert'>
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <%= sr.month %>/<%= sr.year %> - <%= t('schools.sync_request_notification.failed_sync') %>
     </div>
