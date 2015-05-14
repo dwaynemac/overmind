@@ -36,25 +36,17 @@ a:hover { text-decoration: underline; }
 }
 #main #content {
 	width: 100%;
-	background: #e6e7f0;
 	border-radius: 5px;
-	/*padding: 0px 6px 0px 10px;*/
-	overflow: hidden;
-	margin: 0 auto;
 }
 #main #content .manu {
 	width: 100%;
 	height: auto;
 }
 #content .snapshort-holder {
-	overflow: hidden;
-	background: #f8f9fe;
-	/*margin: 0 10px 0 0;*/
-  border-radius: 3px;
+	border-radius: 3px;
 }
 #main #content .heading {
 	background: #FFF;
-	overflow: hidden;
 	margin: 0 0 40px 0;
 	padding: 25px 3%;
 }
@@ -660,14 +652,6 @@ body { min-width: 320px; }
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .ui-slider-horizontal .ui-slider-range {
     	height: 117% !important;
-    }
-    
-    #content .snapshort-holder {
-    	margin: 0 -6px 0 0;
-    }
-    
-    *, *:before, *:after {
-    	box-sizing: content-box;
     }
 
     .distribution-area .student-distribution .headline{
