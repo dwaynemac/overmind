@@ -1,9 +1,6 @@
 /*
  *= require application
- *= require padma-assets
- *= require twitter/bootstrap
 */
-
 .main-content {
 	font: 12px/15px 'Lato', sans-serif;
 	color: #8a8ea5;
@@ -36,17 +33,25 @@ a:hover { text-decoration: underline; }
 }
 #main #content {
 	width: 100%;
+	background: #e6e7f0;
 	border-radius: 5px;
+	/*padding: 0px 6px 0px 10px;*/
+	overflow: hidden;
+	margin: 0 auto;
 }
 #main #content .manu {
 	width: 100%;
 	height: auto;
 }
 #content .snapshort-holder {
-	border-radius: 3px;
+	overflow: hidden;
+	background: #f8f9fe;
+	/*margin: 0 10px 0 0;*/
+  border-radius: 3px;
 }
 #main #content .heading {
 	background: #FFF;
+	overflow: hidden;
 	margin: 0 0 40px 0;
 	padding: 25px 3%;
 }
@@ -484,6 +489,10 @@ a:hover { text-decoration: underline; }
 .values li.ico-2:after{background: #6bccb4;}
 .values li.ico-3:after{background: #e37772;}
 .values li.ico-4:after{background: #a984c6;}
+
+.content{ max-width: 1200px; margin: 0 auto;}
+
+
 @media only screen and (max-width: 1290px) {
 body { min-width: 320px; }
 }
@@ -653,6 +662,12 @@ body { min-width: 320px; }
     .ui-slider-horizontal .ui-slider-range {
     	height: 117% !important;
     }
+    
+  
+    
+    *, *:before, *:after {
+    	box-sizing: content-box;
+    }
 
     .distribution-area .student-distribution .headline{
     	width: 88%;
@@ -668,7 +683,7 @@ body { min-width: 320px; }
 }
 
 .reports-container {
-	width: 100%;
+	width: auto;
 	margin-left: auto;
 	margin-right: auto;
 	padding-left: 15px;

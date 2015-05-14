@@ -27,27 +27,17 @@
     <% if current_user && current_user.current_account -%>
       <%= render 'layouts/header' %>
     <% end -%>
-    <div class="reports-container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="middle-container">
-            <div class="content">
-              <div class="row">
-                <div class="col-md-12">
+                  <div class="main">
+               <div class="col-md-12">
                   <% flash.each do |name, msg| -%>
                     <%= content_tag :div, msg, class: 'alert alert-info' %>
                   <% end -%> 
 
                   <%= yield %>
-                </div>
-              </div><!--/row-->
-            </div><!--/content-->
+      
+              </div> 
 
-            <footer>
-              <p>&copy; PADMA 2014</p>
-            </footer>
-          </div>  
-        </div>
+   
       
         <!-- Javascripts
         ================================================== -->
@@ -63,8 +53,11 @@
             <%- end -%>
           ></span>
         </div>
-      </div>
-      <%= yield(:body_end) %>
-    </div>
+      
+    
+     <footer>
+              <p>&copy; PADMA 2014</p>
+     </footer>
+           <%= yield(:body_end) %>
   </body>
 </html>

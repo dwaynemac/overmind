@@ -22,7 +22,7 @@ gem 'padma-assets', path: '~/Workspace/padma-assets' #'0.1.8' gems in assets gro
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'appsignal', '>= 0.9.4'
+  gem 'appsignal', '0.11.9'
 end
 
 gem 'logical_model', '~> 0.5.10'
@@ -39,7 +39,7 @@ group :assets do
   gem 'jquery-rails'
   gem "execjs"
   gem 'less-rails-bootstrap', '~> 3.0.6'
-  gem "therubyracer", '>= 0.11'
+  gem "therubyracer", '0.12.2'
 end
 
 group :development, :test do
