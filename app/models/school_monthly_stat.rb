@@ -29,7 +29,7 @@ class SchoolMonthlyStat < MonthlyStat
   # If it doesnt exist it will calculate value and store it
   def self.sync_from_service!(school,name,ref_date)
     ms = school.school_monthly_stats.where(name: name, ref_date: ref_date)
-    if ms.empty?
+    if ms.blank?
       create_from_service!(school,name,ref_date)
     else
       st = ms.first

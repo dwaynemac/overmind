@@ -126,7 +126,7 @@ class TeacherMonthlyStat < MonthlyStat
                           teacher_id: teacher.id,
                           name: name,
                           ref_date: ref_date)
-    if existing.empty?
+    if existing.blank?
       # store new
       self.create(school_id: school.id,
                   teacher_id: teacher.id,
