@@ -10,6 +10,8 @@ class TeacherMonthlyStat < MonthlyStat
       :male_students,
       :female_students,
 
+      :male_students_rate,
+
       :aspirante_students,  # students at Aspirante lev
       :sadhaka_students,  # students at Sádhaka lev
       :yogin_students,  # students at Yôgin lev
