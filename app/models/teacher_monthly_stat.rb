@@ -21,6 +21,11 @@ class TeacherMonthlyStat < MonthlyStat
       :professor_students, # students at Professor level.
       :master_students, # students at Master level.
 
+      :aspirante_students_rate,
+      :sadhaka_students_rate,
+      :yogin_students_rate,
+      :chela_students_rate
+
       :enrollments,
       :dropouts,
 
