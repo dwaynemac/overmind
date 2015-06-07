@@ -89,7 +89,7 @@ class Ranking
     end
 
     # defaults
-    self.ref_since = 1.year.ago.end_of_month.to_date if self.ref_since.nil?
+    self.ref_since = 4.months.ago.end_of_month.to_date if self.ref_since.nil?
     self.ref_until = 1.month.ago.end_of_month.to_date if self.ref_until.nil?
   end
 
