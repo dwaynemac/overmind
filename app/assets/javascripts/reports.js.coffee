@@ -10,6 +10,9 @@
 
 $(document).ready ->
 
+  $(".previ").click ->
+    registerEvent("clicked-prev-in-month-summary")
+
   $("#slider-range").slider
     animate: "fast"
     value: $("#amount").val()
