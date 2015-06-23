@@ -48,6 +48,9 @@ class Ability
 
   def user_with_enabled_padma_accounts_permitions
     if @user.padma_enabled?
+ 
+      self.merge GeneralAbility.new(@user)
+
       can [:sync,:sync_year,:read,:see_detail], School, account_name: enabled_account_names
       can [:create,:update], SyncRequest
       can :read, Federation, id: user_federation_ids
