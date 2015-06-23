@@ -7,6 +7,7 @@ $(document).ready ->
 
   $("#current_year").tooltip({placement: 'right', trigger: 'hover manual'}).tooltip('show')
   $("#current_year").click ->
+    registerEvent('clicked-change-statistics-year')
     $(this).hide()
     $(this).tooltip('hide')
     $(this).siblings("form").show()
