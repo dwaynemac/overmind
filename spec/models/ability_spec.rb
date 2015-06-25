@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Ability do
 
-
   let(:ability){Ability.new(user)}
 
   describe "admin" do
