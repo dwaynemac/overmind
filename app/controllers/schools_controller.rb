@@ -31,7 +31,7 @@ class SchoolsController < ApplicationController
 
     @school_monthly_stats = @school.school_monthly_stats.for_year(@year).to_matrix
 
-    current_school_teachers = @school.account.presenta?? @school.account.users.map(&:username) : nil
+    current_school_teachers = @school.account.present?? @school.account.users.map(&:username) : nil
     @teachers_monthly_stats = {}
     @school.teachers.each do |teacher|
       next if current_school_teachers && !teacher.username.in?(current_school_teachers)
