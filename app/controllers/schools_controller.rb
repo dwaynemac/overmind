@@ -31,8 +31,10 @@ class SchoolsController < ApplicationController
 
     @school_monthly_stats = @school.school_monthly_stats.for_year(@year).to_matrix
 
+    #current_school_teachers = @school.account.users.map(&:username) if @school.account_name
     @teachers_monthly_stats = {}
     @school.teachers.each do |teacher|
+      next if current_school_teachers && !teacher.username.in?(current_school_teachers)
       @teachers_monthly_stats[teacher.id] = @school.teacher_monthly_stats.for_year(@year).where(teacher_id: teacher.id).to_matrix
     end
     respond_to do |format|
