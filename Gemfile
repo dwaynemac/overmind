@@ -4,6 +4,8 @@ ruby '1.9.3'
 
 gem 'rails', '3.2.8'
 
+gem 'rack-cors'
+
 # CAS authentication
 gem 'devise', '1.5.0'
 gem 'devise_cas_authenticatable', '~> 1.3'
