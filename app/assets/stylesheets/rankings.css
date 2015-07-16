@@ -9,6 +9,11 @@ button {
 	padding: 6px 12px !important;
 }
 
+.static-table-header {
+	position: relative;
+	z-index: 500;
+}
+
 
 /*************
   Blue Theme
