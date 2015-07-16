@@ -28,7 +28,7 @@ group :production do
 end
 
 gem 'logical_model', '~> 0.5.10'
-gem 'accounts_client', '0.2.14'
+gem 'accounts_client', '0.2.15'
 gem 'kaminari'
 gem 'ransack'
 
