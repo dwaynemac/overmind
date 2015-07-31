@@ -16,6 +16,23 @@ class SchoolsController < ApplicationController
     end
   end
 
+  def show_by_nucleo_id
+    @school = School.find_by_nucleo_id(params[:nid])
+    if @school.nil?
+      # maybe we are out of sync ? 
+      a = PadmaAccount.find_by_nucleo_id params[:nid]
+      if a
+        @school = School.find_by_account_name(a.name)
+        @school.update_attribute :nucleo_id, params[:nid]
+      end
+    end
+    if @school.nil?
+      raise ActiveRecord::RecordNotFound
+    end
+    authorize! :read, @school
+    redirect_to @school
+  end
+
   def show_by_name
     @school = School.find_by_account_name(params[:account_name])
     if @school.nil?

@@ -24,6 +24,7 @@ Overmind::Application.routes.draw do
     end
     collection do
       match "/pa/:account_name", to: 'schools#show_by_name'
+      match "/nid/:nid", to: 'schools#show_by_nucleo_id'
     end
     resources :sync_requests, only: [:create, :update]
     resource :teacher_ranking, only: [:show, :update]
