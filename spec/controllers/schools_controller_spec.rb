@@ -18,6 +18,26 @@ describe SchoolsController do
       it { should respond_with :success }
       it { should assign_to :schools }
     end
+    describe "#show_by_nucleo_id" do
+      describe "if school has nucleo_id" do
+        let(:school){create(:school, nucleo_id: 1)}
+        before do
+          get :show_by_nucleo_id, nid: school.nucleo_id
+        end
+        it { should redirect_to school }
+      end
+      describe "if school doesnt have nucleo_id" do
+        let!(:school){create(:school, nucleo_id: nil, account_name: 'xx-acname-xx')}
+        before do
+          PadmaAccount.stub(:find_by_nucleo_id).and_return PadmaAccount.new name: school.account_name
+          get :show_by_nucleo_id, nid: 12
+        end
+        it { should redirect_to school }
+        it "updates schools nucleo_id" do
+          expect(school.reload.nucleo_id).to eq 12
+        end
+      end
+    end
   end
 
   context "for user without role" do
@@ -29,5 +49,4 @@ describe SchoolsController do
       sign_in(user)
     end
   end
-
 end
