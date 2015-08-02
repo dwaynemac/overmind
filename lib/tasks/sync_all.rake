@@ -6,6 +6,23 @@ namespace :sync do
     SyncRequest.where(state: 'running').update_all(state: 'paused')
   end
 
+  desc 'run pending sync-requests'
+  task :workoff => :environment do
+    scope = SyncRequest.pending.order('priority desc')
+    h = Time.now.hour
+    scope = scope.not_night_only if !(h > 0 && h < 6)
+
+    sr = scope.first
+    if sr
+      i = 0
+      until sr.finished? || sr.failed? || i>12 do
+        puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.month}, pr: #{sr.priority}"
+        sr.start
+        i += 1
+      end
+    end
+  end
+
   desc 'Sync worker, will constantly poll for pending sync_requests'
   task :worker => :environment do
     puts "Starting sync:worker"
