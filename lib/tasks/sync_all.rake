@@ -12,13 +12,22 @@ namespace :sync do
     h = Time.now.hour
     scope = scope.not_night_only if !(h > 0 && h < 6)
 
-    sr = scope.first
-    if sr
-      i = 0
-      until sr.finished? || sr.failed? || i>12 do
-        puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.month}, pr: #{sr.priority}"
-        sr.start
-        i += 1
+    loop do
+      begin
+        sr = scope.first
+        if sr
+          i = 0
+          until sr.finished? || sr.failed? || i>12 do
+            puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.month}, pr: #{sr.priority}"
+            sr.start
+            i += 1
+          end
+        end
+        break if scope.empty?
+      rescue StandardError => e
+        puts "Exception in sync:worker: #{e.message}"
+      ensure
+        break if scope.empty?
       end
     end
   end
