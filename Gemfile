@@ -27,7 +27,7 @@ group :production do
   gem 'appsignal', '0.11.9'
 end
 
-gem 'logical_model', '~> 0.5.10'
+gem 'logical_model', '0.6.3'
 gem 'accounts_client', '0.2.15'
 gem 'kaminari'
 gem 'ransack'
