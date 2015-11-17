@@ -21,10 +21,11 @@ gem 'sqlite3', :group => [:development, :test]
 gem 'best_in_place', :github => 'afalkear/best_in_place_post'
 gem 'padma-assets', '0.1.29'
 
+gem 'appsignal', '0.11.14'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'appsignal', '0.11.14'
 end
 
 gem 'logical_model', '0.6.3'
