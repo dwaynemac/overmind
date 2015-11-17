@@ -24,7 +24,7 @@ gem 'padma-assets', '0.1.29'
 group :production do
   gem 'pg'
   gem 'rails_12factor'
-  gem 'appsignal', '0.11.9'
+  gem 'appsignal', '0.11.14'
 end
 
 gem 'logical_model', '0.6.3'

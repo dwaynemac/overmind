@@ -73,6 +73,7 @@ class SyncRequest < ActiveRecord::Base
 
     state
   rescue => e
+    Appsignal.send_exception(e)
     update_attribute :state, 'failed'
     if safe
       logger.warn "SyncRequest #{self.id} failed with exception."
