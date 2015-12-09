@@ -2,10 +2,55 @@
   <%= @school.name %>
 <%- end -%>
 <%- breadcrum "#{t(".year_stats")} - #{@school.name}" -%>
-
 <%- model_class = @school.class -%>
-<div class="page-header">
-  <%= link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, school_url(id: @school.id, format: 'csv', year: @year), class: 'btn btn-default', id: 'download-link' %>
+
+<div class='schools-container'>
+  <header class='schools-head'>
+    <p><%= @year %></p>
+    <nav class='schools-navbar' role='navigation'>
+      <div class='filter-controls'>
+        <div class='btn-group'>
+          <button type='button' class='btn btn-secondary btn-sm'>
+            <span class='glyphicon glyphicon-chevron-left'></span>
+          </button>
+          <button type='button' class='btn btn-secondary btn-sm'>
+            <span class='glyphicon glyphicon-chevron-right'></span>
+          </button>
+        </div>
+        <button type='button' class='btn btn-secondary btn-sm'>
+          <span class='glyphicon glyphicon-refresh'></span>
+        </button>
+      </div>
+      <div class='filter-controls filter-controls-right'>
+        <%= link_to "<span class='glyphicon glyphicon-download'></span>".html_safe, school_url(id: @school.id, format: 'csv', year: @year), class: 'btn btn-secondary btn-sm', id: 'download-link' %>
+      </div>
+    </nav>
+  </header>
+  <section class='schools-content'>
+    <div id="chartContainer" class="chart-container"></div> <!-- chart -->
+    <ul class='nav nav-tabs' role='tablist'>
+      <li class='active'><a href="#global" class='' data-toggle='tab'>Global</a></li>
+      <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
+        <li><a href='#<%= teacher_id %>' data-toggle='tab'><%= Teacher.find(teacher_id).try(:full_name) %></a></li>
+      <%- end %>
+    </ul>
+    <div class='tab-content tab-content-border'>
+      <div class='tab-pane active' id="global">
+        <%= render 'monthly_stats/chrono_table', monthly_stats: @school_monthly_stats %>
+      </div>
+      <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
+        <div id='<%= teacher_id %>' class='tab-pane'>
+          <% unless stats.values.reject(&:empty?).empty? -%>
+            <%= render "monthly_stats/chrono_table", monthly_stats: stats, teacher_stats: true, title: Teacher.find(teacher_id).try(:full_name) %>
+          <% end -%>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</div>
+
+<div class="page-header" hidden>
+  <%= link_to "<span class='glyphicon glyphicon-download'></span>".html_safe, school_url(id: @school.id, format: 'csv', year: @year), class: 'btn btn-secondary btn-sm', id: 'download-link' %>
   <h2>
     <div>
       <span id="current_year" title="<%= t('schools.show.click_to_change') %>"><%= @year %></span>
@@ -16,29 +61,6 @@
     </div>
   </h2>
   <%= render :partial => 'sync_request_notification' %>
-</div>
-
-<div id="chartContainer" class="chart-container"></div>
-
-<!-- Nav tabs -->
-<ul class="nav nav-tabs" role="tablist">
-  <li class="active"><a href="#global" role="tab" data-toggle="tab">Global</a></li>
-  <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
-  <li><a href="#<%= teacher_id %>" role="tab" data-toggle="tab"><%= Teacher.find(teacher_id).try(:full_name) %></a></li>
-  <%- end %>
-</ul>
-
-<div id="stats" class="tab-content">
-  <div class="tab-pane active" id="global">
-  <%= render 'monthly_stats/chrono_table', monthly_stats: @school_monthly_stats %>
-  </div>
-  <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
-    <div class="tab-pane" id="<%= teacher_id %>">
-    <% unless stats.values.reject(&:empty?).empty? -%>
-      <%= render "monthly_stats/chrono_table", monthly_stats: stats, teacher_stats: true, title: Teacher.find(teacher_id).try(:full_name) %>
-    <% end -%>
-    </div>
-  <% end %>
 </div>
 
 <script>
@@ -72,4 +94,3 @@
     }
   ]
 </script>
-

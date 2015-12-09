@@ -1,42 +1,42 @@
 <% @school.sync_requests.each do |sr| -%>
   <% case sr.state -%>
-  <% when 'ready' -%>
-    <div class="alert">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <%= sr.month %>/<%= sr.year %> - <%= t('schools.sync_request_notification.pending_sync') %>
-    </div>
-    <% if sr.priority < 10 -%>
-      <%- if can?(:create, SyncRequest) && @school.padma_enabled?  -%>
-        <%= form_for [@school,sr], method: 'PUT', id: 'requset-sync-form' do |f| %>
-          <%= f.hidden_field :priority, value: 15 %>
-          <%= f.submit(t('schools.show.sync_current_month_now').capitalize, class: 'btn btn-mini') %>
+    <% when 'ready' -%>
+      <div class="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= sr.month %>/<%= sr.year %> - <%= t('schools.sync_request_notification.pending_sync') %>
+      </div>
+      <% if sr.priority < 10 -%>
+        <%- if can?(:create, SyncRequest) && @school.padma_enabled?  -%>
+          <%= form_for [@school,sr], method: 'PUT', id: 'requset-sync-form' do |f| %>
+            <%= f.hidden_field :priority, value: 15 %>
+            <%= f.submit(t('schools.show.sync_current_month_now').capitalize, class: 'btn btn-secondary btn-sm') %>
+          <% end -%>
         <% end -%>
       <% end -%>
+    <% when 'running' -%>
+      <div class="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= sr.month %>/<%= sr.year %> - <%= t('schools.sync_request_notification_running_sync') %>
+      </div>
+    <% when 'failed' -%>
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= sr.month %>/<%= sr.year %> - <%= t('schools.sync_request_notification.failed_sync') %>
+      </div>
     <% end -%>
-  <% when 'running' -%>
-    <div class="alert">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <%= sr.month %>/<%= sr.year %> - <%= t('schools.sync_request_notification_running_sync') %>
-    </div>
-  <% when 'failed' -%>
-    <div class="alert">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <%= sr.month %>/<%= sr.year %> - <%= t('schools.sync_request_notification.failed_sync') %>
-    </div>
   <% end -%>
-<% end -%>
-<% if @school.sync_requests.where(year: @year).empty? -%>
-  <%- if can?(:create, SyncRequest) && @school.padma_enabled?  -%>
-    <% cur_month = Time.zone.now.month -%>
-    <%= form_for [@school,@school.sync_requests.new(year: @year, priority: 10)], method: 'POST', id: 'requset-sync-form' do |f| %>
-      <%= f.hidden_field :year %>
-      <%= f.hidden_field :priority %>
-      <% if @year == Time.zone.now.year -%>
-        <%= f.hidden_field :month, value: cur_month %>
-        <%= f.submit(t('schools.show.sync_current_month').capitalize, class: 'btn btn-mini') %>
-      <% else -%>
-        <%= f.submit(t('schools.show.sync_year_data', year: @year).capitalize, class: 'btn btn-mini') %>
+  <% if @school.sync_requests.where(year: @year).empty? -%>
+    <%- if can?(:create, SyncRequest) && @school.padma_enabled?  -%>
+      <% cur_month = Time.zone.now.month -%>
+      <%= form_for [@school,@school.sync_requests.new(year: @year, priority: 10)], method: 'POST', id: 'requset-sync-form' do |f| %>
+        <%= f.hidden_field :year %>
+        <%= f.hidden_field :priority %>
+        <% if @year == Time.zone.now.year -%>
+          <%= f.hidden_field :month, value: cur_month %>
+          <%= f.submit(t('schools.show.sync_current_month').capitalize, class: 'btn btn-secondary btn-sm') %>
+        <% else -%>
+          <%= f.submit(t('schools.show.sync_year_data', year: @year).capitalize, class: 'btn btn-secondary btn-sm') %>
+        <% end -%>
       <% end -%>
-    <% end -%>
-  <%- end -%>
-<% end -%>
+    <%- end -%>
+  <% end -%>
