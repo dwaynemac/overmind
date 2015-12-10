@@ -3,11 +3,11 @@ var studentsData = students_pie_chart_data()
 var doughnutData = [
 				{
 					value : distributionData["male_students"],
-					color : "#14b9d6"
+					color : "#f4b06d"
 				},
 				{
 					value: distributionData["female_students"],
-					color:"#e86741"
+					color:"#25a6dd"
 				}
 			];
 var doughnutData2 = [

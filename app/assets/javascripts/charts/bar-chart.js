@@ -7,37 +7,37 @@ var chartData = [
     {
         "country": pedagogic_chart_labels["begginear"],
         "visits": pedagogic_chart_data["begginear"],
-        "color": "#cfd9db"
+        "color": "#ebebeb"
     },
     {
         "country": pedagogic_chart_labels["sadhakas"],
         "visits": pedagogic_chart_data["sadhakas"],
-        "color": "#fef400"
+        "color": "#e0dd6e"
     },
     {
         "country": pedagogic_chart_labels["yogins"],
         "visits": pedagogic_chart_data["yogins"],
-        "color": "#fe5e00"
+        "color": "#f4b06d"
     },
     {
         "country": pedagogic_chart_labels["chelas"],
         "visits": pedagogic_chart_data["chelas"],
-        "color": "#ff060a"
+        "color": "#c44747"
     },
     {
         "country": pedagogic_chart_labels["graduate"],
         "visits": pedagogic_chart_data["graduate"],
-        "color": "#9500d4"
+        "color": "#ad74cc"
     },
     {
         "country": pedagogic_chart_labels["assistant"],
         "visits": pedagogic_chart_data["assistant"],
-        "color": "#01b1e1"
+        "color": "#219cd9"
     },
     {
         "country": pedagogic_chart_labels["professor"],
         "visits": pedagogic_chart_data["professor"],
-        "color": "#0000fe"
+        "color": "#1671b8"
     },
 	{
         "country": "",

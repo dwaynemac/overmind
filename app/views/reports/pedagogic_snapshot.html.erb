@@ -1,124 +1,73 @@
 <%- breadcrum t("monthly_snapshot.pedagogic.monthly_snapshot") -%>
 <%# cache pedagogic_snapshot_cache_key(@year,@month) do %>
-<div id="wrapper">
-  <div id="main">
-    <div id="content">
-        <div class="snapshort-holder">
-          <div class="heading">
-            <div class="date-area">
-              <%= sync_button %>
-              <div class="date">
-                <%= link_to "", set_prev_month_url, class:'previ' %> 
-                <span class="year"><%= set_current_month_and_year %></span>
-                <%= link_to "", set_next_month_url, class:'next' %> 
-              </div>
-            </div>
-          </div>
-          <div class="four-column-area">
-            <div class="column-area">
-              <div class="headline">
+<div class='report-container'>
+  <header class='report-head'>
+    <p><%= set_current_month_and_year %> <%= @year %></p>
+    <div class='btn-group'>
+      <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span>".html_safe, set_prev_month_url, class:'btn btn-secondary btn-sm' %>
+      <%= link_to "<span class='glyphicon glyphicon-chevron-right'></span>".html_safe, set_next_month_url, class:'btn btn-secondary btn-sm' %>
+    </div>
+    <%= sync_button %>
+  </header>
+  <section class='report-content'>
+    <div class='row'>
+      <div class='col-sm-8 col-md-8'>
+        <div class='row'>
+          <div class='col-xs-6 col-sm-3 col-md-3 col-md-padd'>
+            <div class='card card-default'>
+              <div class='card-body'>
                 <h3><%= t("monthly_snapshot.pedagogic.successful_enrollments") %></h3>
-              </div>
-              <div class="num-area">
-                <span class="num"><%= number_with_delimiter(@enrollments) %> </span>
-                <div class="img-holder"> 
-                  <%= image_tag("reports/icon5_03.png", height: '37', width: '197')%>
-                </div>
+                <p class='num'><%= number_with_delimiter(@enrollments) %></p>
               </div>
             </div>
-            <div class="column-area">
-              <div class="headline">
+          </div>
+          <div class='col-xs-6 col-sm-3 col-md-3 col-md-padd'>
+            <div class='card card-default'>
+              <div class='card-body'>
                 <h3><%= t("monthly_snapshot.pedagogic.total_dropouts") %></h3>
+                <p class='num'><%= number_with_delimiter(@dropouts) %></p>
               </div>
-              <div class="num-area">
-                <span class="num"><%= number_with_delimiter(@dropouts) %></span>
-                <div class="img-holder"> 
-                  <%= image_tag("reports/icon6_03.png", height: '37', width: '197')%> </div>
-                </div>
             </div>
-            <div class="column-area">
-              <div class="headline">
+          </div>
+          <div class='col-xs-6 col-sm-3 col-md-3 col-md-padd'>
+            <div class='card card-default'>
+              <div class='card-body'>
                 <h3><%= t("monthly_snapshot.pedagogic.total_students") %></h3>
-              </div>
-              <div class="num-area">
-                <span class="num"><%= number_with_delimiter(@students) %></span>
-                <div class="img-holder"> 
-                  <%= image_tag("reports/icon7_03.png", height: '37', width: '197')%> 
-                </div>
+                <p class='num'><%= number_with_delimiter(@students) %></p>
               </div>
             </div>
-            <div class="column-area">
-              <div class="headline">
+          </div>
+          <div class='col-xs-6 col-sm-3 col-md-3 col-md-padd'>
+            <div class='card card-default'>
+              <div class='card-body'>
                 <h3><%= t("monthly_snapshot.pedagogic.growth_or_decrease") %> </h3>
-              </div>
-              <div class="num-area">
-                <span class="num"><%= set_growth_rate(@growth) %></span>
-                <div class="img-holder"> 
-                  <%= image_tag("reports/icon8_03.png", height: '37', width: '197')%> 
-                </div>
+                <p class="num"><%= set_growth_rate(@growth) %></p>
               </div>
             </div>
           </div>
-          <div class="graph">
-          <div id="chartdiv" style="width: 100%; height: 400px;"></div>
+          <div class='col-sm-12 col-md-12'>
+            <div class="graph">
+              <div id="chartdiv" style="width: 100%; height: 400px;"></div>
+            </div>
+          </div>
         </div>
-        <section class="distribution-area">
-          <div class="main-distribution">
-            <div class="headline">
-              <h2><%= t("monthly_snapshot.pedagogic.distribution_male_&_female") %></h2>
-            </div>
-            <div class="distribution">
-              <div class="placeholder">
-                <canvas id="canvas" height="165" width="164"></canvas>
-              </div>
-              <div class="distribution-list">
-                <ul>
-                  <li class="mail">
-                    <%= @male_students%> % 
-                    <%= t("monthly_snapshot.pedagogic.male") %>
-                  </li>
-                  <li class="femail">
-                    <%= @female_students %> % 
-                    <%= t("monthly_snapshot.pedagogic.female") %>
-                  </li>
-                  <li class="average">
-                    <%= t("monthly_snapshot.pedagogic.average_student") %> 
-                    <span><%= @students_avg_age %> <%= t("monthly_snapshot.pedagogic.years") %></span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="student-distribution" style="display: none">
-            <div class="headline">
-              <h2><%= t("monthly_snapshot.pedagogic.total_of_students") %> </h2>
-            </div>
-            <div class="distribution">
-              <div class="placeholder">
-                <canvas id="canvas2" height="165" width="164"></canvas>
-              </div>
-              <div class="distribution-list add">
-                <ul>
-                  <li class="begginer">
-                    <%= t("monthly_snapshot.pedagogic.begginer") %>
-                    <strong><%= @begginer %> %</strong> 
-                  </li>
-                  <li class="graduate">
-                    <%= t("monthly_snapshot.pedagogic.graduate") %> 
-                    <strong><%= @graduate %> %</strong> 
-                  </li>
-                  <li class="senior">
-                    <%= t("monthly_snapshot.pedagogic.senior") %> 
-                    <strong><%= @senior %> %</strong> 
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+      </div>
+      <div class='col-sm-4 col-md-4'>
+        <section class='section-distribution'>
+          <canvas id="canvas" height="165" width="164"></canvas>
+          <p class='male-students'>
+            <span><%= @male_students%>%</span> <%= t("monthly_snapshot.pedagogic.male") %>
+            </p>
+          <p class='female-students'>
+            <span><%= @female_students %>%</span> <%= t("monthly_snapshot.pedagogic.female") %>
+          </p>
+          <p class='average-students'>
+            <span><%= t("monthly_snapshot.pedagogic.average_student") %></span> <%= @students_avg_age %> <%= t("monthly_snapshot.pedagogic.years") %>
+          </p>
         </section>
       </div>
-    </div>    
-  </div>
+    </div>
+  </section>
 </div>
 <script>
   function pedagogic_chart_labels() {

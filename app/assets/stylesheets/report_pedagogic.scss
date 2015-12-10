@@ -1,0 +1,82 @@
+.report-head {
+	margin-bottom: 15px;
+}
+
+.report-content {
+	@media (min-width: 768px) {
+		.col-md-padd {
+			padding-left: 2.5px;
+			padding-right: 2.5px;
+			&:first-child {
+				padding-left: 15px;
+			}
+			&:last-child {
+				padding-right: 15px;
+			}
+		}
+	}
+	.card-body {
+		min-height: 161px;
+		h3 {
+			font: {
+				size: 14px;
+			}
+			margin: 0;
+		}
+		.num {
+			color: #999;
+			font: {
+				size: 60px;
+				weight: bold;
+			}
+			left: 50%;
+			position: absolute;
+			top: 50%;
+			-webkit-transform: translate(-50%, -50%);
+			-moz-transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%);
+			-o-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+		}
+	}
+}
+
+.section-distribution {
+	color: #000;
+	position: relative;
+	text-align: center;
+}
+
+.male-students,
+.female-students,
+.average-students {
+	font-size: 15px;
+	position: absolute;
+	text-align: left;
+	> span {
+		display: block;
+		font: {
+			size: 26px;
+			weight: bold;
+		}
+	}
+}
+
+.male-students {
+	right: 10px;
+	top: 10px;
+}
+
+.female-students {
+	bottom: 10px;
+	left: 10px;
+}
+
+.average-students {
+	font-size: 14px;
+	right: 0;
+	bottom: 0;
+	> span {
+		font-size: 14px;
+	}
+}
