@@ -1,11 +1,100 @@
 <%- breadcrum t("teacher_ranking.title") -%>
 
-<div class="page-header">
-  <%# link_to "<span class='glyphicon glyphicon-cloud-download'></span> #{t('download')}".html_safe, teacher_ranking_url(id: @teacher_ranking, format: 'csv'), class: 'btn btn-default', id: 'download-link' %>
-  <h2><%= t('teacher_ranking.title') %></h2>
+<div class='stats-teacher-container'>
+  <nav class='statsteacher-navbar' role='navigation'>
+    <div class='filter-controls'>
+      <% url = @school.present? ? school_teacher_ranking_path(@school) : teacher_ranking_path %>
+      <%= form_for @teacher_ranking, url: url, method: :put, :html => { class: 'form-inline' } do |f| %>
+        <div class='form-group'>
+          <div class='label-block'><%= t('teacher_ranking.date') %></div>
+          <%= f.date_select :ref_date, {discard_day: true}, { class: 'form-control' } %>
+        </div>
+        <div class='form-group form-group-flex'>
+          <div class='label-block'><%= t('teacher_ranking.date_range') %></div>
+          <%= f.date_select :ref_since, {discard_day: true}, { class: 'form-control' } %>
+          <span class='label-to'>a</span>
+          <%= f.date_select :ref_until, {discard_day: true}, { class: 'form-control' } %>
+        </div>
+        <div class='form-group'>
+          <div class="btn-group"><button type="button" class="multiselect dropdown-toggle btn btn-info btn-sm" data-toggle="dropdown" title="None selected" aria-expanded="false"><span class="multiselect-selected-text">Seleccionar columnas</span> <b class="caret"></b></button><ul class="multiselect-container dropdown-menu"><li class="multiselect-item filter" value="0"><div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search" type="text" placeholder="Search"><span class="input-group-btn"><button class="btn btn-info multiselect-clear-filter" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span></div></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="full_name"> Nombre completo</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="first_name"> Nombre</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="last_name"> Apellido</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="gender"> género</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="level"> Grado</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="local_status"> Estado local</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="coefficient"> coeficiente</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="local_teacher"> Instructor</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="membership_ends_on"> Fin de membresía</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="membership_payment_type"> Forma de pago</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="membership_value"> Valor de membresía</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="membership_name"> Nombre de membresía</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="time_slots"> Horarios</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="followed_by_user"> En seguimiento por</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="email"> Email principal</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="telephone"> Telefono principal</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="identification"> identification</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="birthday"> Cumpleaños</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="age"> Edad</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="occupation"> Ocupación</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="observation"> observation</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="primary_address"> Dirección primaria</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="primary_postal_code"> Código postal de la dirección primaria</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="primary_neighborhood"> Barrio primario</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="primary_city"> Ciudad primaria</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="primary_state"> Estado primario</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="primary_country"> País primario</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="reason_ids"> Motivos última evasión</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="last_seen_at"> Vino por última vez el</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="last_revisacion"> last_revisacion</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="last_reunion"> last_reunion</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="last_dropout_date"> Fecha última evasión</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="last_gestion_date"> Fecha última gestión evolutiva</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="last_communicated_at"> Fecha última comunicación</label></a></li><li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="last_enrollment_date"> Fecha última matricula</label></a></li></ul></div>
+        </div>
+        <button type="submit" class="btn btn-secondary btn-sm"><%= t('submit') %></button>
+      <% end -%>
+    </div>
+  </nav>
+  <section class='statsteacher-content'>
+    <div class='table-responsive'>
+      <table id="statsteacher-table" class="table table-striped table-condensed tablesorter-blue">
+        <thead>
+          <tr>
+            <th></th>
+            <th colspan="<%= @teacher_ranking.column_names.size %>" class='text-center'>
+              <%= t("teacher_ranking.monthly_stats_for", :month => l(@teacher_ranking.ref_date, :format => "%B"))  %>
+            </th>
+            <th colspan="<%= @teacher_ranking.column_names.size %>" class='text-center'>
+              <%= t("teacher_ranking.average_stats_for", :start_month => l(@teacher_ranking.ref_since, :format => "%B"), :end_month => l(@teacher_ranking.ref_until, :format => "%B")) %>
+            </th>
+          </tr>
+          <tr>
+            <th><%= t('ranking.name') %></th>
+            <% @teacher_ranking.column_names.each do |name| %>
+              <th><%= t("monthly_stat.names.#{name}") %></th>
+            <% end %>
+            <% @teacher_ranking.column_names.each do |name| %>
+              <th><%= t("monthly_stat.names.#{name}") %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><div class='icon-user-default'></div> Mariana Ferreyra</th>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+          </tr>
+          <% monthly_stats =  @teacher_ranking.monthly_stats %>
+          <% @teacher_ranking.matrix.each do |teacher, stats_hash| %>
+            <% if teacher %>
+            <tr>
+              <th>
+                <div class='icon-user-default'></div>
+                <%= teacher.try(:full_name) %>
+              </th>
+              <% teacher_monthly_stats = monthly_stats[teacher] %>
+              <% @teacher_ranking.column_names.each do |name| %>
+                <% monthly_stat = teacher_monthly_stats.detect {|ms| ms.name == name.to_s} unless teacher_monthly_stats.blank? %>
+                <td>
+                    <span><%= print_value monthly_stat %></span>
+                  </td>
+              <% end %>
+              <% @teacher_ranking.column_names.each do |name| %>
+                <% if stats_hash[name.to_s].nil? -%>
+                  <td></td>
+                <% else -%>
+                  <td>
+                    <span data-toggle="tooltip" data-placement="top" title="<%= t('ranking.sample_size', size: stats_hash[name.to_s].size) %>">
+                      <%= print_value stats_hash[name.to_s] %>
+                    </span>
+                  </td>
+                <% end -%>
+              <% end %>
+            </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
 </div>
 
-<div id="options-panel" class="panel panel-default">
+<div id="options-panel" class="panel panel-default" hidden>
   <div class="panel-heading" data-toggle="collapse" data-target="#options-panel .panel-body">
     <%= t('teacher_ranking.options') %>
     <span class="glyphicon glyphicon-collapse-down pull-right"></span>
@@ -16,33 +105,36 @@
       <h4><%= t('teacher_ranking.date') %></h4>
       <div class="form-group form-inline">
         <%= f.date_select :ref_date, {discard_day: true}, { class: 'form-control' } %>
-      </div> 
-
+      </div>
       <h4><%= t('teacher_ranking.date_range') %></h4>
       <div class="form-group form-inline">
         <%= f.date_select :ref_since, {discard_day: true}, { class: 'form-control' } %>
         <%= f.date_select :ref_until, {discard_day: true}, { class: 'form-control' } %>
-      </div> 
+      </div>
+
+
       <% if @federations.present? && @federations.size > 1 %>
-      <h4><%= t('ranking.federations') %></h4>
-      <div class="btn-group form-group" data-toggle="buttons">
-      <% @federations.each do |fed| -%>
-        <label class="checkbox-inline col-sm-offset-1 btn btn-default btn-sm">
-          <%= f.check_box 'federation_ids', {multiple: true, checked: federation_selected?(fed.id,@teacher_ranking)}, fed.id, false %> <%= fed.name %>
-        </label>
-      <% end -%>
-      </div>
+        <h4><%= t('ranking.federations') %></h4>
+        <div class="btn-group form-group" data-toggle="buttons">
+          <% @federations.each do |fed| -%>
+            <label class="checkbox-inline col-sm-offset-1 btn btn-default btn-sm">
+              <%= f.check_box 'federation_ids', {multiple: true, checked: federation_selected?(fed.id,@teacher_ranking)}, fed.id, false %> <%= fed.name %>
+            </label>
+          <% end -%>
+        </div>
       <% end %>
+
       <% if @schools.present? && @schools.size > 1 %>
-      <h4><%= t('teacher_ranking.schools') %></h4>
-      <div class="btn-group form-group" data-toggle="buttons">
-      <% @schools.each do |school| -%>
-        <label class="checkbox-inline col-sm-offset-1 btn btn-default btn-sm">
-          <%= f.check_box 'school_ids', {multiple: true, checked: school_selected?(school.id,@teacher_ranking)}, school.id, false %> <%= school.name %>
-        </label>
-      <% end -%>
-      </div>
+        <h4><%= t('teacher_ranking.schools') %></h4>
+        <div class="btn-group form-group" data-toggle="buttons">
+          <% @schools.each do |school| -%>
+            <label class="checkbox-inline col-sm-offset-1 btn btn-default btn-sm">
+            <%= f.check_box 'school_ids', {multiple: true, checked: school_selected?(school.id,@teacher_ranking)}, school.id, false %> <%= school.name %>
+          </label>
+          <% end -%>
+        </div>
       <% end %>
+
       <h4><%= t('ranking.columns')%></h4>
       <% TeacherRanking::COLUMNS_FOR_VIEW.each do |row_of_names| -%>
         <div class="btn-group input-group" data-toggle="buttons">
@@ -54,58 +146,8 @@
         </div>
       <% end -%>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary col-sm-offset-0"><%= t('submit') %></button> 
+          <button type="submit" class="btn btn-primary col-sm-offset-0"><%= t('submit') %></button>
         </div>
     <% end -%>
   </div>
 </div>
-
-<table id="ranking_table" class="table table-striped table-bordered table-condensed tablesorter-blue">
-  <thead>
-    <tr>
-      <th></th>
-      <th style="text-align: center;" colspan="<%= @teacher_ranking.column_names.size %>"><%= t("teacher_ranking.monthly_stats_for", :month => l(@teacher_ranking.ref_date, :format => "%B"))  %></th>
-      <th style="text-align: center;" colspan="<%= @teacher_ranking.column_names.size %>"><%= t("teacher_ranking.average_stats_for", :start_month => l(@teacher_ranking.ref_since, :format => "%B"), :end_month => l(@teacher_ranking.ref_until, :format => "%B")) %></th>
-    </tr>
-    <tr>
-      <th> <%= t('ranking.name') %> </th>
-      <% @teacher_ranking.column_names.each do |name| %>
-        <th> <%= t("monthly_stat.names.#{name}") %> </th>
-      <% end %>
-      <% @teacher_ranking.column_names.each do |name| %>
-        <th> <%= t("monthly_stat.names.#{name}") %> </th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% monthly_stats =  @teacher_ranking.monthly_stats %>
-    <% @teacher_ranking.matrix.each do |teacher, stats_hash| %>
-      <% if teacher %>
-      <tr>
-        <th> <%= teacher.try(:full_name) %> </th>
-        <% teacher_monthly_stats = monthly_stats[teacher] %>
-        <% @teacher_ranking.column_names.each do |name| %>
-          <% monthly_stat = teacher_monthly_stats.detect {|ms| ms.name == name.to_s} unless teacher_monthly_stats.blank? %>
-          <td>
-              <span>
-                <%= print_value monthly_stat %>
-              </span>
-            </td>
-        <% end %>
-        <% @teacher_ranking.column_names.each do |name| %>
-          <% if stats_hash[name.to_s].nil? -%>
-            <td></td>
-          <% else -%>
-            <td>
-              <span data-toggle="tooltip" data-placement="top"
-                title="<%= t('ranking.sample_size', size: stats_hash[name.to_s].size) %>">
-                <%= print_value stats_hash[name.to_s] %>
-              </span>
-            </td>
-          <% end -%>
-        <% end %>
-      </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
