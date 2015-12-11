@@ -13,12 +13,11 @@
 	font-weight: normal;
 }
 
-@media (max-width: 767px) {
-
-	.filter-controls .label-to {
-		max-width: 20px;
-		text-align: center;
-	}
+.filter-controls .label-block {
+	color: #000;
+	display: block;
+	font-size: 14px;
+	font-weight: normal;
 }
 
 @media (max-width: 767px) {
@@ -44,6 +43,26 @@
 	    -ms-flex: 1;
 	    flex: 1;
 	}
+
+	.filter-controls .label-to {
+		max-width: 20px;
+		text-align: center;
+	}
+
+	.filter-controls .label-block {
+		-webkit-flex: 1 100%;
+		-moz-flex: 1 100%;
+		-ms-flex: 1 100%;
+		flex: 1 100%;
+	}
+}
+
+@media (min-width: 768px) {
+
+	.ranking-navbar .form-inline .form-group {
+		vertical-align: bottom;
+	}
+
 }
 
 #ranking_table {
@@ -55,8 +74,8 @@
 	pointer-events: none;
 }
 
-#ranking_table > tbody > tr {
-	background-color: #fff;
+#ranking_table > tbody > tr > td {
+	text-align: center;
 }
 
 #ranking_table > tbody > tr > th {
