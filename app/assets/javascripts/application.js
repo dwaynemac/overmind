@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require padma-assets
-//= require twitter/bootstrap
 //= require jquery.tablesorter
 //= require mixpanel
 //= require ux-events
