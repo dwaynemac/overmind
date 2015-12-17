@@ -13,13 +13,13 @@
         <div class="btn-group">
           <%= f.select   :column_names,
                          Ranking::COLUMNS_FOR_VIEW.flatten.map{|name| t("monthly_stat.names.#{name}")},
+                         {},
                          {
-                          multiple: :multiple,
-                          data: {
-                            'none-selected-text' => 'Seleccionar columnas'
-                                }
-                          },
-                         {id: 'choose-columns-select'}
+                            data: {
+                              'none-selected-text' => 'Seleccionar columnas'}, 
+                            multiple: :multiple,
+                            id: 'choose-columns-select'
+                          }
           %>
           
         </div>

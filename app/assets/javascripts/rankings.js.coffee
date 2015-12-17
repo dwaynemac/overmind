@@ -6,3 +6,5 @@ $(document).ready ->
   $("#choose-columns-select").multiselect
     buttonClass: 'btn btn-info btn-sm'
     enableCaseInsensitiveFiltering: true
+    buttonText: () ->
+      $("#choose-columns-select").data('none-selected-text')
