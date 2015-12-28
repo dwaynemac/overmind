@@ -111,14 +111,14 @@ class TeacherRanking
   end
 
   def set_federation_ids(attributes)
-    @federation_ids = attributes.fetch(:federation_ids , Federation.pluck(:id))
+    @federation_ids = attributes.fetch(:federation_ids , Federation.pluck(:id)).reject(&:blank?)
     if @federation_ids.first.is_a?(String)
       @federation_ids = @federation_ids.map(&:to_i)
     end
   end
 
   def set_column_names(attributes)
-    @column_names = attributes.fetch( :column_names , DEFAULT_COLUMN_NAMES)
+    @column_names = attributes.fetch( :column_names , DEFAULT_COLUMN_NAMES).reject(&:blank?)
     if @column_names.first.is_a?(String)
       @column_names = @column_names.map(&:to_sym)
     end
