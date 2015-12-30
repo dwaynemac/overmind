@@ -10,16 +10,16 @@
     <nav class='schools-navbar' role='navigation'>
       <div class='filter-controls'>
         <div class='btn-group'>
-          <button type='button' class='btn btn-secondary btn-sm'>
+          <%= link_to school_url(@school, year: @year.to_i - 1), class: 'btn btn-secondary btn-sm' do %>
             <span class='glyphicon glyphicon-chevron-left'></span>
-          </button>
-          <button type='button' class='btn btn-secondary btn-sm'>
-            <span class='glyphicon glyphicon-chevron-right'></span>
-          </button>
+          <% end %>
+          <% unless @year.to_i == Time.zone.now.year %>
+            <%= link_to school_url(@school, year: @year.to_i + 1), class: 'btn btn-secondary btn-sm' do %>
+              <span class='glyphicon glyphicon-chevron-right'></span>
+            <% end %>
+          <% end %>
         </div>
-        <button type='button' class='btn btn-secondary btn-sm'>
-          <span class='glyphicon glyphicon-refresh'></span>
-        </button>
+        <%= render :partial => 'sync_request_notification' %>
       </div>
       <div class='filter-controls filter-controls-right'>
         <%= link_to "<span class='glyphicon glyphicon-download'></span>".html_safe, school_url(id: @school.id, format: 'csv', year: @year), class: 'btn btn-secondary btn-sm', id: 'download-link' %>
