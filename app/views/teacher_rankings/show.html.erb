@@ -60,7 +60,7 @@
             <% if teacher %>
             <tr>
               <th>
-                <img src="<%= @user.gravatar_url(size: 130, default: image_url('icon-user-default.png')) %>" class='icon-user-default' />
+                <img src="<%= @user.gravatar_url(size: 130, default: image_path('icon-user-default.png')) %>" class='icon-user-default' />
                 <%= teacher.try(:full_name) %>
               </th>
               <% teacher_monthly_stats = monthly_stats[teacher] %>
