@@ -60,7 +60,8 @@
             <% if teacher %>
             <tr>
               <th>
-                <img src="<%= @user.gravatar_url(size: 130, default: image_path('icon-user-default.png')) %>" class='icon-user-default' />
+                <% u = PadmaUser.find teacher.try(:username) -%>
+                <img src="<%= u.gravatar_url(size: 130, default: image_path('icon-user-default.png')) %>" class='icon-user-default' />
                 <%= teacher.try(:full_name) %>
               </th>
               <% teacher_monthly_stats = monthly_stats[teacher] %>
