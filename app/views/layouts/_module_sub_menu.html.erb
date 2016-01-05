@@ -1,5 +1,6 @@
     <div id="module-sub-menu">
       <% if can?(:read, Federation) -%>
+        | 
           <% if current_user.federation.present? && current_ability.federations.count == 1 -%>
             <%= link_to current_user.federation.name, current_user.federation %>
           <% else -%>
@@ -7,9 +8,11 @@
           <% end -%>
       <% end -%>
       <% if can?(:manage, School) -%>
+        | 
           <%= link_to t('layouts.navbar.schools'), schools_path %>
       <% end -%>
       <% if can?(:manage,User) -%>
+        | 
           <%= link_to t('layouts.navbar.users'), users_path %>
       <% end -%>
       <%# if can?(:see_global,MonthlyStat) -%>
