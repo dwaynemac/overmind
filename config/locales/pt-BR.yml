@@ -163,8 +163,8 @@ pt-BR:
       sync_last_months: Sincronizar últimos meses.
       sync_current_month: Sincronizar mes atual
       sync_year_data: Solicitar sincronizaçāo de dados do %{year}
-      sync_current_month_now: Sincornizar meus dados do mes atual agora.
-      sync_now: Sincornizar agora.
+      sync_current_month_now: Sincronizar meus dados do mes atual agora.
+      sync_now: Sincronizar agora.
       click_to_change: Clique aqui para alterar o ano
       back: voltar
       new: novo
