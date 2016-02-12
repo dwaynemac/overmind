@@ -124,6 +124,10 @@ class SyncRequest < ActiveRecord::Base
     priority.nil? || priority < 5
   end
 
+  def low_priority?
+    priority < 10
+  end
+
   private
   
   def valid_ref_date
