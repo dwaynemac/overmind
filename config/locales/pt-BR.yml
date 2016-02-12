@@ -164,6 +164,7 @@ pt-BR:
       sync_current_month: Sincronizar mes atual
       sync_year_data: Solicitar sincronizaçāo de dados do %{year}
       sync_current_month_now: Sincornizar meus dados do mes atual agora.
+      sync_now: Sincornizar agora.
       click_to_change: Clique aqui para alterar o ano
       back: voltar
       new: novo
@@ -174,7 +175,9 @@ pt-BR:
       couldnt_queue_sync: Nāo conseguimos sincroniçar os dados
     sync_request_notification:
       pending_sync: Sincronizaçāo programada, começará nos próximos minutos.
+      high_priority_sync: "Sincronização urgente: a sincronização destes dados foi priorizada e começará nos próximos momentos"
       failed_sync: Error na sincronizaçāo. Contate ao support padma@metododerose.org.
+      night_sync: Sincronização programada para a noite
     sync_request_notification_running_sync: Estamos sincroniçando estes dados neste momento.
     form:
       cancel: 
