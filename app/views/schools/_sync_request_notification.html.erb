@@ -20,15 +20,32 @@
 <% @school.sync_requests.each do |sr| -%>
   <% case sr.state -%>
     <% when 'ready' -%>
-      <div class="alert">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= sr.month %>/<%= sr.year %> - <%= t('schools.sync_request_notification.pending_sync') %>
-      </div>
-      <% if sr.priority < 10 -%>
+      <% if sr.night_only? %>
+        <div class="alert">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= sr.month %>/<%= sr.year %> - <%= t('schools.sync_request_notification.night_sync') %>
+          <%- if can?(:create, SyncRequest) && @school.padma_enabled?  -%>
+            <%= link_to t('schools.show.sync_now'), "javascript: $('#edit_sync_request_#{sr.id}').submit();" %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="alert">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= sr.month %>/<%= sr.year %> - 
+          <% if sr.low_priority? %>
+            <%= t('schools.sync_request_notification.pending_sync') %>
+          <% else %>
+            <%= t('schools.sync_request_notification.high_priority_sync') %>
+          <% end %>
+          <%- if can?(:create, SyncRequest) && @school.padma_enabled? && sr.low_priority? -%>
+            <%= link_to t('schools.show.sync_now'), "javascript: $('#edit_sync_request_#{sr.id}').submit();" %>
+          <% end %>
+        </div>
+      <% end %>
+      <% if sr.low_priority? -%>
         <%- if can?(:create, SyncRequest) && @school.padma_enabled?  -%>
           <%= form_for [@school,sr], method: 'PUT', id: 'request-sync-form' do |f| %>
             <%= f.hidden_field :priority, value: 15 %>
-            <%= f.submit(t('schools.show.sync_current_month_now').capitalize, class: 'btn btn-secondary btn-sm') %>
           <% end -%>
         <% end -%>
       <% end -%>
