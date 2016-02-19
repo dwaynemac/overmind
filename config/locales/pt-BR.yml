@@ -38,6 +38,9 @@ pt-BR:
     columns: Columnas
     sample_size: Media obtida de %{size} mêses.
     choose_columns: Selecionar colunas
+    show:
+      apply: Aplicar
+      average_period: Período da media dos indices
   teacher_ranking:
     title: Estadísticas dos instrutores
     options: Opções
