@@ -38,6 +38,7 @@ pt-BR:
     columns: Columnas
     sample_size: Media obtida de %{size} mêses.
     choose_columns: Selecionar colunas
+  rankings:
     show:
       apply: Aplicar
       average_period: Período da media dos indices
