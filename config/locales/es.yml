@@ -409,10 +409,6 @@ es:
     columns: Columnas
     sample_size: Media calculada sobre valores de %{size} meses.
     choose_columns: Seleccionar columnas
-  rankings:
-    show: 
-      apply: Aplicar
-      average_period: Período sobre el que se promedian los indices
   teacher_ranking:
     title: Estadisticas de los instructores
     options: Opciones
@@ -482,5 +478,6 @@ es:
         proffesor: Profesores
   rankings:
     show:
-      options: 
+      apply: Aplicar
+      average_period: Período sobre el que se promedian los indices
   submit: Enviar
