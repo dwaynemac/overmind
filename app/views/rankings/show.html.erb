@@ -2,15 +2,47 @@
 
 <div class='ranking-container'>
   <nav class='ranking-navbar' role='navigation'>
-    <div class='filter-controls'>
-      <%= form_for @ranking, url: ranking_path, method: :put, :html => { class: 'form-inline' } do |f| %>
-        <div class='form-group form-group-flex'>
-          <div class='label-block'><%= t('.average_period') %>:</div>
-          <%= f.date_select :ref_since, {discard_day: true}, { class: 'form-control' } %>
-          <span class='label-to'>a</span>
-          <%= f.date_select :ref_until, {discard_day: true}, { class: 'form-control' } %>
-        </div>
-        <div class="btn-group">
+    <div class="filter-wrap">
+      <div class='filter-controls'>
+        <%= form_for @ranking, url: ranking_path, method: :put, :html => { class: 'form-inline' } do |f| %>
+          <div class='form-group form-group-flex'>
+            <div class='label-block'><%= t('.average_period') %>:</div>
+            <%= f.date_select :ref_since, {discard_day: true}, { class: 'form-control' } %>
+            <span class='label-to'>a</span>
+            <%= f.date_select :ref_until, {discard_day: true}, { class: 'form-control' } %>
+          </div>
+          <div class="btn-group">
+            <%= f.select   :column_names,
+                           Ranking::COLUMNS_FOR_VIEW.flatten.map{|name| [t("monthly_stat.names.#{name}"), name]},
+                           {},
+                           {
+                              data: {
+                                'none-selected-text' => t('ranking.choose_columns')}, 
+                              multiple: :multiple,
+                              class: 'choose-columns-select'
+                            }
+            %>
+            
+          </div>
+          <div class='btn-group'>
+            <%= f.select   :federation_ids,
+                           @federations.map{|f| [f.name, f.id]},
+                           {},
+                           {
+                              data: {
+                                'none-selected-text' => t('ranking.federations')}, 
+                              multiple: :multiple,
+                              class: 'choose-columns-select'
+                            }
+            %>
+          </div>
+          <button type="submit" class="btn btn-secondary btn-sm" data-disable-with="..."><%= t('.apply') %></button>
+        <% end -%>
+      </div>
+      <div class='filter-controls filter-controls-right'>
+        <%= form_for @ranking, url: ranking_path(format: :csv), method: :put, :html => { id: "csv-form" } do |f| %>
+          <%= f.date_select :ref_since, {discard_day: true}, { class: 'form-control-hidden' } %>
+          <%= f.date_select :ref_until, {discard_day: true}, { class: 'form-control-hidden' } %>
           <%= f.select   :column_names,
                          Ranking::COLUMNS_FOR_VIEW.flatten.map{|name| [t("monthly_stat.names.#{name}"), name]},
                          {},
@@ -18,12 +50,9 @@
                             data: {
                               'none-selected-text' => t('ranking.choose_columns')}, 
                             multiple: :multiple,
-                            class: 'choose-columns-select'
+                            class: 'form-control-hidden'
                           }
           %>
-          
-        </div>
-        <div class='btn-group'>
           <%= f.select   :federation_ids,
                          @federations.map{|f| [f.name, f.id]},
                          {},
@@ -31,40 +60,14 @@
                             data: {
                               'none-selected-text' => t('ranking.federations')}, 
                             multiple: :multiple,
-                            class: 'choose-columns-select'
+                            class: 'form-control-hidden'
                           }
           %>
-        </div>
-        <button type="submit" class="btn btn-secondary btn-sm" data-disable-with="..."><%= t('.apply') %></button>
-      <% end -%>
-
-      <%= form_for @ranking, url: ranking_path(format: :csv), method: :put, :html => { id: "csv-form" } do |f| %>
-        <%= f.date_select :ref_since, {discard_day: true}, { class: 'form-control-hidden' } %>
-        <%= f.date_select :ref_until, {discard_day: true}, { class: 'form-control-hidden' } %>
-        <%= f.select   :column_names,
-                       Ranking::COLUMNS_FOR_VIEW.flatten.map{|name| [t("monthly_stat.names.#{name}"), name]},
-                       {},
-                       {
-                          data: {
-                            'none-selected-text' => t('ranking.choose_columns')}, 
-                          multiple: :multiple,
-                          class: 'form-control-hidden'
-                        }
-        %>
-        <%= f.select   :federation_ids,
-                       @federations.map{|f| [f.name, f.id]},
-                       {},
-                       {
-                          data: {
-                            'none-selected-text' => t('ranking.federations')}, 
-                          multiple: :multiple,
-                          class: 'form-control-hidden'
-                        }
-        %>
-        <button type="submit" class="btn btn-secondary btn-sm">
-          <span class='glyphicon glyphicon-download'></span>
-        </button>
-      <% end -%>
+          <button type="submit" class="btn btn-secondary btn-sm">
+            <span class='glyphicon glyphicon-download'></span>
+          </button>
+        <% end -%>
+      </div>
     </div>
   </nav>
   <section class='ranking-content'>
