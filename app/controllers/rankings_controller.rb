@@ -27,7 +27,7 @@ class RankingsController < ApplicationController
         render json: @matrix
       end
       format.csv do
-        response.headers['Content-Disposition'] = "attachment; filename='rankings.csv'"
+        response.headers['Content-Disposition'] = "attachment; filename=rankings.csv"
         render 'show.csv.erb'
       end
     end
