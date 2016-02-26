@@ -123,6 +123,7 @@ es:
       sync_current_month: Sincronizar mes actual
       sync_year_data: Solicitar sincronización de datos del %{year}
       sync_current_month_now: Sincronizar los datos del mes actual ahora.
+      sync_now: Sincronizar los datos ahora.
       click_to_change: Click aqui para modificar el año
       back: 
       new: 
@@ -133,7 +134,9 @@ es:
       couldnt_queue_sync: No se pudo programar la sincronización de datos
     sync_request_notification:
       pending_sync: Ya esta programada la sincronización de estos datos. Puede demorar varios minutos.
+      high_priority_sync: "Sincronización urgente: la sincronización de estos datos fue priorizada y comenzará en los próximos instantes"
       failed_sync: Hubo un error durante la sincronización de datos. Contacte al soporte técnico.
+      night_sync: Sincronización programada para hoy a la noche
     sync_request_notification_running_sync: En este momento estamos sincronizando estos datos.
     form:
       cancel: 
@@ -475,5 +478,6 @@ es:
         proffesor: Profesores
   rankings:
     show:
-      options: 
+      apply: Aplicar
+      average_period: Período sobre el que se promedian los indices
   submit: Enviar

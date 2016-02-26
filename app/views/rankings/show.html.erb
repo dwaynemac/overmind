@@ -5,7 +5,7 @@
     <div class='filter-controls'>
       <%= form_for @ranking, url: ranking_path, method: :put, :html => { class: 'form-inline' } do |f| %>
         <div class='form-group form-group-flex'>
-          <div class='label-block'>Per&iacute;odo del promedio:</div>
+          <div class='label-block'><%= t('.average_period') %>:</div>
           <%= f.date_select :ref_since, {discard_day: true}, { class: 'form-control' } %>
           <span class='label-to'>a</span>
           <%= f.date_select :ref_until, {discard_day: true}, { class: 'form-control' } %>
@@ -35,7 +35,7 @@
                           }
           %>
         </div>
-        <button type="submit" class="btn btn-secondary btn-sm">Aplicar</button>
+        <button type="submit" class="btn btn-secondary btn-sm" data-disable-with="..."><%= t('.apply') %></button>
       <% end -%>
 
       <%= form_for @ranking, url: ranking_path(format: :csv), method: :put, :html => { id: "csv-form" } do |f| %>

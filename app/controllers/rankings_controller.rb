@@ -3,8 +3,8 @@ class RankingsController < ApplicationController
   def show
     authorize! :read, Ranking
 
-    @federations = Federation.accessible_by(current_ability)
-    federation_ids = @federations.pluck(:id)
+    @federations = Federation.scoped 
+    federation_ids = Federation.accessible_by(current_ability).pluck(:id)
     
     if params[:ranking].nil?
       if params[:federation_id]
