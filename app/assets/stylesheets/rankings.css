@@ -246,3 +246,7 @@ caption {
 	cursor: pointer;
 	background-color: #e6bf99;
 }
+
+.form-control-hidden {
+	display: none;
+}
