@@ -45,6 +45,8 @@ class SyncRequest < ActiveRecord::Base
   scope :night_only, where("priority IS NULL OR priority < 5")
   scope :not_night_only, where("NOT (priority IS NULL OR priority < 5)")
 
+  RETRIES = 10
+
   def self.on_ref_date(options={})
     scope = self.scoped
     if options[:year]
@@ -61,26 +63,36 @@ class SyncRequest < ActiveRecord::Base
   def start(safe=true)
     return unless school.present? && year.present? && month.present?
     return if finished? || failed?
+    retries = RETRIES
 
-    update_attribute :state, 'running'
+    begin
 
-    if syncable_month?(month)
-      sync_school_stats
-      sync_teachers_stats
-    end
+      update_attribute :state, 'running'
 
-    update_attributes(state: 'finished')
+      if syncable_month?(month)
+        sync_school_stats
+        sync_teachers_stats
+      end
 
-    state
-  rescue => e
-    Appsignal.send_exception(e)
-    update_attribute :state, 'failed'
-    if safe
-      logger.warn "SyncRequest #{self.id} failed with exception."
-      logger.debug e.message
+      update_attributes(state: 'finished')
+
       state
-    else
-      raise e
+    rescue => e
+      retries -= 1
+      if retries >= 0
+        sleep((RETRIES-retries)*10)
+        retry
+      else
+        Appsignal.send_exception(e)
+        update_attribute :state, 'failed'
+        if safe
+          logger.warn "SyncRequest #{self.id} failed with exception."
+          logger.debug e.message
+          state
+        else
+          raise e
+        end
+      end
     end
   end
 
