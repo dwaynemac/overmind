@@ -4,12 +4,17 @@
   <header class='report-head'>
     <p><%= set_current_month_and_year %> <%= @year %></p>
     <div class='btn-group'>
-      <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span>".html_safe, set_prev_month_url, class:'btn btn-secondary btn-sm' %>
-      <%= link_to "<span class='glyphicon glyphicon-chevron-right'></span>".html_safe, set_next_month_url, class:'btn btn-secondary btn-sm' %>
+      <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span>".html_safe,
+                  set_prev_month_url,
+                  class:'btn btn-secondary btn-sm' %>
+      <%= link_to "<span class='glyphicon glyphicon-chevron-right'></span>".html_safe,
+                  set_next_month_url,
+                  class:'btn btn-secondary btn-sm' %>
       <%= sync_button %>
     </div>
   </header>
   <section class='report-content'>
+    <%= render 'sync_notification' %>
     <div class='row'>
       <div class='col-sm-8 col-md-8'>
         <div class='row'>
