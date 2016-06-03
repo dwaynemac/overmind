@@ -16,8 +16,9 @@ module ReportsHelper
   end
 
   def sync_button
-    if can?(:create, SyncRequest) && @school.padma_enabled? && not_upto_date
-      %[<div class="refresh"><a href="#{refresh_school_reports_path(year: @year, month: @month, return_to: action_name)}" class="arrow">arrow</a></div>].html_safe
+    unless can?(:create, SyncRequest) && @school.padma_enabled? && not_upto_date
+      %[<a href="#{refresh_school_reports_path(year: @year, month: @month, return_to: action_name)}" class="btn btn-secondary btn-sm" id="sync-arrow"><span class='glyphicon glyphicon-refresh'></span></a>].html_safe
+          
     end
   end
 
