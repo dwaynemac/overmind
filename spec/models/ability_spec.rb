@@ -109,7 +109,9 @@ describe Ability do
       let(:school){create(:school, account_name: 'this-account', federation: fed)}
       before do
         school
-        user.stub!(:enabled_accounts).and_return([PadmaAccount.new(name: 'this-account')])
+        pa = PadmaAccount.new(name: 'this-account')
+        user.stub!(:current_account).and_return pa
+        user.stub!(:enabled_accounts).and_return([pa])
         user.padma_enabled?.should be_true
       end
       before do

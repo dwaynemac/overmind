@@ -10,6 +10,9 @@ describe SyncRequestsController do
     User.any_instance.stub(:padma_enabled?).and_return true
     User.any_instance.stub(:padma).and_return pu
 
+    pa = PadmaAccount.new
+    User.any_instance.stub(:current_account).and_return pa
+
     sign_in(@user)
   end
 
