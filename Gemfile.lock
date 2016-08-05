@@ -40,7 +40,7 @@ GEM
     activesupport (3.2.8)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    appsignal (0.11.14)
+    appsignal (1.2.3)
       rack
       thread_safe
     arel (3.0.2)
@@ -271,7 +271,7 @@ PLATFORMS
 
 DEPENDENCIES
   accounts_client (= 0.2.26)
-  appsignal (= 0.11.14)
+  appsignal (~> 1.2)
   best_in_place!
   better_errors
   binding_of_caller
@@ -309,3 +309,9 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   yard (~> 0.8.3)
   yard-restful
+
+RUBY VERSION
+   ruby 1.9.3p551
+
+BUNDLED WITH
+   1.12.5
