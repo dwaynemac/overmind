@@ -35,7 +35,11 @@ class TeacherMonthlyStat < MonthlyStat
       :dropout_rate,
 
       :demand,
+      :male_demand, :female_demand,
+
       :interviews,
+      :male_interviews, :female_interviews,
+
       :emails, :phonecalls,
       :website_contact,
 

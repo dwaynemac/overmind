@@ -64,6 +64,8 @@ pt-BR:
       conversion_count: Conversāo (#)
       conversion_rate: Conversāo (%)
       demand: Procura
+      male_demand: Procura por homens
+      female_demand: Procura por mulheres
       dropout_rate: '% Evasāo'
       dropouts: Evasōes
       dropouts_begginers: Evasōes de Iniciantes

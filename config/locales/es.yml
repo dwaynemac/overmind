@@ -23,6 +23,8 @@ es:
       conversion_count: Conversiones (#)
       conversion_rate: Conversion (%)
       demand: Procura
+      male_demand: Procura por hombres
+      female_demand: Procura por mujeres
       dropout_rate: '% Evasión'
       dropouts: Bajas
       dropouts_begginers: Bajas Iniciantes

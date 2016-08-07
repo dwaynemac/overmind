@@ -55,7 +55,11 @@ class MonthlyStat < ActiveRecord::Base
                  :in_professional_training,
 
                  :demand,
+                 :male_demand, :female_demand,
+
                  :interviews,
+                 :male_interviews, :female_interviews,
+
                  :emails, :phonecalls,
                  :website_contact,
                  :conversion_rate, :conversion_count

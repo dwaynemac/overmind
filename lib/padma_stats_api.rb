@@ -74,8 +74,16 @@ module PadmaStatsApi
           self.count_drop_outs(ref_date,options.merge({filter: {level: ['sádhaka', 'yôgin', 'chêla', 'graduado', 'asistente', 'docente', 'maestro']}}))
         when :demand
           self.count_communications(ref_date,options)
+        when :male_demand
+          self.count_communications(ref_date,options.merge({filter: { gender: 'male' }}))
+        when :female_demand
+          self.count_communications(ref_date,options.merge({filter: { gender: 'female' }}))
         when :interviews
           self.count_interviews(ref_date,options)
+        when :male_interviews
+          self.count_interviews(ref_date,options.merge({filter: { gender: 'male' }}))
+        when :female_interviews
+          self.count_interviews(ref_date,options.merge({filter: { gender: 'female' }}))
         when :p_interviews
           self.count_interviews(ref_date, options.merge({filter: { coefficient: 'p' }}))
         when :emails
