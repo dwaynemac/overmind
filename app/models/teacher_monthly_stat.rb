@@ -52,6 +52,8 @@ class TeacherMonthlyStat < MonthlyStat
       ret << :p_interviews
       ret << :enrollment_rate
       ret << :interviews
+      ret << :male_interviews
+      ret << :female_interviews
     end
     if event =~ /phone_call/
       ret << :phonecalls
@@ -64,6 +66,8 @@ class TeacherMonthlyStat < MonthlyStat
     end
     if event =~ /communication/
       ret << :demand
+      ret << :male_demand
+      ret << :female_demand
       ret << :conversion_rate
     end
     ret
