@@ -38,6 +38,8 @@ es:
       graduado_students: Alumnos Graduados
       in_professional_training: En formación
       interviews: Visitas
+      male_interviews: Visitas de hombres
+      female_interviews: Visitas de mujeres
       male_students: Alumnos hombres
       male_students_rate: '% Alumnos hombres'
       master_students: Monitoreados Maestros
