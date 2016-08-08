@@ -170,6 +170,9 @@ class MonthlyStat < ActiveRecord::Base
 
       :male_students_rate,
 
+      :male_demand_rate, :female_demand_rate,
+      :male_interviews_rate, :female_interviews_rate,
+
       :aspirante_students_rate,
       :sadhaka_students_rate,
       :yogin_students_rate,
