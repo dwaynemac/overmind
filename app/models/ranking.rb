@@ -22,7 +22,13 @@ class Ranking
     :yogin_students_rate,
     :chela_students_rate
    ],
-   [:demand, :interviews, :p_interviews, :emails, :phonecalls, :website_contact],
+   [:demand,
+    :male_demand, :female_demand,
+    :male_demand_rate, :female_demand_rate,
+    :interviews,
+    :male_interviews, :female_interviews,
+    :male_interviews_rate, :female_interviews_rate,
+    :p_interviews, :emails, :phonecalls, :website_contact],
    [:conversion_rate, :conversion_count]
   ]
 
