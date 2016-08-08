@@ -86,11 +86,16 @@ namespace :sync do
         puts "queueing sync for #{school.name}"
         if ENV['year']
           year = (ENV['year'] == 'current')? Date.today.year : ENV['year']
-          SyncRequest.create(school_id: school.id, year: year)
+          (1..12).each do |month|
+            puts "    #{year}-#{month}"
+            SyncRequest.create(school_id: school.id, year: year, month: month)
+          end
         else
           (2010..Time.zone.today.year).each do |year|
-            puts "    #{year}"
-            SyncRequest.create(school_id: school.id, year: year)
+            (1..12).each do |month|
+              puts "    #{year}-#{month}"
+              SyncRequest.create(school_id: school.id, year: year, month: month)
+            end
           end
         end
       else
