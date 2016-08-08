@@ -65,7 +65,9 @@ pt-BR:
       conversion_rate: Conversāo (%)
       demand: Procura
       male_demand: Procura por homens
+      male_demand_rate: "% Procura por homens"
       female_demand: Procura por mulheres
+      female_demand_rate: "% Procura por mulheres"
       dropout_rate: '% Evasāo'
       dropouts: Evasōes
       dropouts_begginers: Evasōes de Iniciantes
@@ -80,7 +82,9 @@ pt-BR:
       in_professional_training: Em formaçāo
       interviews: Visitas
       male_interviews: Visitas de homens
+      male_interviews_rate: "% Visitas de homens"
       female_interviews: Visitas de mulheres
+      female_interviews_rate: "% Visitas de mulheres"
       male_students: Alunos homens
       male_students_rate: '% Alunos homens'
       master_students: Monitorados Mestres

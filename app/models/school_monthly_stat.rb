@@ -12,7 +12,9 @@ class SchoolMonthlyStat < MonthlyStat
       ret << :enrollment_rate
       ret << :interviews
       ret << :male_interviews
+      ret << :male_interviews_rate
       ret << :female_interviews
+      ret << :female_interviews_rate
     end
     ret << :phonecalls if event =~ /phone_call/
     ret << :emails if event =~ /email/
@@ -21,7 +23,9 @@ class SchoolMonthlyStat < MonthlyStat
     if event =~ /communication/
       ret << :demand
       ret << :male_demand
+      ret << :male_demand_rate
       ret << :female_demand
+      ret << :female_demand_rate
       ret << :conversion_count
       ret << :conversion_rate
     end

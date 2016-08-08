@@ -24,7 +24,11 @@ class LocalStat
     :begginers_dropout_rate,
     :swasthya_dropout_rate,
     :enrollment_rate,
-    :dropout_rate
+    :dropout_rate,
+    :male_demand_rate,
+    :female_demand_rate,
+    :male_interviews_rate,
+    :female_interviews_rate
   ]
   include BegginersDropoutRate
   include SwasthyaDropoutRate
@@ -36,6 +40,11 @@ class LocalStat
   include SadhakaStudentsRate
   include YoginStudentsRate
   include ChelaStudentsRate
+
+  include MaleDemandRate
+  include FemaleDemandRate
+  include MaleInterviewsRate
+  include FemaleInterviewsRate
 
   def initialize(attributes={})
     @school   = attributes[:school]

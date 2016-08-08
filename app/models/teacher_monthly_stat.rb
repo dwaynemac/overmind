@@ -36,9 +36,11 @@ class TeacherMonthlyStat < MonthlyStat
 
       :demand,
       :male_demand, :female_demand,
+      :male_demand_rate, :female_demand_rate,
 
       :interviews,
       :male_interviews, :female_interviews,
+      :male_interviews_rate, :female_interviews_rate,
 
       :emails, :phonecalls,
       :website_contact,
