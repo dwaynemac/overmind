@@ -50,3 +50,18 @@ task :recalculate_local_rates => :environment do
         tm.update_attribute :value, value
   end
 end
+
+task :calculate_gender_demand => :environment do
+  [2016,2015,2014].each do |year|
+    (1..12).each do |month|
+      ref = Date.civil(year,month,1).end_of_month
+      School.each do |school|
+        if school.padma_enabled? # school in the inner loops means more calls but also syncing chronologically
+          %W(male_demand female_demand male_interviews female_interviews male_demand_rate female_demand_rate male_interviews_rate female_interviews_rate).each do |stat_name|
+            SchoolMonthlyStat.sync_from_service!(school,name,ref)
+          end
+        end
+      end
+    end
+  end
+end
