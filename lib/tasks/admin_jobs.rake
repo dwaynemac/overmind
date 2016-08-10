@@ -58,7 +58,7 @@ task :calculate_gender_demand => :environment do
       School.all.each do |school|
         if school.padma_enabled? # school in the inner loops means more calls but also syncing chronologically
           %W(male_demand female_demand male_interviews female_interviews male_demand_rate female_demand_rate male_interviews_rate female_interviews_rate).each do |stat_name|
-            SchoolMonthlyStat.sync_from_service!(school,name,ref)
+            SchoolMonthlyStat.sync_from_service!(school,stat_name,ref)
           end
         end
       end
