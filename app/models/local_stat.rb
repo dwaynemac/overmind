@@ -70,6 +70,8 @@ class LocalStat
 
     dependency = {
       male_students_rate: :male_students,
+      male_demand_rate: :male_demand,
+      female_demand_rate: :female_demand,
       aspirante_students_rate: :aspirante_students,
       sadhaka_students_rate: :sadhaka_students,
       yogin_students_rate: :yogin_students,
