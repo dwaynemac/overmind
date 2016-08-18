@@ -7,6 +7,30 @@ namespace :sync do
   end
 
   desc 'run pending sync-requests'
+  task :workoff_ignoring_time => :environment do
+    scope = SyncRequest.pending.order('priority desc')
+
+    loop do
+      begin
+        sr = scope.first
+        if sr
+          i = 0
+          until sr.finished? || sr.failed? || i>12 do
+            puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.month}, pr: #{sr.priority}"
+            sr.start
+            i += 1
+          end
+        end
+        break if scope.empty?
+      rescue StandardError => e
+        puts "Exception in sync:worker: #{e.message}"
+      ensure
+        break if scope.empty?
+      end
+    end
+  end
+
+  desc 'run pending sync-requests'
   task :workoff => :environment do
     scope = SyncRequest.pending.order('priority desc')
     h = Time.now.hour
