@@ -133,7 +133,7 @@ GEM
       rb-fchange (~> 0.0.5)
       rb-fsevent (~> 0.9.1)
       rb-inotify (~> 0.8.8)
-    logical_model (0.6.3)
+    logical_model (0.6.4)
       activemodel
       activesupport
       ethon (= 0.4.2)
@@ -290,7 +290,7 @@ DEPENDENCIES
   kaminari
   less-rails-bootstrap (~> 3.0.6)
   libnotify
-  logical_model (= 0.6.3)
+  logical_model (= 0.6.4)
   padma-assets (= 0.2.12)
   padma-deployment
   pg
