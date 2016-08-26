@@ -25,41 +25,35 @@ class ReportsController < ApplicationController
   def pedagogic_snapshot
     authorize! :read, :reports
 
-    #unless fragment_exist? pedagogic_snapshot_cache_key(params[:year],params[:month])
-      #widget
-      @enrollments = get_value :enrollments
-      @dropouts = get_value :dropouts
-      @students = get_value :students
-      @growth = @enrollments - @dropouts
-      
-      #graph
-      @begginers = get_value :aspirante_students
-      @sadhakas = get_value :sadhaka_students
-      @yogins = get_value :yogin_students
-      @chelas = get_value :chela_students
-      @graduados = get_value :graduado_students
-      @assistants = get_value :assistant_students
-      @professors = get_value :professor_students
-      
-      #left pie chart
-      males = get_value :male_students
-      females = get_value :female_students
-      if males+females > 0
-        @male_students = (males.to_f/(males+females)*100).round(0)
-        @female_students = (females.to_f/(males+females)*100).round(0)
-      else
-        @male_students = 0
-        @female_students = 0
-      end
+    preloaded_stats = @scope.all
 
-      @students_avg_age = get_value :students_average_age
+    #widget
+    @enrollments = select_value preloaded_stats,  :enrollments
+    @dropouts = select_value preloaded_stats,  :dropouts
+    @students = select_value preloaded_stats,  :students
+    @growth = @enrollments - @dropouts
+    
+    #graph
+    @begginers = select_value preloaded_stats,  :aspirante_students
+    @sadhakas = select_value preloaded_stats,  :sadhaka_students
+    @yogins = select_value preloaded_stats,  :yogin_students
+    @chelas = select_value preloaded_stats,  :chela_students
+    @graduados = select_value preloaded_stats,  :graduado_students
+    @assistants = select_value preloaded_stats,  :assistant_students
+    @professors = select_value preloaded_stats,  :professor_students
+    
+    #left pie chart
+    males = select_value preloaded_stats,  :male_students
+    females = select_value preloaded_stats,  :female_students
+    if males+females > 0
+      @male_students = (males.to_f/(males+females)*100).round(0)
+      @female_students = (females.to_f/(males+females)*100).round(0)
+    else
+      @male_students = 0
+      @female_students = 0
+    end
 
-      
-      #right pie chart
-      @begginer = 60
-      @graduate = 30
-      @senior = 10
-    #end
+    @students_avg_age = select_value preloaded_stats,  :students_average_age
   end
 
   def refresh
@@ -115,5 +109,9 @@ class ReportsController < ApplicationController
   
   def get_value(stat_name)
     (@scope.where(name: stat_name).first.try(:value)) || 0
+  end
+
+  def select_value(preloaded_batch,stat_name)
+    (preloaded_batch.select{|sms| sms.name == stat_name }.first.try(:value)) || 0
   end
 end
