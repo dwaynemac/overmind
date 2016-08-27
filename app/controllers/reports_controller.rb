@@ -112,6 +112,6 @@ class ReportsController < ApplicationController
   end
 
   def select_value(preloaded_batch,stat_name)
-    (preloaded_batch.select{|sms| sms.name == stat_name }.first.try(:value)) || 0
+    (preloaded_batch.select{|sms| sms.name.to_sym == stat_name }.first.try(:value)) || 0
   end
 end
