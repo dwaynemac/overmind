@@ -84,6 +84,31 @@ class MonthlyStat < ActiveRecord::Base
   after_save :cache_teachers_count, unless: ->{self.importing?}
 
 
+  def self.api_where(conditions={})
+    ret = self.scoped
+    return ret if conditions.blank?
+
+    if conditions[:month] && conditions[:year]
+      month = conditions.delete(:month).to_i
+      year = conditions.delete(:year).to_i
+      ref_date = Date.civil(year,
+                            month,
+                            1).end_of_month
+      ret = ret.where(ref_date: ref_date)
+    end
+
+    if conditions[:account_name]
+      s = School.find_by_account_name(conditions.delete(:account_name))
+      if s
+        ret = ret.where(school_id: s.id)
+      else
+        ret = ret.where("1 = 0") # force empty
+      end
+    end
+
+    ret.where(conditions)
+  end
+
   def self.for_month(ref_date)
     where(ref_date: ref_date.to_date.end_of_month)
   end

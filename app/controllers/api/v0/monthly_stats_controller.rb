@@ -4,8 +4,16 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   # @action GET
   # @url /api/v0/monthly_stats
   # @required [String] api_key
+  #
+  # @optional [Hash] where
+  # @key_for where year always use with month
+  # @key_for where month always use with year
+  # @key_for where name
+  # @key_for where account_name
+  #         
+  #
   def index
-    @monthly_stats = MonthlyStat.all(include: :school)
+    @monthly_stats = MonthlyStat.api_where(params[:where]).all(include: :school)
     render json: {
         collection: @monthly_stats,
         total: @monthly_stats.size
