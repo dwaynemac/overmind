@@ -6,6 +6,14 @@ defaults: &defaults
   mailing-url: http://localhost:3020
   fnz-url: http://localhost:3008
   attendance-url: http://localhost:3004
+  
+cloud9: &cloud9
+  accounts-url: http://padma-accounts-<%= ENV['C9_USER'] %>.c9users.io
+  overmind-url: http://padma-overmind-<%= ENV['C9_USER'] %>.c9users.io
+  crm-url: http://padma-crm-<%= ENV['C9_USER'] %>.c9users.io
+  contacts-url: http://padma-contacts-<%= ENV['C9_USER'] %>.c9users.io
+  mailing-url: http://padma-mailing-<%= ENV['C9_USER'] %>.c9users.io
+  attendance-url: http://padma-attendance-<%= ENV['C9_USER'] %>.c9users.io
 
 development:
   <<: *defaults
