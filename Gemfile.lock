@@ -309,9 +309,3 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   yard (~> 0.8.3)
   yard-restful
-
-RUBY VERSION
-   ruby 1.9.3p551
-
-BUNDLED WITH
-   1.12.5

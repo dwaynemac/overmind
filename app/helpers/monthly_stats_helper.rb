@@ -1,5 +1,13 @@
 module MonthlyStatsHelper
 
+  def print_value_with_link(monthly_stat)
+    if monthly_stat.url_to_crm_list.nil?
+      print_value(monthly_stat)
+    else
+      link_to print_value(monthly_stat), monthly_stat.url_to_crm_list, target: '_blank'
+    end
+  end
+  
   def print_value(monthly_stat)
     v = monthly_stat.try :value
     return '' if v.nil?

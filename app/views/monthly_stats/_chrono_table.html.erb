@@ -91,7 +91,7 @@ end
                                   :tabindex => tabindex
                 %>
               <% else -%>
-                <%= print_value monthly_stat %>
+                <%= print_value_with_link monthly_stat %>
               <% end -%>
             <% end %>
             <%- unless monthly_stat.nil? || monthly_stat.is_a?(ReducedStat) || @school.nil? -%>

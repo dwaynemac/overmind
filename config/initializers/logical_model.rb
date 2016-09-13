@@ -11,7 +11,7 @@ PADMA_ACCOUNTS_HOST = case Rails.env
   when "production"
     "padma-accounts.herokuapp.com"
   when "development"
-    "localhost:3001"
+    APP_CONFIG['accounts-url'].gsub("http://",'')
   when "test"
     "localhost:3001"
 end
@@ -19,6 +19,9 @@ end
 module Accounts
   HYDRA = ::HYDRA
   API_KEY = ENV['accounts_key']
+  if APP_CONFIG['on-cloud9']
+    HOST = PADMA_ACCOUNTS_HOST
+  end
 end
 
 class LogicalModel

@@ -8,6 +8,7 @@ defaults: &defaults
   attendance-url: http://localhost:3004
   
 cloud9: &cloud9
+  on-cloud9: true
   accounts-url: http://padma-accounts-<%= ENV['C9_USER'] %>.c9users.io
   overmind-url: http://padma-overmind-<%= ENV['C9_USER'] %>.c9users.io
   crm-url: http://padma-crm-<%= ENV['C9_USER'] %>.c9users.io
@@ -16,7 +17,7 @@ cloud9: &cloud9
   attendance-url: http://padma-attendance-<%= ENV['C9_USER'] %>.c9users.io
 
 development:
-  <<: *defaults
+  <<: *cloud9
 
 test:
   <<: *defaults
