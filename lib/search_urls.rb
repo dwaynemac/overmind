@@ -17,6 +17,20 @@ module SearchUrls
     end
   end
   
+  %W(email interview).each do |media|
+    define_method "#{media}s_query" do
+      demand_query + eq(:communication_media, media)
+    end
+  end
+  
+  def phonecalls_query
+    demand_query + eq(:communication_media, :phone_call)
+  end
+  
+  def website_contact_query
+    demand_query + eq(:communication_media, :website_contact)
+  end
+  
   def students_query
     date_eq('student_on',ref_date)
   end
