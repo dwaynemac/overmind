@@ -31,6 +31,14 @@ module SearchUrls
     demand_query + eq(:communication_media, :website_contact)
   end
   
+  def male_interviews_query
+    interviews_query + eq(:gender,:male)
+  end
+  
+  def female_interviews_query
+    interviews_query + eq(:gender,:female)
+  end
+  
   def students_query
     date_eq('student_on',ref_date)
   end
