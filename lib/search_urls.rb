@@ -17,6 +17,10 @@ module SearchUrls
     end
   end
   
+  def p_interviews_query
+    interviews_query + any_of(:communication_estimated_coefficient,[:pmenos,:perfil,:pmas])
+  end
+  
   %W(email interview).each do |media|
     define_method "#{media}s_query" do
       demand_query + eq(:communication_media, media)
@@ -77,6 +81,14 @@ module SearchUrls
   end
   
   private
+  
+  def any_of(attribute,values,prefix="&")
+    ret = "#{prefix}contact_search[#{attribute}][]=#{values.first}"
+    values[1..values.length].each do |v|
+      ret += "&contact_search[#{attribute}][]=#{v}"
+    end
+    ret
+  end
   
   def eq(attribute,value,prefix="&")
     "#{prefix}contact_search[#{attribute}]=#{value}"
