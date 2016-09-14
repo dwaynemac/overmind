@@ -11,7 +11,7 @@ class MonthlyStat < ActiveRecord::Base
   # Adds methods to build stats matrix.
   include StatsMatrix
   
-  include SearchLinks
+  include SearchUrls
 
   attr_accessible :value, :name, :school_id, :ref_date, :service, :account_name, :id   # account name is an accessor, delegated to School.
 
