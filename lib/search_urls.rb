@@ -17,18 +17,25 @@ module SearchUrls
     end
   end
   
+  def students_query
+    "scope=global" + eq('student_on',ref_date)
+  end
+  
   def enrollments_query
-    q = date_eq("enrollment_period_start",ref_date.beginning_of_month,"")
+    q = "scope=global" # to include unlinked contacts
+    q += date_eq("enrollment_period_start",ref_date.beginning_of_month)
     q += date_eq("enrollment_period_end",ref_date.end_of_month)
   end
   
   def dropouts_query
-    q = date_eq("dropout_period_start",ref_date.beginning_of_month,"")
+    q = "scope=global" # to include unlinked contacts
+    q += date_eq("dropout_period_start",ref_date.beginning_of_month)
     q += date_eq("dropout_period_end",ref_date.end_of_month)
   end
   
   def demand_query
-    q = date_eq("communication_period_start",ref_date.beginning_of_month,"")
+    q = "scope=global" # to include unlinked contacts
+    q += date_eq("communication_period_start",ref_date.beginning_of_month)
     q += date_eq("communication_period_end",ref_date.end_of_month)
     q += eq('communication_direction','incoming')
   end
