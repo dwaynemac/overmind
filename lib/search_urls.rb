@@ -18,7 +18,15 @@ module SearchUrls
   end
   
   def students_query
-    "scope=global" + date_eq('student_on',ref_date)
+    date_eq('student_on',ref_date)
+  end
+  
+  def male_students_query
+    students_query + eq(:gender,:male)
+  end
+  
+  def female_students_query
+    students_query + eq(:gender,:female)
   end
   
   def enrollments_query
