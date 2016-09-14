@@ -22,14 +22,12 @@ module SearchUrls
   end
   
   def enrollments_query
-    q = "scope=global" # to include unlinked contacts
-    q += date_eq("enrollment_period_start",ref_date.beginning_of_month)
+    q = date_eq("enrollment_period_start",ref_date.beginning_of_month,"")
     q += date_eq("enrollment_period_end",ref_date.end_of_month)
   end
   
   def dropouts_query
-    q = "scope=global" # to include unlinked contacts
-    q += date_eq("dropout_period_start",ref_date.beginning_of_month)
+    q = date_eq("dropout_period_start",ref_date.beginning_of_month,"")
     q += date_eq("dropout_period_end",ref_date.end_of_month)
   end
   
