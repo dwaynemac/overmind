@@ -60,7 +60,7 @@
           <% @teacher_ranking.matrix.each do |teacher, stats_hash| %>
             <% if teacher %>
               <% u = PadmaUser.find teacher.try(:username) -%>
-              <% if u.usernames.in?(usernames) %>
+              <% if u.username.in?(usernames) %>
                 <tr>
                   <th>
                     <img src="<%= u.gravatar_url(size: 130, default: image_path('icon-user-default.png')) %>" class='icon-user-default' />
