@@ -56,33 +56,36 @@
         </thead>
         <tbody>
           <% monthly_stats =  @teacher_ranking.monthly_stats %>
+          <% usernames = @school.account.users.map(&:username) %>
           <% @teacher_ranking.matrix.each do |teacher, stats_hash| %>
             <% if teacher %>
-            <tr>
-              <th>
-                <% u = PadmaUser.find teacher.try(:username) -%>
-                <img src="<%= u.gravatar_url(size: 130, default: image_path('icon-user-default.png')) %>" class='icon-user-default' />
-                <%= teacher.try(:full_name) %>
-              </th>
-              <% teacher_monthly_stats = monthly_stats[teacher] %>
-              <% @teacher_ranking.column_names.each do |name| %>
-                <% monthly_stat = teacher_monthly_stats.detect {|ms| ms.name == name.to_s} unless teacher_monthly_stats.blank? %>
-                <td>
-                    <span><%= print_value monthly_stat %></span>
-                  </td>
+              <% u = PadmaUser.find teacher.try(:username) -%>
+              <% if u.usernames.in?(usernames) %>
+                <tr>
+                  <th>
+                    <img src="<%= u.gravatar_url(size: 130, default: image_path('icon-user-default.png')) %>" class='icon-user-default' />
+                    <%= teacher.try(:full_name) %>
+                  </th>
+                  <% teacher_monthly_stats = monthly_stats[teacher] %>
+                  <% @teacher_ranking.column_names.each do |name| %>
+                    <% monthly_stat = teacher_monthly_stats.detect {|ms| ms.name == name.to_s} unless teacher_monthly_stats.blank? %>
+                    <td>
+                        <span><%= print_value monthly_stat %></span>
+                      </td>
+                  <% end %>
+                  <% @teacher_ranking.column_names.each do |name| %>
+                    <% if stats_hash[name.to_s].nil? -%>
+                      <td></td>
+                    <% else -%>
+                      <td>
+                        <span data-toggle="tooltip" data-placement="top" title="<%= t('ranking.sample_size', size: stats_hash[name.to_s].size) %>">
+                          <%= print_value stats_hash[name.to_s] %>
+                        </span>
+                      </td>
+                    <% end -%>
+                  <% end %>
+                </tr>
               <% end %>
-              <% @teacher_ranking.column_names.each do |name| %>
-                <% if stats_hash[name.to_s].nil? -%>
-                  <td></td>
-                <% else -%>
-                  <td>
-                    <span data-toggle="tooltip" data-placement="top" title="<%= t('ranking.sample_size', size: stats_hash[name.to_s].size) %>">
-                      <%= print_value stats_hash[name.to_s] %>
-                    </span>
-                  </td>
-                <% end -%>
-              <% end %>
-            </tr>
             <% end %>
           <% end %>
         </tbody>
