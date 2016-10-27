@@ -22,6 +22,9 @@ class School < ActiveRecord::Base
   include Accounts::BelongsToAccount
   validates_uniqueness_of :account_name, allow_blank: true
 
+  def full_name
+    padma_account.nil? ? name : padma_account.full_name
+  end
   ##
   # Checks if this schools has pending sync_requests
   # @return [Boolean]
