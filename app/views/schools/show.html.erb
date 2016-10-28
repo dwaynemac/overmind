@@ -1,7 +1,7 @@
 <%- content_for :title do -%>
-  <%= @school.name %>
+  <%= @school.full_name %>
 <%- end -%>
-<%- breadcrum "#{t(".year_stats")} - #{@school.name}" -%>
+<%- breadcrum "#{t(".year_stats")} - #{@school.full_name}" -%>
 <%- model_class = @school.class -%>
 
 <div class='schools-container'>
