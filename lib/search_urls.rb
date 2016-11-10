@@ -33,7 +33,7 @@ module SearchUrls
   def p_interviews_query
     ret = interviews_query + any_of(:communication_estimated_coefficient,[:pmenos,:perfil,:pmas])
     if type == "TeacherMonthlyStat"
-      ret += any_of(:visit_usenames,[teacher_username])
+      ret += any_of(:visit_usernames,[teacher_username])
     end
     ret
   end
