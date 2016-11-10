@@ -1,24 +1,41 @@
 module SearchUrls
   
+  QUERIES_THAT_SUPPORT_TEACHER_FILTER = %W(p_interviews_query)
   def url_to_crm_list
-    if type == 'SchoolMonthlyStat'
+    query = if type == 'SchoolMonthlyStat'
       
-      query = if respond_to?("#{name}_query")
+      if respond_to?("#{name}_query")
         send("#{name}_query")
       else
         nil
       end
       
-      if query.nil?
-        nil
+    elsif type == "TeacherMonthlyStat"
+      query_name = "#{name}_query"
+      if query_name.in?(QUERIES_THAT_SUPPORT_TEACHER_FILTER)
+        if respond_to?("#{name}_query")
+          send("#{name}_query")
+        else
+          nil
+        end
       else
-        "#{APP_CONFIG['crm-url']}/contacts?#{query}"
+        nil
       end
+    end
+    
+    if query.nil?
+      nil
+    else
+      "#{APP_CONFIG['crm-url']}/contacts?#{query}"
     end
   end
   
   def p_interviews_query
-    interviews_query + any_of(:communication_estimated_coefficient,[:pmenos,:perfil,:pmas])
+    ret = interviews_query + any_of(:communication_estimated_coefficient,[:pmenos,:perfil,:pmas])
+    if type == "TeacherMonthlyStat"
+      ret += any_of(:visit_usenames,[teacher_username])
+    end
+    ret
   end
   
   %W(email interview).each do |media|
