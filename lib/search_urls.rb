@@ -83,7 +83,8 @@ module SearchUrls
   end
   
   def demand_query
-    q = "scope=global" # to include unlinked contacts
+    # global scope disabled because of timeout in contacts-ws, reenable when solverd
+    # q = "scope=global" # to include unlinked contacts
     q += date_eq("communication_period_start",ref_date.beginning_of_month)
     q += date_eq("communication_period_end",ref_date.end_of_month)
     q += eq('communication_direction','incoming')
