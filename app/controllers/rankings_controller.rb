@@ -18,7 +18,7 @@ class RankingsController < ApplicationController
     if @ranking.school_ids.empty?
       @missing_schools ||= School.where(federation_id: params[:ranking][:federation_ids])
     else
-      @missing_schools ||= School.select([:id, :name, :account_name]).where(federation_id: params[:ranking][:federation_ids]).where("id NOT IN ('#{@ranking.school_ids.join("','")}')")
+      @missing_schools ||= School.select([:id, :name, :account_name, :federation_id]).where(federation_id: params[:ranking][:federation_ids]).where("id NOT IN ('#{@ranking.school_ids.join("','")}')")
     end
     
     respond_to do |format|
