@@ -22,9 +22,17 @@ class School < ActiveRecord::Base
   include Accounts::BelongsToAccount
   validates_uniqueness_of :account_name, allow_blank: true
 
+  # avoid calling accounts-ws to get the name.
+  # if PadmaAccount cached call full_name on it
+  # if PadmaAccount NOT cached use name cached on db.
+  def quick_name
+    padma_account.present?? full_name : name
+  end
+
   def full_name
     account.nil? ? name : account.full_name
   end
+  
   ##
   # Checks if this schools has pending sync_requests
   # @return [Boolean]

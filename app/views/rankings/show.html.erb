@@ -110,7 +110,7 @@
           <% @missing_schools.each_slice(3) do |schools_row| %>
             <tr>
               <% schools_row.each do |school| -%>
-                <td><%= link_to_if can?(:read, school), school.full_name, school %></td>
+                <td><%= link_to_if can?(:read, school), school.quick_name, school %></td>
               <% end -%>
           </tr>
           <% end %>
