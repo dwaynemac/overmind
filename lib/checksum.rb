@@ -24,29 +24,29 @@ class Checksum
   end
   
   def self.students(options)
-    school = if options[:school_id]
-      School.find options[:school_id]
-    elsif options[:account_name]
-      School.where(account_name: options[:account_name]).first
-    end
-    return nil if school.nil?
-    
+    school_ids = get_school_ids(options)
+    return nil if school_ids.nil?
     ref_month = options[:ref_month]
     
-    # acum is expected ref_month students
-    acum = school.school_monthly_stats.where(name: :students)
-                     .for_month(ref_month - 1.month)
-                     .sum(:value)
-    acum += school.school_monthly_stats.where(name: :enrollments)
-                        .for_month(ref_month)
-                        .sum(:value)
-    acum -= school.school_monthly_stats.where(name: :dropouts)
-                             .for_month(ref_month)
-                             .sum(:value)
-    
-    
-    acum == school.school_monthly_stats.where(name: :students)
-                             .for_month(ref_month)
-                             .sum(:value)
+    value_for(:students,ref_month-1.month,school_ids) + value_for(:enrollments,ref_month,school_ids) - value_for(:dropouts,ref_month,school_ids) == value_for(:students,ref_month,school_ids)
   end
+  
+  private
+  
+  def get_school_ids(options)
+    if options[:school_id]
+      options[:school_id]
+    elsif options[:account_name]
+      School.where(account_name: options[:account_name]).first.try(:id)
+    end
+  end
+  
+  def value_for(stat_name, ref_date, school_ids)
+    ms = SchoolMonthlyStat.where(school_id: school_ids,
+                                 name: stat_name)
+                          .for_month(ref_date)
+    ms.first.try(:value)
+  end
+
+  
 end
