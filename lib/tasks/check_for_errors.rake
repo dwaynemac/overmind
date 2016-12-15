@@ -25,11 +25,11 @@ task :check_for_errors => :environment do
           
           if school.padma_enabled?
             puts "queueing sync request for #{ref_month}"
-            SyncRequest.create(school_id: school_id,
+            SyncRequest.create(school_id: school.id,
                                year: ref_month.year,
                                month: ref_month.month)
             puts "queueing sync request for #{(ref_month-1.month)}"
-            SyncRequest.create(school_id: school_id,
+            SyncRequest.create(school_id: school.id,
                                year: (ref_month-1.month).year,
                                month: (ref_month-1.month).month)
           else
