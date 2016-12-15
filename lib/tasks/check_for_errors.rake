@@ -23,10 +23,18 @@ task :check_for_errors => :environment do
         else
           puts "failed"
           
-          puts "queueing sync request"
-          SyncRequest.create(school_id: school_id,
-                             year: ref_month.year,
-                             month: ref_month.month)
+          if school.padma_enabled?
+            puts "queueing sync request for #{ref_month}"
+            SyncRequest.create(school_id: school_id,
+                               year: ref_month.year,
+                               month: ref_month.month)
+            puts "queueing sync request for #{(ref_month-1.month)}"
+            SyncRequest.create(school_id: school_id,
+                               year: (ref_month-1.month).year,
+                               month: (ref_month-1.month).month)
+          else
+            puts "padma not enabled. doing nothing.."
+          end
         end
       end
     end
