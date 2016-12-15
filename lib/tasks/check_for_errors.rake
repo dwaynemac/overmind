@@ -1,5 +1,7 @@
 task :check_for_errors => :environment do
   
+  @schools = School.all
+  
   i = 12
   
   while(i >= 0) do
@@ -14,7 +16,7 @@ task :check_for_errors => :environment do
       puts "failed"
       
       # only check school by school if global failed
-      School.all.each do |school|
+      @schools.each do |school|
         puts "checking school #{school.quick_name} ============="
         
         puts "students checksum"
