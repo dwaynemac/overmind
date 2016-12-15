@@ -5,7 +5,7 @@ task :check_for_errors => :environment do
   while(i >= 0) do
     ref_month = i.months.ago
     
-    puts "checking month: #{ref_month}"
+    puts "checking month: #{ref_month} ========================================"
     
     puts "global students checksum"
     if Checksum.global_students(ref_month: ref_month) # quick global check.
