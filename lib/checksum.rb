@@ -28,7 +28,16 @@ class Checksum
     return nil if school_ids.nil?
     ref_month = options[:ref_month]
     
-    value_for(:students,ref_month-1.month,school_ids) + value_for(:enrollments,ref_month,school_ids) - value_for(:dropouts,ref_month,school_ids) == value_for(:students,ref_month,school_ids)
+    prev_month_students = value_for(:students,ref_month-1.month,school_ids) || 0
+    cur_month_enrollments = value_for(:enrollments,ref_month,school_ids) || 0
+    cur_month_dropouts = value_for(:dropouts,ref_month,school_ids) || 0
+    cur_month_students = value_for(:students,ref_month,school_ids)
+     
+    begin
+      prev_month_students + cur_month_enrollments - cur_month_dropouts == cur_month_students  
+    rescue NoMethodError # catch if any value was nil
+      false
+    end
   end
   
   private
