@@ -2,7 +2,7 @@ task :check_for_errors => :environment do
   
   @schools = School.all
   
-  i = 12
+  i = 6
   
   while(i >= 0) do
     ref_month = i.months.ago
