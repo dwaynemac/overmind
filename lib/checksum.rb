@@ -1,4 +1,4 @@
-class CheckForErrors
+class Checksum
   
   # return TRUE if ok.
   # return FALSE if global students for given month doesnt match:
