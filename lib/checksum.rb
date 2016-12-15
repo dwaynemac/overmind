@@ -33,7 +33,7 @@ class Checksum
   
   private
   
-  def get_school_ids(options)
+  def self.get_school_ids(options)
     if options[:school_id]
       options[:school_id]
     elsif options[:account_name]
@@ -41,7 +41,7 @@ class Checksum
     end
   end
   
-  def value_for(stat_name, ref_date, school_ids)
+  def self.value_for(stat_name, ref_date, school_ids)
     ms = SchoolMonthlyStat.where(school_id: school_ids,
                                  name: stat_name)
                           .for_month(ref_date)
