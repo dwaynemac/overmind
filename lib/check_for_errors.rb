@@ -13,7 +13,7 @@ class CheckForErrors
     acum += SchoolMonthlyStat.where(name: :enrollments)
                         .for_month(ref_month)
                         .sum(:value)
-    acum -= SchoolMonthlyStat.where(name: :drop_outs)
+    acum -= SchoolMonthlyStat.where(name: :dropouts)
                              .for_month(ref_month)
                              .sum(:value)
     
@@ -40,7 +40,7 @@ class CheckForErrors
     acum += school.school_monthly_stats.where(name: :enrollments)
                         .for_month(ref_month)
                         .sum(:value)
-    acum -= school.school_monthly_stats.where(name: :drop_outs)
+    acum -= school.school_monthly_stats.where(name: :dropouts)
                              .for_month(ref_month)
                              .sum(:value)
     
