@@ -26,6 +26,7 @@ gem 'appsignal', '~> 1.2'
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+  gem 'dalli'
 end
 
 gem 'logical_model', '0.6.4'

@@ -1,7 +1,7 @@
+# return TRUE if value is ok.
+# return FALSE if value doesnt match:
 class Checksum
   
-  # return TRUE if ok.
-  # return FALSE if global students for given month doesnt match:
   # prev_month_students + cur_month_enrollments - cur_month_dropouts
   def self.global_students(options)
     ref_month = options[:ref_month]
