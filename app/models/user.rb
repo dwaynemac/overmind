@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   end
 
   def current_account
-    PadmaAccount.find self.account_name
+    PadmaAccount.find_with_rails_cache self.account_name
   end
 
   def account_name_changed?
