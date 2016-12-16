@@ -1,8 +1,9 @@
 task :check_for_errors => :environment do
+  return unless Date.today.wday == 5
   
   @schools = School.all
   
-  i = 6
+  i = 12
   
   while(i >= 0) do
     ref_month = i.months.ago
@@ -28,10 +29,12 @@ task :check_for_errors => :environment do
           if school.padma_enabled?
             puts "queueing sync request for #{ref_month}"
             SyncRequest.create(school_id: school.id,
+                               priority: 6, # not night only but bellow manual sync requests.
                                year: ref_month.year,
                                month: ref_month.month)
             puts "queueing sync request for #{(ref_month-1.month)}"
             SyncRequest.create(school_id: school.id,
+                               priority: 6, # not night only but bellow manual sync requests.
                                year: (ref_month-1.month).year,
                                month: (ref_month-1.month).month)
           else
