@@ -19,7 +19,7 @@ gem 'sqlite3', :group => [:development, :test]
 
 # Inplace editor
 gem 'best_in_place', :github => 'afalkear/best_in_place_post'
-gem 'padma-assets', '0.2.17'
+gem 'padma-assets', '0.2.18'
 
 gem 'appsignal', '~> 1.2'
 
@@ -30,7 +30,7 @@ group :production do
 end
 
 gem 'logical_model', '0.6.4'
-gem 'accounts_client', '0.2.27'
+gem 'accounts_client', '0.2.28'
 gem 'kaminari'
 gem 'ransack'
 
