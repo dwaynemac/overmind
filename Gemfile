@@ -61,9 +61,7 @@ group :doc do
   gem 'redcarpet'
 end
 
-group :test do
-  gem 'rake' # for travis-ci
-end
+gem 'rake', '< 12'
 
 group :development do
   gem 'subcontractor', '>= 0.6.1'
