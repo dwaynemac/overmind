@@ -152,7 +152,7 @@ GEM
     nokogiri-happymapper (0.5.7)
       nokogiri (~> 1.5)
     orm_adapter (0.0.7)
-    padma-assets (0.2.18)
+    padma-assets (0.2.19)
       accounts_client (>= 0.2.28)
       railties (>= 3.1)
     padma-deployment (0.2.1)
@@ -293,7 +293,7 @@ DEPENDENCIES
   less-rails-bootstrap (~> 3.0.6)
   libnotify
   logical_model (= 0.6.4)
-  padma-assets (= 0.2.18)
+  padma-assets (= 0.2.19)
   padma-deployment
   pg
   rack-cors
