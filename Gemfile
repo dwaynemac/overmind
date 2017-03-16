@@ -19,7 +19,7 @@ gem 'sqlite3', :group => [:development, :test]
 
 # Inplace editor
 gem 'best_in_place', :github => 'afalkear/best_in_place_post'
-gem 'padma-assets', '0.2.18'
+gem 'padma-assets', '0.2.19'
 
 gem 'appsignal', '~> 1.2'
 
@@ -61,9 +61,7 @@ group :doc do
   gem 'redcarpet'
 end
 
-group :test do
-  gem 'rake' # for travis-ci
-end
+gem 'rake', '< 12'
 
 group :development do
   gem 'subcontractor', '>= 0.6.1'

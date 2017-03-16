@@ -177,7 +177,7 @@
   <tbody>
     <% @ranking.matrix.each do |school, stats_hash| %>
       <tr>
-        <th> <%= link_to_if can?(:read, school), school.name, school %> </th>
+        <td> <%= link_to_if can?(:read, school), school.name, school %> </td>
         <% @ranking.column_names.each do |name| %>
           <% if stats_hash[name.to_s].nil? -%>
             <td></td>
