@@ -14,7 +14,7 @@ class TeacherRanking
    [:dropouts_begginers, :dropouts_intermediates, :begginers_dropout_rate, :swasthya_dropout_rate],
    [:male_students, :female_students],
    [:aspirante_students, :sadhaka_students, :yogin_students, :chela_students, :graduado_students, :assistant_students, :professor_students, :master_students],
-   [:demand, :interviews, :p_interviews, :emails, :phonecalls, :website_contact],
+   [:demand, :interviews, :p_interviews, :emails, :phonecalls, :website_contact, :messaging_comms, :social_comms],
    [:conversion_rate]
   ]
 

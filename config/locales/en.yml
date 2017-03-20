@@ -13,6 +13,8 @@ en:
       emails: Incoming emails
       phonecalls: Incoming phonecalls
       website_contact: Incoming website contacts
+      social_comms: Incoming social media contacts
+      messaging_comms: Incoming messaging contacts
     names:
       aspirante_students: Introductory Students
       assistant_students: Assistant Students

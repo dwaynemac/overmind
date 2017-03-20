@@ -52,6 +52,14 @@ module SearchUrls
     demand_query + eq(:communication_media, :website_contact)
   end
   
+  def messaging_comms_query
+    demand_query + eq(:communication_media, :messaging)
+  end
+  
+  def social_comms_query
+    demand_query + eq(:communication_media, :social)
+  end
+  
   def male_interviews_query
     interviews_query + eq(:gender,:male)
   end
