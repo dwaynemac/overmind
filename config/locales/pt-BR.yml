@@ -99,6 +99,8 @@ pt-BR:
       yogin_students: Yôgins
       students_average_age: Idade média dos alunos
       assistantxe_students: 
+      social_comms: Contatos via social média
+      messaging_comms: Contatos via mensageria
   views:
     pagination:
       first: Primeira

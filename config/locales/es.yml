@@ -58,6 +58,8 @@ es:
       yogin_students: Yôgins
       students_average_age: Promedio de edad
       assistantxe_students: 
+      messaging_comms: Contactos por mensajería
+      social_comms: Contactos por redes sociales
   views:
     pagination:
       first: Primera
