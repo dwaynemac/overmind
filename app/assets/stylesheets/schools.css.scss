@@ -81,7 +81,7 @@ th form {
       display: none;
     }
     &:hover {
-      .show-on-hover {
+      .show-on-hover:not(:empty) {
         display: inline-block;
       }
     }
