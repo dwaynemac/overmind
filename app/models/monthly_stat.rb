@@ -66,6 +66,8 @@ class MonthlyStat < ActiveRecord::Base
 
                  :emails, :phonecalls,
                  :website_contact,
+                 :messaging_comms,
+                 :social_comms,
                  :conversion_rate, :conversion_count
   ]
 

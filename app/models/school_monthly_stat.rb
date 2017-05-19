@@ -19,6 +19,8 @@ class SchoolMonthlyStat < MonthlyStat
     ret << :phonecalls if event =~ /phone_call/
     ret << :emails if event =~ /email/
     ret << :website_contact if event =~ /website_contact/
+    ret << :messaging_comms if event =~ /messaging/
+    ret << :social_comms if event =~ /social/
     
     if event =~ /communication/
       ret << :demand

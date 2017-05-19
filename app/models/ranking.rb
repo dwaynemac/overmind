@@ -28,7 +28,7 @@ class Ranking
     :interviews,
     :male_interviews, :female_interviews,
     :male_interviews_rate, :female_interviews_rate,
-    :p_interviews, :emails, :phonecalls, :website_contact],
+    :p_interviews, :emails, :phonecalls, :website_contact, :messaging_comms, :social_comms],
    [:conversion_rate, :conversion_count]
   ]
 

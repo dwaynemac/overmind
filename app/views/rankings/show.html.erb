@@ -75,7 +75,7 @@
       <table id="ranking_table" class="table table-striped tablesorter-blue table-sorter">
         <thead class="static-table-header">
           <tr>
-            <th> <%#= t('ranking.name') %> </th>
+            <th> <%= t('ranking.name') %> </th>
             <% @ranking.column_names.each do |name| %>
               <th> <%= t("monthly_stat.names.#{name}") %> </th>
             <% end %>
@@ -177,7 +177,7 @@
   <tbody>
     <% @ranking.matrix.each do |school, stats_hash| %>
       <tr>
-        <th> <%= link_to_if can?(:read, school), school.name, school %> </th>
+        <td> <%= link_to_if can?(:read, school), school.name, school %> </td>
         <% @ranking.column_names.each do |name| %>
           <% if stats_hash[name.to_s].nil? -%>
             <td></td>

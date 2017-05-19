@@ -92,6 +92,10 @@ module PadmaStatsApi
           self.count_communications(ref_date, options.merge({filter: { media: 'phone_call'}}))
         when :website_contact
           self.count_communications(ref_date, options.merge({filter: { media: 'website_contact'}}))
+        when :messaging_comms
+          self.count_communications(ref_date, options.merge({filter: { media: 'messaging'}}))
+        when :social_comms
+          self.count_communications(ref_date, options.merge({filter: { media: 'social'}}))
         when :conversion_rate
           self.get_conversion_rate(ref_date,options)
         when :conversion_count

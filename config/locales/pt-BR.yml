@@ -52,6 +52,8 @@ pt-BR:
       emails: Emails recebidos
       phonecalls: Chamadas recebidas
       website_contact: Contatos via website recebidos
+      social_comms: Contatos via social média
+      messaging_comms: Contatos via mensageria
       dropout_rate: "O % de evasāo é calculado dividindo as evasōes do mes pelos alunos + evasōes."
     names:
       aspirante_students_rate: '% Iniciantes'
@@ -97,6 +99,8 @@ pt-BR:
       yogin_students: Yôgins
       students_average_age: Idade média dos alunos
       assistantxe_students: 
+      social_comms: Contatos via social média
+      messaging_comms: Contatos via mensageria
   views:
     pagination:
       first: Primeira

@@ -44,6 +44,7 @@ class TeacherMonthlyStat < MonthlyStat
 
       :emails, :phonecalls,
       :website_contact,
+      :social_comms, :messaging_comms,
 
       :conversion_rate
   ]
@@ -65,6 +66,12 @@ class TeacherMonthlyStat < MonthlyStat
     end
     if event =~ /website_contact/
       ret << :website_contact
+    end
+    if event =~ /messaging/
+      ret << :messaging_comms
+    end
+    if event =~ /social/
+      ret << :social_comms
     end
     if event =~ /communication/
       ret << :demand
