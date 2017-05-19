@@ -1,7 +1,7 @@
 module MonthlyStatsHelper
 
   def print_value_with_link(monthly_stat)
-    if monthly_stat.url_to_crm_list.nil?
+    if monthly_stat.url_to_crm_list.nil? || monthly_stat.account_name != current_user.padma.current_account_name
       print_value(monthly_stat)
     else
       link_to print_value(monthly_stat), monthly_stat.url_to_crm_list, target: '_blank'
@@ -71,6 +71,17 @@ module MonthlyStatsHelper
     not_teacher_stats = !options[:teacher_stats]
 
     permitions && service_blank && month_past && is_not_reduced_stat && not_teacher_stats && is_not_local_stat
+  end
+
+  def can_delete?(options={})
+    permitions = current_ability.can?(:update,MonthlyStat)
+    service_blank = options[:monthly_stat].service.blank?
+    month_past = (options[:ref_date].end_of_month < Date.today)
+    is_not_reduced_stat = !options[:monthly_stat].is_a?(ReducedStat)
+    is_not_local_stat   = !LocalStat.is_local_stat?(options[:monthly_stat].name)
+    not_teacher_stats = !options[:teacher_stats]
+
+    permitions && month_past && is_not_reduced_stat && not_teacher_stats && is_not_local_stat
   end
 
 end
