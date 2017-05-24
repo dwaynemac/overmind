@@ -74,7 +74,7 @@ module MonthlyStatsHelper
   end
 
   def can_delete?(options={})
-    permitions = current_ability.can?(:update,MonthlyStat)
+    permitions = current_ability.can?(:destroy,MonthlyStat)
     service_blank = options[:monthly_stat].service.blank?
     month_past = (options[:ref_date].end_of_month < Date.today)
     is_not_reduced_stat = !options[:monthly_stat].is_a?(ReducedStat)
