@@ -51,7 +51,7 @@ describe MonthlyStat do
       let(:school){create(:school, account_name: 'account-name')}
       describe "if communication with accounts-ws fails" do
         before do
-          # we dont stub account
+          school.stub(:account).and_return nil
         end
         it "returns nil" do
           MonthlyStat.service_for(school,'students',Date.today).should be_nil
@@ -59,7 +59,11 @@ describe MonthlyStat do
       end
       describe "if school was not migrated to padma" do
         before do
-          stub_account(migrated_to_padma_on: nil)
+          # stub_account(migrated_to_padma_on: nil)
+          school.stub(:account).and_return  PadmaAccount.new({
+            migrated_to_padma_on: nil,
+            name: 'account-name'
+          })
         end
         it "returns kshema" do
           MonthlyStat.service_for(school,'students',Date.today).should == 'kshema'
