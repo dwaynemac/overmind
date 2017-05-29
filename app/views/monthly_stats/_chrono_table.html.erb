@@ -95,32 +95,32 @@ end
               <% end -%>
             <% end %>
             <%- unless monthly_stat.nil? || monthly_stat.is_a?(ReducedStat) || @school.nil? -%>
-              <span class="show-on-hover">
-                <% if in_place_edit?(monthly_stat: monthly_stat, ref_date: ref_date, teacher_stats: teacher_stats) %>
+              <span class="show-on-hover"><% if in_place_edit?(monthly_stat: monthly_stat, ref_date: ref_date, teacher_stats: teacher_stats) %>
                   <a href="#" data-toggle="tooltip" data-original-title="<%= t('edit')%>" class="editable">
                     <span class='glyphicon glyphicon-pencil'></span>
                   </a>
                 <% end %>
-                <%= link_to('<span class="glyphicon glyphicon-trash"></span>'.html_safe,
-                            school_monthly_stat_path(id: monthly_stat, school_id: @school.id),
-                            rel: 'tooltip',
-                            data: {
-                              'original-title' => t('delete'),
-                              'toggle' => 'tooltip',
-                              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))
-                              },
-                            :method => :delete,
-                            :remote => true,
-                            :id => "monthly-stat-#{monthly_stat.id}",
-                            :class => 'red deletable') %>
+                <% if can_delete?(monthly_stat: monthly_stat, ref_date: ref_date, teacher_stats: teacher_stats) %>
+                  <%= link_to('<span class="glyphicon glyphicon-trash"></span>'.html_safe,
+                              school_monthly_stat_path(id: monthly_stat, school_id: @school.id),
+                              rel: 'tooltip',
+                              data: {
+                                'original-title' => t('delete'),
+                                'toggle' => 'tooltip',
+                                :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))
+                                },
+                              :method => :delete,
+                              :remote => true,
+                              :id => "monthly-stat-#{monthly_stat.id}",
+                              :class => 'red deletable') %>
+                <% end %>
                 <%- if can_sync_update?(monthly_stat) -%>
                   <%= link_to('<span class="glyphicon glyphicon-refresh"></span>'.html_safe,
                               sync_school_monthly_stat_path(id: monthly_stat, school_id: @school.id, year: @year),
                               rel: 'tooltip',
                               data: {'original-title' => "sync from #{monthly_stat.service}"},
                               :class => 'red') %>
-                <%- end -%>
-              </span>
+                <%- end -%></span>
             <%- end -%>
           <% end -%>
           </td>

@@ -6,7 +6,7 @@
   text-align: center;
 }
 
-.toggle-views:hover{
+.toggle-views:hover .show-on-hover:not(:empty) {
   .show-on-hover {
     display: inline-block;
   }
