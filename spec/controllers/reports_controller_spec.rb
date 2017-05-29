@@ -39,8 +39,8 @@ describe ReportsController do
 
   describe "GET /schools/:account_name/pedagogic/:year/:month" do
     before do
-      PadmaAccount.should_receive(:find).with(school.account_name)
-        .and_return PadmaAccount.new(account_name: school.account_name)
+      school.stub(:account).and_return
+        PadmaAccount.new(account_name: school.account_name)
       get :pedagogic_snapshot, school_id: school.account_name,
                                year: 2014,
                                month: 6
