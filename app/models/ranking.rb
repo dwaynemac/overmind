@@ -57,7 +57,7 @@ class Ranking
                              .includes(:school)
                              .where(ref_date: (ref_since.to_date..ref_until.to_date))
                              .where(name: @column_names)
-                             .where(schools: { cached_nucleo_enabled: true})
+                             .where("(schools.cached_nucleo_enabled IS NULL) OR schools.cached_nucleo_enabled")
     scope = scope.where(schools: { federation_id: @federation_ids}) unless @federation_ids.nil?
 
     scope.all.group_by(&:school).map do |school, stats|
