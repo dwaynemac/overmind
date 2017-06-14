@@ -36,6 +36,8 @@ class SchoolsSynchronizer
                                  federation_id: get_federation_id(account)) if school.name.blank?
       end
     end
+    
+    School.all.each{|s| s.nucleo_enabled? } # cache nucleo_enabled on attribute: cached_nucleo_enabledh
   end
 
   private
