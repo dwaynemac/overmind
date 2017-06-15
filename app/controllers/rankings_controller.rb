@@ -15,10 +15,13 @@ class RankingsController < ApplicationController
     end
     @ranking = Ranking.new params[:ranking]
 
+    schools_scope = School.where(federation_id: params[:ranking][:federation_ids])
+                          .where("(cached_nucleo_enabled IS NULL) OR cached_nucleo_enabled")
     if @ranking.school_ids.empty?
-      @missing_schools ||= School.where(federation_id: params[:ranking][:federation_ids])
+      @missing_schools ||= schools_scope
     else
-      @missing_schools ||= School.select([:id, :name, :account_name, :federation_id]).where(federation_id: params[:ranking][:federation_ids]).where("id NOT IN ('#{@ranking.school_ids.join("','")}')")
+      @missing_schools ||= schools_scope.select([:id, :name, :account_name, :federation_id])
+                                 .where("id NOT IN ('#{@ranking.school_ids.join("','")}')")
     end
     
     respond_to do |format|
