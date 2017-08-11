@@ -81,6 +81,7 @@ class Ability
         can :see_global, MonthlyStat
         can :read, Ranking
         can :read, TeacherRanking
+        can [:create, :update, :destroy], MonthlyStat, service: '', school: {account_name: linked_account_names }
       when 'president'
         can :read_only_one, Federation
         can :read, Federation, id: @user.federation_id
