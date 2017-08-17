@@ -15,7 +15,7 @@ class Ranking
    [:male_students, :female_students, :male_students_rate],
    [:students_average_age],
    [:aspirante_students, :sadhaka_students, :yogin_students,
-    :chela_students, :graduado_students, :assistantxe_students,
+    :chela_students, :graduado_students, :assistant_students,
     :professor_students, :master_students],
    [:aspirante_students_rate,
     :sadhaka_students_rate,
@@ -27,6 +27,7 @@ class Ranking
     :male_demand_rate, :female_demand_rate,
     :interviews,
     :male_interviews, :female_interviews,
+    :male_p_interviews,
     :male_interviews_rate, :female_interviews_rate,
     :p_interviews, :emails, :phonecalls, :website_contact, :messaging_comms, :social_comms],
    [:conversion_rate, :conversion_count]
