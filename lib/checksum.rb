@@ -26,7 +26,7 @@ class Checksum
   def self.students(options)
     school_ids = get_school_ids(options)
     return nil if school_ids.nil?
-    @check = false
+    @check = true
     ref_month = options[:ref_month]
     
     # check prev students + enroll - drops
@@ -42,8 +42,6 @@ class Checksum
     end
     
     begin
-      cur_month_students
-      cur_month_begginer_students = value_for(,ref_month,school_ids)
       levels = [:aspirante_students,
        :sadhaka_students, :yogin_students, :chela_students, :graduado_students,
        :assistant_students, :professor_students, :master_students ]
