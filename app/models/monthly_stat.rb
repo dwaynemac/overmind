@@ -62,6 +62,7 @@ class MonthlyStat < ActiveRecord::Base
 
                  :interviews,
                  :male_interviews, :female_interviews,
+                 :male_p_interviews,
                  :male_interviews_rate, :female_interviews_rate,
 
                  :emails, :phonecalls,

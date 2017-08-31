@@ -66,6 +66,8 @@ module PadmaStatsApi
           self.count_students(ref_date, options.merge({in_professional_training: true}))
         when :enrollments
           self.count_enrollments(ref_date,options)
+        when :male_enrollments
+          self.count_enrollments(ref_date,options.merge({filter: {gender: :male}}))
         when :dropouts
           self.count_drop_outs(ref_date,options)
         when :dropouts_begginers
@@ -84,7 +86,11 @@ module PadmaStatsApi
           self.count_interviews(ref_date,options.merge({filter: { gender: 'male' }}))
         when :female_interviews
           self.count_interviews(ref_date,options.merge({filter: { gender: 'female' }}))
+        when :male_p_interviews
+          # option coefficient: 'p' will be interpreted in CRM as :pmenos, :perfil and :pmas
+          self.count_interviews(ref_date,options.merge({filter: { gender: 'male', coefficient: 'p' }}))
         when :p_interviews
+          # option coefficient: 'p' will be interpreted in CRM as :pmenos, :perfil and :pmas
           self.count_interviews(ref_date, options.merge({filter: { coefficient: 'p' }}))
         when :emails
           self.count_communications(ref_date, options.merge({filter: {media: 'email'}}))
@@ -324,6 +330,9 @@ module PadmaStatsApi
                       }
       }
       req_options.merge!({by_teacher: true}) if options[:by_teacher]
+      if options[:filter]
+        req_options[:filter].merge! options[:filter]
+      end
 
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/enrollments/count", params: req_options)
       parse_response(response,!options[:by_teacher])
