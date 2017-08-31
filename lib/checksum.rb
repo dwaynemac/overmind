@@ -26,18 +26,41 @@ class Checksum
   def self.students(options)
     school_ids = get_school_ids(options)
     return nil if school_ids.nil?
+    @check = false
     ref_month = options[:ref_month]
     
+    # check prev students + enroll - drops
     prev_month_students = value_for(:students,ref_month-1.month,school_ids) || 0
     cur_month_enrollments = value_for(:enrollments,ref_month,school_ids) || 0
     cur_month_dropouts = value_for(:dropouts,ref_month,school_ids) || 0
     cur_month_students = value_for(:students,ref_month,school_ids)
      
     begin
-      prev_month_students + cur_month_enrollments - cur_month_dropouts == cur_month_students  
+      @check &&= (prev_month_students + cur_month_enrollments - cur_month_dropouts == cur_month_students  )
     rescue NoMethodError # catch if any value was nil
-      false
+      @check &&= false
     end
+    
+    begin
+      cur_month_students
+      cur_month_begginer_students = value_for(,ref_month,school_ids)
+      levels = [:aspirante_students,
+       :sadhaka_students, :yogin_students, :chela_students, :graduado_students,
+       :assistant_students, :professor_students, :master_students ]
+      students_by_levels = 0
+      levels.each do |level|
+        students_by_levels += value_for(level,ref_month,school_ids)
+      end
+      @check &&= (cur_month_students == students_by_levels)
+    rescue NoMethodError
+      @check &&= false
+    end
+    
+    # TODO check that students by gender match
+    
+    # TODO check that students by teacher match
+    
+    @check
   end
   
   private
