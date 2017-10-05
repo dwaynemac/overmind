@@ -54,10 +54,7 @@ class Ranking
   end
 
   def stats
-    pre_scope = SchoolMonthlyStat.select([:name, :value, :school_id])
-                             .includes(:school)
-                             .where(ref_date: (ref_since.to_date..ref_until.to_date))
-                             .where("(schools.cached_nucleo_enabled IS NULL) OR schools.cached_nucleo_enabled")
+    pre_scope = SchoolMonthlyStat.select([:name, :value, :school_id]).includes(:school).where(ref_date: (ref_since.to_date..ref_until.to_date)).where("(schools.cached_nucleo_enabled IS NULL) OR schools.cached_nucleo_enabled")
     pre_scope = pre_scope.where(schools: { federation_id: @federation_ids}) unless @federation_ids.nil?
     simple_reduction_scope = pre_scope.where(name: @column_names - columns_with_special_reduction)
 
@@ -67,12 +64,14 @@ class Ranking
       end
     end.flatten
     
-    special_reduction_stats = columns_with_special_reduction.map do |name|
-      ReducedStat.new(school: school,
-                      name: name,
-                      value: LocalStat.new().send("reduce_#{name}",pre_scope)
-                      )
-    end
+    special_reduction_stats = pre_scope.where(name: columns_with_special_reduction).uniq(:school_id).map(&:school).each do |school|
+      columns_with_special_reduction.map do |name|
+        ReducedStat.new(school: school,
+                        name: name,
+                        value: LocalStat.new().send("reduce_#{name}",pre_scope)
+                        )
+      end
+    end.flatten
     
     simple_reduction_stats + special_reduction_stats
   end
