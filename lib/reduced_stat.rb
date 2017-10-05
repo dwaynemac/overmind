@@ -2,6 +2,7 @@
 class ReducedStat
   attr_accessor :ref_date, :name, :stats, :name, :reduce_as, :school, :teacher
 
+  # TODO si agregamos el attribute :stats_scope podemos resolver aca adentro los casos de special_reduction   
   def initialize(attributes)
     self.school = attributes[:school]
     self.teacher = attributes[:teacher]

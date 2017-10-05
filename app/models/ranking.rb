@@ -54,18 +54,27 @@ class Ranking
   end
 
   def stats
-    scope = SchoolMonthlyStat.select([:name, :value, :school_id])
+    pre_scope = SchoolMonthlyStat.select([:name, :value, :school_id])
                              .includes(:school)
                              .where(ref_date: (ref_since.to_date..ref_until.to_date))
-                             .where(name: @column_names)
                              .where("(schools.cached_nucleo_enabled IS NULL) OR schools.cached_nucleo_enabled")
-    scope = scope.where(schools: { federation_id: @federation_ids}) unless @federation_ids.nil?
+    pre_scope = pre_scope.where(schools: { federation_id: @federation_ids}) unless @federation_ids.nil?
+    simple_reduction_scope = pre_scope.where(name: @column_names - columns_with_special_reduction)
 
-    scope.all.group_by(&:school).map do |school, stats|
+    simple_reduction_stats = simple_reduction_scope.all.group_by(&:school).map do |school, stats|
       stats.group_by(&:name).map do |name, stats|
         ReducedStat.new(school: school, stats: stats, name: name, reduce_as: :avg)
       end
     end.flatten
+    
+    special_reduction_stats = columns_with_special_reduction.map do |name|
+      ReducedStat.new(school: school,
+                      name: name,
+                      value: LocalStat.new().send("reduce_#{name}",pre_scope)
+                      )
+    end
+    
+    simple_reduction_stats + special_reduction_stats
   end
 
   def school_ids
@@ -74,6 +83,12 @@ class Ranking
 
   def persisted?
     false
+  end
+  
+  def columns_with_special_reduction
+    @column_names.select do |name|
+      LocalStat.has_special_reduction?(name)
+    end
   end
 
   private
