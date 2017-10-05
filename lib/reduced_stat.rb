@@ -15,11 +15,21 @@ class ReducedStat
   end
 
   def value 
-    @value ||= case self.reduce_as.to_sym
-      when :sum
-        compacted_stats.sum(&:value)
-      when :avg
-        compacted_stats.sum(&:value).to_f / self.size
+    if @value
+      @value
+    else
+      if LocalStat.has_special_reduction?(name)
+        # value should have been set on initialization
+        # TODO with :stats_scope attribute we could calculate here
+        @value 
+      else
+        @value = case self.reduce_as.to_sym
+          when :sum
+            compacted_stats.sum(&:value)
+          when :avg
+            compacted_stats.sum(&:value).to_f / self.size
+        end
+      end
     end
   end
 
