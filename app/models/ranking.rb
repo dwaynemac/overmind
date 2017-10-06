@@ -64,7 +64,7 @@ class Ranking
       end
     end.flatten
     
-    special_reduction_stats = pre_scope.where(name: columns_with_special_reduction).uniq(:school_id).all.map(&:school).each do |school|
+    special_reduction_stats = pre_scope.where(name: columns_with_special_reduction).uniq(:school_id).all.map(&:school).map do |school|
       columns_with_special_reduction.map do |name|
         ReducedStat.new(school: school,
                         name: name,
