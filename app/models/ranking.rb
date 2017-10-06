@@ -57,23 +57,30 @@ class Ranking
     if @stats
       @stats
     else
-      pre_scope = SchoolMonthlyStat.select([:name, :value, :school_id]).includes(:school).where(ref_date: (ref_since.to_date..ref_until.to_date)).where("(schools.cached_nucleo_enabled IS NULL) OR schools.cached_nucleo_enabled")
+      pre_scope = SchoolMonthlyStat.select([:name, :value, :school_id])
+                                   .includes(:school)
+                                   .where("(schools.cached_nucleo_enabled IS NULL) OR schools.cached_nucleo_enabled")
+                                   .where(ref_date: (ref_since.to_date..ref_until.to_date))
       pre_scope = pre_scope.where(schools: { federation_id: @federation_ids}) unless @federation_ids.nil?
       simple_reduction_scope = pre_scope.where(name: @column_names - columns_with_special_reduction)
   
-      simple_reduction_stats = simple_reduction_scope.all.group_by(&:school).map do |school, stats|
-        stats.group_by(&:name).map do |name, stats|
-          ReducedStat.new(school: school, stats: stats, name: name, reduce_as: :avg)
+      @stats = simple_reduction_scope.all.group_by(&:school).map do |school, stats|
+        @column_names.map do |name|
+          if LocalStat.has_special_reduction?(name)
+            ReducedStat.new(school: school,
+                            name: name,
+                            ref_date: ref_since,
+                            value: LocalStat.new().send("reduce_#{name}",pre_scope.where(school_id: school.id))
+                            )
+          else
+            ReducedStat.new(school: school,
+                            stats: stats[name],
+                            name: name,
+                            reduce_as: :avg
+                            )
+          end
         end
       end.flatten
-      
-      special_reduction_stats = pre_scope.where(name: columns_with_special_reduction).uniq(:school_id).all.map(&:school).map do |school|
-        columns_with_special_reduction.map do |name|
-          ReducedStat.new(school: school, name: name, ref_date: ref_since, value: LocalStat.new().send("reduce_#{name}",pre_scope.where(school_id: school.id)) )
-        end
-      end.flatten
-      
-      @stats = simple_reduction_stats + special_reduction_stats
     end
   end
 
