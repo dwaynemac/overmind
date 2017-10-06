@@ -78,7 +78,7 @@ class Ranking
   end
 
   def school_ids
-    @school_ids ||= stats.map(&:school_id)
+    @school_ids ||= stats.map(&:school_id).uniq
   end
 
   def persisted?
