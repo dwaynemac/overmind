@@ -65,6 +65,7 @@ class Ranking
       simple_reduction_scope = pre_scope.where(name: @column_names - columns_with_special_reduction)
   
       @stats = simple_reduction_scope.all.group_by(&:school).map do |school, stats|
+        stats_by_name = stats.group_by(&:name)
         @column_names.map do |name|
           if LocalStat.has_special_reduction?(name)
             ReducedStat.new(school: school,
@@ -74,7 +75,7 @@ class Ranking
                             )
           else
             ReducedStat.new(school: school,
-                            stats: stats[name],
+                            stats: stats_by_name[name],
                             name: name,
                             reduce_as: :avg
                             )
