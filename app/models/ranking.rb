@@ -66,10 +66,7 @@ class Ranking
     
     special_reduction_stats = pre_scope.where(name: columns_with_special_reduction).uniq(:school_id).all.map(&:school).map do |school|
       columns_with_special_reduction.map do |name|
-        ReducedStat.new(school: school,
-                        name: name,
-                        value: LocalStat.new().send("reduce_#{name}",pre_scope)
-                        )
+        ReducedStat.new(school: school, name: name, value: LocalStat.new().send("reduce_#{name}",pre_scope.where(school_id: school.id)) )
       end
     end.flatten
     
