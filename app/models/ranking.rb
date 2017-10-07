@@ -66,12 +66,13 @@ class Ranking
   
       @stats = simple_reduction_scope.all.group_by(&:school).map do |school, stats|
         stats_by_name = stats.group_by(&:name)
-        @column_names.map do |name|
+        (stats_by_name.keys + columns_with_special_reduction).map do |name|
           if LocalStat.has_special_reduction?(name)
             ReducedStat.new(school: school,
                             name: name,
                             ref_date: ref_since,
-                            value: LocalStat.new().send("reduce_#{name}",pre_scope.where(school_id: school.id))
+                            value: LocalStat.new().send("reduce_#{name}",
+                                                        pre_scope.where(school_id: school.id))
                             )
           else
             ReducedStat.new(school: school,
