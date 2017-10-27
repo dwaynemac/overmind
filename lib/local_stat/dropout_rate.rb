@@ -20,9 +20,9 @@ class LocalStat
         students_sum = stats_scope.where(name: :students).sum(:value)
         dropouts_sum = stats_scope.where(name: :dropouts).sum(:value)
         ret = calculate_dropout_rate(dropouts: dropouts_sum, students: students_sum)
-      end
-      unless ret.nil?
-        Rails.cache.write(cache_key, ret, expires_in: 5.minutes)
+        unless ret.nil?
+          Rails.cache.write(cache_key, ret, expires_in: 5.minutes)
+        end
       end
       ret
     end
