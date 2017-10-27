@@ -34,7 +34,9 @@ class ReducedStat
   end
 
   def compacted_stats
-    @compacted_stats ||= stats.reject{|s| s.value.nil? }
+    if stats
+      @compacted_stats ||= stats.reject{|s| s.value.nil? }
+    end
   end
 
   def size

@@ -97,7 +97,7 @@ class Ranking
   def columns_with_special_reduction
     @column_names.select do |name|
       LocalStat.has_special_reduction?(name)
-    end
+    end.map(&:to_s)
   end
 
   private
