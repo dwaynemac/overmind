@@ -90,10 +90,14 @@
                   <td></td>
                 <% else -%>
                   <td>
-                    <span data-toggle="tooltip" data-placement="top"
-                      title="<%= t('ranking.sample_size', size: stats_hash[name.to_s].size) %>">
+                    <% if LocalStat.has_special_reduction?(name) %>
                       <%= print_value stats_hash[name.to_s] %>
-                    </span>
+                    <% else %>
+                      <span data-toggle="tooltip" data-placement="top"
+                        title="<%= t('ranking.sample_size', size: stats_hash[name.to_s].size) %>">
+                        <%= print_value stats_hash[name.to_s] %>
+                      </span>
+                    <% end %>
                   </td>
                 <% end -%>
               <% end %>
