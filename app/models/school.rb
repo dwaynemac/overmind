@@ -21,6 +21,8 @@ class School < ActiveRecord::Base
 
   include Accounts::BelongsToAccount
   validates_uniqueness_of :account_name, allow_blank: true
+  
+  scope :enabled_on_nucleo, where("(cached_nucleo_enabled IS NULL) OR cached_nucleo_enabled")
 
   # avoid calling accounts-ws to get the name.
   # if PadmaAccount cached call full_name on it
