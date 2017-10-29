@@ -34,10 +34,9 @@ class Matrixer
             # ignore this values, for reduction we need to recalculate from source. 
             stat_scope = @stats.scoped
                                .where(ref_date: stats.first.ref_date)
-            rs = ReducedStat.new(school: school,
-                            name: name,
-                            ref_date: ref_since,
-                            value: LocalStat.new().send("reduce_#{name}",
+            rs = ReducedStat.new(
+                            name: stat_name,
+                            value: LocalStat.new().send("reduce_#{stat_name}",
                                                         stat_scope )
                             )
           else
