@@ -28,19 +28,32 @@ class Matrixer
     # reduce each month to a total
     matrix.each_pair do |stat_name,stats_by_month|
       stats_by_month.each_pair do |month,stats|
+        rs = nil
         if stats.size>1
-          red_fn = if MonthlyStat.is_a_rate?(stat_name) || stat_name == 'students_average_age'
-            :avg
+          if LocalStat.has_special_reduction?(stat_name)
+            # ignore this values, for reduction we need to recalculate from source. 
+            stat_scope = @stats.scoped
+                               .where(ref_date: stats.first.ref_date)
+            rs = ReducedStat.new(school: school,
+                            name: name,
+                            ref_date: ref_since,
+                            value: LocalStat.new().send("reduce_#{name}",
+                                                        stat_scope )
+                            )
           else
-            :sum
-          end
-
-          rs = ReducedStat.new(
-            stats: stats,
-            reduce_as: red_fn
-          )
+            red_fn = if MonthlyStat.is_a_rate?(stat_name) || stat_name == 'students_average_age'
+              :avg
+            else
+              :sum
+            end
+  
+            rs = ReducedStat.new(
+              stats: stats,
+              reduce_as: red_fn
+            )
           
-          rs.value # calculate and cache value
+            rs.value # calculate and cache value
+          end
 
           matrix[stat_name][month] = rs
         else
