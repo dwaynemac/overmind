@@ -42,7 +42,7 @@ class Checksum
        
       begin
         @check &&= (prev_month_students + cur_month_enrollments - cur_month_dropouts == cur_month_students  )
-      rescue NoMethodError # catch if any value was nil
+      rescue
         @check &&= false
       end
     end
@@ -57,7 +57,7 @@ class Checksum
           students_by_levels += value_for(level,ref_month,school_ids)
         end
         @check &&= (cur_month_students == students_by_levels)
-      rescue NoMethodError
+      rescue 
         @check &&= false
       end
     end
@@ -69,7 +69,7 @@ class Checksum
           students_by_gender += value_for(gender,ref_month,school_ids)
         end
         @check &&= (cur_month_students == students_by_gender)
-      rescue NoMethodError
+      rescue
         @check &&= false
       end
     end
