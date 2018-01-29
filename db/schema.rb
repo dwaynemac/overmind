@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170614205350) do
+ActiveRecord::Schema.define(:version => 20180129143434) do
 
   create_table "federations", :force => true do |t|
     t.string   "name"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20170614205350) do
     t.integer  "count_students_relative_to_value"
     t.date     "count_students_relative_to_date"
     t.boolean  "cached_nucleo_enabled"
+    t.boolean  "cached_padma_enabled"
   end
 
   create_table "schools_teachers", :force => true do |t|

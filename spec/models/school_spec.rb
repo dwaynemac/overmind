@@ -33,6 +33,29 @@ describe School do
     s.save
     s.errors.keys.should include :account_name
   end
+  
+  describe "#padma_enabled?" do
+    describe "if school has an account_name" do
+      let(:school){create(:school, account_name: 'x')}
+      describe "and connection to accounts-ws NOT available" do
+        it "wont cache to cached_padma_enabled" do
+          expect(school.cached_padma_enabled).to be_nil
+          school.padma_enabled? 
+          expect(school.cached_padma_enabled).to be_nil
+        end
+      end
+      describe "and connection to accounts-ws is available" do
+        before do
+          school.stub!(:account).and_return(PadmaAccount.new(enabled: true))
+        end
+        it "caches value co cached_padma_enabled" do
+          expect(school.cached_padma_enabled).to be_nil
+          school.padma_enabled? 
+          expect(school.cached_padma_enabled).not_to be_nil
+        end
+      end
+    end
+  end
 
   describe "#sync_year_stats" do
     let(:school){create(:school)}
