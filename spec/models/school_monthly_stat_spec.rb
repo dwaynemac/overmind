@@ -4,7 +4,6 @@ describe SchoolMonthlyStat do
 
   before do
     if SchoolMonthlyStat.count == 0
-      School.any_instance.stub(:padma2_enabled?).and_return true
       create(:school_monthly_stat)
     end
   end

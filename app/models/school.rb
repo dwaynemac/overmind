@@ -140,10 +140,6 @@ class School < ActiveRecord::Base
     ret
   end
 
-  def padma2_enabled?
-    !self.account.try(:migrated_to_padma_on).nil?
-  end
-
   # Difference: stored for school - calculated from teachers
   # @return [Integer] diference between value stored as total for school and sum of teachers values.
   def diff(ref_date,stat_name)

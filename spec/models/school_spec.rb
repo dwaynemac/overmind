@@ -60,7 +60,6 @@ describe School do
   describe "#sync_year_stats" do
     let(:school){create(:school)}
     before do
-      School.any_instance.stub(:padma2_enabled?).and_return true
       SchoolMonthlyStat.any_instance.stub(:get_remote_value).and_return('1')
       TeacherMonthlyStat.stub(:get_remote_values).and_return([
           {full_name: 'Name', padma_username: 'username', value: '3'},

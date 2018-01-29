@@ -3,7 +3,6 @@ require 'spec_helper'
 describe TeacherMonthlyStat do
 
   before do
-    School.any_instance.stub(:padma2_enabled?).and_return true
     if TeacherMonthlyStat.count == 0
       create(:teacher_monthly_stat)
     end

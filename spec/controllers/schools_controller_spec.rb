@@ -2,9 +2,6 @@ require 'spec_helper'
 
 describe SchoolsController do
 
-  before do
-    PadmaAccount.any_instance.stub('padma2_enabled?').and_return(false)
-  end
 
   context "for admin" do
     let(:user){create(:user,role: 'admin')}
