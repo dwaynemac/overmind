@@ -34,38 +34,44 @@ class Checksum
       return false # no data for cur_month, sync!
     end
     
-    # check prev students + enroll - drops
-    prev_month_students = value_for(:students,ref_month-1.month,school_ids) || 0
-    cur_month_enrollments = value_for(:enrollments,ref_month,school_ids) || 0
-    cur_month_dropouts = value_for(:dropouts,ref_month,school_ids) || 0
-     
-    begin
-      @check &&= (prev_month_students + cur_month_enrollments - cur_month_dropouts == cur_month_students  )
-    rescue NoMethodError # catch if any value was nil
-      @check &&= false
+    if @check
+      # check prev students + enroll - drops
+      prev_month_students = value_for(:students,ref_month-1.month,school_ids) || 0
+      cur_month_enrollments = value_for(:enrollments,ref_month,school_ids) || 0
+      cur_month_dropouts = value_for(:dropouts,ref_month,school_ids) || 0
+       
+      begin
+        @check &&= (prev_month_students + cur_month_enrollments - cur_month_dropouts == cur_month_students  )
+      rescue NoMethodError # catch if any value was nil
+        @check &&= false
+      end
     end
     
-    begin
-      levels = [:aspirante_students,
-       :sadhaka_students, :yogin_students, :chela_students, :graduado_students,
-       :assistant_students, :professor_students, :master_students ]
-      students_by_levels = 0
-      levels.each do |level|
-        students_by_levels += value_for(level,ref_month,school_ids)
+    if @check
+      begin
+        levels = [:aspirante_students,
+         :sadhaka_students, :yogin_students, :chela_students, :graduado_students,
+         :assistant_students, :professor_students, :master_students ]
+        students_by_levels = 0
+        levels.each do |level|
+          students_by_levels += value_for(level,ref_month,school_ids)
+        end
+        @check &&= (cur_month_students == students_by_levels)
+      rescue NoMethodError
+        @check &&= false
       end
-      @check &&= (cur_month_students == students_by_levels)
-    rescue NoMethodError
-      @check &&= false
     end
     
-    begin
-      students_by_gender = 0
-      [:male_students, :female_students].each do |gender|
-        students_by_gender += value_for(gender,ref_month,school_ids)
+    if @check
+      begin
+        students_by_gender = 0
+        [:male_students, :female_students].each do |gender|
+          students_by_gender += value_for(gender,ref_month,school_ids)
+        end
+        @check &&= (cur_month_students == students_by_gender)
+      rescue NoMethodError
+        @check &&= false
       end
-      @check &&= (cur_month_students == students_by_gender)
-    rescue NoMethodError
-      @check &&= false
     end
     
     # TODO check that students by teacher match
