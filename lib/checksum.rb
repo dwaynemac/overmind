@@ -54,7 +54,15 @@ class Checksum
       @check &&= false
     end
     
-    # TODO check that students by gender match
+    begin
+      students_by_gender = 0
+      [:male_students, :female_students].each do |gender|
+        students_by_gender += value_for(gender,ref_month,school_ids)
+      end
+      @check &&= (cur_month_students == students_by_gender)
+    rescue NoMethodError
+      @check &&= false
+    end
     
     # TODO check that students by teacher match
     
