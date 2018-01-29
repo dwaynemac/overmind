@@ -1,5 +1,5 @@
 task :check_for_errors => :environment do
-  if Date.today.wday == 5
+  if Date.today.wday == 6
     @schools = School.enabled_on_padma.all
     
     i = 12
