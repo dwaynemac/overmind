@@ -52,4 +52,5 @@ Overmind::Application.routes.draw do
 
  root to: 'schools#index'
  match 'message_door', to: 'message_door#catch'
+ match 'sns', to: 'message_door#sns'
 end

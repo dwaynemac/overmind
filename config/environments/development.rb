@@ -44,4 +44,6 @@ Overmind::Application.configure do
       ENV[key.to_s] = value
     end if File.exists?(env_file)
   end
+  
+  config.log_level = :debug
 end

@@ -1,13 +1,32 @@
 class MessageDoorController < ApplicationController
+  include SnsHelper
+  
 
   skip_before_filter :mock_login
   skip_before_filter :authenticate_user!
   skip_before_filter :pre_check_access
   skip_before_filter :set_locale
 
-  before_filter :decode_data
-  before_filter :set_ref_dates
-  before_filter :load_school
+  before_filter :decode_data, only: [:catch]
+  before_filter :set_ref_dates, only: [:catch]
+  before_filter :load_school, only: [:catch]
+
+  def sns
+    case sns_type
+    when 'SubscriptionConfirmation'
+      # confirm subscription to Topic
+      render json: Typhoeus.get(sns_data[:SubscribeURL]).body, status: 200
+    when 'Notification'
+      Rails.logger.debug "DATA: #{sns_data}"
+      if sns_verified?
+        render json: '...', status: 200
+      else
+        render json: 'shit', status: 400
+      end
+    else
+      render json: 'WTF'
+    end
+  end
 
   ##
   #
