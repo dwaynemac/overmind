@@ -6,15 +6,6 @@ GIT
       jquery-rails
       rails (>= 3.1)
 
-GIT
-  remote: git@github.com:dwaynemac/messaging_client.git
-  revision: f1858859673d7bd5ad59744277ba945ec42d6adb
-  specs:
-    messaging_client (0.1.5)
-      aws-sdk-sns (~> 1)
-      logical_model (>= 0.5.0)
-      railties (>= 3.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -165,6 +156,10 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    messaging_client (0.1.7)
+      aws-sdk-sns (~> 1)
+      logical_model (>= 0.5.0)
+      railties (>= 3.1)
     mime-types (1.25.1)
     mini_portile (0.5.1)
     multi_json (1.13.1)
@@ -314,7 +309,7 @@ DEPENDENCIES
   less-rails-bootstrap (~> 3.0.6)
   libnotify
   logical_model (= 0.6.4)
-  messaging_client!
+  messaging_client (~> 0.1)
   padma-assets (= 0.2.25)
   padma-deployment
   pg
