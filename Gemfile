@@ -31,6 +31,7 @@ end
 
 gem 'logical_model', '0.6.4'
 gem 'accounts_client', '0.2.28'
+gem 'messaging_client', '~> 0.1'
 gem 'kaminari'
 gem 'ransack'
 
