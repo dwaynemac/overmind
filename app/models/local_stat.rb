@@ -84,6 +84,7 @@ class LocalStat
       begginers_dropout_rate: :dropouts_begginers,
       swasthya_dropout_rate: :dropouts_intermediates,
       enrollment_rate: :enrollments,
+      male_enrollment_rate: :male_enrollments,
       dropout_rate: :dropouts
     }
 
