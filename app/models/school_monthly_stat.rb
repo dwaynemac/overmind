@@ -9,7 +9,9 @@ class SchoolMonthlyStat < MonthlyStat
 
     if event =~ /interview/
       ret << :p_interviews
+      ret << :male_p_interviews
       ret << :enrollment_rate
+      ret << :male_enrollment_rate
       ret << :interviews
       ret << :male_interviews
       ret << :male_interviews_rate

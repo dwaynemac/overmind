@@ -38,6 +38,8 @@ es:
       emails: Emails
       enrollment_rate: '% Efectividad'
       enrollments: Matrículas
+      male_enrollments: Matrículas de hombres
+      male_p_interviews: Entrevistas de Hombres Perfil
       female_students: Alumnas mujeres
       graduado_students: Alumnos Graduados
       in_professional_training: En formación

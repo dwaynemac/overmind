@@ -24,8 +24,11 @@ class MonthlyStat < ActiveRecord::Base
                  :dropout_rate, # depends of :dropouts and :students of previous month
 
                  :enrollments,
+                 :male_enrollments,
                  :p_interviews,
+                 :male_p_interviews,
                  :enrollment_rate, # dependes of :enrollments and :p_interviews
+                 :enrollment_rate, # dependes of :male_enrollments and :male_p_interviews
 
                  :male_students,
                  :female_students,

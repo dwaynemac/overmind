@@ -68,6 +68,9 @@ pt-BR:
       conversion_count: Conversāo (#)
       conversion_rate: Conversāo (%)
       demand: Procura
+      male_enrollments: Matriculas de homens
+      male_p_interviews: Visitas de homens perfil
+      male_enrollment_rate: '% Efetividade em Homens'
       male_demand: Procura por homens
       male_demand_rate: "% Procura por homens"
       female_demand: Procura por mulheres

@@ -2,7 +2,7 @@ class LocalStat
   module MaleEnrollmentRate
 
     def calculate_male_enrollment_rate
-      e = value_for(:enrollments)
+      e = value_for(:male_enrollments)
       i = value_for(:male_p_interviews)
 
       if i && e && i > 0
