@@ -4,7 +4,7 @@
   MonthlyStat::VALID_NAMES.reject{|n|n==:conversion_rate}.each do |name|
     csv << [t("monthly_stat.names.#{name}")] + (1...13).map do |month|
       monthly_stat = @school_monthly_stats[name][month]
-      monthly_stat.try :value
+      print_value(monthly_stat)
     end
   end
 end -%>

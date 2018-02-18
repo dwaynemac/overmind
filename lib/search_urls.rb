@@ -64,6 +64,10 @@ module SearchUrls
     interviews_query + eq(:gender,:male)
   end
   
+  def male_p_interviews_query
+    p_interviews_query + eq(:gender,:male)
+  end
+  
   def female_interviews_query
     interviews_query + eq(:gender,:female)
   end
@@ -83,6 +87,10 @@ module SearchUrls
   def enrollments_query
     q = date_eq("enrollment_period_start",ref_date.beginning_of_month,"")
     q += date_eq("enrollment_period_end",ref_date.end_of_month)
+  end
+  
+  def male_enrollments_query
+    enrollments_query + eq(:gender,:male)
   end
   
   def dropouts_query
