@@ -34,6 +34,8 @@ class LocalStat
   include BegginersDropoutRate
   include SwasthyaDropoutRate
   include EnrollmentRate
+  include MaleEnrollmentRate
+  
   include DropoutRate
   include MaleStudentsRate
 
