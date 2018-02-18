@@ -199,6 +199,7 @@ class MonthlyStat < ActiveRecord::Base
       :begginers_dropout_rate,
       :swasthya_dropout_rate,
       :enrollment_rate,
+      :male_enrollment_rate,
       :dropout_rate,
 
       :male_students_rate,
