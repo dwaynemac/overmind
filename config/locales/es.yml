@@ -37,6 +37,7 @@ es:
       swasthya_dropout_rate: "% Evasion de intermedios"
       emails: Emails
       enrollment_rate: '% Efectividad'
+      male_enrollment_rate: '% Efectividad Homens'
       enrollments: Matrículas
       male_enrollments: Matrículas de hombres
       male_p_interviews: Entrevistas de Hombres Perfil
