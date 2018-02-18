@@ -3,7 +3,12 @@ namespace :sync do
   desc 'It doesnt really stop excecution. It just changes state running -> paused'
   task :pause_all => :environment do
     puts "Pausing running workers"
-    SyncRequest.where(state: 'running').update_all(state: 'paused')
+    SyncRequest.where(state: 'running').update_all(state: 'paused', updated_at: Time.now)
+  end
+  
+  task :pause_long_running => :environment do
+    puts "Pausing running workers last updated more than 5 hours ago"
+    SyncRequest.where(state: 'running').where('updated_at < ?', 5.hours.ago).update_all(state: 'paused', updated_at: Time.now)
   end
 
   desc 'run pending sync-requests'

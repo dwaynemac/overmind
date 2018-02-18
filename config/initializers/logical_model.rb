@@ -31,3 +31,10 @@ class LogicalModel
     end
   end
 end
+
+module Messaging
+  HYDRA = ::HYDRA
+  KEY = ENV['messaging_key']
+  SNS_KEY_ID = ENV['padma_aws_key_id']
+  SNS_SECRET_ACCESS_KEY = ENV['padma_aws_secret_access_key']
+end

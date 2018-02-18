@@ -15,7 +15,6 @@ describe ReportsController do
 
   let(:user){create(:user,role: 'admin')}
   before do
-    PadmaAccount.any_instance.stub('padma2_enabled?').and_return(false)
     sign_in(user)
   end
 

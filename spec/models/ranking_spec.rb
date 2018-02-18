@@ -30,17 +30,17 @@ describe Ranking do
       create(:monthly_stat, ref_date: 1.month.ago, school: school)
       create(:monthly_stat, ref_date: 2.months.ago, school: create(:school, federation_id: federation.id))
       create(:monthly_stat, ref_date: 4.months.ago, school: create(:school, federation_id: federation.id))
-   end
-   it "gets stats between ref_since and ref_until" do
+    end
+    it "gets stats between ref_since and ref_until" do
       expect(ranking.stats.count).to eq 2
-   end
-   it "reduces stats by school" do
+    end
+    it "reduces stats by school" do
       create(:monthly_stat,
              ref_date: 2.months.ago,
              school: school)
       expect(ranking.stats.count).to eq 2
-   end
-   it "reduces stats by name" do
+    end
+    it "reduces stats by name" do
       create(:monthly_stat,
              name: 'other_stat',
              ref_date: 2.months.ago,
@@ -50,11 +50,11 @@ describe Ranking do
              school: school)
       ranking.column_names = %W(enrollments_count other_stat)
       expect(ranking.stats.size).to eq 3
-   end
+    end
   end
 
   it "validates that ref_since < ref_until" do
     r = Ranking.new ref_since: Date.today, ref_until: 2.months.ago
     expect(r.errors.keys).to eq []
-  end
+   end
 end

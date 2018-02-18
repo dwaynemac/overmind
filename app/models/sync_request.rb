@@ -119,6 +119,7 @@ class SyncRequest < ActiveRecord::Base
   end
 
   def pending?
+    # TODO BUG this method's criteria is nos consistent with .pending scope.
     state.in?([nil, 'ready', 'paused', 'failed'])
   end
 

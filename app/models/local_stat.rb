@@ -65,6 +65,10 @@ class LocalStat
   def self.is_local_stat?(stat_name)
     stat_name.to_sym.in?(registered_stats)
   end
+  
+  def self.has_special_reduction?(stat_name)
+    self.new().respond_to?("reduce_#{stat_name}")
+  end
 
   def self.calculate_all(options={})
 

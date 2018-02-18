@@ -54,26 +54,50 @@ class Ranking
   end
 
   def stats
-    scope = SchoolMonthlyStat.select([:name, :value, :school_id])
-                             .includes(:school)
-                             .where(ref_date: (ref_since.to_date..ref_until.to_date))
-                             .where(name: @column_names)
-                             .where("(schools.cached_nucleo_enabled IS NULL) OR schools.cached_nucleo_enabled")
-    scope = scope.where(schools: { federation_id: @federation_ids}) unless @federation_ids.nil?
-
-    scope.all.group_by(&:school).map do |school, stats|
-      stats.group_by(&:name).map do |name, stats|
-        ReducedStat.new(school: school, stats: stats, name: name, reduce_as: :avg)
-      end
-    end.flatten
+    if @stats
+      @stats
+    else
+      pre_scope = SchoolMonthlyStat.select([:name, :value, :school_id])
+                                   .includes(:school)
+                                   .where("(schools.cached_nucleo_enabled IS NULL) OR schools.cached_nucleo_enabled")
+                                   .where(ref_date: (ref_since.to_date..ref_until.to_date))
+      pre_scope = pre_scope.where(schools: { federation_id: @federation_ids}) unless @federation_ids.nil?
+      simple_reduction_scope = pre_scope.where(name: @column_names - columns_with_special_reduction)
+  
+      @stats = simple_reduction_scope.all.group_by(&:school).map do |school, stats|
+        stats_by_name = stats.group_by(&:name)
+        (stats_by_name.keys + columns_with_special_reduction).map do |name|
+          if LocalStat.has_special_reduction?(name)
+            ReducedStat.new(school: school,
+                            name: name,
+                            ref_date: ref_since,
+                            value: LocalStat.new().send("reduce_#{name}",
+                                                        pre_scope.where(school_id: school.id))
+                            )
+          else
+            ReducedStat.new(school: school,
+                            stats: stats_by_name[name],
+                            name: name,
+                            reduce_as: :avg
+                            )
+          end
+        end
+      end.flatten
+    end
   end
 
   def school_ids
-    @school_ids ||= stats.map(&:school_id)
+    @school_ids ||= stats.map(&:school_id).uniq
   end
 
   def persisted?
     false
+  end
+  
+  def columns_with_special_reduction
+    @column_names.select do |name|
+      LocalStat.has_special_reduction?(name)
+    end.map(&:to_s)
   end
 
   private

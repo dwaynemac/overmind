@@ -2,6 +2,7 @@
 class ReducedStat
   attr_accessor :ref_date, :name, :stats, :name, :reduce_as, :school, :teacher
 
+  # TODO si agregamos el attribute :stats_scope podemos resolver aca adentro los casos de special_reduction   
   def initialize(attributes)
     self.school = attributes[:school]
     self.teacher = attributes[:teacher]
@@ -14,16 +15,28 @@ class ReducedStat
   end
 
   def value 
-    @value ||= case self.reduce_as.to_sym
-      when :sum
-        compacted_stats.sum(&:value)
-      when :avg
-        compacted_stats.sum(&:value).to_f / self.size
+    if @value
+      @value
+    else
+      if LocalStat.has_special_reduction?(name)
+        # value should have been set on initialization
+        # TODO with :stats_scope attribute we could calculate here
+        @value 
+      else
+        @value = case self.reduce_as.to_sym
+          when :sum
+            compacted_stats.sum(&:value)
+          when :avg
+            compacted_stats.sum(&:value).to_f / self.size
+        end
+      end
     end
   end
 
   def compacted_stats
-    @compacted_stats ||= stats.reject{|s| s.value.nil? }
+    if stats
+      @compacted_stats ||= stats.reject{|s| s.value.nil? }
+    end
   end
 
   def size

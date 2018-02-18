@@ -3,15 +3,25 @@ class FederationsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @federations = case params[:order]
-      when /schools/
-        @federations.sort{|a,b|b.schools.count <=> a.schools.count }
-      when /students/
-        @federations.sort{|a,b|b.schools.sum(:last_students_count) <=> a.schools.sum(:last_students_count) }
-      when /teachers/
-        @federations.sort{|a,b|b.schools.sum(:last_teachers_count) <=> a.schools.sum(:last_teachers_count) }
-      else
-        @federations.order('name')
+    @dropouts_sums = {}
+    @dropouts_rates = {}
+    
+    @federations.each do |federation|
+      
+      @dropouts_sums[federation.id] = SchoolMonthlyStat.where(name: :dropouts)
+                                                        .where(school_id: federation.schools.map(&:id))
+                                                        .where("ref_date >= ?", 13.months.ago )
+                                                        .sum(:value)
+      int_value = LocalStat.new.calculate_dropout_rate(
+        dropouts: @dropouts_sums[federation.id],
+        students: SchoolMonthlyStat.where(name: :students)
+                                    .where(school_id: federation.schools.map(&:id))
+                                    .where("ref_date >= ?", 13.months.ago )
+                                    .sum(:value)
+      )
+      if int_value
+        @dropouts_rates[federation.id] = int_value / 100.0
+      end
     end
   end
 

@@ -21,6 +21,9 @@ class School < ActiveRecord::Base
 
   include Accounts::BelongsToAccount
   validates_uniqueness_of :account_name, allow_blank: true
+  
+  scope :enabled_on_nucleo, where("(cached_nucleo_enabled IS NULL) OR cached_nucleo_enabled")
+  scope :enabled_on_padma, where("(cached_padma_enabled IS NULL) OR cached_padma_enabled")
 
   # avoid calling accounts-ws to get the name.
   # if PadmaAccount cached call full_name on it
@@ -127,13 +130,14 @@ class School < ActiveRecord::Base
   # @return nil on Connection Problems
   # @return [TrueClass]
   def padma_enabled?
-    if self.account_name.present? && self.account.present?
-      self.account.enabled?
+    ret = nil
+    if self.account_name.present?
+      if self.account.present?
+        ret = self.account.enabled?
+        update_attribute :cached_padma_enabled, ret
+      end
     end
-  end
-
-  def padma2_enabled?
-    !self.account.try(:migrated_to_padma_on).nil?
+    ret
   end
 
   # Difference: stored for school - calculated from teachers
