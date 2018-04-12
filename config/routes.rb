@@ -29,7 +29,11 @@ Overmind::Application.routes.draw do
     resources :sync_requests, only: [:create, :update]
     resource :teacher_ranking, only: [:show, :update]
   end
-  resource :ranking, only: [:show, :update]
+  resource :ranking, only: [:show, :update] do
+    member do
+      get 'students'
+    end
+  end
   resource :teacher_ranking, only: [:show, :update]
   resources :federations
   resources :users

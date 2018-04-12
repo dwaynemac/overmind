@@ -1,0 +1,25 @@
+<% require 'csv' %>
+
+<%= CSV.generate do |csv|
+  
+  csv <<  ["Federacion","Escuela","mig_on"] + @ref_dates
+  @schools.each do |school|
+    
+    s_name = school.full_name
+    if s_name.blank?
+      s_name = school.name
+    end
+    
+    line = [
+      school.federation.try(:name),
+      s_name,
+      school.account.try(:migrated_to_padma_on)
+    ]
+    @ref_dates.each do |ref_date|
+      line << @stats_hash[ref_date][school.id]
+    end
+    csv << line
+  end
+  
+  csv
+end -%>

@@ -1,4 +1,27 @@
 class RankingsController < ApplicationController
+  
+  def students
+    authorize! :see_global, MonthlyStat
+    
+    @ref_dates = []
+    @stats_hash = {}
+    SchoolMonthlyStat.where(name: :students).where("ref_date > ?", Date.civil(2009,12,31)).each do |stat|
+      @ref_dates << stat.ref_date
+      @stats_hash[stat.ref_date] = {} if @stats_hash[stat.ref_date].nil?
+      @stats_hash[stat.ref_date][stat.school_id] = stat.value
+    end
+    
+    @ref_dates.uniq!
+    @ref_dates.sort!
+    @schools = School.all
+    
+    respond_to do |format|
+      format.csv do
+        response.headers['Content-Disposition'] = "attachment; filename=students.csv"
+        render 'students.csv.erb'
+      end 
+    end
+  end
 
   def show
     authorize! :read, Ranking
