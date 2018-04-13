@@ -1,3 +1,7 @@
+.container.full-width {
+	max-width: none !important;	
+}
+
 #options-panel .panel-heading {
   cursor: pointer;
 }

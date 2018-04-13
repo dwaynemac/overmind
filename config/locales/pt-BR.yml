@@ -146,6 +146,7 @@ pt-BR:
       default: '%d/%m/%Y'
       long: '%d de %B de %Y'
       short: '%d de %B'
+      month: '%m-%Y'
     month_names:
     - 
     - Janeiro
@@ -454,6 +455,11 @@ pt-BR:
         graduate: Graduados
         proffesor: Professores
   rankings:
+    history:
+      school_name: Escola
+      sum: Soma
+      avg: Media
+      choose_stat_name: Selecionar dado
     show:
       apply: Aplicar
       average_period: Período da media dos indices

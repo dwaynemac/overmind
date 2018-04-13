@@ -32,6 +32,7 @@ Overmind::Application.routes.draw do
   resource :ranking, only: [:show, :update] do
     member do
       get 'students'
+      get 'history'
     end
   end
   resource :teacher_ranking, only: [:show, :update]

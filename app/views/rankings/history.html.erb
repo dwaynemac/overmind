@@ -1,0 +1,94 @@
+<%- breadcrum t("monthly_stat.names.#{@ranking.column_names.first}") -%>
+
+<%= content_for(:container_css_class){ "full-width" } %>
+
+<div class='ranking-container'>
+  <nav class='ranking-navbar' role='navigation'>
+    <div class="filter-wrap">
+      <div class='filter-controls'>
+        <%= form_for @ranking, url: history_ranking_path, method: :get, :html => { class: 'form-inline' } do |f| %>
+          <div class='form-group form-group-flex'>
+            <%= f.date_select :ref_since, { discard_day: true, start_year: 2010, end_year: Date.today.year }, { class: 'form-control' } %>
+            <span class='label-to'>a</span>
+            <%= f.date_select :ref_until, { discard_day: true, start_year: 2010, end_year: Date.today.year }, { class: 'form-control' } %>
+          </div>
+          <div class="btn-group">
+            <%= f.select   :column_names,
+                           Ranking::COLUMNS_FOR_VIEW.flatten.map{|name| [t("monthly_stat.names.#{name}"), name]},
+                           {},
+                           {
+                              data: {
+                                'none-selected-text' => t('rankings.history.choose_stat_name')}, 
+                              class: 'choose-columns-select'
+                            }
+            %>
+            
+          </div>
+          <div class='btn-group'>
+            <%= f.select   :federation_ids,
+                           @federations.map{|f| [f.name, f.id]},
+                           {},
+                           {
+                              data: {
+                                'none-selected-text' => t('ranking.federations')}, 
+                              multiple: :multiple,
+                              class: 'choose-columns-select'
+                            }
+            %>
+          </div>
+          <button type="submit" class="btn btn-secondary btn-sm" data-disable-with="..."><%= t('rankings.show.apply') %></button>
+        <% end -%>
+      </div>
+      <div class="filter-controls filter-controls-right">
+        <%= link_to "<span class='glyphicon glyphicon-download'></span>".html_safe,
+                    history_ranking_path(params: params, format: :csv),
+                    class: 'btn btn-secondary btn-sm filter-controls-right' %>
+      </div>
+    </div>
+  </nav>
+  <section class='ranking-content'>
+    <div class='table-responsive'>
+      <table id="ranking_table" class="table table-striped tablesorter-blue table-sorter">
+        <thead class="static-table-header">
+          <tr>
+            <th> <%= t('.school_name') %> </th>
+            <% @ref_dates.each do |ref_date| %>
+              <th> <%= l(ref_date, format: :month) %> </th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @schools.each do |school| %>
+            <tr>
+              <th><%= link_to_if can?(:read, school), school.full_name, school %></th>
+              <% @ref_dates.each do |ref_date| %>
+                <% if @stats_hash[ref_date][school.id].nil? -%>
+                  <td></td>
+                <% else -%>
+                  <td>
+                    <%= @stats_hash[ref_date][school.id] %>
+                  </td>
+                <% end -%>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+            <tr>
+              <th><%= t(".sum") %></th>
+              <% @ref_dates.each do |ref_date| %>
+                <th> <%= @stats_hash[ref_date].values.sum %> </th>
+              <% end %>
+            </tr>
+            <tr>
+              <th><%= t(".avg") %></th>
+              <% @ref_dates.each do |ref_date| %>
+                <th> <%= @stats_hash[ref_date].values.sum / @stats_hash[ref_date].values.size if @stats_hash[ref_date].values.size > 0 %> </th>
+              <% end %>
+            </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </section>
+</div>

@@ -73,6 +73,7 @@ es:
       default: '%d/%m/%Y'
       short: '%d de %b'
       long: '%d de %B de %Y'
+      month: '%m-%Y'
     day_names:
     - domingo
     - lunes
@@ -493,6 +494,11 @@ es:
         graduate: Graduados
         proffesor: Profesores
   rankings:
+    history:
+      school_name: Escuela
+      sum: Suma
+      avg: Promedio
+      choose_stat_name: Seleccionar dato
     show:
       apply: Aplicar
       average_period: Período sobre el que se promedian los indices

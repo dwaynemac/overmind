@@ -23,7 +23,7 @@
       <%= render 'layouts/header' %>
     <% end -%>
 
-    <div id='content' class='container'>
+    <div id='content' class='container <%= yield(:container_css_class) %>'>
       <div class='row'>
         <div class='col-xs-12 col-md-12'>
           <%= render 'layouts/module_sub_menu' %>

@@ -64,7 +64,7 @@ class Ability
   def role_specific_permitions
     case @user.role
       when 'admin'
-        can :read, Ranking
+        can [:read,:history], Ranking
         can :read, TeacherRanking
         can :sync, School
         can [:create,:update], SyncRequest
@@ -87,7 +87,7 @@ class Ability
         can :read, Federation, id: @user.federation_id
         can :read, School, federation_id: @user.federation_id
         can :read, MonthlyStat, school: { federation_id: @user.federation_id }
-        can :read, Ranking
+        can [:read,:history], Ranking
         can :read, TeacherRanking
     end
   end
