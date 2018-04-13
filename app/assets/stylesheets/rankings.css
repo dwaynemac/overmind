@@ -73,10 +73,11 @@
 	border: none;
 }
 
+/*
 #ranking_table > thead > tr > th:first-child {
 	background-image: none;
 	pointer-events: none;
-}
+} */
 
 #ranking_table > tbody > tr > td {
 	text-align: center;
