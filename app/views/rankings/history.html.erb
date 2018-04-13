@@ -87,12 +87,21 @@
                 </th>
               <% end %>
             </tr>
-            <tr>
-              <th><%= t(".avg") %></th>
-              <% @ref_dates.each do |ref_date| %>
-                <th> <%= @stats_hash[ref_date].values.map(&:value).sum / @stats_hash[ref_date].values.size if @stats_hash[ref_date].values.size > 0 %> </th>
-              <% end %>
-            </tr>
+            <% unless LocalStat.has_special_reduction?(@stat_name) %>
+              <tr>
+                <th><%= t(".avg") %></th>
+                <% @ref_dates.each do |ref_date| %>
+                  <th>
+                    <%= print_value ReducedStat.new(
+                          name: @stat_name,
+                          ref_date: ref_date,
+                          stats: @stats_hash[ref_date].values,
+                          reduce_as: :avg
+                        ) %>
+                  </th>
+                <% end %>
+              </tr>
+            <% end %>
         </tfoot>
       </table>
     </div>
