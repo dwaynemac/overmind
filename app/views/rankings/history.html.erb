@@ -77,7 +77,14 @@
             <tr>
               <th><%= t(".sum") %></th>
               <% @ref_dates.each do |ref_date| %>
-                <th> <%= @stats_hash[ref_date].values.map(&:value).sum %> </th>
+                <th>
+                  <%= print_value ReducedStat.new(
+                        name: @stat_name,
+                        ref_date: ref_date,
+                        stats: @stats_hash[ref_date].values,
+                        reduce_as: :sum
+                      ) %>
+                </th>
               <% end %>
             </tr>
             <tr>

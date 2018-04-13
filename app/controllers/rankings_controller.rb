@@ -22,6 +22,7 @@ class RankingsController < ApplicationController
     @ranking = Ranking.new params[:ranking]
     
     
+    @stat_name = @ranking.column_names.first
     @ref_dates = []
     @stats_hash = {}
     
