@@ -13,7 +13,7 @@
     line = [ s_name ]
     @ref_dates.each do |ref_date|
       v = print_value(@stats_hash[ref_date][school.id])
-      line << v.blank?? nil : v
+      line << (v.blank?? nil : v )
     end
     csv << line
   end
