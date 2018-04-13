@@ -37,7 +37,7 @@ class RankingsController < ApplicationController
     stats_scope.each do |stat|
       @ref_dates << stat.ref_date
       @stats_hash[stat.ref_date] = {} if @stats_hash[stat.ref_date].nil?
-      @stats_hash[stat.ref_date][stat.school_id] = stat.value
+      @stats_hash[stat.ref_date][stat.school_id] = stat
     end
     
     @ref_dates.uniq!.sort!

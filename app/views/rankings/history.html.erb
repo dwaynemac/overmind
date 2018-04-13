@@ -66,7 +66,7 @@
                   <td></td>
                 <% else -%>
                   <td>
-                    <%= @stats_hash[ref_date][school.id] %>
+                    <%= print_value @stats_hash[ref_date][school.id] %>
                   </td>
                 <% end -%>
               <% end %>
@@ -77,13 +77,13 @@
             <tr>
               <th><%= t(".sum") %></th>
               <% @ref_dates.each do |ref_date| %>
-                <th> <%= @stats_hash[ref_date].values.sum %> </th>
+                <th> <%= @stats_hash[ref_date].values.map(&:value).sum %> </th>
               <% end %>
             </tr>
             <tr>
               <th><%= t(".avg") %></th>
               <% @ref_dates.each do |ref_date| %>
-                <th> <%= @stats_hash[ref_date].values.sum / @stats_hash[ref_date].values.size if @stats_hash[ref_date].values.size > 0 %> </th>
+                <th> <%= @stats_hash[ref_date].values.map(&:value).sum / @stats_hash[ref_date].values.size if @stats_hash[ref_date].values.size > 0 %> </th>
               <% end %>
             </tr>
         </tfoot>
