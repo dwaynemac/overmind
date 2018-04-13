@@ -14,7 +14,7 @@ class RankingsController < ApplicationController
       params[:ranking] = {
         federation_ids: federation_ids,
         column_names: [:students],
-        ref_since: 1.year.ago.to_date
+        ref_since: 2.years.ago.to_date
       }
     else
       params[:ranking][:column_names] = [params[:ranking][:column_names]]
