@@ -57,22 +57,6 @@
             <% end %>
           </tr>
         </thead>
-        <tbody>
-          <% @schools.each do |school| %>
-            <tr>
-              <th><%= link_to_if can?(:read, school), school.full_name, school %></th>
-              <% @ref_dates.each do |ref_date| %>
-                <% if @stats_hash[ref_date][school.id].nil? -%>
-                  <td></td>
-                <% else -%>
-                  <td>
-                    <%= print_value @stats_hash[ref_date][school.id] %>
-                  </td>
-                <% end -%>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
         <tfoot>
             <tr>
               <th><%= t(".sum") %></th>
@@ -103,8 +87,23 @@
               </tr>
             <% end %>
         </tfoot>
+        <tbody>
+          <% @schools.each do |school| %>
+            <tr>
+              <th><%= link_to_if can?(:read, school), school.full_name, school %></th>
+              <% @ref_dates.each do |ref_date| %>
+                <% if @stats_hash[ref_date][school.id].nil? -%>
+                  <td></td>
+                <% else -%>
+                  <td>
+                    <%= print_value @stats_hash[ref_date][school.id] %>
+                  </td>
+                <% end -%>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
       </table>
     </div>
-
   </section>
 </div>
