@@ -79,7 +79,7 @@ class Ability
         can :read, School
         can :read, MonthlyStat
         can :see_global, MonthlyStat
-        can :read, Ranking
+        can [:read,:history], Ranking
         can :read, TeacherRanking
         can [:create, :update, :destroy], MonthlyStat, service: '', school: {account_name: linked_account_names }
       when 'president'

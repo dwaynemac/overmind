@@ -73,7 +73,7 @@
 	border: none;
 }
 
-/*
+/* comment to allow sorting first column 
 #ranking_table > thead > tr > th:first-child {
 	background-image: none;
 	pointer-events: none;
