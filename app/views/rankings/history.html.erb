@@ -58,19 +58,21 @@
           </tr>
         </thead>
         <tfoot>
-            <tr>
-              <th><%= t(".sum") %></th>
-              <% @ref_dates.each do |ref_date| %>
-                <th>
-                  <%= print_value ReducedStat.new(
-                        name: @stat_name,
-                        ref_date: ref_date,
-                        stats: @stats_hash[ref_date].values,
-                        reduce_as: :sum
-                      ) %>
-                </th>
-              <% end %>
-            </tr>
+            <% unless MonthlyStat.is_a_rate?(@stat_name) %>
+              <tr>
+                <th><%= t(".sum") %></th>
+                <% @ref_dates.each do |ref_date| %>
+                  <th>
+                    <%= print_value ReducedStat.new(
+                          name: @stat_name,
+                          ref_date: ref_date,
+                          stats: @stats_hash[ref_date].values,
+                          reduce_as: :sum
+                        ) %>
+                  </th>
+                <% end %>
+              </tr>
+            <% end %>
             <% unless LocalStat.has_special_reduction?(@stat_name) %>
               <tr>
                 <th><%= t(".avg") %></th>
