@@ -23,6 +23,8 @@ class RankingsController < ApplicationController
     
     
     @stat_name = @ranking.column_names.first
+    @stat_name = @stat_name.first if @stat_name.is_a?(Array)
+      
     @ref_dates = []
     @stats_hash = {}
     
