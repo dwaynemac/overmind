@@ -160,6 +160,7 @@ es:
       title: 
   layouts:
     navbar:
+      history: Detalle historico
       global: Global
       federations: Federaciones
       current_school_general_indices: Indices generales

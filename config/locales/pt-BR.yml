@@ -203,6 +203,7 @@ pt-BR:
       title: 
   layouts:
     navbar:
+      history: Detalhe historico
       global: Global
       federations: Federaçōes
       current_school_general_indices: Indices gerais
