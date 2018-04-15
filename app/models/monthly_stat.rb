@@ -213,6 +213,13 @@ class MonthlyStat < ActiveRecord::Base
       :chela_students_rate
     ])
   end
+  
+  def self.default_reduction(name)
+    case name.to_s
+    when 'students_average_age'
+      :avg
+    end
+  end
 
   private
 

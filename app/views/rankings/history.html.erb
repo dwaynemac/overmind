@@ -59,7 +59,7 @@
           </tr>
         </thead>
         <tfoot>
-            <% unless MonthlyStat.is_a_rate?(@stat_name) %>
+            <% unless (MonthlyStat.is_a_rate?(@stat_name) || (MonthlyStat.default_reduction(@stat_name) == :avg)) %>
               <tr>
                 <th><%= t(".sum") %></th>
                 <% @ref_dates.each do |ref_date| %>

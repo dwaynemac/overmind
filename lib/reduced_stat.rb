@@ -9,7 +9,7 @@ class ReducedStat
     self.stats = attributes[:stats]
     self.name = attributes[:name] || stats.try(:first).try(:name)
     self.ref_date = attributes[:ref_date] || stats.try(:first).try(:ref_date)
-    self.reduce_as = attributes[:reduce_as] || :sum
+    self.reduce_as = attributes[:reduce_as] || default_reduction
     @value = attributes[:value]
     self
   end
@@ -57,5 +57,9 @@ class ReducedStat
 
   def is_a_rate?
     MonthlyStat.is_a_rate?(self.name)
+  end
+  
+  def default_reduction
+    MonthlyStat.default_reduction(name) || :sum
   end
 end

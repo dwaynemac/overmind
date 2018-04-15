@@ -57,7 +57,7 @@ class RankingsController < ApplicationController
                           reduce_as: :avg
                         )
     end
-    @graph_data = if MonthlyStat.is_a_rate?(@stat_name)
+    @graph_data = if MonthlyStat.is_a_rate?(@stat_name) || (MonthlyStat.default_reduction(@stat_name) == :avg) 
       @avgs
     else
       @sums
