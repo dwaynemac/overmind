@@ -8,12 +8,13 @@ module MonthlyStatsHelper
     end
   end
   
-  def print_value(monthly_stat)
+  def print_value(monthly_stat, options = {})
     v = monthly_stat.try :value
     return '' if v.nil?
     if monthly_stat.is_a_rate?
       # rates are represented as 'cents' in integer.
-      "#{number_with_precision(v.to_f/100, precision: 2)}%"
+      sufix = options[:sufix] || "%"
+      "#{number_with_precision(v.to_f/100, precision: 2)}#{sufix}"
     elsif monthly_stat.is_a?(ReducedStat) && (monthly_stat.reduce_as.to_sym == :avg)
       number_with_precision(v, precision: 0)
     else

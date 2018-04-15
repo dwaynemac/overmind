@@ -41,6 +41,28 @@ class RankingsController < ApplicationController
       @stats_hash[stat.ref_date][stat.school_id] = stat
     end
     
+    @sums = {}
+    @avgs = {}
+    @ref_dates.each do |ref_date|
+      @sums[ref_date] = ReducedStat.new(
+                          name: @stat_name,
+                          ref_date: ref_date,
+                          stats: @stats_hash[ref_date].values,
+                          reduce_as: :sum
+                        )
+      @avgs[ref_date] = ReducedStat.new(
+                          name: @stat_name,
+                          ref_date: ref_date,
+                          stats: @stats_hash[ref_date].values,
+                          reduce_as: :avg
+                        )
+    end
+    @graph_data = if MonthlyStat.is_a_rate?(@stat_name)
+      @avgs
+    else
+      @sums
+    end
+    
     @ref_dates.uniq!.sort!
     
     respond_to do |format|

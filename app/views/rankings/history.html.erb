@@ -47,6 +47,7 @@
     </div>
   </nav>
   <section class='ranking-content'>
+    <div id="historyChartContainer" class="chart-container"></div> <!-- chart -->
     <div class='table-responsive'>
       <table id="ranking_table" class="table table-striped tablesorter-blue table-sorter">
         <thead class="static-table-header">
@@ -63,12 +64,7 @@
                 <th><%= t(".sum") %></th>
                 <% @ref_dates.each do |ref_date| %>
                   <th>
-                    <%= print_value ReducedStat.new(
-                          name: @stat_name,
-                          ref_date: ref_date,
-                          stats: @stats_hash[ref_date].values,
-                          reduce_as: :sum
-                        ) %>
+                    <%= print_value @sums[ref_date] %>
                   </th>
                 <% end %>
               </tr>
@@ -78,12 +74,7 @@
                 <th><%= t(".avg") %></th>
                 <% @ref_dates.each do |ref_date| %>
                   <th>
-                    <%= print_value ReducedStat.new(
-                          name: @stat_name,
-                          ref_date: ref_date,
-                          stats: @stats_hash[ref_date].values,
-                          reduce_as: :avg
-                        ) %>
+                    <%= print_value @avgs[ref_date] %>
                   </th>
                 <% end %>
               </tr>
@@ -109,3 +100,19 @@
     </div>
   </section>
 </div>
+
+<script>
+  var historyChartData = [
+    <%- @ref_dates.each_with_index do |ref_date,index| -%>
+      {
+        month: "<%= l(ref_date, format: :month) %>",
+        data: <%= print_value @graph_data[ref_date], sufix: '' %>
+      }
+      <%= "," unless index == @ref_dates.size-1 %>
+    <%- end -%>
+  ];
+</script>
+
+<%= content_for(:body_end) do %>
+  <%= javascript_include_tag "history" %>
+<% end %>
