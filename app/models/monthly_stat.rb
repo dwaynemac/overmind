@@ -135,13 +135,11 @@ class MonthlyStat < ActiveRecord::Base
   end
 
   def cache_student_count
-    # TODO dont run if this stat is not :students
-    self.school.cache_last_student_count
+    self.school.cache_last_student_count if self.name == :students
   end
 
   def cache_teachers_count
-    # TODO dont run if this stat is not :assistant_students, etc
-    self.school.cache_last_teachers_count
+    self.school.cache_last_teachers_count if self.name.in?([:assistant_students, :professor_students, :master_students])
   end
 
   def as_json(args={})
