@@ -10,5 +10,9 @@ class LocalStat
         nil
       end
     end
+    
+    def sadhaka_students_rate_dependencies
+      [:sadhaka_students, :students]
+    end
   end
 end

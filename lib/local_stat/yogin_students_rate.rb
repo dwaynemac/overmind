@@ -10,5 +10,9 @@ class LocalStat
         nil
       end
     end
+    
+    def yogin_students_rate_dependencies
+      [:yogin_students, :students]
+    end
   end
 end

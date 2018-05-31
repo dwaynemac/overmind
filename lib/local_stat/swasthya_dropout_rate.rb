@@ -12,6 +12,10 @@ class LocalStat
         d*10000.0 / s
       end
     end
-
+    
+    def swasthya_dropout_rate_dependencies
+      [:dropouts_intermediates, :sadhaka_students,:yogin_students,:chela_students,
+      :graduado_students, :assistant_students,:professor_students,:master_students]
+    end
   end
 end

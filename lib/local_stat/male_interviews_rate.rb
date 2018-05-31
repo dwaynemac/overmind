@@ -10,5 +10,9 @@ class LocalStat
         nil
       end
     end
+    
+    def male_interviews_rate_dependencies
+      [:male_interviews, :interviews]
+    end
   end
 end

@@ -10,5 +10,9 @@ class LocalStat
         nil
       end
     end
+    
+    def aspirante_students_rate_dependencies
+      [:aspirante_students, :students]
+    end
   end
 end

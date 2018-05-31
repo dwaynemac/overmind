@@ -11,4 +11,9 @@ class LocalStat
       end
     end
   end
+  
+  def male_demand_rate_dependencies
+    [:male_demand, :demand]
+  end
+    
 end

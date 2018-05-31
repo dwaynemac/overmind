@@ -10,5 +10,9 @@ class LocalStat
         nil
       end
     end
+    
+    def female_demand_rate_dependencies
+      [:female_demand, :demand]
+    end
   end
 end

@@ -9,4 +9,17 @@ describe LocalStat do
       expect(LocalStat.has_special_reduction?(:dropouts)).to be_false
     end
   end
+  
+  describe ".dependant_on" do
+    it "returns local_stat_names dependent on given stat_name" do
+      expect(LocalStat.dependant_on(:students)).to eq [
+        :yogin_students_rate,
+        :aspirante_students_rate,
+        :chela_students_rate,
+        :dropout_rate,
+        :male_students_rate,
+        :sadhaka_students_rate
+      ]
+    end
+  end
 end

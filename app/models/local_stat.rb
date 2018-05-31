@@ -31,6 +31,11 @@ class LocalStat
     :male_interviews_rate,
     :female_interviews_rate
   ]
+  
+  DEPENDENCIES = {
+    
+  }
+  
   include BegginersDropoutRate
   include SwasthyaDropoutRate
   include EnrollmentRate
@@ -122,6 +127,12 @@ class LocalStat
         value = TeacherMonthlyStat.calculate_local_value(ms.school,ms.teacher,local_stat_name,ms.ref_date)
         TeacherMonthlyStat.create_or_update(ms.school,ms.teacher,local_stat_name,ms.ref_date,value) if value
       end
+    end
+  end
+  
+  def self.dependant_on(name)
+    registered_stats.map do |local_stat_name|
+      name.in?(send("#{local_stat_name}_dependencies"))
     end
   end
 

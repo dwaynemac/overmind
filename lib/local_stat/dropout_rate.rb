@@ -10,6 +10,10 @@ class LocalStat
       end
     end
     
+    def dropout_rate_dependencies
+      [dropouts, :students]
+    end
+    
     # options:
     #   :scope # ActiveRecord scope with school, federation, ref_date, etc.
     #   scope should be query of stats to reduce EXCEPT for the names.   

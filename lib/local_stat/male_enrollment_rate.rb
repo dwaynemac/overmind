@@ -12,5 +12,9 @@ class LocalStat
         nil
       end
     end
+    
+    def male_enrollment_rate_dependencies
+      [:male_enrollments, :male_p_interviews]
+    end
   end
 end

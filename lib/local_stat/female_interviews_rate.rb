@@ -11,4 +11,8 @@ class LocalStat
       end
     end
   end
+  
+  def female_interviews_rate_dependencies
+    [:female_interviews,:interviews]
+  end
 end

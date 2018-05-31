@@ -10,5 +10,9 @@ class LocalStat
         nil
       end
     end
+    
+    def chela_students_rate_dependencies
+      [:chela_students, :students]
+    end
   end
 end

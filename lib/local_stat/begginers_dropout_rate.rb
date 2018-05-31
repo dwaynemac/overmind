@@ -10,6 +10,10 @@ class LocalStat
         d*10000.0 / (s+d)
       end
     end
+    
+    def begginers_dropout_rate_dependencies
+      [:dropouts_begginers, :aspirante_students]
+    end
 
   end
 end

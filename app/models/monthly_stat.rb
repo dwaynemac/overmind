@@ -90,6 +90,8 @@ class MonthlyStat < ActiveRecord::Base
 
   after_save :cache_student_count, unless: ->{self.importing?}
   after_save :cache_teachers_count, unless: ->{self.importing?}
+  
+  after_save :recalculate_dependent_local_stats
 
 
   def self.api_where(conditions={})
@@ -216,6 +218,14 @@ class MonthlyStat < ActiveRecord::Base
     case name.to_s
     when 'students_average_age'
       :avg
+    end
+  end
+  
+  def recalculate_dependent_local_stats
+    unless self.service == 'overmind'
+      LocalStat.dependant_on(self.name).each do |local_stat_name|
+        # recalculate
+      end
     end
   end
 

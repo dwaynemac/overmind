@@ -103,7 +103,7 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   private
 
   def is_a_teacher_stat?
-    params[:monthly_stat] && params[:monthly_stat][:teacher_username].present?
+    params[:monthly_stat] && !params[:monthly_stat][:teacher_username].blank?
   end
 
   # Finds MonthlyStat duplicate

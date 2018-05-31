@@ -12,5 +12,9 @@ class LocalStat
         nil
       end
     end
+    
+    def enrollment_rate_dependencies
+      [:enrollments, :p_interviews]
+    end
   end
 end
