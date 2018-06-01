@@ -1,6 +1,6 @@
 # @restful_api v0
 class Api::V0::MonthlyStatsController < Api::V0::ApiController
-
+  
   # @action GET
   # @url /api/v0/monthly_stats
   # @required [String] api_key
@@ -54,6 +54,9 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   # @example_response {errors: [], message: 'Stat not saved'} - status: 400
   # @response_field errors [Array] (only for status: 400)
   def create
+    
+    remove_blank_teacher_username
+
     if @monthly_stat = find_this_stat(params[:monthly_stat])
       @monthly_stat.value = params[:monthly_stat][:value]
       @monthly_stat.service = params[:monthly_stat][:service]
@@ -101,6 +104,14 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   end
 
   private
+  
+  def remove_blank_teacher_username
+    if params[:monthly_stat]
+      if params[:monthly_stat][:teacher_username].blank?
+        params[:monthly_stat].delete(:teacher_username)
+      end
+    end
+  end
 
   def is_a_teacher_stat?
     params[:monthly_stat] && !params[:monthly_stat][:teacher_username].blank?
