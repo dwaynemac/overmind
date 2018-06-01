@@ -103,14 +103,7 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   private
 
   def is_a_teacher_stat?
-    if params[:monthly_stat]
-      if params[:monthly_stat][:teacher_username].blank?
-        params[:monthly_stat].delete(:teacher_username) # delete in case we had '' value
-        false
-      else
-        true # we have teacher_username -> its a teacher_stat
-      end
-    end
+    params[:monthly_stat] && !params[:monthly_stat][:teacher_username].blank?
   end
 
   # Finds MonthlyStat duplicate
