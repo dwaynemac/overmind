@@ -1,7 +1,7 @@
 module MonthlyStatsHelper
 
   def print_value_with_link(monthly_stat)
-    if monthly_stat.url_to_crm_list.nil? || monthly_stat.account_name != current_user.padma.current_account_name
+    if !monthly_stat.respond_to?(:url_to_crm_list) || monthly_stat.url_to_crm_list.nil? || (monthly_stat.account_name != current_user.padma.current_account_name)
       print_value(monthly_stat)
     else
       link_to print_value(monthly_stat), monthly_stat.url_to_crm_list, target: '_blank'
