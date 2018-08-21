@@ -80,7 +80,7 @@ class Ics
   end
 
   def manual_input?
-    1 or !@school.padma_enabled?
+    !@school.padma_enabled?
   end
 
 end
