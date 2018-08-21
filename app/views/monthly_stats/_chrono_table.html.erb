@@ -146,11 +146,8 @@ end
         </th>
         <%- (1...13).each do |month| -%>
           <td>
-            <% monthly_stat = monthly_stats[:conversion_rate][month]
-               v = monthly_stat.try :value -%>
-            <%- if v -%>
-              <%= number_with_precision(v,precision:0) %> %
-            <%- end -%>
+            <% monthly_stat = monthly_stats[:conversion_rate][month] -%>
+            <%= print_value monthly_stat %> %
           </td>
         <%- end -%>
       </tr>

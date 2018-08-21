@@ -155,11 +155,11 @@ module PadmaStatsApi
       if res
         if options[:by_teacher]
           res.each do |h|
-            h['value'] = (h['value'].to_f*100).to_i
+            h['value'] = (h['value'].to_f*10000).to_i
           end
           res
         else
-          (res.to_f*100).to_i
+          (res.to_f*10000).to_i
         end
       end
     end
