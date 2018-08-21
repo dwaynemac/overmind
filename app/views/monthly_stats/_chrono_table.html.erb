@@ -147,7 +147,7 @@ end
         <%- (1...13).each do |month| -%>
           <td>
             <% monthly_stat = monthly_stats[:conversion_rate][month] -%>
-            <%= print_value monthly_stat %> %
+            <%= print_value monthly_stat %>
           </td>
         <%- end -%>
       </tr>
