@@ -5,6 +5,10 @@ pt-BR:
   destroy: apagar
   search: pesquisa
   warning: Atençāon!
+  ics:
+    show:
+      update_ics: Atualizar indices de controle
+      recalculate_these_values: Recalcular estes valores
   monthly_stats:
     chrono_table:
       title: Estatísticas mensais

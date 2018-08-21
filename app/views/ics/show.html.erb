@@ -31,11 +31,45 @@
         </div>
       </div>
   </header>
-<ul>
-  <% Ics::ICS.each do |ic| %>
-    <li>
-      <%= t("monthly_stat.names.#{ic}") %> : <%= @ics.monthly_stats(ic).try(:value) %>
-    </li>
-  <% end %>
-</ul>
+  <section class="schools-content">
+    <%= form_for :ics,
+                 url: school_ics_path(school_id: @ics.school.id, ref_date: @ref_date),
+                 method: :put,
+                 html: {
+                   class: "form-inline"
+                 } do |f| %>
+                  
+      <ul>
+        <% Ics::ICS.each do |ic| %>
+          <li>
+            <%= t("monthly_stat.names.#{ic}") %> :
+            <% if @ics.manual_input? %>
+              <%= f.text_field ic %>
+            <% else %>
+              <%= @ics.monthly_stats(ic).try(:value) %>
+            <% end %>
+          </li>
+        <% end %>
+        <% if @ics.manual_input? %>
+          <li>
+            <%= f.submit t('.update_ics'), class: 'btn btn-primary' %>
+          </li>
+        <% end %>
+      </ul>
+
+    <% end %>
+
+    <%- if !@ics.manual_input? && can_sync_month?(@ref_date.month)  -%>
+      <%= link_to(t('.recalculate_these_values'),
+                  school_sync_requests_path(school_id: @school.id,
+                                            sync_request: {
+                                              priority: 15,
+                                              year: @ref_date.year,
+                                              month: @ref_date.month}),
+                  method: 'POST',
+                  rel: 'tooltip',
+                  data: {'original-title' => t('monthly_stats.chrono_table.sync_month')},
+                  :class => 'btn btn-secondary') %>
+    <% end -%>
+  </section>
 </div>

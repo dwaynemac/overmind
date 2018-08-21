@@ -17,7 +17,7 @@ cloud9: &cloud9
   attendance-url: http://padma-attendance-<%= ENV['C9_USER'] %>.c9users.io
 
 development:
-  <<: *cloud9
+  <<: *defaults
 
 test:
   <<: *defaults

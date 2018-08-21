@@ -5,6 +5,10 @@ es:
   destroy: eliminar
   search: buscar
   warning: ¡Atención!
+  ics:
+    show:
+      update_ics: Actualizar índices de control
+      recalculate_these_values: Recalcular estos valores
   monthly_stat:
     description:
       demand: Cantidad de personas que se contactaron con la escuela.

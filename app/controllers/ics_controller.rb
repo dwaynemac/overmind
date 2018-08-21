@@ -1,26 +1,36 @@
 class IcsController < ApplicationController
 
+  before_filter :set_ref_date
+  before_filter :get_school
+  before_filter :initialize_ics
+
+
   def show
-    set_ref_date
-    get_school
-
-    if @school.nil?
-      raise ActiveRecord::RecordNotFound
-    end
-
     # use a different ability?
     authorize! :read, @school
-    
-    @ics = Ics.new(@school,@ref_date)
+  end
+
+  def update
+    @ics.update_stats params[:ics]
+
+    redirect_to school_ics_path(ref_date: @ref_date, school_id: @school.id),
+                notice: I18n.t('ics.update.updated')
   end
 
   private
+
+  def initialize_ics
+    @ics = Ics.new(@school,@ref_date)
+  end
 
   def get_school
     if params[:school_id]
       @school = School.find params[:school_id] 
     elsif params[:account_name]
       @school = School.find_by_account_name params[:account_name] 
+    end
+    if @school.nil?
+      raise ActiveRecord::RecordNotFound
     end
   end
 
