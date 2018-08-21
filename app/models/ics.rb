@@ -21,25 +21,42 @@ class Ics
 
   ICS.each do |ic|
     define_method(ic) do
-      monthly_stats(ic).try(:value)
+      stat = monthly_stats(ic)
+      if stat
+        if stat.is_a_rate?
+          # rates are represented as 'cents' in integer.
+          stat.value.to_f / 100
+        else
+          stat.value
+        end
+      end
     end
   end
 
   def update_stats(attrs)
     attrs.keys.each do |ic|
       unless attrs[ic].blank?
-        if monthly_stats(ic).nil?
+
+        new_value = if MonthlyStat.is_a_rate?(ic)
+          # rates are represented as 'cents' in integer.
+          attrs[ic].gsub(",",".").to_f * 100
+        else
+          attrs[ic]
+        end
+
+        stat = monthly_stats(ic)
+        if stat.nil?
           # create
-          sms = SchoolMonthlyStat.new
-          sms.school_id = @school.id
-          sms.ref_date = @ref_date.end_of_month
-          sms.name = ic
-          sms.service = nil
-          sms.value = attrs[ic]
-          sms.save
+          stat = SchoolMonthlyStat.new
+          stat.school_id = @school.id
+          stat.ref_date = @ref_date.end_of_month
+          stat.name = ic
+          stat.service = nil
+          stat.value = new_value
+          stat.save
         else
           # TODO check if service is local !!! 
-          monthly_stats(ic).update_attribute :value, attrs[ic]
+          stat.update_attribute :value, new_value
         end
       end
     end

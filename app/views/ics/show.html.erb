@@ -46,7 +46,7 @@
             <% if @ics.manual_input? %>
               <%= f.text_field ic %>
             <% else %>
-              <%= @ics.monthly_stats(ic).try(:value) %>
+              <%= print_value @ics.monthly_stats(ic) %>
             <% end %>
           </li>
         <% end %>
