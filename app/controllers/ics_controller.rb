@@ -4,10 +4,10 @@ class IcsController < ApplicationController
   before_filter :get_school
   before_filter :initialize_ics
 
-
   def show
     # use a different ability?
     authorize! :read, @school
+    render layout: "ics"
   end
 
   def update

@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require menu
+ *= require ics
  *= require monthly_stats
  *= require pictos
  *= require rankings

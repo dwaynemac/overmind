@@ -6,9 +6,13 @@ es:
   search: buscar
   warning: ¡Atención!
   ics:
+    update:
+      updated: Valores guardados!
     show:
       update_ics: Actualizar índices de control
       recalculate_these_values: Recalcular estos valores
+      previous_month: Mes anterior
+      next_month: Próximo mes
   monthly_stat:
     description:
       demand: Cantidad de personas que se contactaron con la escuela.

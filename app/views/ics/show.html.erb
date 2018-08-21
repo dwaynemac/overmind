@@ -19,18 +19,27 @@
           <%= link_to school_ics_path(school_id: @ics.school.id,
                                       ref_date: @ref_date - 1.month),
                       class: 'btn btn-secondary btn-sm' do %>
-            <span class='glyphicon glyphicon-chevron-left'></span>
+            <span class='glyphicon glyphicon-chevron-left'></span> 
+            <%= t('.previous_month') %>
           <% end %>
           <% unless @ref_date == Time.zone.today %>
             <%= link_to school_ics_path(school_id: @ics.school.id,
                                         ref_date: @ref_date + 1.month),
                         class: 'btn btn-secondary btn-sm' do %>
+              <%= t('.next_month') %>
               <span class='glyphicon glyphicon-chevron-right'></span>
             <% end %>
           <% end %>
         </div>
       </div>
   </header>
+
+  <% unless notice.blank? %>
+    <div id="ics_notice">
+      <%= notice %>
+    </div>
+  <% end %>
+
   <section class="schools-content">
     <%= form_for :ics,
                  url: school_ics_path(school_id: @ics.school.id, ref_date: @ref_date),
@@ -44,7 +53,7 @@
           <li>
             <%= t("monthly_stat.names.#{ic}") %> :
             <% if @ics.manual_input? %>
-              <%= f.text_field ic %>
+              <%= f.text_field ic, class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats(ic).blank?}" %>
             <% else %>
               <%= print_value @ics.monthly_stats(ic) %>
             <% end %>

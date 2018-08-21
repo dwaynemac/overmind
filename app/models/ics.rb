@@ -38,6 +38,7 @@ class Ics
       unless attrs[ic].blank?
 
         new_value = if MonthlyStat.is_a_rate?(ic)
+          attrs[ic] = attrs[ic].gsub("%","")
           # rates are represented as 'cents' in integer.
           attrs[ic].gsub(",",".").to_f * 100
         else
@@ -55,8 +56,10 @@ class Ics
           stat.value = new_value
           stat.save
         else
-          # TODO check if service is local !!! 
-          stat.update_attribute :value, new_value
+          if stat.service.nil?
+            # only override manually set stats
+            stat.update_attribute :value, new_value
+          end
         end
       end
     end
@@ -77,7 +80,7 @@ class Ics
   end
 
   def manual_input?
-    !@school.padma_enabled?
+    1 or !@school.padma_enabled?
   end
 
 end

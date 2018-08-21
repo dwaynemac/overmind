@@ -6,9 +6,13 @@ pt-BR:
   search: pesquisa
   warning: Atençāon!
   ics:
+    update:
+      updated: Valores atualizados!
     show:
       update_ics: Atualizar indices de controle
       recalculate_these_values: Recalcular estes valores
+      previous_month: Mês anterior
+      next_month: próximo mês 
   monthly_stats:
     chrono_table:
       title: Estatísticas mensais

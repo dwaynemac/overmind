@@ -1,0 +1,12 @@
+
+#ics_notice {
+  color: white;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 20px;
+  background: limegreen;
+}
+
+.ic_missing {
+  background-color: indianred !important;
+}
