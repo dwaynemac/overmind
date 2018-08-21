@@ -1,0 +1,41 @@
+<% title = "ICs Conselho e Colegiado : #{ l @ref_date, format: :month} " %>
+<%- content_for :title do -%>
+  <%= title %>
+<% end %>
+<%= content_for :breadcrum do %>
+  <%= title %>
+<% end %>
+
+<h1>
+  <%= title %>
+</h1>
+
+<div class='schools-container'>
+  <header class='schools-head'>
+    <p><%= @year %></p>
+    <nav class='schools-navbar' role='navigation'>
+      <div class='filter-controls'>
+        <div class='btn-group'>
+          <%= link_to school_ics_path(school_id: @ics.school.id,
+                                      ref_date: @ref_date - 1.month),
+                      class: 'btn btn-secondary btn-sm' do %>
+            <span class='glyphicon glyphicon-chevron-left'></span>
+          <% end %>
+          <% unless @ref_date == Time.zone.today %>
+            <%= link_to school_ics_path(school_id: @ics.school.id,
+                                        ref_date: @ref_date + 1.month),
+                        class: 'btn btn-secondary btn-sm' do %>
+              <span class='glyphicon glyphicon-chevron-right'></span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+  </header>
+<ul>
+  <% Ics::ICS.each do |ic| %>
+    <li>
+      <%= t("monthly_stat.names.#{ic}") %> : <%= @ics.monthly_stats(ic).try(:value) %>
+    </li>
+  <% end %>
+</ul>
+</div>

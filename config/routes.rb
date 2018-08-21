@@ -4,6 +4,7 @@ Overmind::Application.routes.draw do
     match '/logout', to: "devise/cas_sessions#destroy"
   end
   resources :schools do
+    resource :ics, only: [:show, :update]
     resources :reports, only: [] do
       collection do
         get 'pedagogic/:year/:month', to: 'reports#pedagogic_snapshot', as: :pdg
@@ -24,6 +25,7 @@ Overmind::Application.routes.draw do
     end
     collection do
       match "/pa/:account_name", to: 'schools#show_by_name'
+      match "/pa/:account_name/ics", to: 'ics#show'
       match "/nid/:nid", to: 'schools#show_by_nucleo_id'
     end
     resources :sync_requests, only: [:create, :update]
