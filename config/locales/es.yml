@@ -9,7 +9,7 @@ es:
     update:
       updated: Valores guardados!
     show:
-      update_ics: Actualizar índices de control
+      update_ics: Guardar índices de control
       recalculate_these_values: Recalcular estos valores
       previous_month: Mes anterior
       next_month: Próximo mes

@@ -9,7 +9,7 @@ pt-BR:
     update:
       updated: Valores atualizados!
     show:
-      update_ics: Atualizar indices de controle
+      update_ics: Salvar indices de controle
       recalculate_these_values: Recalcular estes valores
       previous_month: Mês anterior
       next_month: próximo mês 

@@ -6,13 +6,11 @@
   <%= title %>
 <% end %>
 
-<h1>
-  <%= title %>
-</h1>
-
-<div class='schools-container'>
+<div class='ics-container schools-container'>
   <header class='schools-head'>
-    <p><%= @year %></p>
+    <h1>
+      <%= title %>
+    </h1>
     <nav class='schools-navbar' role='navigation'>
       <div class='filter-controls'>
         <div class='btn-group'>
@@ -51,7 +49,7 @@
       <ul>
         <% Ics::ICS.each do |ic| %>
           <li>
-            <%= t("monthly_stat.names.#{ic}") %> :
+            <label><%= t("monthly_stat.names.#{ic}") %> :</label>
             <% if @ics.manual_input? %>
               <%= f.text_field ic, class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats(ic).blank?}" %>
             <% else %>
@@ -61,7 +59,7 @@
         <% end %>
         <% if @ics.manual_input? %>
           <li>
-            <%= f.submit t('.update_ics'), class: 'btn btn-primary' %>
+            <%= f.submit t('.update_ics'), class: 'btn btn-primary float-right' %>
           </li>
         <% end %>
       </ul>

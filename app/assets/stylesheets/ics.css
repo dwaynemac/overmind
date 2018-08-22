@@ -10,3 +10,27 @@
 .ic_missing {
   background-color: indianred !important;
 }
+
+.ics-container ul {
+  list-style: none;
+}
+
+.ics-container li {
+  margin-top: 10px;
+}
+
+.ics-container label {
+  font-weight: bold;
+}
+
+.ics-container h1 {
+  margin-top: 15px !important;
+}
+
+.ics-container nav {
+  margin-bottom: 30px;
+}
+
+.ics-container input[type=submit] {
+  width: 100% !important;
+}
