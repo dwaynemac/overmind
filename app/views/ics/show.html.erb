@@ -32,6 +32,12 @@
       </div>
   </header>
 
+  <% unless @ics.manual_input? %>
+    <div id="ics_info">
+      <%= t('.automatic_for_padma_users') %>
+    </div>
+  <% end %>
+
   <% unless notice.blank? %>
     <div id="ics_notice">
       <%= notice %>
@@ -59,7 +65,7 @@
         <% end %>
         <% if @ics.manual_input? %>
           <li>
-            <%= f.submit t('.update_ics'), class: 'btn btn-primary float-right' %>
+            <%= f.submit t('.update_ics'), class: 'btn btn-primary full-width' %>
           </li>
         <% end %>
       </ul>
@@ -78,5 +84,8 @@
                   data: {'original-title' => t('monthly_stats.chrono_table.sync_month')},
                   :class => 'btn btn-secondary') %>
     <% end -%>
+    <%= link_to(t('.see_all_ics'),
+                school_path(@school.id),
+                :class => 'btn btn-link full-width') %>
   </section>
 </div>

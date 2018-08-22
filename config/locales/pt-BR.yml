@@ -9,10 +9,12 @@ pt-BR:
     update:
       updated: Valores atualizados!
     show:
+      automatic_for_padma_users: Estes indices são calculados de forma automática para usuários do PADMA
       update_ics: Salvar indices de controle
       recalculate_these_values: Recalcular estes valores
       previous_month: Mês anterior
       next_month: próximo mês 
+      see_all_ics: Ver todos os índices de controle do ano
   monthly_stats:
     chrono_table:
       title: Estatísticas mensais

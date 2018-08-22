@@ -3,15 +3,15 @@ class Ics
   attr_reader :school
 
   ICS = [
+    :students,
+    :male_students,
     :demand,
     :conversion_rate,
     :p_interviews,
     :enrollments,
     :enrollment_rate,
     :dropout_rate,
-    :students_average_age,
-    :male_students,
-    :students
+    :students_average_age
   ]
 
   def initialize(school,ref_date)
@@ -31,6 +31,12 @@ class Ics
         end
       end
     end
+  end
+
+  def sync_stats
+    return if manual_input?
+
+    # sync stats
   end
 
   def update_stats(attrs)

@@ -140,6 +140,11 @@ namespace :sync do
       School.all.each do |school|
         if school.padma_enabled?
           SyncRequest.create(school_id: school.id, year: today.year, priority: 5, month: today.month)
+        else
+          # request ics
+          #if school.api.email
+          #  RequestIcs.first_day_of_month(school,school.api.email).deliver
+          #end
         end
       end
     end

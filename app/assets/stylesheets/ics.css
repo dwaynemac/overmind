@@ -1,4 +1,12 @@
 
+#ics_info {
+  color: white;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 20px;
+  background: dodgerblue;
+}
+
 #ics_notice {
   color: white;
   margin-top: 50px;
@@ -31,6 +39,6 @@
   margin-bottom: 30px;
 }
 
-.ics-container input[type=submit] {
+.ics-container .full-width {
   width: 100% !important;
 }
