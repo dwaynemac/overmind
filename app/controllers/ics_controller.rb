@@ -28,6 +28,8 @@ class IcsController < ApplicationController
       @school = School.find params[:school_id] 
     elsif params[:account_name]
       @school = School.find_by_account_name params[:account_name] 
+    elsif params[:nucleo_id]
+      @school = School.find_by_nucleo_id params[:nucleo_id] 
     end
     if @school.nil?
       raise ActiveRecord::RecordNotFound
