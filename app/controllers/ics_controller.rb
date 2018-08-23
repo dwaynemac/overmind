@@ -20,7 +20,7 @@ class IcsController < ApplicationController
   private
 
   def initialize_ics
-    @ics = Ics.new(@school,@ref_date)
+    @ics = Ics.new(@school,@ref_date,params[:ics_options])
   end
 
   def get_school

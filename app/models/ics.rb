@@ -14,9 +14,10 @@ class Ics
     :students_average_age
   ]
 
-  def initialize(school,ref_date)
+  def initialize(school,ref_date, options = {})
     @school = school
     @ref_date = ref_date
+    @options = options || {}
   end
 
   ICS.each do |ic|
@@ -86,7 +87,7 @@ class Ics
   end
 
   def manual_input?
-    !@school.padma_enabled?
+    @options[:force_manual] || !@school.padma_enabled?
   end
 
 end
