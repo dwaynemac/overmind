@@ -7,11 +7,7 @@ class IcsController < ApplicationController
   def show
     # use a different ability?
     authorize! :read, @school
-    if @school.padma_enabled?
-      render layout: "application"
-    else
-      render layout: "ics"
-    end
+    render layout: "ics"
   end
 
   def update
