@@ -29,7 +29,13 @@ class IcsController < ApplicationController
 
   def get_school
     if params[:school_id]
-      @school = School.find params[:school_id] 
+      if (params[:school_id] == "current")
+        if current_user.padma_enabled?
+          @school = School.find_by_account_name current_user.current_account.name
+        end
+      else
+        @school = School.find params[:school_id] 
+      end
     elsif params[:account_name]
       @school = School.find_by_account_name params[:account_name] 
     elsif params[:nucleo_id]
