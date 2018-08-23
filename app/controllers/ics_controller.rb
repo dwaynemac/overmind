@@ -1,7 +1,7 @@
 class IcsController < ApplicationController
 
   # any user can access
-  skip_filter :pre_check_access
+  skip_before_filter :pre_check_access
 
   before_filter :set_ref_date
   before_filter :get_school
@@ -10,7 +10,6 @@ class IcsController < ApplicationController
 
   def show
     # use a different ability?
-    authorize! :read, @school
     render layout: "ics"
   end
 
