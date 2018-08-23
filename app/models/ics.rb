@@ -87,7 +87,23 @@ class Ics
   end
 
   def manual_input?
-    @options[:force_manual] || !@school.padma_enabled?
+    true?(@options[:force_manual]) || !@school.padma_enabled?
+  end
+
+  
+  private
+
+  def true?(val)
+    return false if val.nil?
+    val.in?([
+      true,
+      "true",
+      1,
+      "1",
+      "t",
+      "yes",
+      "si"
+    ])
   end
 
 end
