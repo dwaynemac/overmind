@@ -1,4 +1,4 @@
-<% title = "ICs Conselho e Colegiado : #{ l @ref_date, format: :month} " %>
+<% title = "ICs Conselho e Colegiado" %>
 <%- content_for :title do -%>
   <%= title %>
 <% end %>
@@ -9,8 +9,11 @@
 <div class='ics-container schools-container'>
   <header class='schools-head'>
     <h1>
-      <%= title %>
+      <%= "#{title}" %>
     </h1>
+    <h2>
+      <%= "#{@school.full_name} #{ l @ref_date, format: :month} " %>
+    </h2>
     <nav class='schools-navbar' role='navigation'>
       <div class='filter-controls'>
         <div class='btn-group'>
@@ -20,7 +23,7 @@
             <span class='glyphicon glyphicon-chevron-left'></span> 
             <%= t('.previous_month') %>
           <% end %>
-          <% unless @ref_date == Time.zone.today %>
+          <% unless @ref_date.end_of_month >= Time.zone.today.end_of_month %>
             <%= link_to school_ics_path(school_id: @ics.school.id,
                                         ref_date: @ref_date + 1.month),
                         class: 'btn btn-secondary btn-sm' do %>
