@@ -1,6 +1,6 @@
 class Ics
 
-  attr_reader :school
+  attr_reader :school, :options
 
   ICS = [
     :students,

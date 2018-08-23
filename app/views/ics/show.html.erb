@@ -18,14 +18,18 @@
       <div class='filter-controls'>
         <div class='btn-group'>
           <%= link_to school_ics_path(school_id: @ics.school.id,
-                                      ref_date: @ref_date - 1.month),
+                                      ref_date: @ref_date - 1.month,
+                                      ics_options: @ics.options
+                                     ),
                       class: 'btn btn-secondary btn-sm' do %>
             <span class='glyphicon glyphicon-chevron-left'></span> 
             <%= t('.previous_month') %>
           <% end %>
           <% unless @ref_date.end_of_month >= Time.zone.today.end_of_month %>
             <%= link_to school_ics_path(school_id: @ics.school.id,
-                                        ref_date: @ref_date + 1.month),
+                                        ref_date: @ref_date + 1.month,
+                                        ics_options: @ics.options
+                                       ),
                         class: 'btn btn-secondary btn-sm' do %>
               <%= t('.next_month') %>
               <span class='glyphicon glyphicon-chevron-right'></span>
