@@ -23,6 +23,8 @@ class FederationsController < ApplicationController
         @dropouts_rates[federation.id] = int_value / 100.0
       end
     end
+
+    render layout: role_layout
   end
 
   def show
@@ -36,6 +38,8 @@ class FederationsController < ApplicationController
         render 'show.csv.erb'
       end
     end
+
+    render layout: role_layout
   end
 
   def new

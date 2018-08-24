@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def role_layout
+    if current_user.role.in?(%W(council president))
+      "analytics"
+    else
+      "application"
+    end
+  end
+  
   def current_school
     if current_user && !current_user.account_name.blank?
       @current_school ||= School.find_by_account_name(current_user.account_name)

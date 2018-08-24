@@ -68,7 +68,9 @@ class RankingsController < ApplicationController
     @ref_dates.uniq!.sort!
     
     respond_to do |format|
-      format.html
+      format.html do
+        render layout: "analytics"
+      end
       format.csv do
         response.headers['Content-Disposition'] = "attachment; filename=history.csv"
         render 'history.csv.erb'
@@ -124,7 +126,9 @@ class RankingsController < ApplicationController
     end
     
     respond_to do |format|
-      format.html { render action: :show }
+      format.html do
+        render action: :show, layout: role_layout
+      end
       format.json do
         render json: @matrix
       end
