@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def role_stats
+    if current_user.role.in?(%W(council president))
+      Ics::ICS
+    else
+      Ranking::COLUMNS_FOR_VIEW
+    end
+  end
+
   def role_layout
     if current_user.role.in?(%W(council president))
       "analytics"

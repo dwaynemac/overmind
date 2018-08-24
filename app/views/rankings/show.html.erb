@@ -13,7 +13,7 @@
           </div>
           <div class="btn-group">
             <%= f.select   :column_names,
-                           Ranking::COLUMNS_FOR_VIEW.flatten.map{|name| [t("monthly_stat.names.#{name}"), name]},
+                           role_stats.flatten.map{|name| [t("monthly_stat.names.#{name}"), name]},
                            {},
                            {
                               data: {
