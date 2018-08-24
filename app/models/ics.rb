@@ -63,10 +63,8 @@ class Ics
           stat.value = new_value
           stat.save
         else
-          if stat.service.nil?
-            # only override manually set stats
-            stat.update_attribute :value, new_value
-          end
+          stat.update_attributes value: new_value,
+                                 service: nil
         end
       end
     end
