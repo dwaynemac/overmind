@@ -1,4 +1,5 @@
 class FederationsController < ApplicationController
+  include ApplicationHelper
 
   load_and_authorize_resource
 

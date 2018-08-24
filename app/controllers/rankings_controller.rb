@@ -1,4 +1,5 @@
 class RankingsController < ApplicationController
+  include ApplicationHelper
   
   def history
     authorize! :history, Ranking
