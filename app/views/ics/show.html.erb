@@ -1,9 +1,10 @@
-<% title = "Itens de controle para acompanhamento do Colegiado de Presidentes de Federação e Conselho Administrativo" %>
+<% title = "Itens de controle" %>
+<% subtitle = "para acompanhamento do Colegiado de Presidentes de Federação e Conselho Administrativo" %>
 <%- content_for :title do -%>
-  <%= title %>
+  <%= title %> <%= subtitle %>
 <% end %>
 <%= content_for :breadcrum do %>
-  <%= title %>
+  <%= title %> <%= subtitle %>
 <% end %>
 
 <div class='ics-container schools-container'>
@@ -11,9 +12,16 @@
     <h1>
       <%= "#{title}" %>
     </h1>
+
+    <h2 id="ics_subtitle">
+      <%= "#{subtitle}" %>
+    </h2>
+
     <h2>
       <%= "#{@school.full_name} #{ l @ref_date, format: :month} " %>
     </h2>
+
+
     <nav class='schools-navbar' role='navigation'>
       <div class='filter-controls'>
         <div class='btn-group'>
