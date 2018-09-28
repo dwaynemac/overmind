@@ -25,11 +25,12 @@
            >
     <b><%= t(".select_school") %>:</b>
     <form>
-      <select data-target="selectSchool.school">
+      <select id="school_select" data-target="selectSchool.school">
         <%= options_for_select [nil]+@schools %>
       </select>
     </form>
     <%= submit_tag t('.goto_ics'),
+        id: 'goto_ics',
         class: 'btn btn-primary full-width',
         data: { action: "click->selectSchool#gotoSchoolIcs" }
     %>
