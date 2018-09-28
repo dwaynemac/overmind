@@ -3,6 +3,8 @@ Overmind::Application.routes.draw do
     match "/login", :to => "devise/cas_sessions#new"
     match '/logout', to: "devise/cas_sessions#destroy"
   end
+
+  match "/formulario_ics", to: "ics#show", school_id: "current"
   resource :ics, only: [] do
     collection do
       get :select_school
