@@ -1,3 +1,7 @@
+input {
+  font-size: 16px !important;
+}
+
 select#school_select {
   margin-top: 15px;
 }
