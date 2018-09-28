@@ -47,12 +47,6 @@
       </div>
   </header>
 
-  <% unless @ics.manual_input? %>
-    <div id="ics_info">
-      <%= t('.automatic_for_padma_users') %>
-    </div>
-  <% end %>
-
   <% unless notice.blank? %>
     <div id="ics_notice">
       <%= notice %>
@@ -68,7 +62,26 @@
                  } do |f| %>
                   
       <ul>
-        <% Ics::ICS.each do |ic| %>
+
+        <!-- MANUAL for ALL -->
+        <% Ics::ICS.select{|ic_name| MonthlyStat.is_manual?(ic_name) }.each do |ic| %>
+          <li>
+            <label><%= t("monthly_stat.names.#{ic}") %> :</label>
+            <%= f.text_field ic, class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats(ic).blank?}" %>
+          </li>
+        <% end %>
+
+        <% unless @ics.manual_input? %>
+        <li>
+          <%= f.submit t('.update_ics'), class: 'btn btn-primary full-width' %>
+        </li>
+        <li>
+              <%= t('.automatic_for_padma_users') %>
+        </li>
+        <% end %>
+
+        <!-- MANUAL for non-padma -->
+        <% Ics::ICS.reject{|ic_name| MonthlyStat.is_manual?(ic_name) }.each do |ic| %>
           <li>
             <label><%= t("monthly_stat.names.#{ic}") %> :</label>
             <% if @ics.manual_input? %>
@@ -78,10 +91,11 @@
             <% end %>
           </li>
         <% end %>
+        
         <% if @ics.manual_input? %>
-          <li>
-            <%= f.submit t('.update_ics'), class: 'btn btn-primary full-width' %>
-          </li>
+        <li>
+          <%= f.submit t('.update_ics'), class: 'btn btn-primary full-width' %>
+        </li>
         <% end %>
       </ul>
 

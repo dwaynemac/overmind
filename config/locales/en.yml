@@ -7,6 +7,29 @@ en:
   delete: delete
   destroy: delete
   warning: Warning!
+  ics:
+    update:
+      updated: Values updated
+    show:
+      automatic_for_padma_users: Following values are automatically stored for PADMA users
+      update_ics: Save values
+      recalculate_these_values: "Re-calculate these values"
+      previous_month: Previous month
+      next_month: next month
+      see_all_ics: See values for all year
+  monthly_stats:
+    chrono_table:
+      title: Estatísticas mensais
+      sync_month: Atualizar índices deste mes.
+      evasion_calculation: Cálculo da evasāo
+      evasion_explanation: Esta evasāo é calculada a partir de valores absolutos. Dividindo o TOTAL de evasōes pelo TOTAL de alunos. Nāo é a média das evasōes
+      efectividad_calculation: Cálculo da efetividade
+      efectividad_explanation: Esta efectividad é calculada a partir de valores absolutos. Dividiendo o TOTAL de matriculas pelo TOTAL de visitas. Nāo é a média das efetividades.
+      conversion_calculation: Cálculo da conversāo total
+      conversion_explanation: Esta taixa de conversāo é a média das taixas de conversāo das escoelas
+      confirm: 
+    form:
+      manual_edition_disable_sync: As estadísticas registradas manualmente no se syncronizam com outros sistemas.
   monthly_stat:
     description:
       demand: 'Number of unique people that made contacted the school. '

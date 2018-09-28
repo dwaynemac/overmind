@@ -11,7 +11,11 @@ class Ics
     :enrollments,
     :enrollment_rate,
     :dropout_rate,
-    :students_average_age
+    :students_average_age,
+    :gross_income,
+    :expenses,
+    :profit,
+    :team_teachers
   ]
 
   def initialize(school,ref_date, options = {})
