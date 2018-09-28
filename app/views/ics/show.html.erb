@@ -58,18 +58,48 @@
                  url: school_ics_path(school_id: @ics.school.id, ref_date: @ref_date),
                  method: :put,
                  html: {
-                   class: "form-inline"
+                   class: "form-inline",
+                   data: {
+                     controller: "ics"
+                   }
                  } do |f| %>
                   
       <ul>
 
         <!-- MANUAL for ALL -->
-        <% Ics::ICS.select{|ic_name| MonthlyStat.is_manual?(ic_name) }.each do |ic| %>
-          <li>
-            <label><%= t("monthly_stat.names.#{ic}") %> :</label>
-            <%= f.text_field ic, class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats(ic).blank?}" %>
-          </li>
-        <% end %>
+        <li>
+          <label><%= t("monthly_stat.names.gross_income") %> :</label>
+          <%= f.text_field "gross_income", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("gross_income").blank?}",
+                               data: {
+                                 target: "ics.gross_income",
+                                 action: "change->ics#updateProfit keyup->ics#updateProfit"
+                               }
+        %>
+        </li>
+        <li>
+          <label><%= t("monthly_stat.names.expenses") %> :</label>
+          <%= f.text_field "expenses", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("expenses").blank?}",
+                               data: {
+                                 target: "ics.expenses",
+                                 action: "change->ics#updateProfit keyup->ics#updateProfit"
+                               }
+        %>
+        </li>
+        <li>
+          <label><%= t("monthly_stat.names.profit") %> :</label>
+          <%= f.text_field "profit", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("profit").blank?}",
+                               data: {
+                                 target: "ics.profit",
+                                 action: "change->ics#validateProfit"
+                               }
+        %>
+          <span data-target="ics.profitError"></span>
+        </li>
+
+        <li>
+          <label><%= t("monthly_stat.names.team_teachers") %> :</label>
+          <%= f.text_field "team_teachers", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("expenses").blank?}" %>
+        </li>
 
         <% unless @ics.manual_input? %>
         <li>

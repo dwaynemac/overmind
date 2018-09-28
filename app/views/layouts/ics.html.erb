@@ -16,6 +16,8 @@
     <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
     <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+
+    <script src="https://unpkg.com/stimulus@1.1.0/dist/stimulus.umd.js"></script>
   </head>
   <body>
 
@@ -31,7 +33,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%# each controller includes application.js and it's own  -%>
-    <%= javascript_include_tag "application", controller_name %>
+    <%= javascript_include_tag "application", "ics_controller" %>
     
     <div style="display: none;">
       <!-- i18n -->
