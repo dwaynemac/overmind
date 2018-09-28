@@ -8,7 +8,13 @@ class IcsController < ApplicationController
   before_filter :initialize_ics, except: [:select_school]
 
   def select_school
-    @schools = School.order(:name).map{|s| [s.full_name,s.id] }
+    @schools = School.order(:name).map do |s|
+      name = s.full_name
+      if name.blank?
+        name = s.name
+      end
+      [name,s.id]
+    end
     render layout: "ics"
   end
 
