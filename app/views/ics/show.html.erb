@@ -71,7 +71,7 @@
         <li>
           <label><%= t("monthly_stat.names.gross_income") %> :</label>
           <%= f.text_field "gross_income",
-                           type: "number",
+                           type: "tel",
                            class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("gross_income").blank?}",
                            data: {
                              target: "ics.gross_income",
@@ -82,7 +82,7 @@
         <li>
           <label><%= t("monthly_stat.names.expenses") %> :</label>
           <%= f.text_field "expenses", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("expenses").blank?}",
-                           type: "number",
+                           type: "tel",
                                data: {
                                  target: "ics.expenses",
                                  action: "change->ics#updateProfit keyup->ics#updateProfit"
@@ -92,7 +92,7 @@
         <li>
           <label><%= t("monthly_stat.names.profit") %> :</label>
           <%= f.text_field "profit", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("profit").blank?}",
-                           type: "number",
+                           type: "tel",
                                data: {
                                  target: "ics.profit",
                                  action: "change->ics#validateProfit"
@@ -103,7 +103,7 @@
 
         <li>
           <label><%= t("monthly_stat.names.team_teachers") %> :</label>
-          <%= f.text_field "team_teachers", type: "number", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("expenses").blank?}" %>
+          <%= f.text_field "team_teachers", type: "tel", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("expenses").blank?}" %>
         </li>
 
         <% unless @ics.manual_input? %>
@@ -120,7 +120,7 @@
           <li>
             <label><%= t("monthly_stat.names.#{ic}") %> :</label>
             <% if @ics.manual_input? %>
-              <%= f.text_field ic, type: "number", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats(ic).blank?}" %>
+              <%= f.text_field ic, type: "tel", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats(ic).blank?}" %>
             <% else %>
               <%= print_value @ics.monthly_stats(ic) %>
             <% end %>
