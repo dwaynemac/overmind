@@ -3,10 +3,14 @@ class IcsController < ApplicationController
   # any user can access
   skip_before_filter :pre_check_access
 
-  before_filter :set_ref_date
-  before_filter :get_school
-  before_filter :initialize_ics
+  before_filter :set_ref_date, except: [:select_school]
+  before_filter :get_school, except: [:select_school]
+  before_filter :initialize_ics, except: [:select_school]
 
+  def select_school
+    @schools = School.order(:name).map{|s| [s.full_name,s.id] }
+    render layout: "ics"
+  end
 
   def show
     # use a different ability?
@@ -31,6 +35,9 @@ class IcsController < ApplicationController
       if (params[:school_id] == "current")
         if current_user.padma_enabled?
           @school = School.find_by_account_name current_user.current_account.name
+        else
+          redirect_to select_school_ics_path
+          return
         end
       else
         @school = School.find params[:school_id] 

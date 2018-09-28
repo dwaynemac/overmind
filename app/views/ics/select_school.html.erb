@@ -1,0 +1,37 @@
+<% title = "Itens de controle" %>
+<% subtitle = "para acompanhamento do Colegiado de Presidentes de Federação e Conselho Administrativo" %>
+<%- content_for :title do -%>
+  <%= title %> <%= subtitle %>
+<% end %>
+<%= content_for :breadcrum do %>
+  <%= title %> <%= subtitle %>
+<% end %>
+
+<div class='ics-container schools-container'>
+  <header class='schools-head'>
+    <h1>
+      <%= "#{title}" %>
+    </h1>
+
+    <h2 id="ics_subtitle">
+      <%= "#{subtitle}" %>
+    </h2>
+  </header>
+
+  <section class="schools-content" id="selectSchool"
+                                   data-controller="selectSchool"
+                                   data-selectSchool-gotodate="<%= 1.month.ago.to_date %>"
+                                   data-selectSchool-select_school_msg="<%= t(".you_must_select_school") %>"
+           >
+    <b><%= t(".select_school") %>:</b>
+    <form>
+      <select data-target="selectSchool.school">
+        <%= options_for_select [nil]+@schools %>
+      </select>
+    </form>
+    <%= submit_tag t('.goto_ics'),
+        class: 'btn btn-primary full-width',
+        data: { action: "click->selectSchool#gotoSchoolIcs" }
+    %>
+  </section>
+</div>

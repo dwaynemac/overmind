@@ -6,6 +6,10 @@ es:
   search: buscar
   warning: ¡Atención!
   ics:
+    select_school:
+      select_school: Indique su escuela
+      goto_ics: Ir a cargar datos
+      you_must_select_school: Debe indicar su escuela
     update:
       updated: Valores guardados!
     show:

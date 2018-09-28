@@ -6,6 +6,10 @@ pt-BR:
   search: pesquisa
   warning: Atençāon!
   ics:
+    select_school:
+      select_school: Indique sua escola
+      goto_ics: Ir a cargar dados
+      you_must_select_school: Deve indicar sua escola
     update:
       updated: Valores atualizados!
     show:

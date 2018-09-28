@@ -2,7 +2,7 @@
 /* global $ */
 (() => {
   const application = Stimulus.Application.start();
-  
+
   application.register("ics", class extends Stimulus.Controller {
 
     static get targets(){

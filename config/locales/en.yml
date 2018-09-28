@@ -8,6 +8,10 @@ en:
   destroy: delete
   warning: Warning!
   ics:
+    select_school:
+      select_school: Select your school
+      goto_ics: Go to form
+      you_must_select_school: You must select your school
     update:
       updated: Values updated
     show:
