@@ -140,11 +140,6 @@ namespace :sync do
       School.enabled_on_nucleo.each do |school|
         if school.padma_enabled?
           SyncRequest.create(school_id: school.id, year: today.year, priority: 5, month: today.month)
-        else
-          # request ics
-          #if school.padma_account && !school.padma_account.email.blank? && school.padma_account.email != "no-email@gmail.com"
-          #  RequestIcs.first_day_of_month(school,school.padma_account.email).deliver
-          #end
         end
       end
     end
