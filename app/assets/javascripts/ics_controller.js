@@ -39,6 +39,7 @@
         this.profitTarget.classList.add("ic_missing");
       else
         this.profitTarget.classList.remove("ic_missing");
+      
       this.profitErrorTarget.innerText = txt;
     }
 

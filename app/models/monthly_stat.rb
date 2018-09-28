@@ -176,7 +176,7 @@ class MonthlyStat < ActiveRecord::Base
   def self.service_for(school,stat_name,ref_date)
     if LocalStat.is_local_stat?(stat_name)
       'overmind'
-    elsif school.account_name.blank?
+    elsif school.account_name.blank? || MonthlyStat.is_manual?(stat_name)
       ''
     else
       account = school.account
