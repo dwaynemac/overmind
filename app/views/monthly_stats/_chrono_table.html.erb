@@ -42,7 +42,7 @@ end
                                                          team_teachers
                                                      ))
         }.each do |name| -%>
-      <% next if teacher_stats && (monthly_stats[name].empty? && MonthlyStat.is_local_stat?(name)) -%>
+      <% next if teacher_stats && (monthly_stats[name].empty? && MonthlyStat.is_manual?(name)) -%>
       <tr>
         <th>
           <%= t("monthly_stat.names.#{name}") %>
