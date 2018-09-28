@@ -33,7 +33,7 @@
             <span class='glyphicon glyphicon-chevron-left'></span> 
             <%= t('.previous_month') %>
           <% end %>
-          <% unless @ref_date.end_of_month >= Time.zone.today.end_of_month %>
+          <% unless @ref_date.end_of_month >= (1.month.ago.to_date).end_of_month %>
             <%= link_to school_ics_path(school_id: @ics.school.id,
                                         ref_date: @ref_date + 1.month,
                                         ics_options: @ics.options
