@@ -37,6 +37,7 @@
     <div class='tab-content tab-content-border'>
       <div class='tab-pane active' id="global">
         <%= render 'monthly_stats/chrono_table', monthly_stats: @school_monthly_stats %>
+        <%= render "manual_ics", monthly_stats: @school_monthly_stats %>
       </div>
       <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
         <div id='<%= teacher_id %>' class='tab-pane'>

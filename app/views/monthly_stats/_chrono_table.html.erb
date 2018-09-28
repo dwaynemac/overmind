@@ -34,8 +34,15 @@ end
     </thead>
     <tbody>
     <% tabindex=0 %>
-    <%- MonthlyStat::VALID_NAMES.reject{|n|n==:conversion_rate}.each do |name| -%>
-      <% next if teacher_stats && monthly_stats[name].empty? -%>
+    <%# ALL STATS , except some manually rejected %>
+    <%- MonthlyStat::VALID_NAMES.reject{|n|n.to_s.in?(%W(conversion_rate
+                                                         gross_income
+                                                         expenses
+                                                         profit
+                                                         team_teachers
+                                                     ))
+        }.each do |name| -%>
+      <% next if teacher_stats && (monthly_stats[name].empty? && MonthlyStat.is_local_stat?(name)) -%>
       <tr>
         <th>
           <%= t("monthly_stat.names.#{name}") %>

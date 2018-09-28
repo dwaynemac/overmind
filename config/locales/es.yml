@@ -72,6 +72,10 @@ es:
       students_average_age: Promedio de edad
       messaging_comms: Contactos por mensajería
       social_comms: Contactos por redes sociales
+      gross_income: Recaudación bruta
+      expenses: Gastos
+      profit: Lucro
+      team_teachers: Número de instructores
   views:
     pagination:
       first: Primera
@@ -133,6 +137,8 @@ es:
     - :month
     - :year
   schools:
+    manual_ics:
+      ics_for_colegiado: Indices de control para Consejo Administrativo y Colegiado de presidentes de federación
     index:
       actions: Acciones
       last_registered_stat: Esta column muestra el último registro de cada escuela

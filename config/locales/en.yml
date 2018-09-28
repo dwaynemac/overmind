@@ -46,6 +46,10 @@ en:
       students_average_age: 
       swasthya_dropout_rate: Dropout of Intermediaries
       swasthya_students_subtotal: Subtotal of SwáSthya Students
+      gross_income: Gross income
+      expenses: Expenses
+      profit: Profit
+      team_teachers: Teachers
   monthly_stats:
     chrono_table:
       title: Monthly statistics
@@ -69,6 +73,8 @@ en:
     formats:
       month: '%b %Y'
   schools:
+    manual_ics:
+      ics_for_colegiado: Control stats for Conselho Administrativo and Colegiado de Presidentes de Federação
     index:
       actions: Actions
       last_registered_stat: This column shows the last registered number for each school

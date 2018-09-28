@@ -115,6 +115,10 @@ pt-BR:
       students_average_age: Idade média dos alunos
       social_comms: Contatos via social média
       messaging_comms: Contatos via mensageria
+      gross_income: Recaudação bruta
+      expenses: Gastos
+      profit: Lucro
+      team_teachers: Número de instrutores
   views:
     pagination:
       first: Primeira
@@ -176,6 +180,8 @@ pt-BR:
     - :month
     - :year
   schools:
+    manual_ics:
+      ics_for_colegiado: Indices de controle para Conselho Administrativo y Colegiado de presidentes de federação
     index:
       actions: Açōes
       last_registered_stat: Esta colun utiliza o último registro de cada escola

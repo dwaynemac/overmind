@@ -72,7 +72,13 @@ class MonthlyStat < ActiveRecord::Base
                  :website_contact,
                  :messaging_comms,
                  :social_comms,
-                 :conversion_rate, :conversion_count
+                 :conversion_rate, :conversion_count,
+
+                 :gross_income,
+                 :expenses,
+                 :profit,
+                 :team_teachers
+
   ]
 
   belongs_to :school
@@ -212,6 +218,11 @@ class MonthlyStat < ActiveRecord::Base
       :yogin_students_rate,
       :chela_students_rate
     ])
+  end
+
+  # Stats that are filled manually
+  def self.is_manual?(name)
+    name.to_s.in?(%W(gross_income expenses team_teachers))
   end
   
   def self.default_reduction(name)
