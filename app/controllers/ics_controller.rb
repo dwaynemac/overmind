@@ -56,10 +56,10 @@ class IcsController < ApplicationController
     begin
       @ref_date = Date.parse params[:ref_date]
     rescue
-      @ref_date = Time.zone.today
+      @ref_date = 1.month.ago.to_date
     end
     if @ref_date.nil?
-      @ref_date = Time.zone.today
+      @ref_date = 1.month.ago.to_date
     end
   end
 end
