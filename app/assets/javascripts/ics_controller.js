@@ -8,10 +8,6 @@
     static get targets(){
       return ["gross_income","expenses","profit","profitError"];
     }
-    
-    initialize(){
-      console.log("initialized ics");
-    }
 
     updateProfit(){
       console.log("updating profit");
