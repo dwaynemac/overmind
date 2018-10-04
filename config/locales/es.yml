@@ -79,7 +79,7 @@ es:
       gross_income: Recaudación bruta
       expenses: Gastos
       profit: Lucro
-      team_teachers: Número de instructores
+      team_teachers: Número de instructores en el equipo
   views:
     pagination:
       first: Primera

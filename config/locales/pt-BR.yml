@@ -122,7 +122,7 @@ pt-BR:
       gross_income: Recaudação bruta
       expenses: Gastos
       profit: Lucro
-      team_teachers: Número de instrutores
+      team_teachers: Número de instrutores na equipe
   views:
     pagination:
       first: Primeira
