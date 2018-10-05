@@ -2,7 +2,7 @@ module ApplicationHelper
 
   def role_stats
     if current_user.role.in?(%W(council president))
-      Ics::ICS
+      Ics::ICS + (Ranking::COLUMNS_FOR_VIEW - Ics::ICS)
     else
       Ranking::COLUMNS_FOR_VIEW
     end
