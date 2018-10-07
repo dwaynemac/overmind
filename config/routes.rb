@@ -5,6 +5,8 @@ Overmind::Application.routes.draw do
   end
 
   match "/formulario_ics", to: "ics#show", school_id: "current"
+  match "/analytics", to: "rankings#history"
+
   resource :ics, only: [] do
     collection do
       get :select_school
