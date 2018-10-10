@@ -227,7 +227,7 @@ class MonthlyStat < ActiveRecord::Base
   
   def self.default_reduction(name)
     case name.to_s
-    when 'students_average_age'
+    when 'students_average_age', 'team_teachers'
       :avg
     end
   end
