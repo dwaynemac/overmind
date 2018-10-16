@@ -11,7 +11,7 @@ class LocalStat
     end
     
     def dropout_rate_dependencies
-      [dropouts, :students]
+      [:dropouts, :students]
     end
     
     # options:
