@@ -21,6 +21,7 @@ $(document).ready(function(){
   chart.addChartCursor( chartCursor );
 
   var valAxis = new AmCharts.ValueAxis();
+  valAxis.minimum = 0;
   valAxis.position = "left";
   valAxis.axisColor = "#2d66bb";
   valAxis.gridAlpha = 0;
