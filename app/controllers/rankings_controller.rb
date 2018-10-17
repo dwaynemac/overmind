@@ -51,12 +51,14 @@ class RankingsController < ApplicationController
                           name: @stat_name,
                           ref_date: ref_date,
                           stats: @stats_hash[ref_date].values,
+                          stats_scope: stats_scope.where(ref_date: ref_date, name: @stat_name),
                           reduce_as: :sum
                         )
       @avgs[ref_date] = ReducedStat.new(
                           name: @stat_name,
                           ref_date: ref_date,
                           stats: @stats_hash[ref_date].values,
+                          stats_scope: stats_scope.where(ref_date: ref_date, name: @stat_name),
                           reduce_as: :avg
                         )
     end
