@@ -54,21 +54,20 @@ class TeacherRanking
   end
 
   def stats
-    pre_scope = TeacherMonthlyStat
-                             .where(ref_date: (ref_since.to_date..ref_until.to_date))
+    pre_scope = TeacherMonthlyStat.where(ref_date: (ref_since.to_date..ref_until.to_date))
     pre_scope = pre_scope.where(schools: { federation_id: @federation_ids }) unless @federation_ids.nil?
-    pre_scope = pre_scope.where(school_id: @school_ids ) unless @school_ids.nil?
+    pre_scope = pre_scope.where(schools: { id: @school_ids }) unless @school_ids.nil?
 
     scope = pre_scope.select([:name, :value, :teacher_id])
-                      .includes(:school)
-                      .includes(:teacher)
-                      .where(name: @column_names)
+                     .includes(:school)
+                     .includes(:teacher)
+                     .where(name: @column_names)
 
     scope.all.group_by(&:teacher).map do |teacher, stats|
       stats.group_by(&:name).map do |name, stats|
         ReducedStat.new(teacher: teacher,
                         stats: stats,
-                        stats_scope: pre_scope.where(teacher_id: teacher.id),
+                        stats_scope: pre_scope.joins(:school).where(teacher_id: teacher.id),
                         name: name,
                         reduce_as: :avg)
       end
