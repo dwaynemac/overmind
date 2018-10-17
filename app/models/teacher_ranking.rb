@@ -57,7 +57,7 @@ class TeacherRanking
     pre_scope = TeacherMonthlyStat
                              .where(ref_date: (ref_since.to_date..ref_until.to_date))
     pre_scope = pre_scope.where(schools: { federation_id: @federation_ids }) unless @federation_ids.nil?
-    pre_scope = pre_scope.where(schools: { id: @school_ids }) unless @school_ids.nil?
+    pre_scope = pre_scope.where(school_id: @school_ids ) unless @school_ids.nil?
 
     scope = pre_scope.select([:name, :value, :teacher_id])
                       .includes(:school)
