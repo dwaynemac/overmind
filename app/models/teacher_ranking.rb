@@ -66,7 +66,7 @@ class TeacherRanking
       stats.group_by(&:name).map do |name, stats|
         ReducedStat.new(teacher: teacher,
                         stats: stats,
-                        stats_scope: scope.where(teacher_id: teacher.id, name: name),
+                        stats_scope: scope.where(teacher_id: teacher.id),
                         name: name,
                         reduce_as: :avg)
       end

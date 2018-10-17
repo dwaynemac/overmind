@@ -69,7 +69,7 @@ class Ranking
         (stats_by_name.keys + columns_with_special_reduction).map do |name|
           ReducedStat.new(school: school,
                           stats: stats_by_name[name],
-                          stats_scope: pre_scope.where(school_id: school.id, name: name), # for stats with special reduction. 
+                          stats_scope: pre_scope.where(school_id: school.id), # for stats with special reduction. 
                           name: name,
                           reduce_as: :avg
                           )

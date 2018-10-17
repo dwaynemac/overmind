@@ -1,5 +1,7 @@
 # Used for Derived Stats
 class ReducedStat
+
+  # stats_scope shouldnt have condition on name. 
   attr_accessor :ref_date, :name, :stats, :name, :reduce_as, :school, :teacher, :stats_scope
 
   def initialize(attributes)
@@ -9,7 +11,7 @@ class ReducedStat
     self.stats = attributes[:stats]
     self.stats_scope = attributes[:stats_scope]
 
-    self.name = attributes[:name] || data.try(:first).try(:name) 
+    self.name = attributes[:name] || stats.try(:first).try(:name) 
     self.ref_date = attributes[:ref_date] || data.try(:first).try(:ref_date)
     self.reduce_as = attributes[:reduce_as] || default_reduction
 
@@ -44,7 +46,7 @@ class ReducedStat
     @data ||= if stats
       stats
     elsif stats_scope
-      stats_scope
+      stats_scope.where(name: name)
     end
   end
 

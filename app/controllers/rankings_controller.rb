@@ -29,11 +29,11 @@ class RankingsController < ApplicationController
     @ref_dates = []
     @stats_hash = {}
     
-    stats_scope = SchoolMonthlyStat.where(name: @ranking.column_names.first)
-                     .where("ref_date >= ?", @ranking.ref_since)
+    base_scope = SchoolMonthlyStat.where("ref_date >= ?", @ranking.ref_since)
                      .where("ref_date <= ?", @ranking.ref_until)
                      .joins(:school)
                      .where(schools: { federation_id: @ranking.federation_ids })
+    stats_scope = base_scope.where(name: @ranking.column_names.first)
                      
     school_ids = stats_scope.pluck(:school_id).uniq
     @schools = School.find school_ids
@@ -51,14 +51,14 @@ class RankingsController < ApplicationController
                           name: @stat_name,
                           ref_date: ref_date,
                           stats: @stats_hash[ref_date].values,
-                          stats_scope: stats_scope.where(ref_date: ref_date, name: @stat_name),
+                          stats_scope: base_scope.where(ref_date: ref_date),
                           reduce_as: :sum
                         )
       @avgs[ref_date] = ReducedStat.new(
                           name: @stat_name,
                           ref_date: ref_date,
                           stats: @stats_hash[ref_date].values,
-                          stats_scope: stats_scope.where(ref_date: ref_date, name: @stat_name),
+                          stats_scope: base_scope.where(ref_date: ref_date, name: @stat_name),
                           reduce_as: :avg
                         )
     end
