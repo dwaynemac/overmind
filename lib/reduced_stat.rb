@@ -1,15 +1,18 @@
 # Used for Derived Stats
 class ReducedStat
-  attr_accessor :ref_date, :name, :stats, :name, :reduce_as, :school, :teacher
+  attr_accessor :ref_date, :name, :stats, :name, :reduce_as, :school, :teacher, :stats_scope
 
-  # TODO si agregamos el attribute :stats_scope podemos resolver aca adentro los casos de special_reduction   
   def initialize(attributes)
     self.school = attributes[:school]
     self.teacher = attributes[:teacher]
+
     self.stats = attributes[:stats]
-    self.name = attributes[:name] || stats.try(:first).try(:name)
-    self.ref_date = attributes[:ref_date] || stats.try(:first).try(:ref_date)
+    self.stats_scope = attributes[:stats_scope]
+
+    self.name = attributes[:name] || data.try(:first).try(:name) 
+    self.ref_date = attributes[:ref_date] || data.try(:first).try(:ref_date)
     self.reduce_as = attributes[:reduce_as] || default_reduction
+
     @value = attributes[:value]
     self
   end
@@ -19,9 +22,7 @@ class ReducedStat
       @value
     else
       if LocalStat.has_special_reduction?(name)
-        # value should have been set on initialization
-        # TODO with :stats_scope attribute we could calculate here
-        @value 
+        @value = LocalStat.new().send("reduce_#{name}", stats_scope )
       else
         @value = case self.reduce_as.to_sym
           when :sum
@@ -34,8 +35,16 @@ class ReducedStat
   end
 
   def compacted_stats
-    if stats
-      @compacted_stats ||= stats.reject{|s| s.value.nil? }
+    if data
+      @compacted_stats ||= data.reject{|s| s.value.nil? }
+    end
+  end
+
+  def data
+    @data ||= if stats
+      stats
+    elsif stats_scope
+      stats_scope
     end
   end
 
