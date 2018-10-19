@@ -3,10 +3,11 @@ module SchoolsHelper
   def print_year_subtotal_with_link(options={})
     reduced_stat = options[:reduced_stat]
     if reduced_stat
-      if reduced_stat.name.in?(%W(enrollments male_enrollments dropouts p_interviews male_p_interviews))
+      year = options[:year].to_i
+      if reduced_stat.name.in?(%W(enrollments male_enrollments dropouts p_interviews male_p_interviews)) && year > 0
         query = MonthlyStat.new().send("#{reduced_stat.name}_query",{
-          l_limit: Date.civil(options[:year],1,1),
-          r_limit: Date.civil(options[:year],12,31)
+          l_limit: Date.civil(year,1,1),
+          r_limit: Date.civil(year,12,31)
         })
         link_to print_value(reduced_stat), "#{APP_CONFIG['crm-url']}/contacts?#{query}", target: "_blank"
       else
