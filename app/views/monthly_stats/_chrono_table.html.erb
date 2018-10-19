@@ -13,7 +13,7 @@ end
     <thead>
       <tr>
         <th></th>
-        <%- (1...13).each do |m| -%>
+        <%- (1..12).each do |m| -%>
           <th class="toggle-views">
             <%= Date::MONTHNAMES[m] %>
             <%- if can_sync_month?(m)  -%>
@@ -30,6 +30,7 @@ end
             <% end -%>
           </th>
         <%- end -%>
+
       </tr>
     </thead>
     <tbody>
@@ -50,7 +51,7 @@ end
             <span class='glyphicon glyphicon-question-sign pull-right' data-toggle='popover' data-placement='left' data-content='<%= monthly_stat_description(name) %>' data-trigger='hover' tabindex='-1'></span>
           <% end -%>
         </th>
-        <%- (1...13).each do |month| -%>
+        <%- (1..12).each do |month| -%>
           <% ref_date = Date.civil(@year.to_i,month,1) -%>
           <% tabindex = tabindex + 1 %>
           <td class="toggle-views">
