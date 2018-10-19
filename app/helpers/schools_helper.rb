@@ -1,5 +1,20 @@
 module SchoolsHelper
 
+  def print_year_subtotal_with_link(options={})
+    reduced_stat = options[:reduced_stat]
+    if reduced_stat
+      if reduced_stat.name.in?(%W(enrollments male_enrollments dropouts p_interviews male_p_interviews))
+        query = MonthlyStat.new().send("#{reduced_stat.name}_query",{
+          l_limit: Date.civil(options[:year],1,1),
+          r_limit: Date.civil(options[:year],12,31)
+        })
+        link_to print_value(reduced_stat), "#{APP_CONFIG['crm-url']}/contacts?#{query}"
+      else
+        print_value(reduced_stat)
+      end
+    end
+  end
+
   def data_freshness_label(school)
     label_class = if school.synced_at.nil? || school.synced_at < 1.month.ago
     #synced more than 1 month ago

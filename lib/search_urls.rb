@@ -30,8 +30,9 @@ module SearchUrls
     end
   end
   
-  def p_interviews_query
-    ret = interviews_query + any_of(:communication_estimated_coefficient,[:pmenos,:perfil,:pmas])
+  def p_interviews_query(options={})
+    l_limit, r_limit = get_limits(options)
+    ret = interviews_query(options) + any_of(:communication_estimated_coefficient,[:pmenos,:perfil,:pmas])
     if type == "TeacherMonthlyStat"
       ret += any_of(:visit_usernames,[teacher_username])
     end
@@ -39,8 +40,8 @@ module SearchUrls
   end
   
   %W(email interview).each do |media|
-    define_method "#{media}s_query" do
-      demand_query + eq(:communication_media, media)
+    define_method "#{media}s_query" do |options={}|
+      demand_query(options) + eq(:communication_media, media)
     end
   end
   
@@ -64,8 +65,8 @@ module SearchUrls
     interviews_query + eq(:gender,:male)
   end
   
-  def male_p_interviews_query
-    p_interviews_query + eq(:gender,:male)
+  def male_p_interviews_query(options={})
+    p_interviews_query(options) + eq(:gender,:male)
   end
   
   def female_interviews_query
@@ -84,25 +85,28 @@ module SearchUrls
     students_query + eq(:gender,:female)
   end
   
-  def enrollments_query
-    q = date_eq("enrollment_period_start",ref_date.beginning_of_month,"")
-    q += date_eq("enrollment_period_end",ref_date.end_of_month)
+  def enrollments_query(options={})
+    l_limit, r_limit = get_limits(options)
+    q = date_eq("enrollment_period_start",l_limit,"")
+    q += date_eq("enrollment_period_end",r_limit)
   end
   
-  def male_enrollments_query
-    enrollments_query + eq(:gender,:male)
+  def male_enrollments_query(options={})
+    enrollments_query(options) + eq(:gender,:male)
   end
   
-  def dropouts_query
-    q = date_eq("dropout_period_start",ref_date.beginning_of_month,"")
-    q += date_eq("dropout_period_end",ref_date.end_of_month)
+  def dropouts_query(options={})
+    l_limit, r_limit = get_limits(options)
+    q = date_eq("dropout_period_start",l_limit,"")
+    q += date_eq("dropout_period_end",r_limit)
   end
   
-  def demand_query
+  def demand_query(options={})
+    l_limit, r_limit = get_limits(options)
     # global scope disabled because of timeout in contacts-ws, reenable when solverd
     q = ""# q = "scope=global" # to include unlinked contacts
-    q += date_eq("communication_period_start",ref_date.beginning_of_month)
-    q += date_eq("communication_period_end",ref_date.end_of_month)
+    q += date_eq("communication_period_start",l_limit)
+    q += date_eq("communication_period_end",r_limit)
     q += eq('communication_direction','incoming')
   end
   
@@ -113,9 +117,14 @@ module SearchUrls
   def female_demand_query
     demand_query + eq(:gender,:female)
   end
-  
+
   private
   
+  def get_limits(options)
+    l_limit = options[:l_limit] || ref_date.beginning_of_month
+    r_limit = options[:r_limit] || ref_date.end_of_month 
+    return [l_limit, r_limit]
+  end
   def any_of(attribute,values,prefix="&")
     ret = "#{prefix}contact_search[#{attribute}][]=#{values.first}"
     values[1..values.length].each do |v|

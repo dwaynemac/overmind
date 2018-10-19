@@ -134,7 +134,11 @@ end
           </td>
         <%- end -%>
         <td class="subtotal">
-          <%= print_value( monthly_stats[name][:total] )  %>
+          <% if teacher_stats %>
+            <%= print_value(monthly_stats[name][:total]) %>
+          <% else %>
+            <%= print_year_subtotal_with_link( reduced_stat: monthly_stats[name][:total], year: @year )  %>
+          <% end %>
         </td>
       </tr>
     <%- end -%>
