@@ -8,7 +8,7 @@ module SchoolsHelper
           l_limit: Date.civil(options[:year],1,1),
           r_limit: Date.civil(options[:year],12,31)
         })
-        link_to print_value(reduced_stat), "#{APP_CONFIG['crm-url']}/contacts?#{query}"
+        link_to print_value(reduced_stat), "#{APP_CONFIG['crm-url']}/contacts?#{query}", target: "_blank"
       else
         print_value(reduced_stat)
       end
