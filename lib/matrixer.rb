@@ -82,7 +82,8 @@ class Matrixer
   
   def subtotal_for?(stat_name)
     ignore_students = !((stat_name =~ /student/) || stat_name.in?(%W(in_professional_training)))
-    true && ignore_students 
+    ignore_rates_wout_special_reductions = !(stat_name =~ /rate/ && !LocalStat.has_special_reduction?(stat_name))
+    true && ignore_students && ignore_rates_wout_special_reductions
   end
 
   # @param matrix [Hash]
