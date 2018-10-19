@@ -18,6 +18,9 @@ class LocalStat
     #   :scope # ActiveRecord scope with school, federation, ref_date, etc.
     #   scope should be query of stats to reduce EXCEPT for the names.   
     def reduce_dropout_rate(stats_scope)
+      if stats_scope.nil?
+        raise 'need stats_scope to reduce dropout_rate'
+      end
       cache_key = "reduced_dropout_rate_#{Digest::SHA256.hexdigest(stats_scope.to_sql)}"
       ret = Rails.cache.read(cache_key)
       if ret.nil?

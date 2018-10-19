@@ -27,6 +27,12 @@ class Matrixer
 
     # reduce each month to a total
     matrix.each_pair do |stat_name,stats_by_month|
+      red_fn = if MonthlyStat.is_a_rate?(stat_name) || stat_name == 'students_average_age'
+        :avg
+      else
+        :sum
+      end
+
       stats_by_month.each_pair do |month,stats|
         rs = nil
         if stats.size>1
@@ -40,12 +46,7 @@ class Matrixer
                                                         stat_scope )
                             )
           else
-            red_fn = if MonthlyStat.is_a_rate?(stat_name) || stat_name == 'students_average_age'
-              :avg
-            else
-              :sum
-            end
-  
+             
             rs = ReducedStat.new(
               stats: stats,
               reduce_as: red_fn
@@ -59,6 +60,16 @@ class Matrixer
           matrix[stat_name][month] = stats.first
         end
       end
+
+      if subtotal_for?(stat_name)
+        matrix[stat_name][:total] = ReducedStat.new(
+          name: stat_name,
+          stats: matrix[stat_name].values,
+          stats_scope: @stats.scoped,
+          reduce_as: red_fn
+        )
+      end
+
     end
 
     matrix.symbolize_keys!
@@ -68,6 +79,11 @@ class Matrixer
   end
 
   private
+  
+  def subtotal_for?(stat_name)
+    ignore_students = !((stat_name =~ /student/) || stat_name.in?(%W(in_professional_training)))
+    true && ignore_students 
+  end
 
   # @param matrix [Hash]
   # @return [Ha6sh] matrix with dropout_rate added

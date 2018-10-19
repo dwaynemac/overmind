@@ -5,6 +5,7 @@ pt-BR:
   destroy: apagar
   search: pesquisa
   warning: Atençāon!
+  total: Total
   ics:
     select_school:
       select_school: Indique sua escola
@@ -117,6 +118,7 @@ pt-BR:
       swasthya_students_subtotal: SubTotal Alunos em SwáSthya
       yogin_students: Yôgins
       students_average_age: Idade média dos alunos
+      website_contact: Contatos via website recebidos
       social_comms: Contatos via social média
       messaging_comms: Contatos via mensageria
       gross_income: Recaudação bruta

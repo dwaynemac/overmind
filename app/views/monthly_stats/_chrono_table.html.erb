@@ -30,7 +30,7 @@ end
             <% end -%>
           </th>
         <%- end -%>
-
+        <th><%= t('total') %></th>
       </tr>
     </thead>
     <tbody>
@@ -133,6 +133,9 @@ end
           <% end -%>
           </td>
         <%- end -%>
+        <td>
+          <%= print_value( monthly_stats[name][:total] )  %>
+        </td>
       </tr>
     <%- end -%>
     <% unless monthly_stats[:swasthya_students_subtotal] == {} %>

@@ -7,6 +7,7 @@ en:
   delete: delete
   destroy: delete
   warning: Warning!
+  total: Total
   ics:
     select_school:
       select_school: Select your school
