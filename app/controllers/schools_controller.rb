@@ -49,11 +49,7 @@ class SchoolsController < ApplicationController
     @school_monthly_stats = @school.school_monthly_stats.for_year(@year).to_matrix
 
     current_school_teachers = @school.account.present?? @school.account.users.map(&:username) : nil
-    @teachers_monthly_stats = {}
-    @school.teachers.each do |teacher|
-      next if current_school_teachers && !teacher.username.in?(current_school_teachers)
-      @teachers_monthly_stats[teacher.id] = @school.teacher_monthly_stats.for_year(@year).where(teacher_id: teacher.id).to_matrix
-    end
+    @teachers = current_school_teachers.blank?? @school.teachers : @school.teachers.select{|t| t.username.in?(current_school_teachers) }
     respond_to do |format|
       format.html
       format.csv do

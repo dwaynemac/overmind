@@ -1,0 +1,61 @@
+<%- content_for :title do -%>
+  <%= @teacher.full_name %>
+<%- end -%>
+<%- breadcrum "#{@teacher.full_name} #{@year}" -%>
+
+<div class='schools-container'>
+  <header class='schools-head'>
+    <p><%= @year %></p>
+    <nav class='schools-navbar' role='navigation'>
+      <div class='filter-controls'>
+        <div class='btn-group'>
+          <%= link_to school_teacher_url(school_id: @school.id, teacher_id: @teacher.id, year: @year.to_i - 1), class: 'btn btn-secondary btn-sm' do %>
+            <span class='glyphicon glyphicon-chevron-left'></span>
+          <% end %>
+          <% unless @year.to_i == Time.zone.now.year %>
+            <%= link_to school_teacher_url(school_id: @school.id, teacher_id: @teacher.id, year: @year.to_i + 1), class: 'btn btn-secondary btn-sm' do %>
+              <span class='glyphicon glyphicon-chevron-right'></span>
+            <% end %>
+          <% end %>
+        </div>
+        <%= render :partial => 'schools/sync_request_notification' %>
+      </div>
+      <div class='filter-controls filter-controls-right'>
+        <%# link_to "<span class='glyphicon glyphicon-download'></span>".html_safe, school_url(id: @school.id, format: 'csv', year: @year), class: 'btn btn-secondary btn-sm', id: 'download-link' %>
+      </div>
+    </nav>
+  </header>
+  <section class='schools-content'>
+    <ul class='nav nav-tabs' role='tablist'>
+      <li>
+        <%= link_to @school.full_name, school_path(id: @school.id, year: @year) %>
+      </li>
+      <%- @teachers.each do |teacher| %>
+        <li <%= "class='active'".html_safe if @teacher.id == teacher.id%>>
+          <%= link_to teacher.try(:full_name), school_teacher_path(@school,teacher.id) %>
+        </li>
+      <%- end %>
+    </ul>
+    <div class='tab-content tab-content-border'>
+      <div id='<%= @teacher.id %>' class='tab-pane active'>
+        <% unless @stats.values.reject(&:empty?).empty? -%>
+          <%= render "monthly_stats/chrono_table", monthly_stats: @stats, teacher_stats: true, title: @teacher.try(:full_name) %>
+        <% end -%>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="page-header" hidden>
+  <%= link_to "<span class='glyphicon glyphicon-download'></span>".html_safe, school_url(id: @school.id, format: 'csv', year: @year), class: 'btn btn-secondary btn-sm', id: 'download-link' %>
+  <h2>
+    <div>
+      <span id="current_year" title="<%= t('schools.show.click_to_change') %>"><%= @year %></span>
+      <%= form_tag nil, method: 'GET', class: 'form-inline', id: 'set-year'  do -%>
+        <%= select_tag( :year, options_for_select(@years,@year)) %>
+        <%= submit_tag(t('see'), class: 'btn') %>
+      <%- end -%>
+    </div>
+  </h2>
+  <%= render :partial => 'schools/sync_request_notification' %>
+</div>

@@ -52,6 +52,9 @@ class Ability
       self.merge GeneralAbility.new(@user)
 
       can [:sync,:sync_year,:read,:see_detail], School, account_name: enabled_account_names
+      # can read teachers of my enabled accounts
+      can :read, Teacher, id: School.where(account_name: enabled_account_names).all.map{|s| s.teachers.map(&:id) }.flatten
+
       can [:create,:update], SyncRequest
       can :read, Federation, id: user_federation_ids
       can :manage, MonthlyStat, school: {account_name: enabled_account_names }

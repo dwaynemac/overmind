@@ -13,6 +13,7 @@ Overmind::Application.routes.draw do
     end
   end
   resources :schools do
+    resources :teachers, only: [:show]
     resource :ics, only: [:show, :update]
     resources :reports, only: [] do
       collection do

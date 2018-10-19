@@ -30,8 +30,8 @@
     <div id="chartContainer" class="chart-container"></div> <!-- chart -->
     <ul class='nav nav-tabs' role='tablist'>
       <li class='active'><a href="#global" class='' data-toggle='tab'><%= @school.full_name %></a></li>
-      <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
-        <li><a href='#<%= teacher_id %>' data-toggle='tab'><%= Teacher.find(teacher_id).try(:full_name) %></a></li>
+      <%- @teachers.each do |teacher| %>
+        <li><%= link_to teacher.try(:full_name), school_teacher_path(@school,teacher.id) %></li>
       <%- end %>
     </ul>
     <div class='tab-content tab-content-border'>
@@ -39,13 +39,6 @@
         <%= render 'monthly_stats/chrono_table', monthly_stats: @school_monthly_stats %>
         <%= render "manual_ics", monthly_stats: @school_monthly_stats %>
       </div>
-      <%- @teachers_monthly_stats.each_pair do |teacher_id, stats| %>
-        <div id='<%= teacher_id %>' class='tab-pane'>
-          <% unless stats.values.reject(&:empty?).empty? -%>
-            <%= render "monthly_stats/chrono_table", monthly_stats: stats, teacher_stats: true, title: Teacher.find(teacher_id).try(:full_name) %>
-          <% end -%>
-        </div>
-      <% end %>
     </div>
   </section>
 </div>
