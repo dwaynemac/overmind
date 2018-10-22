@@ -417,6 +417,7 @@ es:
   monthly_stats:
     chrono_table:
       title: Estadísticas mensuales
+      anual: Anual
       sync_month: Actualizar índices de este mes.
       evasion_calculation: Cálculo de la evasion
       evasion_explanation: Esta evasión es calculada a partir de valores absolutos. Dividiendo el TOTAL de bajas por el TOTAL de alumnos. No es el promedio de las evasiones
