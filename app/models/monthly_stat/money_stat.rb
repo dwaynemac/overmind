@@ -2,6 +2,10 @@
 class MonthlyStat
   module MoneyStat
 
+    def needs_unit?
+      name.to_s.in?(%W(gross_income expenses profit))
+    end
+
     def suggested_currency
       if @suggested_currency
         @suggested_currency

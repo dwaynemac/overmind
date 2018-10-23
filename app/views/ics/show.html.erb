@@ -72,7 +72,7 @@
           <div class="select-inline">
             <div class="select">
               <%= f.select "gross_income_unit",  currency_options,
-                           {selected: @currency},
+                           {selected: @ics.gross_income_unit || @currency},
                            {
                              data: {
                                target: "ics.currency",
@@ -97,7 +97,8 @@
           <label><%= t("monthly_stat.names.expenses") %> :</label>
           <div class="select-inline">
             <div class="select">
-              <%= f.select "expenses_unit", currency_options, {selected: @currency},
+              <%= f.select "expenses_unit", currency_options,
+                           {selected: @ics.expenses_unit || @currency},
                            {
                              data: {
                                target: "ics.currency",
@@ -121,7 +122,8 @@
           <label><%= t("monthly_stat.names.profit") %> :</label>
           <div class="select-inline">
             <div class="select">
-              <%= f.select "profit_unit",  currency_options, {selected: @currency},
+              <%= f.select "profit_unit",  currency_options,
+                           {selected: @ics.profit_unit || @currency},
                            {
                              data: {
                                target: "ics.currency",

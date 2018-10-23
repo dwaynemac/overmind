@@ -55,6 +55,7 @@ class Ics
   def update_stats(attrs)
     attrs.keys.each do |ic|
       unless attrs[ic].blank?
+        next if ic =~ /unit/ # skip unit, will read it differently
 
         new_value = if MonthlyStat.is_a_rate?(ic)
           attrs[ic] = attrs[ic].gsub("%","")
@@ -73,10 +74,19 @@ class Ics
           stat.name = ic
           stat.service = nil
           stat.value = new_value
+          if stat.needs_unit?
+            stat.unit = attrs["#{ic}_unit"]
+          end
           stat.save
         else
-          stat.update_attributes value: new_value,
-                                 service: nil
+          new_attributes = {
+            value: new_value,
+            service: nil
+          }
+          if stat.needs_unit?
+            new_attributes = new_attributes.merge({unit: attrs["#{ic}_unit"]})
+          end
+          stat.update_attributes new_attributes
         end
       end
     end
