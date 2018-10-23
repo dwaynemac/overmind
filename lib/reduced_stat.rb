@@ -2,7 +2,11 @@
 class ReducedStat
 
   # stats_scope shouldnt have condition on name. 
-  attr_accessor :ref_date, :name, :stats, :name, :reduce_as, :school, :teacher, :stats_scope
+  attr_accessor :ref_date, :name,
+                :school, :teacher,
+                :stats, :stats_scope,
+                :reduce_as, :unit
+                
 
   def initialize(attributes)
     self.school = attributes[:school]
@@ -14,6 +18,8 @@ class ReducedStat
     self.name = attributes[:name] || stats.try(:first).try(:name) 
     self.ref_date = attributes[:ref_date] || data.try(:first).try(:ref_date)
     self.reduce_as = attributes[:reduce_as] || default_reduction
+
+    self.unit = attributes[:unit] || stats.try(:first).try(:unit)
 
     @value = attributes[:value]
     self

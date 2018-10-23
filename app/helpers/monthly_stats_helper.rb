@@ -11,7 +11,8 @@ module MonthlyStatsHelper
   def print_value(monthly_stat, options = {})
     v = monthly_stat.try :value
     return '' if v.nil?
-    if monthly_stat.is_a_rate?
+
+    val = if monthly_stat.is_a_rate?
       # rates are represented as 'cents' in integer.
       sufix = options[:sufix] || "%"
       "#{number_with_precision(v.to_f/100, precision: 2)}#{sufix}"
@@ -19,6 +20,12 @@ module MonthlyStatsHelper
       number_with_precision(v, precision: 0)
     else
       v
+    end
+
+    if monthly_stat.unit.blank?
+      val
+    else
+      "#{val} #{monthly_stat.unit}"
     end
   end
 
