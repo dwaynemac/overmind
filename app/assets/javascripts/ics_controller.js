@@ -6,7 +6,7 @@
   application.register("ics", class extends Stimulus.Controller {
 
     static get targets(){
-      return ["gross_income","expenses","profit","profitError"];
+      return ["gross_income","expenses","profit","profitError","currency"];
     }
 
     updateProfit(){
@@ -37,6 +37,13 @@
         this.profitTarget.classList.remove("ic_missing");
       
       this.profitErrorTarget.innerText = txt;
+    }
+
+    updateAllCurrencies(event){
+      var newCurrency = event.target.value;
+      this.currencyTargets.forEach((i) => {
+        i.value = newCurrency;
+      });
     }
 
   });

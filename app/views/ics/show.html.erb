@@ -71,7 +71,15 @@
           <label><%= t("monthly_stat.names.gross_income") %> :</label>
           <div class="select-inline">
             <div class="select">
-              <%= f.select "gross_income_unit",  currency_options, {selected: @currency} %>
+              <%= f.select "gross_income_unit",  currency_options,
+                           {selected: @currency},
+                           {
+                             data: {
+                               target: "ics.currency",
+                               action: "change->ics#updateAllCurrencies"
+                             }
+                           }
+                         %>
             </div>
             <div class="select">
             <%= f.text_field "gross_income",
@@ -89,7 +97,14 @@
           <label><%= t("monthly_stat.names.expenses") %> :</label>
           <div class="select-inline">
             <div class="select">
-              <%= f.select "expenses_unit", currency_options, {selected: @currency} %>
+              <%= f.select "expenses_unit", currency_options, {selected: @currency},
+                           {
+                             data: {
+                               target: "ics.currency",
+                               action: "change->ics#updateAllCurrencies"
+                             }
+                           }
+              %>
             </div>
             <div class="select">
           <%= f.text_field "expenses", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("expenses").blank?}",
@@ -106,7 +121,14 @@
           <label><%= t("monthly_stat.names.profit") %> :</label>
           <div class="select-inline">
             <div class="select">
-              <%= f.select "profit_unit",  currency_options, {selected: @currency} %>
+              <%= f.select "profit_unit",  currency_options, {selected: @currency},
+                           {
+                             data: {
+                               target: "ics.currency",
+                               action: "change->ics#updateAllCurrencies"
+                             }
+                           }
+              %>
             </div>
             <div class="select">
               <%= f.text_field "profit", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("profit").blank?}",
