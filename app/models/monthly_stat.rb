@@ -12,8 +12,10 @@ class MonthlyStat < ActiveRecord::Base
   include StatsMatrix
   
   include SearchUrls
+  
+  include MoneyStat
 
-  attr_accessible :value, :name, :school_id, :ref_date, :service, :account_name, :id   # account name is an accessor, delegated to School.
+  attr_accessible :value, :name, :school_id, :ref_date, :service, :account_name, :id, :unit   # account name is an accessor, delegated to School.
 
   # IMPORTANT
   # Stats are synced in THIS order

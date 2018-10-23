@@ -1,5 +1,7 @@
 class IcsController < ApplicationController
 
+  include IcsHelper
+
   # any user can access
   skip_before_filter :pre_check_access
 
@@ -19,6 +21,7 @@ class IcsController < ApplicationController
   end
 
   def show
+    @currency = MonthlyStat.new(school_id: @school.id).suggested_currency
     # use a different ability?
     render layout: "ics"
   end

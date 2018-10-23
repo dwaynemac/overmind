@@ -37,6 +37,14 @@ class Ics
       end
     end
   end
+  %W(gross_income expenses profit).each do |money_stat|
+    define_method("#{money_stat}_unit") do
+      stat = monthly_stats(money_stat)
+      if stat
+        stat.unit
+      end
+    end
+  end
 
   def sync_stats
     return if manual_input?
