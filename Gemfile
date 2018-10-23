@@ -29,6 +29,9 @@ group :production do
   gem 'dalli'
 end
 
+gem 'daemons'
+gem 'delayed_job_active_record'
+
 gem 'logical_model', '0.6.4'
 gem 'messaging_client', '~> 0.1'
 gem 'accounts_client', '0.2.28'
