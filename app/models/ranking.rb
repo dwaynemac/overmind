@@ -49,8 +49,18 @@ class Ranking
     
   end
 
+  def cache_key
+    "federations/#{federation_ids.join("-")}/columns/#{column_names.join("-")}/#{ref_since}/#{ref_until}"
+  end
+
   def matrix
-    @matrix ||= RankingMatrix.new(stats).matrix
+    if @matrix
+      @matrix
+    else
+      @matrix = Rails.cache.fetch("#{cache_key}/matrix") do
+        RankingMatrix.new(stats).matrix
+      end
+    end
   end
 
   def stats

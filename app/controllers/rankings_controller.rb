@@ -127,13 +127,16 @@ class RankingsController < ApplicationController
       @missing_schools ||= schools_scope.select([:id, :name, :account_name, :federation_id])
                                  .where("id NOT IN ('#{@ranking.school_ids.join("','")}')")
     end
+
+    # memoize here for faster rendering.
+    @ranking.matrix
     
     respond_to do |format|
       format.html do
         render action: :show, layout: role_layout
       end
       format.json do
-        render json: @matrix
+        render json: @ranking.matrix
       end
       format.csv do
         response.headers['Content-Disposition'] = "attachment; filename=rankings.csv"
