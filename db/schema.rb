@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20181023135506) do
+ActiveRecord::Schema.define(:version => 20181030160654) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -49,6 +49,9 @@ ActiveRecord::Schema.define(:version => 20181023135506) do
     t.string   "unit"
   end
 
+  add_index "monthly_stats", ["id", "school_id", "teacher_id", "ref_date"], :name => "existance_optimizer"
+  add_index "monthly_stats", ["school_id", "name", "teacher_id", "ref_date"], :name => "load_optimizer"
+
   create_table "schools", :force => true do |t|
     t.string   "name"
     t.integer  "federation_id"
@@ -65,6 +68,11 @@ ActiveRecord::Schema.define(:version => 20181023135506) do
     t.boolean  "cached_nucleo_enabled"
     t.boolean  "cached_padma_enabled"
   end
+
+  add_index "schools", ["account_name"], :name => "index_schools_on_account_name"
+  add_index "schools", ["federation_id"], :name => "index_schools_on_federation_id"
+  add_index "schools", ["id"], :name => "index_schools_on_id"
+  add_index "schools", ["nucleo_id"], :name => "index_schools_on_nucleo_id"
 
   create_table "schools_teachers", :force => true do |t|
     t.integer "teacher_id"
