@@ -232,6 +232,7 @@ en:
       actions: Actions
       new: New federation
       title: Federations
+      see_all_federation_ics: See all data
   ranking:
     title: Ranking
     name: Name

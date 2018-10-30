@@ -113,7 +113,7 @@ class Ranking
   def set_dates(attributes)
     [:ref_since, :ref_until].each do |ref|
       val = if attributes[ref]
-        attributes[ref]
+        attributes[ref].to_date
       elsif attributes["#{ref}(1i)"] && attributes["#{ref}(2i)"]
         Date.new(attributes["#{ref}(1i)"].to_i,
                  attributes["#{ref}(2i)"].to_i,

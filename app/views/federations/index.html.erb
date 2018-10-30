@@ -8,9 +8,8 @@
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= t('.schools_count') %></th>
       <th><%= t('.students_count') %></th>
-      <th><%= t('.dropouts_in_last_12_months') %></th>
       <th><%= t('.dropout_rate_last_12_months') %></th>
-      <!-- <th><%# link_to t('.teachers'), federations_path(order: 'teachers') %></th> -->
+      <th><%= t('.teachers') %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -18,12 +17,27 @@
     <% @federations.each do |federation| %>
       <tr>
         <td><%= link_to_if can?(:read,federation), federation.name, federation %></td>
-        <td><%= federation.schools.enabled_on_nucleo.count %></td>
-        <td><%= federation.schools.sum(:last_students_count) %></td>
-        <td><%= @dropouts_sums[federation.id] %></td>
-        <td><%= @dropouts_rates[federation.id] %></td>
-        <!-- <td><%# federation.schools.sum(:last_teachers_count) %></td> -->
+        <td><%= link_to(@schools_sums[federation.id], ranking_path(federation_id: federation.id)) %></td>
+        <td><%= link_to(@students_sums[federation.id], history_ranking_path(ranking: {
+          federation_ids: [federation.id],
+          column_names: :students,
+          ref_since: @ref_since,
+          ref_until: @ref_until
+        })) %></td>
+        <td><%= link_to(@dropouts_rates[federation.id], history_ranking_path(ranking: {
+          federation_ids: [federation.id],
+          column_names: :dropout_rate,
+          ref_since: @ref_since,
+          ref_until: @ref_until
+        })) if @dropouts_rates[federation.id] %></td>
+        <td><%= link_to(@teachers_sums[federation.id], history_ranking_path(ranking: {
+          federation_ids: [federation.id],
+          column_names: :team_teachers,
+          ref_since: @ref_since,
+          ref_until: @ref_until
+        })) %></td>
         <td>
+          <%= link_to(t(".see_all_federation_ics"), federation) if can?(:read,federation) %>
           <%= link_to(t('edit', :default => t("helpers.links.edit")),
                       edit_federation_path(federation), :class => 'btn btn-mini') if can?(:edit,federation) %>
           <%= link_to(t('destroy', :default => t("helpers.links.destroy")),

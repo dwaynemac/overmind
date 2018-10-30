@@ -440,6 +440,7 @@ es:
       title: Federaciones
       dropouts_in_last_12_months: Bajas en los últimos 12 meses
       dropout_rate_last_12_months: Evasión de los últimos 12 meses
+      see_all_federation_ics: Ver todos los índices
   ranking:
     title: Ranking
     name: Nombre
