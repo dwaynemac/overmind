@@ -15,15 +15,6 @@ describe School do
     let(:klass){School}
   end
 
-  describe "#cache_last_student_count" do
-    it "caches nr of students of last month" do
-      stat = create(:school_monthly_stat, school: school, ref_date: 1.month.ago, name: 'students')
-      create(:school_monthly_stat, school: school, ref_date: 3.months.ago, name: 'students')
-      school.cache_last_teachers_count
-      school.reload.last_students_count.should == stat.value
-    end
-  end
-
   # PadmaAccounts
   it { should have_db_column :account_name }
   it { should allow_value(nil).for(:account_name)}

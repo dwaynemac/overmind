@@ -96,9 +96,6 @@ class MonthlyStat < ActiveRecord::Base
   validates_presence_of :value
   validate :ref_date_is_end_of_month
 
-  after_save :cache_student_count, unless: ->{self.importing?}
-  after_save :cache_teachers_count, unless: ->{self.importing?}
-  
   after_save :recalculate_dependent_local_stats
 
 
@@ -142,14 +139,6 @@ class MonthlyStat < ActiveRecord::Base
 
   def importing?
     !!@importing
-  end
-
-  def cache_student_count
-    self.school.cache_last_student_count if self.name == :students
-  end
-
-  def cache_teachers_count
-    self.school.cache_last_teachers_count if self.name.in?([:assistant_students, :professor_students, :master_students])
   end
 
   def as_json(args={})
