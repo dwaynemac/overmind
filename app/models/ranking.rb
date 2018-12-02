@@ -57,7 +57,7 @@ class Ranking
     if @matrix
       @matrix
     else
-      @matrix = Rails.cache.fetch("#{cache_key}/matrix") do
+      @matrix = Rails.cache.fetch("#{cache_key}/matrix", expires_in: 12.hours ) do
         RankingMatrix.new(stats).matrix
       end
     end
