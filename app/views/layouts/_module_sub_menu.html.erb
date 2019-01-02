@@ -1,5 +1,5 @@
     <div id="module-sub-menu">
-      <% if can?(:read, Federation) -%>
+      <% if can?(:detail, Federation) -%>
           <% if current_user.federation.present? && current_ability.federations.count == 1 -%>
             <%= link_to current_user.federation.name, current_user.federation %>
           <% else -%>

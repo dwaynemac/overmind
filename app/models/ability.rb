@@ -79,6 +79,7 @@ class Ability
         can [:create, :update, :destroy], MonthlyStat, service: '', school: {account_name: linked_account_names }
       when 'council'
         can :read, Federation
+        can :detail, Federation
         can :read, School
         can :read, MonthlyStat
         can :see_global, MonthlyStat
@@ -88,6 +89,7 @@ class Ability
       when 'president'
         can :read_only_one, Federation
         can :read, Federation, id: @user.federation_id
+        can :detail, Federation
         can :read, School, federation_id: @user.federation_id
         can :read, MonthlyStat, school: { federation_id: @user.federation_id }
         can [:read,:history], Ranking
