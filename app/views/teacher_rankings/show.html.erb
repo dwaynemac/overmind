@@ -60,7 +60,7 @@
           <% @teacher_ranking.matrix.each do |teacher, stats_hash| %>
             <% if teacher %>
               <% u = PadmaUser.find teacher.try(:username) -%>
-              <% if u.username.in?(usernames) %>
+              <% if u && u.username.in?(usernames) %>
                 <tr>
                   <th>
                     <%= teacher.try(:full_name) %>
