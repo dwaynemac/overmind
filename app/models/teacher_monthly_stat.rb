@@ -90,6 +90,11 @@ class TeacherMonthlyStat < MonthlyStat
     self.teacher.try(:username)
   end
 
+  def as_json(args={})
+    args = {methods: [:account_name, :teacher_username], except: [:school_id]}.merge(args)
+    super(args)
+  end
+
   # updates value
   # IMPORTANT - currently only works for local_stats
   # @return [Integer] new value
