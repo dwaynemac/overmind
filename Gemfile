@@ -16,6 +16,7 @@ gem 'intercom-rails'
 
 # DB
 gem 'sqlite3', :group => [:development, :test]
+gem 'pg'
 
 # Inplace editor
 gem 'best_in_place', :github => 'afalkear/best_in_place_post'
@@ -24,7 +25,6 @@ gem 'padma-assets', '0.2.29'
 gem 'appsignal', '~> 1.2'
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
   gem 'dalli'
 end
