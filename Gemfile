@@ -22,7 +22,7 @@ gem 'pg'
 gem 'best_in_place', :github => 'afalkear/best_in_place_post'
 gem 'padma-assets', '0.2.29'
 
-gem 'appsignal', '~> 1.2'
+gem 'appsignal', '~> 2.8'
 
 group :production do
   gem 'rails_12factor'
