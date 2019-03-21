@@ -1,3 +1,6 @@
+require 'appsignal'
+require 'appsignal/integrations/object'
+
 class TeacherMonthlyStat < MonthlyStat
   attr_accessible :teacher_id, :teacher_username
   belongs_to :teacher
@@ -111,6 +114,7 @@ class TeacherMonthlyStat < MonthlyStat
       end
     end
   end
+  appsignal_instrument_method :update_from_service!
 
   ##
   # Will fetch all stats in STATS_BY_TEACHER from corresponding service (according to school)
@@ -148,6 +152,7 @@ class TeacherMonthlyStat < MonthlyStat
       end
     end
   end
+  appsignal_instrument_class_method :sync_school_from_service
 
   def self.create_or_update(school,teacher,name,ref_date,value)
     return nil if school.nil? || teacher.nil?
@@ -169,6 +174,7 @@ class TeacherMonthlyStat < MonthlyStat
       teacher_stat.save
     end
   end
+  appsignal_instrument_class_method :create_or_update
 
   def self.calculate_local_value(school,teacher,stat_name,ref_date)
     ls = LocalStat.new(name: stat_name,
@@ -178,6 +184,7 @@ class TeacherMonthlyStat < MonthlyStat
                       )
     ls.value
   end
+  appsignal_instrument_class_method :calculate_local_value
 
   # Will delegate fetching value to a corresponding module according to
   # service.
@@ -197,4 +204,6 @@ class TeacherMonthlyStat < MonthlyStat
         raise 'unknown service'
     end
   end
+  appsignal_instrument_class_method :get_remote_value
+
 end

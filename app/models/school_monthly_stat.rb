@@ -1,3 +1,6 @@
+require 'appsignal'
+require 'appsignal/integrations/object'
+
 class SchoolMonthlyStat < MonthlyStat
   default_scope where(teacher_id: nil)
   attr_protected :teacher_id
@@ -67,6 +70,7 @@ class SchoolMonthlyStat < MonthlyStat
 
     ms.save ? ms : nil
   end
+  appsignal_instrument_class_method :create_from_service!
 
   # updates value
   # @return [Integer] new value
@@ -80,6 +84,7 @@ class SchoolMonthlyStat < MonthlyStat
       end
     end
   end
+  appsignal_instrument_method :update_from_service!
 
   # Will delegate fetching value to a corresponding module according to
   # service.
@@ -98,6 +103,7 @@ class SchoolMonthlyStat < MonthlyStat
         raise "Unknown service : #{service}"
     end
   end
+  appsignal_instrument_method :get_remote_value
 
   private
 

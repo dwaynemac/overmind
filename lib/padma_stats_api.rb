@@ -1,3 +1,6 @@
+require 'appsignal'
+require 'appsignal/integrations/object'
+
 # encoding: utf-8
 # expects base class to have respond to account_name
 module PadmaStatsApi
@@ -136,6 +139,7 @@ module PadmaStatsApi
         end
       end
     end
+    appsignal_instrument_method :get_conversion_count
 
     # @param ref_date [Date]
     # @param options [Hash]
@@ -163,6 +167,7 @@ module PadmaStatsApi
         end
       end
     end
+    appsignal_instrument_method :get_conversion_rate
 
     # Fetches students count from CRM-ws
     # @param ref_date [Date]
@@ -231,6 +236,7 @@ module PadmaStatsApi
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
       parse_response(response,!options[:by_teacher])
     end
+    appsignal_instrument_method :count_students
 
     # Fetches students average age
     # @param ref_date [Date]
@@ -277,6 +283,7 @@ module PadmaStatsApi
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/students_average_age", params: req_options)
       parse_response(response,true)
     end
+    appsignal_instrument_method :students_average_age
 
     def count_interviews(ref_date, options={})
       options[:filter] ||= {}
@@ -300,6 +307,7 @@ module PadmaStatsApi
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/communications/count", params: req_options)
       parse_response(response,!options[:by_teacher])
     end
+    appsignal_instrument_method :count_communications
 
     # @param options [Hash]
     # @option options [String] level
@@ -320,6 +328,7 @@ module PadmaStatsApi
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/drop_outs/count", params: req_options)
       parse_response(response,!options[:by_teacher])
     end
+    appsignal_instrument_method :count_drop_outs
 
     def count_enrollments(ref_date, options={})
       req_options = { app_key: ENV['crm_key'],
@@ -337,6 +346,7 @@ module PadmaStatsApi
       response = Typhoeus::Request.get("#{CRM_URL}/api/v0/enrollments/count", params: req_options)
       parse_response(response,!options[:by_teacher])
     end
+    appsignal_instrument_method :count_enrollments
   end
 
   private

@@ -1,3 +1,6 @@
+require 'appsignal'
+require 'appsignal/integrations/object'
+
 ##
 # SyncRequest
 #
@@ -102,6 +105,8 @@ class SyncRequest < ActiveRecord::Base
       SchoolMonthlyStat.sync_from_service!(school,name,ref)
     end
   end
+  appsignal_instrument_method :sync_school_stats
+
 
   def sync_teachers_stats
     ref = ref_date(year,month)
@@ -109,6 +114,7 @@ class SyncRequest < ActiveRecord::Base
       TeacherMonthlyStat.sync_school_from_service(school,name,ref)
     end
   end
+  appsignal_instrument_method :sync_teachers_stats
 
   def ready?
     state == 'ready'
