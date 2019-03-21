@@ -63,6 +63,13 @@ namespace :sync do
 
   desc 'Sync worker, will constantly poll for pending sync_requests'
   task :worker => :environment do
+
+    Appsignal::Transaction.create(
+      SecureRandom.uuid,
+      Appsignal::Transaction::BACKGROUND_JOB,
+      Appsignal::Transaction::GenericRequest.new({})
+    )
+
     puts "Starting sync:worker"
     begin
       loop do
@@ -86,11 +93,15 @@ namespace :sync do
           end
 
         rescue StandardError => e
+          Appsignal.set_error(e)
           puts "Exception in sync:worker: #{e.message}"
         end
       end
     rescue SignalException => e
+      Appsignal.set_error(e)
       puts "Signal to sync:worker: #{e.message}"
+    ensure
+      Appsignal::Transaction.complete_current!
     end
     puts "exiting sync:worker"
   end
