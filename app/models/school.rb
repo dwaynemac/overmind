@@ -1,3 +1,6 @@
+require 'appsignal'
+require 'appsignal/integrations/object'
+
 class School < ActiveRecord::Base
   attr_accessible :name, :federation_id, :nucleo_id, :account_name, :migrated_kshema_to_padma_at
 
@@ -17,7 +20,16 @@ class School < ActiveRecord::Base
 
   include NucleoApi
   include KshemaApi
+
   include PadmaStatsApi
+  # Appsignal measurements for PadmaStatsApi
+  appsignal_instrument_method :get_conversion_count
+  appsignal_instrument_method :get_conversion_rate
+  appsignal_instrument_method :count_students
+  appsignal_instrument_method :students_average_age
+  appsignal_instrument_method :count_communications
+  appsignal_instrument_method :count_drop_outs
+  appsignal_instrument_method :count_enrollments
 
   include Accounts::BelongsToAccount
   validates_uniqueness_of :account_name, allow_blank: true
