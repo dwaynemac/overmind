@@ -204,6 +204,6 @@ class TeacherMonthlyStat < MonthlyStat
         raise 'unknown service'
     end
   end
-  appsignal_instrument_class_method :get_remote_value
+  appsignal_instrument_class_method :get_remote_values
 
 end
