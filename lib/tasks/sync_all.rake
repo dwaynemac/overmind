@@ -74,24 +74,31 @@ namespace :sync do
     begin
       loop do
         begin
-          Appsignal.instrument('month_iteration.sync_worker') do
-            puts "Polling for sync requests"
+          puts "Polling for sync requests"
 
-            scope = SyncRequest.pending.order('priority desc')
-            h = Time.now.hour
-            scope = scope.not_night_only if !(h > 0 && h < 6)
+          scope = SyncRequest.pending.order('priority desc')
+          h = Time.now.hour
+          scope = scope.not_night_only if !(h > 0 && h < 6)
 
-            sr = scope.first
-            if sr
+          sr = scope.first
+          if sr
+            ActiveSupport::Notifications.instrument(
+              'process_sync_request.sync_worker',
+              :class => 'SyncRequest',
+              :method => 'start',
+              :queue_time => (Time.now.to_f - sr.updated_at.to_f) * 1000,
+              :queue => "sync_worker",
+              :attempts => 1
+            ) do
               i = 0
               until sr.finished? || sr.failed? || i>12 do
                 puts "starting SyncRequest##{sr.id} for school##{sr.school_id} year:#{sr.year} month:#{sr.month}, pr: #{sr.priority}"
                 sr.start
                 i += 1
               end
-            else
-              sleep 5 
             end
+          else
+            sleep 5 
           end
         rescue StandardError => e
           Appsignal.set_error(e)
