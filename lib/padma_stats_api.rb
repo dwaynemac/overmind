@@ -1,7 +1,8 @@
+# encoding: utf-8
+
 require 'appsignal'
 require 'appsignal/integrations/object'
 
-# encoding: utf-8
 # expects base class to have respond to account_name
 module PadmaStatsApi
 
