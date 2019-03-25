@@ -57,6 +57,8 @@
         <tbody>
           <% monthly_stats =  @teacher_ranking.monthly_stats %>
           <% usernames = @school.account.users.map(&:username) %>
+          <% acums_by_name = {} %>
+          <% @teacher_ranking.column_names.each{|n| acums_by_name[n] = 0 } %>
           <% @teacher_ranking.matrix.each do |teacher, stats_hash| %>
             <% if teacher %>
               <% u = PadmaUser.find teacher.try(:username) -%>
@@ -68,9 +70,10 @@
                   <% teacher_monthly_stats = monthly_stats[teacher] %>
                   <% @teacher_ranking.column_names.each do |name| %>
                     <% monthly_stat = teacher_monthly_stats.detect {|ms| ms.name == name.to_s} unless teacher_monthly_stats.blank? %>
+                    <% acums_by_name[name] += monthly_stat.value if monthly_stat %>
                     <td>
-                        <span><%= print_value monthly_stat %></span>
-                      </td>
+                      <span><%= print_value monthly_stat %></span>
+                    </td>
                   <% end %>
                   <% @teacher_ranking.column_names.each do |name| %>
                     <% if stats_hash[name.to_s].nil? -%>
@@ -95,6 +98,11 @@
             <% @teacher_ranking.column_names.each do |name| %>
               <td>
                 <%= print_value @teacher_ranking.school_stats[@school.id]["month"][name.to_s] %>
+                <% unless MonthlyStat.is_a_rate?(name) %>
+                  <% if acums_by_name[name] != (@teacher_ranking.school_stats[@school.id]["month"][name.to_s].try(:value) || 0 ) %>
+                    DEBUG ERROR. Suma x instructor <%= acums_by_name[name] %>
+                  <% end %>
+                <% end %>
               </td>
             <% end %>
             <% @teacher_ranking.column_names.each do |name| %>
