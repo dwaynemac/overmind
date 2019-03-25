@@ -25,7 +25,7 @@ class Ability
   end
 
   def alpha?
-    true || @user.current_account.try(:tester_level) == 'alpha'
+    @user.current_account.try(:tester_level) == 'alpha'
   end
 
   def beta?
