@@ -78,6 +78,37 @@ class TeacherRanking
     @teacher_ids ||= stats.map(&:teacher_id)
   end
 
+  def school_stats
+    if @school_stats
+      @school_stats
+    else
+      @school_stats = {}
+      school_ids.each do |sid|
+        @school_stats[sid] = {
+          "month" => {},
+          "avg" => {}
+        }
+        values = SchoolMonthlyStat.where(school_id: sid,
+                                name: column_names,
+                                ref_date: ref_date)
+        values.each do |sms|
+          @school_stats[sid]["month"][sms.name] = sms
+        end
+
+        column_names.each do |name|
+          @school_stats[sid]["avg"][name] = ReducedStat.new(
+            name: name,
+            stats_scope: SchoolMonthlyStat.where(
+                                school_id: sid,
+                                ref_date: ref_since.to_date..ref_until.to_date),
+            reduce_as: :avg
+          )
+        end
+      end
+      @school_stats
+    end
+  end
+
   def persisted?
     false
   end

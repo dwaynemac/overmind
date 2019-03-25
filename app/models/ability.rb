@@ -24,6 +24,15 @@ class Ability
 
   end
 
+  def alpha?
+    true || @user.current_account.try(:tester_level) == 'alpha'
+  end
+
+  def beta?
+    tl = @user.current_account.try(:tester_level)
+    tl == 'alpha' || tl == 'beta'
+  end
+
   ##
   # Warning! This uses accessible_by. Shouldn't be used in Ability intialization.
   #

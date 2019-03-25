@@ -57,6 +57,9 @@ pt-BR:
     columns: Columnas
     sample_size: Media obtida de %{size} mêses.
     choose_columns: Selecionar colunas
+  teacher_rankings:
+    show:
+      school_total: Escola
   teacher_ranking:
     title: Estadísticas dos instrutores
     options: Opções

@@ -88,6 +88,23 @@
             <% end %>
           <% end %>
         </tbody>
+        <% if current_ability.alpha? %>
+        <tfoot>
+          <tr>
+            <th><%= t(".school_total") %></th>
+            <% @teacher_ranking.column_names.each do |name| %>
+              <td>
+                <%= print_value @teacher_ranking.school_stats[@school.id]["month"][name.to_s] %>
+              </td>
+            <% end %>
+            <% @teacher_ranking.column_names.each do |name| %>
+              <td>
+                <%= print_value @teacher_ranking.school_stats[@school.id]["avg"][name] %>
+              </td>
+            <% end %>
+          </tr>
+        </tfoot>
+        <% end %>
       </table>
     </div>
   </section>

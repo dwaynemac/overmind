@@ -451,6 +451,9 @@ es:
     columns: Columnas
     sample_size: Media calculada sobre valores de %{size} meses.
     choose_columns: Seleccionar columnas
+  teacher_rankings:
+    show:
+      school_total: Escuela
   teacher_ranking:
     title: Estadisticas de los instructores
     options: Opciones

@@ -241,6 +241,9 @@ en:
     federations: Federations
     columns: Columns
     column: Columns
+  teacher_rankings:
+    show:
+      school_total: School
   teacher_ranking:
     title: Teacher Stats
     options: Options
