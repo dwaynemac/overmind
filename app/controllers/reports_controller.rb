@@ -3,11 +3,34 @@ class ReportsController < ApplicationController
 
   include ReportsHelper
 
-  before_filter :load_school
-  authorize_resource :school
+  before_filter :load_school, except: [:global_teachers]
+  authorize_resource :school, except: [:global_teachers]
 
-  before_filter :set_ref_date
-  before_filter :set_stats_scope
+  before_filter :set_ref_date, except: [:global_teachers]
+  before_filter :set_stats_scope, except: [:global_teachers]
+
+  def global_teachers
+    authorize! :global_teachers, :reports
+
+    scope = TeacherMonthlyStat.scoped
+
+    if params[:federation_ids]
+      scope = scope.joins(:school).where( schools: { federation_id: params[:federation_ids] })
+    elsif params[:school_ids]
+      scope = scope.where(school_id: params[:school_ids])
+    end
+    if params[:stat_names]
+      @stat_names = params[:stat_names]
+      scope = scope.where(name: params[:stat_names])
+    end
+    if params[:avg_since] && params[:avg_until]
+      scope = scope.where(ref_date: params[:avg_since].to_date..params[:avg_until].to_date )
+    elsif params[:ref_date]
+      scope = scope.where(ref_date: params[:ref_date])
+    end
+
+    @stats = scope.includes(:teacher).group("monthly_stats.name, teacher_id").select("AVG(value) as value, monthly_stats.name as name, teacher_id")
+  end
   
   def marketing_snapshot
     authorize! :read, :reports

@@ -1,0 +1,27 @@
+<table>
+  <thead>
+    <tr>
+      <th></th>
+    </tr>
+    <tr>
+      <th></th>
+      <% @stat_names.each do |name| %>
+        <th><%= name %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stats.group_by(&:teacher).each do |teacher, stats| %>
+      <tr>
+        <td><%= teacher.try :username %></td>
+        <% @stat_names.each do |name| %>
+          <td>
+            <%= stats.select{|s| s.name == name }.first.try :value %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+  </tfoot>
+</table>

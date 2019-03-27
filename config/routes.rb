@@ -12,6 +12,11 @@ Overmind::Application.routes.draw do
       get :select_school
     end
   end
+  resources :reports, only: [] do
+    collection do
+      get 'global_teachers', to: 'reports#global_teachers'
+    end
+  end
   resources :schools do
     resources :teachers, only: [:show]
     resource :ics, only: [:show, :update]
