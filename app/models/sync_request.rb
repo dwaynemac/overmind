@@ -99,6 +99,14 @@ class SyncRequest < ActiveRecord::Base
     end
   end
 
+  def queue_dj
+    if persisted?
+      # delayed job prioity is lower number -> higher priority
+      # queue on DelayedJob starting sync. safe=false for exception to force retrying
+      delay(priority: -priority).start(false)
+    end
+  end
+
   def sync_school_stats
     ref = ref_date(year,month)
     school_stat_names.each do |name|

@@ -11,10 +11,13 @@ class SyncRequestsController < ApplicationController
         sr = @school.sync_requests.new(params[:sync_request])
         sr.month = month
         sr.save
+        sr.queue_dj
       end
     else
-      @school.sync_requests.create(params[:sync_request])
+      sr = @school.sync_requests.create(params[:sync_request])
+      sr.queue_dj
     end
+
 
     redirect_to school_path(id: @school.id,
                             year: @year),

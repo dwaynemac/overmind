@@ -71,11 +71,12 @@ class MessageDoorController < ApplicationController
   
   def queue_sync_requests
     @ref_dates.each do |ref_date|
-      SyncRequest.create(school_id: @school.id,
-                         year: ref_date.year,
-                         month: ref_date.month,
-                         filter_by_event: event_filter_name(@key_name),
-                         priority: calculate_priority(ref_date))
+      sr = SyncRequest.create(school_id: @school.id,
+                              year: ref_date.year,
+                              month: ref_date.month,
+                              filter_by_event: event_filter_name(@key_name),
+                              priority: calculate_priority(ref_date))
+      sr.queue_dj
     end
   end
 
