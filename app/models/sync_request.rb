@@ -99,11 +99,19 @@ class SyncRequest < ActiveRecord::Base
     end
   end
 
+  #"--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/object:SyncRequest\n  attributes:\n    id: 146506\n    school_id: 90\n    year: 2019\n    state: finished\n    created_at: 2019-04-04 14:30:44.882430000 Z\n    updated_at: 2019-04-04 14:31:55.492554000 Z\n    priority: 15\n    month: 2\n    filter_by_event: \nmethod_name: :start\nargs:\n- false\n"
   def queue_dj
     if persisted?
-      # delayed job prioity is lower number -> higher priority
-      # queue on DelayedJob starting sync. safe=false for exception to force retrying
-      delay(priority: -priority).start(false)
+      handler_matcher = "%SyncRequest%id: #{id}%school_id: #{school_id}%year: #{year}%priority: #{priority}%month: #{month}%"
+      if filter_by_event
+        handler_matcher = "#{handler_matcher}%filter_by_event: #{filter_by_event}%"
+      end
+
+      unless Delayed::Job.where("handler like ? AND attempts = 0", handler_matcher).exists?
+        # delayed job prioity is lower number -> higher priority
+        # queue on DelayedJob starting sync. safe=false for exception to force retrying
+        delay(priority: -priority).start(false)
+      end
     end
   end
 
