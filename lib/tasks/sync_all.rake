@@ -1,5 +1,10 @@
 namespace :sync do
 
+  task :queue_on_delayed_job => :environment do
+    scope = SyncRequest.pending
+    scope.each{|sr| sr.queue_dj }
+  end
+
   desc 'It doesnt really stop excecution. It just changes state running -> paused'
   task :pause_all => :environment do
     puts "Pausing running workers"
