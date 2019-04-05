@@ -1,7 +1,13 @@
 <%= print_value @teacher_ranking.school_stats[@school.id]["month"][name.to_s] %>
 <% unless MonthlyStat.is_a_rate?(name) %>
   <% if acum != (@teacher_ranking.school_stats[@school.id]["month"][name.to_s].try(:value) || 0 ) %>
-    <%- if can?(:create, SyncRequest) && @school.padma_enabled? -%>
+    <% if SyncRequest.where(year: @teacher_ranking.ref_date.year,
+                            school_id: @school.id,
+                            month: @teacher_ranking.ref_date.month).exists? %>
+      <p>
+        Error? we're re calculating
+      </p>
+    <%- elsif can?(:create, SyncRequest) && @school.padma_enabled? -%>
       <p>
         <%= form_for [@school,@school.sync_requests.new(year: @teacher_ranking.ref_date.year, month: @teacher_ranking.ref_date.month, priority: 10)], method: 'POST', id: 'request-sync-form' do |f| %>
           <%= f.hidden_field :year %>
