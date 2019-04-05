@@ -90,7 +90,7 @@ class TeacherRanking
         }
         values = SchoolMonthlyStat.where(school_id: sid,
                                 name: column_names,
-                                ref_date: ref_date)
+                                ref_date: ref_date.end_of_month)
         values.each do |sms|
           @school_stats[sid]["month"][sms.name] = sms
         end

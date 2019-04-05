@@ -5,7 +5,6 @@ class TeacherRankingsController < ApplicationController
   def show
     authorize! :read, TeacherRanking
 
-
     @federation = @school.federation if @school
 
     unless params[:school_id]
