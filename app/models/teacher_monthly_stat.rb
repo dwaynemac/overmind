@@ -160,7 +160,8 @@ class TeacherMonthlyStat < MonthlyStat
                           teacher_id: teacher.id,
                           name: name,
                           ref_date: ref_date)
-    if existing.blank?
+                   .first
+    if existing.nil?
       # store new
       self.create(school_id: school.id,
                   teacher_id: teacher.id,
@@ -168,10 +169,11 @@ class TeacherMonthlyStat < MonthlyStat
                   ref_date: ref_date,
                   value: value)
     else
-      # update existing
-      teacher_stat = existing.first
-      teacher_stat.value = value
-      teacher_stat.save
+      if existing.value.to_i != value.to_i
+        # update existing
+        existing.value = value
+        existing.save
+      end
     end
   end
   appsignal_instrument_class_method :create_or_update
