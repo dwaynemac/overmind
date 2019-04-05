@@ -141,13 +141,15 @@ namespace :sync do
           year = (ENV['year'] == 'current')? Date.today.year : ENV['year']
           (1..12).each do |month|
             puts "    #{year}-#{month}"
-            SyncRequest.create(school_id: school.id, year: year, month: month)
+            sr = SyncRequest.create(school_id: school.id, year: year, month: month)
+            sr.queue_dj
           end
         else
           (2010..Time.zone.today.year).each do |year|
             (1..12).each do |month|
               puts "    #{year}-#{month}"
-              SyncRequest.create(school_id: school.id, year: year, month: month)
+              sr = SyncRequest.create(school_id: school.id, year: year, month: month)
+              sr.queue_dj
             end
           end
         end
@@ -163,7 +165,8 @@ namespace :sync do
     if today.day == 1
       School.enabled_on_nucleo.each do |school|
         if school.padma_enabled?
-          SyncRequest.create(school_id: school.id, year: today.year, priority: 5, month: today.month)
+          sr = SyncRequest.create(school_id: school.id, year: today.year, priority: 5, month: today.month)
+          sr.queue_dj
         end
       end
     end
