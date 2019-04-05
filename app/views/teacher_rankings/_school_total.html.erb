@@ -1,0 +1,19 @@
+<%= print_value @teacher_ranking.school_stats[@school.id]["month"][name.to_s] %>
+<% unless MonthlyStat.is_a_rate?(name) %>
+  <% if acum != (@teacher_ranking.school_stats[@school.id]["month"][name.to_s].try(:value) || 0 ) %>
+    <%- if can?(:create, SyncRequest) && @school.padma_enabled? -%>
+      <p>
+        <%= form_for [@school,@school.sync_requests.new(year: @teacher_ranking.ref_date.year, month: @teacher_ranking.ref_date.month, priority: 10)], method: 'POST', id: 'request-sync-form' do |f| %>
+          <%= f.hidden_field :year %>
+          <%= f.hidden_field :month %>
+          <%= f.hidden_field :priority %>
+          <input type="hidden" name="return_to" value="<%= url_for params %>" />
+          <button type='submit' class='btn btn-link btn-sm'>
+            Error? refresh: 
+            <span class='glyphicon glyphicon-refresh'></span>
+          </button>
+        <% end -%>
+      </p>
+    <%- end -%>
+  <% end %>
+<% end %>

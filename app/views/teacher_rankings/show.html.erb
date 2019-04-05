@@ -91,18 +91,16 @@
             <% end %>
           <% end %>
         </tbody>
-        <% if current_ability.alpha? %>
         <tfoot>
           <tr>
             <th><%= t(".school_total") %></th>
             <% @teacher_ranking.column_names.each do |name| %>
               <td>
-                <%= print_value @teacher_ranking.school_stats[@school.id]["month"][name.to_s] %>
-                <% unless MonthlyStat.is_a_rate?(name) %>
-                  <% if acums_by_name[name] != (@teacher_ranking.school_stats[@school.id]["month"][name.to_s].try(:value) || 0 ) %>
-                    DEBUG ERROR. Suma x instructor <%= acums_by_name[name] %>
-                  <% end %>
-                <% end %>
+                <%= render partial: "school_total",
+                          locals: {
+                            name: name,
+                            acum: acums_by_name[name]
+                          } %>
               </td>
             <% end %>
             <% @teacher_ranking.column_names.each do |name| %>
@@ -112,7 +110,6 @@
             <% end %>
           </tr>
         </tfoot>
-        <% end %>
       </table>
     </div>
   </section>

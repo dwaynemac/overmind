@@ -19,9 +19,13 @@ class SyncRequestsController < ApplicationController
     end
 
 
-    redirect_to school_path(id: @school.id,
-                            year: @year),
-                            notice: I18n.t('schools.sync_year.queued')
+    if params[:return_to]
+      redirect_to params[:return_to]
+    else
+      redirect_to school_path(id: @school.id,
+                              year: @year),
+                              notice: I18n.t('schools.sync_year.queued')
+    end
   end
 
   def update
