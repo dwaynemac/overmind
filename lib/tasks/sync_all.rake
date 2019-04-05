@@ -128,11 +128,11 @@ namespace :sync do
   task :all => :environment do
     schools = []
     if ENV['federation_id']
-      schools = Federation.find(ENV['federation_id']).schools
+      schools = Federation.find(ENV['federation_id']).schools.enabled_on_nucleo
     elsif ENV['school_id']
       schools = School.where(id: ENV['school_id'])
     else
-      schools = School.all
+      schools = School.enabled_on_nucleo.all
     end
     schools.each do |school|
       if school.padma_enabled?
@@ -146,7 +146,9 @@ namespace :sync do
           end
           months.each do |month|
             puts "    #{year}-#{month}"
-            sr = SyncRequest.create(school_id: school.id, year: year, month: month)
+            sr = SyncRequest.create(school_id: school.id,
+                                    year: year,
+                                    month: month)
             sr.queue_dj
           end
         else
@@ -160,19 +162,6 @@ namespace :sync do
         end
       else
         puts "#{school.name}\t\thas no service to sync"
-      end
-    end
-  end
-
-  desc "Queues syncs for current month, only on the 1st of the month."
-  task :first_day_of_month_stats_sync => :environment do
-    today = Date.today
-    if today.day == 1
-      School.enabled_on_nucleo.each do |school|
-        if school.padma_enabled?
-          sr = SyncRequest.create(school_id: school.id, year: today.year, priority: 5, month: today.month)
-          sr.queue_dj
-        end
       end
     end
   end
