@@ -48,7 +48,7 @@ class ReportsController < ApplicationController
   def pedagogic_snapshot
     authorize! :read, :reports
 
-    unless SyncRequest.on_ref_date(@ref_date)
+    unless SyncRequest.on_ref_date(year: @year, month: @month)
                       .where(school_id: @school.id)
                       .where(state: %W(ready running paused))
                       .exists?
