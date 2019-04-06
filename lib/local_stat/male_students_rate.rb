@@ -1,5 +1,10 @@
 class LocalStat
   module MaleStudentsRate
+
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
+
     def calculate_male_students_rate
       m = value_for(:male_students)
       s = value_for(:students)
@@ -11,8 +16,10 @@ class LocalStat
       end
     end
     
-    def male_students_rate_dependencies
-      [:male_students, :students]
+    module ClassMethods
+      def male_students_rate_dependencies
+        [:male_students, :students]
+      end
     end
   end
 end

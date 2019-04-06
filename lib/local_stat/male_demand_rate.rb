@@ -1,5 +1,10 @@
 class LocalStat
   module MaleDemandRate
+
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
+
     def calculate_male_demand_rate
       m = value_for(:male_demand)
       s = value_for(:demand)
@@ -12,8 +17,10 @@ class LocalStat
     end
   end
   
-  def male_demand_rate_dependencies
-    [:male_demand, :demand]
+  module ClassMethods
+    def male_demand_rate_dependencies
+      [:male_demand, :demand]
+    end
   end
     
 end

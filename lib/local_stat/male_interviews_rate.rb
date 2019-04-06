@@ -1,5 +1,10 @@
 class LocalStat
   module MaleInterviewsRate
+
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
+
     def calculate_male_interviews_rate
       m = value_for(:male_interviews)
       s = value_for(:interviews)
@@ -11,8 +16,10 @@ class LocalStat
       end
     end
     
-    def male_interviews_rate_dependencies
-      [:male_interviews, :interviews]
+    module ClassMethods
+      def male_interviews_rate_dependencies
+        [:male_interviews, :interviews]
+      end
     end
   end
 end

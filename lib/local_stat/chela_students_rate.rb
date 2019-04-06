@@ -1,5 +1,10 @@
 class LocalStat
   module ChelaStudentsRate
+
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
+
     def calculate_chela_students_rate
       a = value_for(:chela_students)
       b = value_for(:students)
@@ -11,8 +16,10 @@ class LocalStat
       end
     end
     
-    def chela_students_rate_dependencies
-      [:chela_students, :students]
+    module ClassMethods
+      def chela_students_rate_dependencies
+        [:chela_students, :students]
+      end
     end
   end
 end

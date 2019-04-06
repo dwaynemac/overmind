@@ -1,5 +1,10 @@
 class LocalStat
   module SadhakaStudentsRate
+
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
+
     def calculate_sadhaka_students_rate
       a = value_for(:sadhaka_students)
       b = value_for(:students)
@@ -11,8 +16,10 @@ class LocalStat
       end
     end
     
-    def sadhaka_students_rate_dependencies
-      [:sadhaka_students, :students]
+    module ClassMethods
+      def sadhaka_students_rate_dependencies
+        [:sadhaka_students, :students]
+      end
     end
   end
 end

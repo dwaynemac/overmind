@@ -1,6 +1,10 @@
 class LocalStat
   module EnrollmentRate
 
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
+
     def calculate_enrollment_rate(options={})
       e = options[:enrollments] || value_for(:enrollments)
       i = options[:p_interviews] || value_for(:p_interviews)
@@ -13,10 +17,6 @@ class LocalStat
       end
     end
     
-    def enrollment_rate_dependencies
-      [:enrollments, :p_interviews]
-    end
-
     def reduce_enrollment_rate(scope)
       if scope.nil?
         raise "need scope to reduce enrollment_rate"
@@ -34,5 +34,12 @@ class LocalStat
       ret
 
     end
+
+    module ClassMethods
+      def enrollment_rate_dependencies
+        [:enrollments, :p_interviews]
+      end
+    end
+
   end
 end

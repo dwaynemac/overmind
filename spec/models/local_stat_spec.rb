@@ -12,14 +12,14 @@ describe LocalStat do
   
   describe ".dependant_on" do
     it "returns local_stat_names dependent on given stat_name" do
-      expect(LocalStat.dependant_on(:students)).to eq [
+      expect(LocalStat.dependant_on(:students).sort).to eq [
         :yogin_students_rate,
         :aspirante_students_rate,
         :chela_students_rate,
         :dropout_rate,
         :male_students_rate,
         :sadhaka_students_rate
-      ]
+      ].sort
     end
   end
 end

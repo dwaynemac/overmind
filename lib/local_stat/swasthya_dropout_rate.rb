@@ -1,6 +1,10 @@
 class LocalStat
   module SwasthyaDropoutRate
 
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
+
     def calculate_swasthya_dropout_rate
       d = value_for(:dropouts_intermediates)
 
@@ -13,9 +17,11 @@ class LocalStat
       end
     end
     
-    def swasthya_dropout_rate_dependencies
-      [:dropouts_intermediates, :sadhaka_students,:yogin_students,:chela_students,
-      :graduado_students, :assistant_students,:professor_students,:master_students]
+    module ClassMethods
+      def swasthya_dropout_rate_dependencies
+        [:dropouts_intermediates, :sadhaka_students,:yogin_students,:chela_students,
+        :graduado_students, :assistant_students,:professor_students,:master_students]
+      end
     end
   end
 end

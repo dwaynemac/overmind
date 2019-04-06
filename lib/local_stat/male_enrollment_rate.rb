@@ -1,6 +1,10 @@
 class LocalStat
   module MaleEnrollmentRate
 
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
+
     def calculate_male_enrollment_rate(options={})
       e = options[:male_enrollments] || value_for(:male_enrollments)
       i = options[:male_p_interviews] || value_for(:male_p_interviews)
@@ -11,10 +15,6 @@ class LocalStat
       else
         nil
       end
-    end
-    
-    def male_enrollment_rate_dependencies
-      [:male_enrollments, :male_p_interviews]
     end
 
     def reduce_male_enrollment_rate(scope)
@@ -33,6 +33,12 @@ class LocalStat
       end
       ret
 
+    end
+    
+    module ClassMethods
+      def male_enrollment_rate_dependencies
+        [:male_enrollments, :male_p_interviews]
+      end
     end
   end
 end

@@ -1,5 +1,10 @@
 class LocalStat
   module DropoutRate
+
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
+
     def calculate_dropout_rate(options={})
       d = options[:dropouts] || value_for(:dropouts)
       s = options[:students] || value_for(:students)
@@ -8,10 +13,6 @@ class LocalStat
       else
         nil
       end
-    end
-    
-    def dropout_rate_dependencies
-      [:dropouts, :students]
     end
     
     # options:
@@ -33,5 +34,12 @@ class LocalStat
       end
       ret
     end
+    
+    module ClassMethods
+      def dropout_rate_dependencies
+        [:dropouts, :students]
+      end
+    end
+    
   end
 end

@@ -1,6 +1,10 @@
 class LocalStat
   module BegginersDropoutRate
 
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
+
     def calculate_begginers_dropout_rate
       d = value_for(:dropouts_begginers)
       s = value_for(:aspirante_students)
@@ -11,8 +15,10 @@ class LocalStat
       end
     end
     
-    def begginers_dropout_rate_dependencies
-      [:dropouts_begginers, :aspirante_students]
+    module ClassMethods
+      def begginers_dropout_rate_dependencies
+        [:dropouts_begginers, :aspirante_students]
+      end
     end
 
   end
