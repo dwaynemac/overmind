@@ -20,7 +20,7 @@ class TeacherRankingsController < ApplicationController
                                                                            school_ids: [@school.id] })
     
     
-    unless SyncRequest.on_ref_date(@teacher_ranking.ref_date)
+    unless SyncRequest.on_ref_date(year: @teacher_ranking.ref_date.year, month: @teacher_ranking.ref_date.month)
                       .where(school_id: @school.id)
                       .where(state: %W(ready running paused))
                       .exists?
