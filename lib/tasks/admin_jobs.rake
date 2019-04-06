@@ -9,10 +9,6 @@ task :update_services => :environment do
   end
 end
 
-task :calculate_local_stats => :environment do
-  LocalStat.calculate_all
-end
-
 task :recalculate_local_rates => :environment do
   SchoolMonthlyStat.where(service: 'overmind').where("value <= 100").where(name: [
       :conversion_rate,
