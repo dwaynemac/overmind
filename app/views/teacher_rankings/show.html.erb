@@ -56,18 +56,16 @@
         </thead>
         <tbody>
           <% monthly_stats =  @teacher_ranking.monthly_stats %>
-          <% usernames = @school.account.users.map(&:username) %>
           <% acums_by_name = {} %>
           <% @teacher_ranking.column_names.each{|n| acums_by_name[n] = 0 } %>
           <% @teacher_ranking.matrix.each do |teacher, stats_hash| %>
             <% if teacher %>
-              <% u = PadmaUser.find teacher.try(:username) -%>
-              <% if u && u.username.in?(usernames) %>
+              <% teacher_monthly_stats = monthly_stats[teacher] %>
+              <% if teacher_is_currently_in_team?(teacher) || non_zero_stats?(teacher_monthly_stats)  %>
                 <tr>
                   <th>
                     <%= teacher.try(:full_name) %>
                   </th>
-                  <% teacher_monthly_stats = monthly_stats[teacher] %>
                   <% @teacher_ranking.column_names.each do |name| %>
                     <% monthly_stat = teacher_monthly_stats.detect {|ms| ms.name == name.to_s} unless teacher_monthly_stats.blank? %>
                     <% acums_by_name[name] += monthly_stat.value if monthly_stat %>
