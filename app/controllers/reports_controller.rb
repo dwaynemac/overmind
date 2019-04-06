@@ -52,7 +52,7 @@ class ReportsController < ApplicationController
                       .where(school_id: @school.id)
                       .where(state: %W(ready running paused))
                       .exists?
-      sr = SyncRequest.create(year: @year, month: @month, school_id: @school.id)
+      sr = SyncRequest.create(year: @year, month: @month, school_id: @school.id, priority: 10)
       sr.queue_dj
     end
 
