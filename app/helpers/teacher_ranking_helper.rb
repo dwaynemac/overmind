@@ -6,7 +6,6 @@ module TeacherRankingHelper
   end
 
   def non_zero_stats?(stats)
-    debugger
-    stats.sum(&:value) > 0
+    stats && ( stats.sum(&:value) > 0 )
   end
 end
