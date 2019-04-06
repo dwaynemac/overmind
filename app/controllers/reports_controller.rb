@@ -48,6 +48,14 @@ class ReportsController < ApplicationController
   def pedagogic_snapshot
     authorize! :read, :reports
 
+    unless SyncRequest.on_ref_date(@ref_date)
+                      .where(school_id: @school.id)
+                      .where(state: %W(ready running paused))
+                      .exists?
+      sr = SyncRequest.create(year: @year, month: @month, school_id: @school.id)
+      sr.queue_dj
+    end
+
     preloaded_stats = @scope.all
 
     #widget

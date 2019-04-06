@@ -19,6 +19,15 @@ class TeacherRankingsController < ApplicationController
     @teacher_ranking = TeacherRanking.new params[:teacher_ranking].merge({ federation_ids: [@federation.try(:id)],
                                                                            school_ids: [@school.id] })
     
+    
+    unless SyncRequest.on_ref_date(@teacher_ranking.ref_date)
+                      .where(school_id: @school.id)
+                      .where(state: %W(ready running paused))
+                      .exists?
+      sr = SyncRequest.create(year: @teacher_ranking.ref_date.year, month: @teacher_ranking.ref_date.month, school_id: @school.id)
+      sr.queue_dj
+    end
+
     respond_to do |format|
       format.html { render action: :show }
       format.json do
