@@ -3,7 +3,10 @@
   <% if acum != (@teacher_ranking.school_stats[@school.id]["month"][name.to_s].try(:value) || 0 ) %>
     <% if SyncRequest.where(year: @teacher_ranking.ref_date.year,
                             school_id: @school.id,
-                            month: @teacher_ranking.ref_date.month).exists? %>
+                            month: @teacher_ranking.ref_date.month
+                           )
+                     .where(state: %W(ready running paused))
+                     .exists? %>
       <p>
         Error? we're re calculating
       </p>
