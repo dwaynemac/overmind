@@ -135,7 +135,7 @@ class LocalStat
   def self.dependant_on(name)
     registered_stats.map do |local_stat_name|
       mthd = "#{local_stat_name}_dependencies"
-      if respond_to?(mthd) && name.in?(send(mthd)) 
+      if respond_to?(mthd) && name.to_sym.in?(send(mthd)) 
         local_stat_name
       end
     end.compact

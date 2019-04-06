@@ -224,9 +224,17 @@ class MonthlyStat < ActiveRecord::Base
   end
   
   def recalculate_dependent_local_stats
-    unless self.service == 'overmind'
-      LocalStat.dependant_on(self.name).each do |local_stat_name|
-        # recalculate
+    dependant_stat_names = LocalStat.dependant_on(name)
+    unless dependant_stat_names.empty?
+      # this updates exists stats
+      # TODO we should create missing stats
+      MonthlyStat.where(
+        ref_date: ref_date,
+        school_id: school_id,
+        teacher_id: teacher_id,
+        name: dependant_stat_names
+      ).each do |ms|
+        ms.update_from_service!
       end
     end
   end
