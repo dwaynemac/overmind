@@ -86,6 +86,12 @@ class SchoolMonthlyStat < MonthlyStat
   end
   appsignal_instrument_method :update_from_service!
 
+  def queue_resync
+    unless Delayed::Job.where("handler like '%SchoolMonthlyStat%id: #{id}%update_from_service!%' AND attempts = 0").exists?
+      delay.update_from_service!
+    end
+  end
+
   # Will delegate fetching value to a corresponding module according to
   # service.
   # @return [Integer/Array<Hash>]

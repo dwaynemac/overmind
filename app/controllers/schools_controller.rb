@@ -49,14 +49,19 @@ class SchoolsController < ApplicationController
     @stat_names = get_stat_names.map(&:to_sym)
     @ranking_for_column_names = Ranking.new(column_names: @stat_names)
 
-    @school_monthly_stats = Matrixer.new(
-      @school.school_monthly_stats
+    stats_scope = @school.school_monthly_stats
       .where(name: @stat_names)
       .for_year(@year)
-    ).to_matrix
+    # matrix to render table
+    @school_monthly_stats = Matrixer.new(stats_scope).to_matrix
 
+    # queue updating all rendered stats
+    stats_scope.each{|sms| sms.queue_resync }
+
+    # load teachers for teacher tabs
     current_school_teachers = @school.account.present?? @school.account.users.map(&:username) : nil
     @teachers = current_school_teachers.blank?? @school.teachers : @school.teachers.select{|t| t.username.in?(current_school_teachers) }
+
     respond_to do |format|
       format.html
       format.csv do
