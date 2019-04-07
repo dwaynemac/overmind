@@ -162,8 +162,9 @@ es:
       sync_current_month_now: Sincronizar los datos del mes actual ahora.
       sync_now: Sincronizar los datos ahora.
       click_to_change: Click aqui para modificar el año
-      back: 
-      new: 
+      back: atras
+      new: nuevo
+      choose_stats: Seleccionar indices de control para este reporte
     search_form:
       show_only_w_account_name_blank: Sólo escuelas sin cuenta PADMA configurada.
     sync_year:

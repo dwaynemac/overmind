@@ -211,9 +211,10 @@ class MonthlyStat < ActiveRecord::Base
     ])
   end
 
+  MANUAL_STATS = %W(gross_income expenses profit team_teachers)
   # Stats that are filled manually
   def self.is_manual?(name)
-    name.to_s.in?(%W(gross_income expenses profit team_teachers))
+    name.to_s.in?(MANUAL_STATS)
   end
   
   def self.default_reduction(name)

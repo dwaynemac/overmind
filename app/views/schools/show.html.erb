@@ -5,25 +5,53 @@
 <%- model_class = @school.class -%>
 
 <div class='schools-container'>
+  <nav class='ranking-navbar' role='navigation'>
+    <div class="filter-wrap">
+      <div class='filter-controls'>
+      </div>
+    </div>
+  </nav>
+
   <header class='schools-head'>
     <p><%= @year %></p>
     <nav class='schools-navbar' role='navigation'>
       <div class='filter-controls'>
         <div class='btn-group'>
-          <%= link_to school_url(@school, year: @year.to_i - 1), class: 'btn btn-secondary btn-sm' do %>
+          <%= link_to school_url(@school, params.merge(year: @year.to_i - 1)), class: 'btn btn-secondary btn-sm' do %>
             <span class='glyphicon glyphicon-chevron-left'></span>
           <% end %>
           <% unless @year.to_i == Time.zone.now.year %>
-            <%= link_to school_url(@school, year: @year.to_i + 1), class: 'btn btn-secondary btn-sm' do %>
+            <%= link_to school_url(@school, params.merge(year: @year.to_i + 1)), class: 'btn btn-secondary btn-sm' do %>
               <span class='glyphicon glyphicon-chevron-right'></span>
             <% end %>
           <% end %>
+
         </div>
-        <%= render :partial => 'sync_request_notification' %>
       </div>
+      
       <div class='filter-controls filter-controls-right'>
         <%= link_to "<span class='glyphicon glyphicon-download'></span>".html_safe, school_url(id: @school.id, format: 'csv', year: @year), class: 'btn btn-secondary btn-sm', id: 'download-link' %>
       </div>
+    </nav>
+    <nav>
+        <%= form_for @ranking_for_column_names, url: school_path(id: @school.id), method: :get, :html => { class: 'form-inline' } do |f| %>
+          <div class="btn-group">
+            <%= f.select   :column_names,
+                           role_stats.flatten.map{|name| [t("monthly_stat.names.#{name}"), name]},
+                           {},
+                           {
+                              data: {
+                                'none-selected-text' => t('.choose_stats')}, 
+                              multiple: :multiple,
+                              class: 'choose-columns-select'
+                            }
+            %>
+            
+          </div>
+          <button type="submit"
+                  class="btn btn-secondary btn-sm"
+                  data-disable-with="..."><%= t('see') %></button>
+        <% end -%>
     </nav>
   </header>
   <section class='schools-content'>
@@ -40,6 +68,7 @@
         <%= render "manual_ics", monthly_stats: @school_monthly_stats %>
       </div>
     </div>
+        <%= render :partial => 'sync_request_notification' %>
   </section>
 </div>
 

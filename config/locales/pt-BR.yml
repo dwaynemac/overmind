@@ -213,6 +213,7 @@ pt-BR:
       click_to_change: Clique aqui para alterar o ano
       back: voltar
       new: novo
+      choose_stats: Selecionar indices de controle para este reporte
     search_form:
       show_only_w_account_name_blank: Só escolas sem PADMA.
     sync_year:

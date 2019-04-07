@@ -12,6 +12,11 @@ $(document).ready ->
     $(this).tooltip('hide')
     $(this).siblings("form").show()
 
+  $(".choose-columns-select").multiselect
+    buttonClass: 'btn btn-info btn-sm'
+    enableCaseInsensitiveFiltering: true
+    buttonText: (options, select) ->
+      select.context.dataset.noneSelectedText
 
   hideTooltip = () ->
     $("#current_year").tooltip('hide')

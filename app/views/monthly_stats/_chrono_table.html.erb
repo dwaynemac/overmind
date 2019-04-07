@@ -35,13 +35,15 @@ end
     </thead>
     <tbody>
     <% tabindex=0 %>
-    <%# ALL STATS , except some manually rejected %>
-    <%- MonthlyStat::VALID_NAMES.reject{|n|n.to_s.in?(%W(conversion_rate
-                                                         gross_income
-                                                         expenses
-                                                         profit
-                                                         team_teachers
-                                                     ))
+    <% if @stat_names.nil?
+         @stat_names = MonthlyStat::VALID_NAMES
+       end %>
+    <% @stat_names.reject{|n|n.to_s.in?(%W(conversion_rate
+                                           gross_income
+                                           expenses
+                                           profit
+                                           team_teachers
+                                       ))
         }.each do |name| -%>
       <% next if teacher_stats && (monthly_stats[name].empty? && MonthlyStat.is_manual?(name)) -%>
       <tr>
