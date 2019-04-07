@@ -454,6 +454,7 @@ es:
   teacher_rankings:
     show:
       school_total: Escuela
+      teacherless: Sin instructor
   teacher_ranking:
     title: Estadisticas de los instructores
     options: Opciones

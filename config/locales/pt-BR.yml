@@ -60,6 +60,7 @@ pt-BR:
   teacher_rankings:
     show:
       school_total: Escola
+      teacherless: Sem instrutor
   teacher_ranking:
     title: Estadísticas dos instrutores
     options: Opções

@@ -88,17 +88,25 @@
               <% end %>
             <% end %>
           <% end %>
+          <% if any_diff?(acums_by_name,@teacher_ranking) %>
+            <tr>
+              <th><span style="display: none" id="lastInAlphabeticalOrder">zz</span><%= t(".teacherless") %></th>
+              <% @teacher_ranking.column_names.each do |name| %>
+                <td>
+                  <% unless MonthlyStat.is_a_rate?(name) %>
+                    <%= (@teacher_ranking.school_stats[@school.id]["month"][name.to_s].try(:value) || 0) - (acums_by_name[name] || 0) %>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
         </tbody>
         <tfoot>
           <tr>
             <th><%= t(".school_total") %></th>
             <% @teacher_ranking.column_names.each do |name| %>
               <td>
-                <%= render partial: "school_total",
-                          locals: {
-                            name: name,
-                            acum: acums_by_name[name]
-                          } %>
+                <%= print_value @teacher_ranking.school_stats[@school.id]["month"][name.to_s] %>
               </td>
             <% end %>
             <% @teacher_ranking.column_names.each do |name| %>

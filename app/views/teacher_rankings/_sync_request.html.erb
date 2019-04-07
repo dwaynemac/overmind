@@ -1,4 +1,3 @@
-<%= print_value @teacher_ranking.school_stats[@school.id]["month"][name.to_s] %>
 <% unless MonthlyStat.is_a_rate?(name) %>
   <% if acum != (@teacher_ranking.school_stats[@school.id]["month"][name.to_s].try(:value) || 0 ) %>
     <% if SyncRequest.where(year: @teacher_ranking.ref_date.year,
