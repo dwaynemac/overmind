@@ -82,14 +82,19 @@
 <%= content_for :body_end do %>
   <% 
   @graph_stat_names = @stat_names.select do |sn|
-    !sn.in?(MonthlyStat::MANUAL_STATS.map(&:to_sym)) && sn != :students_average_age && !MonthlyStat.is_a_rate?(sn) 
+    !sn.in?(MonthlyStat::MANUAL_STATS.map(&:to_sym)) && sn != :students_average_age
   end
   %>
 <script>
     var chartData = <%= (1..12).map do |month|
       r = { month: Date::MONTHNAMES[month] }
+      @rendering_pers = false
       @graph_stat_names.each do |name|
         val = (@school_monthly_stats[name.to_sym][month].try(:value) || 0)
+        if MonthlyStat.is_a_rate?(name)
+          @rendering_pers = true
+          val = val.to_f/100
+        end
         r.merge!({ name => val })
       end
       r
@@ -107,14 +112,34 @@
     chart.marginLeft = 80;
     chart.marginRight = 80;
 
+    valAxis = new AmCharts.ValueAxis();
+    valAxis.position = "left";
+    valAxis.axisColor = "#2d66bb";
+    valAxis.gridAlpha = 0;
+    valAxis.fillColor = "#2d66bb";
+    valAxis.fillAlpha = 0.1;
+    valAxis.dashLength = 3;
+    chart.addValueAxis(valAxis);
+
+    <% if @rendering_pers %>
+      perAxis = new AmCharts.ValueAxis();
+      perAxis.minimum = 0;
+      perAxis.maximum = 100;
+      perAxis.position = "right";
+      perAxis.gridAlpha = 0;
+      perAxis.dashLength = 3;
+      chart.addValueAxis(perAxis);
+    <% end %>
+
     <% @graph_stat_names.each do |stat_name| %>
       <%= stat_name %>_graph = new AmCharts.AmGraph();
       <%= stat_name %>_graph.valueField = "<%= stat_name %>";
       <%= stat_name %>_graph.title = $("#stats-names").data("<%= stat_name %>");
       <%= stat_name %>_graph.type = "line";
-      <%= stat_name %>_graph.lineThickness = 1;
-      <%= stat_name %>_graph.bullet = "round";
-      <%= stat_name %>_graph.dashLength = 1;
+      <%= stat_name %>_graph.lineThickness = <%= MonthlyStat.is_a_rate?(stat_name)? '1' : '2' %>;
+      <%= stat_name %>_graph.bullet = "<%= MonthlyStat.is_a_rate?(stat_name)? 'none' : 'round' %>";
+      <%= stat_name %>_graph.dashLength = <%= MonthlyStat.is_a_rate?(stat_name)? '3' : '1' %>;
+      <%= stat_name %>_graph.valueAxis = <%= MonthlyStat.is_a_rate?(stat_name)? "perAxis" : "valAxis" %>;
       <%= case stat_name
           when :students
             "students_graph.lineColor = 'black';"
@@ -135,15 +160,6 @@
     
     chartCursor = new AmCharts.ChartCursor();
     chart.addChartCursor( chartCursor );
-
-    valAxis = new AmCharts.ValueAxis();
-    valAxis.position = "left";
-    valAxis.axisColor = "#2d66bb";
-    valAxis.gridAlpha = 0;
-    valAxis.fillColor = "#2d66bb";
-    valAxis.fillAlpha = 0.1;
-    valAxis.dashLength = 3;
-    chart.addValueAxis(valAxis);
 
     legend = new AmCharts.AmLegend();
     legend.align = "center";
