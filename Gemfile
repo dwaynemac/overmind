@@ -20,7 +20,7 @@ gem 'pg'
 
 # Inplace editor
 gem 'best_in_place', :github => 'afalkear/best_in_place_post'
-gem 'padma-assets', '0.2.29'
+gem 'padma-assets', '0.2.30'
 
 gem 'appsignal', '~> 2.8'
 
