@@ -48,7 +48,7 @@
     </nav>
   </header>
   <section class='schools-content'>
-    <div id="chartContainer" class="chart-container"></div> <!-- chart -->
+    <div id="newChartContainer" class="chart-container"></div> <!-- chart -->
     <ul class='nav nav-tabs' role='tablist'>
       <li class='active'><a href="#global" class='' data-toggle='tab'><%= @school.full_name %></a></li>
       <%- @teachers.each do |teacher| %>
@@ -79,34 +79,77 @@
   <%= render :partial => 'sync_request_notification' %>
 </div>
 
+<%= content_for :body_end do %>
+  <% 
+  @graph_stat_names = @stat_names.select do |sn|
+    !sn.in?(MonthlyStat::MANUAL_STATS.map(&:to_sym)) && sn != :students_average_age && !MonthlyStat.is_a_rate?(sn) 
+  end
+  %>
 <script>
-  chartData = [
-    <%- (1..12).each do |month| -%>
-      {
-        month: "<%= Date::MONTHNAMES[month] %>",
-        students: <%= monthly_stat = @school_monthly_stats[:students][month]; monthly_stat.try(:value) || 0 %>,
-        dropouts: <%= monthly_stat = @school_monthly_stats[:dropouts][month]; monthly_stat.try(:value) || 0 %>,
-        enrollments: <%= monthly_stat = @school_monthly_stats[:enrollments][month]; monthly_stat.try(:value) || 0 %>,
-        p_interviews: <%= monthly_stat = @school_monthly_stats[:p_interviews][month]; monthly_stat.try(:value) || 0 %>,
-        assistant_students: <%= monthly_stat = @school_monthly_stats[:assistant_students][month]; monthly_stat.try(:value) || 0 %>,
-        professor_students: <%= monthly_stat = @school_monthly_stats[:professor_students][month]; monthly_stat.try(:value) || 0 %>,
-        master_students: <%= monthly_stat = @school_monthly_stats[:master_students][month]; monthly_stat.try(:value) || 0 %>,
-        male_students: <%= monthly_stat = @school_monthly_stats[:male_students][month]; monthly_stat.try(:value) || 0 %>,
-        female_students: <%= monthly_stat = @school_monthly_stats[:female_students][month]; monthly_stat.try(:value) || 0 %>
-      },
-    <%- end -%>
-    <%- month = 12 -%>
-    {
-      month: "<%= Date::MONTHNAMES[month] %>",
-      students: <%= monthly_stat = @school_monthly_stats[:students][month]; monthly_stat.try(:value) || 0 %>,
-      dropouts: <%= monthly_stat = @school_monthly_stats[:dropouts][month]; monthly_stat.try(:value) || 0 %>,
-      enrollments: <%= monthly_stat = @school_monthly_stats[:enrollments][month]; monthly_stat.try(:value) || 0 %>,
-      p_interviews: <%= monthly_stat = @school_monthly_stats[:p_interviews][month]; monthly_stat.try(:value) || 0 %>,
-      assistant_students: <%= monthly_stat = @school_monthly_stats[:assistant_students][month]; monthly_stat.try(:value) || 0 %>,
-      professor_students: <%= monthly_stat = @school_monthly_stats[:professor_students][month]; monthly_stat.try(:value) || 0 %>,
-      master_students: <%= monthly_stat = @school_monthly_stats[:master_students][month]; monthly_stat.try(:value) || 0 %>,
-      male_students: <%= monthly_stat = @school_monthly_stats[:male_students][month]; monthly_stat.try(:value) || 0  %>,
-      female_students: <%= monthly_stat = @school_monthly_stats[:female_students][month]; monthly_stat.try(:value) || 0 %>
-    }
-  ]
+    var chartData = <%= (1..12).map do |month|
+      r = { month: Date::MONTHNAMES[month] }
+      @graph_stat_names.each do |name|
+        val = (@school_monthly_stats[name.to_sym][month].try(:value) || 0)
+        r.merge!({ name => val })
+      end
+      r
+    end.to_json.html_safe -%>;
+
+    chart = new AmCharts.AmSerialChart();
+    chart.dataProvider = chartData;
+    chart.categoryField = "month";
+
+    chart.color = "#AAAAAA";
+    chart.startDuration = 2;
+    chart.autoMargins = false;
+    chart.marginTop = 30;
+    chart.marginBottom = 30;
+    chart.marginLeft = 80;
+    chart.marginRight = 80;
+
+    <% @graph_stat_names.each do |stat_name| %>
+      <%= stat_name %>_graph = new AmCharts.AmGraph();
+      <%= stat_name %>_graph.valueField = "<%= stat_name %>";
+      <%= stat_name %>_graph.title = $("#stats-names").data("<%= stat_name %>");
+      <%= stat_name %>_graph.type = "line";
+      <%= stat_name %>_graph.lineThickness = 1;
+      <%= stat_name %>_graph.bullet = "round";
+      <%= stat_name %>_graph.dashLength = 1;
+      <%= case stat_name
+          when :students
+            "students_graph.lineColor = 'black';"
+          when :male_students
+            "male_students_graph.lineColor = 'blue';"
+          when :female_students
+            "female_students_graph.lineColor = 'pink';"
+          when :enrollments
+            "enrollments_graph.lineColor = 'green';"
+          when :dropouts
+            "dropouts_graph.lineColor = 'red';"
+          else
+            ""
+          end.html_safe
+      %>
+      chart.addGraph(<%= stat_name %>_graph);
+    <% end %>
+    
+    chartCursor = new AmCharts.ChartCursor();
+    chart.addChartCursor( chartCursor );
+
+    valAxis = new AmCharts.ValueAxis();
+    valAxis.position = "left";
+    valAxis.axisColor = "#2d66bb";
+    valAxis.gridAlpha = 0;
+    valAxis.fillColor = "#2d66bb";
+    valAxis.fillAlpha = 0.1;
+    valAxis.dashLength = 3;
+    chart.addValueAxis(valAxis);
+
+    legend = new AmCharts.AmLegend();
+    legend.align = "center";
+    legend.markerType = "circle";
+    chart.addLegend(legend);
+
+    chart.write('newChartContainer');
 </script>
+<% end %>
