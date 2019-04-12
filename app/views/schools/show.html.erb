@@ -30,7 +30,7 @@
         <%= form_for @ranking_for_column_names, url: school_path(id: @school.id), method: :get, :html => { class: 'form-inline' } do |f| %>
           <div class="btn-group">
             <%= f.select   :column_names,
-                           role_stats.flatten.map{|name| [t("monthly_stat.names.#{name}"), name]},
+                           MonthlyStat::VALID_NAMES.flatten.map{|name| [t("monthly_stat.names.#{name}"), name]},
                            {},
                            {
                               data: {
