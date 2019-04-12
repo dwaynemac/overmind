@@ -31,6 +31,7 @@ class Checksum
     
     cur_month_students = value_for(:students,ref_month,school_ids)
     if cur_month_students.nil?
+      log "no data for current month"
       return false # no data for cur_month, sync!
     end
     
@@ -44,6 +45,9 @@ class Checksum
         @check &&= (prev_month_students + cur_month_enrollments - cur_month_dropouts == cur_month_students  )
       rescue
         @check &&= false
+      end
+      unless @check
+        log "failed enrolls drops check"
       end
     end
     
@@ -60,6 +64,9 @@ class Checksum
       rescue 
         @check &&= false
       end
+      unless @check
+        log "failed levels check"
+      end
     end
     
     if @check
@@ -72,9 +79,24 @@ class Checksum
       rescue
         @check &&= false
       end
+      unless @check
+        log "failed gender check"
+      end
     end
     
-    # TODO check that students by teacher match
+    if @check
+      begin
+        students_by_teachers = TeacherMonthlyStat.where(school_id: school_ids,
+                                 name: :students,
+                                 ref_date: ref_month).sum(:value) 
+        @check &&= (students_by_teachers == cur_month_students)
+      rescue
+        @check &&= false
+      end
+      unless @check
+        log "failed teachers check"
+      end
+    end
     
     @check
   end
@@ -94,6 +116,10 @@ class Checksum
                                  name: stat_name)
                           .for_month(ref_date)
     ms.first.try(:value)
+  end
+
+  def self.log(msg)
+    puts msg
   end
 
   
