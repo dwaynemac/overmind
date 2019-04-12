@@ -2,14 +2,16 @@
 <%# cache pedagogic_snapshot_cache_key(@year,@month) do %>
 <div class='report-container'>
   <header class='report-head'>
-    <p><%= set_current_month_and_year %> <%= @year %></p>
+    <p><%= set_current_month_and_year %></p>
     <div class='btn-group'>
       <%= link_to "<span class='glyphicon glyphicon-chevron-left'></span>".html_safe,
                   set_prev_month_url,
                   class:'btn btn-secondary btn-sm' %>
-      <%= link_to "<span class='glyphicon glyphicon-chevron-right'></span>".html_safe,
-                  set_next_month_url,
-                  class:'btn btn-secondary btn-sm' %>
+      <% unless current_month? %>
+        <%= link_to "<span class='glyphicon glyphicon-chevron-right'></span>".html_safe,
+                    set_next_month_url,
+                    class:'btn btn-secondary btn-sm' %>
+      <% end %>
       <%= sync_button %>
     </div>
   </header>

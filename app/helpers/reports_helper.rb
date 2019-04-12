@@ -87,6 +87,10 @@ module ReportsHelper
     "/schools/#{params[:school_id]}/reports/#{current_report}/#{prev_year}/#{prev_month}"
   end
 
+  def current_month?
+    (Date.today.month == params[:month].to_i) && (Date.today.year == params[:year].to_i)
+  end
+  
   def set_next_month_url
     current_year = params[:year].to_i
     current_month = params[:month].to_i
