@@ -3,6 +3,9 @@ task :check_for_errors => :environment do
     @schools = School.enabled_on_padma.all
     
     i = 12
+
+    # rates over 100%
+    MonthlyStat.where("name like '%rate'").where("value > 10000").delete_all
     
     while(i >= 0) do
       ref_month = i.months.ago
