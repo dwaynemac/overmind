@@ -149,8 +149,12 @@
             "female_students_graph.lineColor = 'pink';"
           when :enrollments
             "enrollments_graph.lineColor = 'green';"
+          when :enrollment_rate
+            "enrollment_rate_graph.lineColor = '#3fff3f';"
           when :dropouts
             "dropouts_graph.lineColor = 'red';"
+          when :dropout_rate
+            "dropout_rate_graph.lineColor = '#ff3f3f';"
           else
             ""
           end.html_safe
