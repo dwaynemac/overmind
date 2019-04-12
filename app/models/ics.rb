@@ -12,6 +12,7 @@ class Ics
     :enrollment_rate,
     :dropout_rate,
     :students_average_age,
+    :in_professional_training,
     :gross_income,
     :expenses,
     :profit,
