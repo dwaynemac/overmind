@@ -3,6 +3,10 @@ require 'spec_helper'
 describe Ability do
 
   let(:ability){Ability.new(user)}
+  before do
+    User.any_instance.stub(:user).and_return(PadmaUser.new)
+    PadmaUser.any_instance.stub(:padma_accounts).and_return([School.new])
+  end
 
   describe "admin" do
     let(:federation){create(:federation)}
