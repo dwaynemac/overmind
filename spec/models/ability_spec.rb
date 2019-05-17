@@ -6,6 +6,7 @@ describe Ability do
   before do
     User.any_instance.stub(:user).and_return(PadmaUser.new)
     PadmaUser.any_instance.stub(:padma_accounts).and_return([School.new])
+    User.any_instance.stub(:account).and_return(PadmaAccount.new)
   end
 
   describe "admin" do
@@ -80,7 +81,7 @@ describe Ability do
     end
     context "without padma_accounts" do
       before do
-        user.stub!(:enabled_accounts).and_return([])
+        user.stub(:enabled_accounts).and_return([])
       end
       context "in a federation" do
         let(:fed){create(:federation)}
@@ -114,9 +115,9 @@ describe Ability do
       before do
         school
         pa = PadmaAccount.new(name: 'this-account')
-        user.stub!(:current_account).and_return pa
-        user.stub!(:enabled_accounts).and_return([pa])
-        user.padma_enabled?.should be_true
+        user.stub(:current_account).and_return pa
+        user.stub(:enabled_accounts).and_return([pa])
+        user.padma_enabled?.should be_truthy
       end
       before do
         user.update_attribute(:federation_id, fed.id)
@@ -148,11 +149,11 @@ describe Ability do
   end
   
   def it_can(action,target)
-    ability.can?(action,target).should be_true
+    ability.can?(action,target).should be_truthy
   end
 
   def it_cannot(action,target)
-    ability.can?(action,target).should be_false
+    ability.can?(action,target).should be_falsey
   end
 
 end
