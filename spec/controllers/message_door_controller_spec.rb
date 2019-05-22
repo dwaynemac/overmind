@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe MessageDoorController do
+describe MessageDoorController, type: :controller do
 
   def request(key_name,sk,data)
     post :catch,

@@ -9,7 +9,7 @@ shared_examples "receives params from url" do
   end
 end
 
-describe ReportsController do
+describe ReportsController, type: :controller do
   
   let!(:school){ create(:school, account_name: 'nunez') }
 
@@ -38,8 +38,7 @@ describe ReportsController do
 
   describe "GET /schools/:account_name/pedagogic/:year/:month" do
     before do
-      school.stub(:account).and_return
-        PadmaAccount.new(account_name: school.account_name)
+      school.stub(:account).and_return PadmaAccount.new(account_name: school.account_name)
       get :pedagogic_snapshot, school_id: school.account_name,
                                year: 2014,
                                month: 6

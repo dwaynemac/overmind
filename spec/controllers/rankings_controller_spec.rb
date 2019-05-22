@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe RankingsController do
+describe RankingsController, type: :controller do
   describe "for admin user" do
   let(:user){create(:user,role: 'admin')}
     before do
-      PadmaUser.stub(:find).and_return PadmaUser.new username: user.username, current_account_name: 'test-acc'
+      allow(PadmaUser).to receive(:find).and_return(PadmaUser.new(username: user.username, current_account_name: "test-acc"))
       @fedone = create(:federation,id:1)
       @fedtwo = create(:federation,id:2)
       @school = create(:school, :account_name => 'test-acc')
