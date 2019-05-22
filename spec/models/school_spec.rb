@@ -4,6 +4,7 @@ describe School do
   let(:school){create(:school)}
   before do
     school
+    School.any_instance.stub(:account).and_return(PadmaAccount.new)
   end
   it { should belong_to :federation }
   it { should validate_presence_of :name }
@@ -37,7 +38,7 @@ describe School do
       end
       describe "and connection to accounts-ws is available" do
         before do
-          school.stub!(:account).and_return(PadmaAccount.new(enabled: true))
+          school.stub(:account).and_return(PadmaAccount.new(enabled: true))
         end
         it "caches value co cached_padma_enabled" do
           expect(school.cached_padma_enabled).to be_nil
@@ -76,11 +77,11 @@ describe School do
                           count_students_relative_to_value: 1,
                           count_students_relative_to_date: Date.today
                          )}
-      it { should be_true }
+      it { should be_truthy }
     end
     context "if schools does NOT have relative value or date" do
       let(:school){create(:school)}
-      it { should be_false }
+      it { should be_falsey }
     end
   end
 end
