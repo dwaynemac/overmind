@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
+ruby '2.1.10'
 
 gem 'rails', '3.2.8'
 
@@ -15,8 +15,8 @@ gem 'cancan'
 gem 'intercom-rails'
 
 # DB
-gem 'sqlite3', :group => [:development, :test]
-gem 'pg'
+gem 'sqlite3', '~> 1.3.5', :group => [:development, :test]
+gem 'pg', '~> 0.11'
 
 # Inplace editor
 gem 'best_in_place', :github => 'afalkear/best_in_place_post'
@@ -32,9 +32,9 @@ end
 gem 'daemons'
 gem 'delayed_job_active_record'
 
-gem 'logical_model', '0.6.4'
+gem 'logical_model', '0.6.6'
 gem 'messaging_client', '~> 0.1'
-gem 'accounts_client', '0.2.28'
+gem 'accounts_client', '0.2.37'
 gem 'kaminari'
 gem 'ransack'
 
@@ -56,6 +56,7 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "guard-rspec"
   gem "libnotify"
+  gem "byebug"
 
 end
 
@@ -71,7 +72,6 @@ group :development do
   gem 'subcontractor', '>= 0.6.1'
   gem 'foreman'
 
-  gem 'debugger'
 
   gem 'git-pivotal-tracker-integration'
   gem 'padma-deployment'
