@@ -4,9 +4,9 @@ describe Ability do
 
   let(:ability){Ability.new(user)}
   before do
-    User.any_instance.stub(:user).and_return(PadmaUser.new)
-    PadmaUser.any_instance.stub(:padma_accounts).and_return([School.new])
-    User.any_instance.stub(:account).and_return(PadmaAccount.new)
+    allow_any_instance_of(User).to receive(:user).and_return(PadmaUser.new)
+    allow_any_instance_of(PadmaUser).to receive(:padma_accounts).and_return([School.new])
+    allow_any_instance_of(User).to receive(:account).and_return(PadmaAccount.new)
   end
 
   describe "admin" do
@@ -17,7 +17,7 @@ describe Ability do
     end
     it "can read all federations" do
       3.times{create(:federation)}
-      ability.federations.count.should == 4
+      expect(ability.federations.count).to be == 4
     end
   end
 
@@ -60,7 +60,7 @@ describe Ability do
         School.delete_all
         create(:school, federation: create(:federation))
         3.times{create(:school, federation: fed)}
-        School.accessible_by(ability).count.should == 3
+        expect(School.accessible_by(ability).count).to be == 3
         it_can(:read,School.last)
       end
       it "should NOT be able to read OTHER federation stats" do
@@ -81,7 +81,7 @@ describe Ability do
     end
     context "without padma_accounts" do
       before do
-        user.stub(:enabled_accounts).and_return([])
+        allow(user).to receive(:enabled_accounts).and_return([])
       end
       context "in a federation" do
         let(:fed){create(:federation)}
@@ -115,9 +115,9 @@ describe Ability do
       before do
         school
         pa = PadmaAccount.new(name: 'this-account')
-        user.stub(:current_account).and_return pa
-        user.stub(:enabled_accounts).and_return([pa])
-        user.padma_enabled?.should be_truthy
+        allow(user).to receive(:current_account).and_return pa
+        allow(user).to receive(:enabled_accounts).and_return([pa])
+        expect(user.padma_enabled?).to be_truthy
       end
       before do
         user.update_attribute(:federation_id, fed.id)
@@ -131,11 +131,11 @@ describe Ability do
       it "should NOT be able to read other schools from his federation" do
         3.times{create(:school, federation: fed)}
         it_cannot(:read,School.last)
-        School.accessible_by(ability).count.should == 1
+        expect(School.accessible_by(ability).count).to be == 1
       end
       it "should be able to read his school" do
         it_can(:read, school)
-        School.accessible_by(ability).count.should == 1
+        expect(School.accessible_by(ability).count).to be == 1
       end
       it "should NOT be able to read OTHER federation stats" do
         ms = create(:monthly_stat, school: create(:school, federation: create(:federation)))
@@ -149,11 +149,11 @@ describe Ability do
   end
   
   def it_can(action,target)
-    ability.can?(action,target).should be_truthy
+    expect(ability.can?(action,target)).to be_truthy
   end
 
   def it_cannot(action,target)
-    ability.can?(action,target).should be_falsey
+    expect(ability.can?(action,target)).to be_falsey
   end
 
 end
