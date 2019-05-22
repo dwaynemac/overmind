@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SchoolsController do
+describe SchoolsController, type: :controller do
 
 
   context "for admin" do
@@ -13,7 +13,6 @@ describe SchoolsController do
         get :index
       end
       it { should respond_with :success }
-      it { should assign_to :schools }
     end
     describe "#show_by_nucleo_id" do
       describe "if school has nucleo_id" do

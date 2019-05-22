@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe TeacherRankingsController do
+describe TeacherRankingsController, type: :controller do
   let(:user){create(:user,role: 'admin')}
   before do
-      PadmaUser.stub(:find).and_return PadmaUser.new username: user.username, current_account_name: 'test-acc'
+      allow(PadmaUser).to receive(:find).and_return(PadmaUser.new(username: user.username, current_account_name: "test-acc"))
       sign_in(user)
   end
 

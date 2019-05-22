@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SyncRequestsController do
+describe SyncRequestsController, type: :controller do
 
   before do
     @school = School.first||create(:school) 

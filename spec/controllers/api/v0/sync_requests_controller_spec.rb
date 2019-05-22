@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V0::SyncRequestsController do
+describe Api::V0::SyncRequestsController, type: :controller do
   describe "#pause_all" do
     let(:sr){create(:sync_request)}
     it "changes state running to paused" do

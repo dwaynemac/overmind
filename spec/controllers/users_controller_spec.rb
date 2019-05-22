@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UsersController do
+describe UsersController, type: :controller do
   context "for admin" do
     let(:user){create(:user,role: 'admin')}
     before do
@@ -9,7 +9,6 @@ describe UsersController do
     describe "#index" do
       before { get :index }
       it { should respond_with :success }
-      it { should assign_to :users }
     end
     describe "#create" do
       before do

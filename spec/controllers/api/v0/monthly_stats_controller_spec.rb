@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V0::MonthlyStatsController do
+describe Api::V0::MonthlyStatsController, type: :controller do
   before do
     create(:school, account_name: 'account-name')
   end
