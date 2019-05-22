@@ -53,7 +53,7 @@ end
 group :development, :test do
   gem "rspec-rails"
   gem "shoulda", require: false
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
   gem "guard-rspec"
   gem "libnotify"
   gem "byebug"
