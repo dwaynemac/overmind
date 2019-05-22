@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe User do
   before do
-    PadmaUser.stub(:find).and_return(PadmaUser.new)
-    create(FactoryGirl.create :user)
+    User.any_instance.stub(:user).and_return(PadmaUser.new)
+    create(:user)
   end
   it { should validate_uniqueness_of :username }
   it { should validate_presence_of :username }
