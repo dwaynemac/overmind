@@ -21,8 +21,8 @@ describe RankingsController, type: :controller do
 
       it "allows to filter from all federations visible to user even when filtered" do
         get :show, ranking: { federation_ids: [1] }
-        @fedone.should be_in assigns(:federations)
-        @fedtwo.should be_in assigns(:federations)
+        expect(@fedone).to be_in assigns(:federations)
+        expect(@fedtwo).to be_in assigns(:federations)
       end
       
       describe "shows missing schools" do
@@ -30,7 +30,7 @@ describe RankingsController, type: :controller do
           yes = create(:school, federation_id: 1)
           no  = create(:school, federation_id: 2)
           get :show, ranking: { federation_ids: [1] }
-          yes.should be_in assigns(:missing_schools)
+          expect(yes).to be_in assigns(:missing_schools)
         end
       end
     end

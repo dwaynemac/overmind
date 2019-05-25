@@ -5,13 +5,12 @@ describe SyncRequestsController, type: :controller do
   before do
     @school = School.first||create(:school) 
     
-    @user = FactoryGirl.create(:user, role: 'admin')
+    @user = FactoryBot.create(:user, role: 'admin')
     pu = PadmaUser.new(username: @user.username)
-    User.any_instance.stub(:padma_enabled?).and_return true
-    User.any_instance.stub(:padma).and_return pu
-
+    allow_any_instance_of(User).to receive(:padma_enabled?).and_return(true)
+    allow_any_instance_of(User).to receive(:padma).and_return pu
     pa = PadmaAccount.new
-    User.any_instance.stub(:current_account).and_return pa
+    allow_any_instance_of(User).to receive(:current_account).and_return pa
 
     sign_in(@user)
   end
@@ -27,7 +26,7 @@ describe SyncRequestsController, type: :controller do
 
       it "redirects to schools#show" do
         do_request
-        response.should redirect_to school_path(@school.id, year: 2013)
+        expect(response).to redirect_to school_path(@school.id, year: 2013)
       end
     end
     context "when month is not specified" do
@@ -55,7 +54,7 @@ describe SyncRequestsController, type: :controller do
     it "changes priorty value" do
       sr.update_attribute :priority, 2
       put :update, school_id: sr.school_id, id: sr.id, sync_request: { priority: 10 }
-      sr.reload.priority.should == 10
+      expect(sr.reload.priority).to be == 10
     end
   end
 

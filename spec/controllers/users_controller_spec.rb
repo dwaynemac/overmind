@@ -31,7 +31,7 @@ describe UsersController, type: :controller do
       end
       it "should update user attributes" do
         @user.reload
-        @user.role.should == 'council'
+        expect(@user.role).to be == 'council'
       end
     end
   end

@@ -12,15 +12,15 @@ describe MonthlyStat do
       ms = build(:monthly_stat, teacher_id: nil)
       ms.save
 
-      ms.reload.type.should == 'SchoolMonthlyStat'
-      SchoolMonthlyStat.last.id.should == ms.id
+      expect(ms.reload.type).to be == 'SchoolMonthlyStat'
+      expect(SchoolMonthlyStat.last.id).to be == ms.id
     end
   end
 
   it "should ensure ref_date is end of month date" do
     ms = create(:monthly_stat, ref_date: Date.civil(2012,7,1))
     ms.save
-    ms.ref_date.should == Date.civil(2012,7,31)
+    expect(ms.ref_date).to be == Date.civil(2012,7,31)
   end
   it "should belong to a school" do
     should belong_to :school
@@ -34,7 +34,7 @@ describe MonthlyStat do
   it "should always have a school" do
     should validate_presence_of :school
   end
-  it { should ensure_inclusion_of(:name).in_array(MonthlyStat::VALID_NAMES)}
+  it { should validate_inclusion_of(:name).in_array(MonthlyStat::VALID_NAMES)}
 
   it "stores service name" do
     should have_db_column :service
@@ -44,29 +44,29 @@ describe MonthlyStat do
     describe "for a school without account_name" do
       let(:school){create(:school, account_name: nil)}
       it "returns ''" do
-        MonthlyStat.service_for(school,'students',Date.today).should == ''
+        expect(MonthlyStat.service_for(school,'students',Date.today)).to be == ''
       end
     end
     describe "for a school with account_name" do
       let(:school){create(:school, account_name: 'account-name')}
       describe "if communication with accounts-ws fails" do
         before do
-          school.stub(:account).and_return nil
+          allow(school).to receive(:account).and_return nil
         end
         it "returns nil" do
-          MonthlyStat.service_for(school,'students',Date.today).should be_nil
+          expect(MonthlyStat.service_for(school,'students',Date.today)).to be_nil
         end
       end
       describe "if school was not migrated to padma" do
         before do
           # stub_account(migrated_to_padma_on: nil)
-          school.stub(:account).and_return  PadmaAccount.new({
+          allow(school).to receive(:account).and_return  PadmaAccount.new({
             migrated_to_padma_on: nil,
             name: 'account-name'
           })
         end
         it "returns kshema" do
-          MonthlyStat.service_for(school,'students',Date.today).should == 'kshema'
+          expect(MonthlyStat.service_for(school,'students',Date.today)).to be == 'kshema'
         end
       end
       describe "if school was migrated to padma" do
@@ -76,13 +76,13 @@ describe MonthlyStat do
         describe "if stat's ref_date is before migration date" do
           let(:ref_date){Date.civil(2012,1,1)}
           it "returns kshema" do
-            MonthlyStat.service_for(school,'students',ref_date).should == 'kshema'
+            expect(MonthlyStat.service_for(school,'students',ref_date)).to be == 'kshema'
           end
         end
         describe "if stat's ref_date is after migration date" do
           let(:ref_date){Date.civil(2014,1,1)}
           it "returns crm" do
-            MonthlyStat.service_for(school,'students',ref_date).should == 'crm'
+            expect(MonthlyStat.service_for(school,'students',ref_date)).to be == 'crm'
           end
         end
       end
@@ -92,7 +92,7 @@ end
 
 def stub_account(attrs)
   attrs = attrs.merge(name: 'account-name')
-  PadmaAccount.stub(:find).with('account-name').and_return(
+  allow(PadmaAccount).to receive(:find).with('account-name').and_return(
     PadmaAccount.new(attrs)
   )
 end

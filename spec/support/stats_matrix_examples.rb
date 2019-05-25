@@ -11,28 +11,28 @@ shared_examples_for "a stats matrix" do
       @matrix = s.monthly_stats.to_matrix
     end
     it "should default matrix[stat-name] to {}" do
-      @matrix.default.should == {}
+      expect(@matrix.default).to be == {}
     end
     it "should default matrix[stat-name][month] to nil" do
-      @matrix[:'no-key'].default.should be_nil
-      @matrix[:enrollments].default.should be_nil
+      expect(@matrix[:'no-key'].default).to be_nil
+      expect(@matrix[:enrollments].default).to be_nil
     end
     it "should store found stats on matrix keeping scope" do
-      @matrix[:enrollments][1].should == @jan
-      @matrix[:enrollments][4].should == @apr
-      @matrix[:enrollments][12].should == @dec
-      @matrix[:dropout_rate].should == {}
-      @matrix[:enrollment_rate].should == {}
+      expect(@matrix[:enrollments][1]).to be == @jan
+      expect(@matrix[:enrollments][4]).to be == @apr
+      expect(@matrix[:enrollments][12]).to be == @dec
+      expect(@matrix[:dropout_rate]).to be == {}
+      expect(@matrix[:enrollment_rate]).to be == {}
     end
     context "when there is more than one stat in a month (eg: scoping by fed)" do
       before do
         @matrix = MonthlyStat.to_matrix
       end
       it "should set a ReducedStat" do
-        @matrix[:enrollments][1].should be_a(ReducedStat)
+        expect(@matrix[:enrollments][1]).to be_a(ReducedStat)
       end
       it "should store SUM in #value" do
-        @matrix[:enrollments][1].value.should == 7
+        expect(@matrix[:enrollments][1].value).to be == 7
       end
     end
     describe "dropout_rate" do
@@ -49,10 +49,10 @@ shared_examples_for "a stats matrix" do
         @matrix = s.monthly_stats.for_year(2012).to_matrix
       end
       it "should set matrix[:dropout_rate][1] to januaries dropout rate (cents)" do
-        @matrix[:dropout_rate][1].value.should == 2500
+        expect(@matrix[:dropout_rate][1].value).to be == 2500
       end
       it "should set matrix[:dropout_rate][12] to december dropout rate (cents)" do
-        @matrix[:dropout_rate][12].value.should == 5000
+        expect(@matrix[:dropout_rate][12].value).to be == 5000
       end
     end
     describe "enrollment_rate" do
@@ -66,11 +66,11 @@ shared_examples_for "a stats matrix" do
         @matrix = s.monthly_stats.to_matrix
       end
       it "should cosider P interviews, not total" do
-        @matrix[:enrollment_rate][1].value.should_not == 2500
-        @matrix[:enrollment_rate][1].value.should == 5000
+        expect(@matrix[:enrollment_rate][1].value).not_to be == 2500
+        expect(@matrix[:enrollment_rate][1].value).to be == 5000
       end
       it "should set matrix[:enrollment_rate][4] to april enrollment rate (cents)" do
-        @matrix[:enrollment_rate][4].value.should == 5000
+        expect(@matrix[:enrollment_rate][4].value).to be == 5000
       end
     end
     it "shouldnt raise expection when scoped to federation" do
@@ -85,10 +85,10 @@ shared_examples_for "a stats matrix" do
         @matrix = s.monthly_stats.to_matrix
       end
       it "should set matrix[:swasthya_students_subtotal][1] to 3" do
-        @matrix[:swasthya_students_subtotal][1].value.should == 3
+        expect(@matrix[:swasthya_students_subtotal][1].value).to be == 3
       end
       it 'should leave value nil if there are no stats in such month' do
-        @matrix[:swasthya_students_subtotal][2].should be_nil
+        expect(@matrix[:swasthya_students_subtotal][2]).to be_nil
       end
     end
   end

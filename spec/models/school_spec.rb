@@ -4,7 +4,7 @@ describe School do
   let(:school){create(:school)}
   before do
     school
-    School.any_instance.stub(:account).and_return(PadmaAccount.new)
+    allow_any_instance_of(School).to receive(:account).and_return(PadmaAccount.new)
   end
   it { should belong_to :federation }
   it { should validate_presence_of :name }
@@ -21,9 +21,9 @@ describe School do
   it { should allow_value(nil).for(:account_name)}
   it "should validate uniqueness of account_name" do
     create(:school, account_name: 'blah')
-    s = FactoryGirl.build(:school, account_name: 'blah')
+    s = FactoryBot.build(:school, account_name: 'blah')
     s.save
-    s.errors.keys.should include :account_name
+    expect(s.errors.keys).to include :account_name
   end
   
   describe "#padma_enabled?" do
@@ -38,7 +38,7 @@ describe School do
       end
       describe "and connection to accounts-ws is available" do
         before do
-          school.stub(:account).and_return(PadmaAccount.new(enabled: true))
+          allow(school).to receive(:account).and_return(PadmaAccount.new(enabled: true))
         end
         it "caches value co cached_padma_enabled" do
           expect(school.cached_padma_enabled).to be_nil
@@ -52,12 +52,15 @@ describe School do
   describe "#sync_year_stats" do
     let(:school){create(:school)}
     before do
-      SchoolMonthlyStat.any_instance.stub(:get_remote_value).and_return('1')
-      TeacherMonthlyStat.stub(:get_remote_values).and_return([
+      allow_any_instance_of(SchoolMonthlyStat).to receive(:get_remote_value).
+        and_return("1")
+      allow(TeacherMonthlyStat).to receive(:get_remote_values).and_return(
+        [
           {full_name: 'Name', padma_username: 'username', value: '3'},
           {full_name: 'Name2', padma_username: 'username5', value: '3'}
-                                                             ])
-      TeacherMonthlyStat.stub(:calculate_local_value).and_return('1')
+        ]
+      )
+      allow(TeacherMonthlyStat).to receive(:calculate_local_value).and_return("1")
     end
     it "should create stats for each month for each stat name" do
       n = MonthlyStat::VALID_NAMES.size * 12
@@ -66,7 +69,7 @@ describe School do
     end
     it "should update school#synced_at timestamp" do
       school.sync_year_stats(2011)
-      school.synced_at.should be_within(1.minute).of(Time.now)
+      expect(school.synced_at).to be_within(1.minute).of(Time.now)
     end
   end
 

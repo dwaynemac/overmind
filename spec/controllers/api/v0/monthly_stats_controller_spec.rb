@@ -29,7 +29,7 @@ describe Api::V0::MonthlyStatsController, type: :controller do
                                              account_name: 'account-name',
                                              teacher_username: 'dwayne',
                                              value: 4}}.to_not change{MonthlyStat.count}
-          teacher_stat.reload.value.should == 4
+          expect(teacher_stat.reload.value).to be == 4
         end
         it "updates stat service" do
           expect{req_with_key :post, :create, monthly_stat: {service: 'new-service',
@@ -38,7 +38,7 @@ describe Api::V0::MonthlyStatsController, type: :controller do
                                                              account_name: 'account-name',
                                                              teacher_username: 'dwayne',
                                                              value: 4}}.to_not change{MonthlyStat.count}
-          teacher_stat.reload.service.should == 'new-service'
+          expect(teacher_stat.reload.service).to be == 'new-service'
         end
       end
       context "with non-existing MonthlyStat" do
@@ -53,8 +53,8 @@ describe Api::V0::MonthlyStatsController, type: :controller do
                                                         teacher_username: 'dwayne',
                                                         value: 4}
           }.to change{MonthlyStat.count}.by 1
-          MonthlyStat.last.value.should == 4
-          TeacherMonthlyStat.last.teacher.username.should == 'dwayne'
+          expect(MonthlyStat.last.value).to be == 4
+          expect(TeacherMonthlyStat.last.teacher.username).to be == 'dwayne'
         end
       end
     end
@@ -69,7 +69,7 @@ describe Api::V0::MonthlyStatsController, type: :controller do
                                              ref_date: Date.civil(2012,10,31).to_s,
                                              account_name: 'account-name',
                                              value: 4}}.to_not change{MonthlyStat.count}
-          a_monthly_stat.reload.value.should == 4
+          expect(a_monthly_stat.reload.value).to be == 4
         end
         it "updates stat service" do
           expect{req_with_key :post, :create, monthly_stat: {service: 'new-service',
@@ -77,7 +77,7 @@ describe Api::V0::MonthlyStatsController, type: :controller do
                                                              ref_date: Date.civil(2012,10,31).to_s,
                                                              account_name: 'account-name',
                                                              value: 4}}.to_not change{MonthlyStat.count}
-          a_monthly_stat.reload.service.should == 'new-service'
+          expect(a_monthly_stat.reload.service).to be == 'new-service'
         end
       end
       context "with non-existing MonthlyStat" do
@@ -88,7 +88,7 @@ describe Api::V0::MonthlyStatsController, type: :controller do
                                                         account_name: 'account-name',
                                                         value: 4}
           }.to change{MonthlyStat.count}.by 1
-          MonthlyStat.last.value.should == 4
+          expect(MonthlyStat.last.value).to be == 4
         end
       end
     end

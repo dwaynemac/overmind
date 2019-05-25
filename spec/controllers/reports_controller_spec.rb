@@ -2,10 +2,10 @@ require 'spec_helper'
 
 shared_examples "receives params from url" do
   it "receives :year as string" do
-    controller.params[:year].should == "2014"
+    expect(controller.params[:year]).to be == "2014"
   end
   it "receives :month as string" do
-    controller.params[:month].should == "6"
+    expect(controller.params[:month]).to be == "6"
   end
 end
 
@@ -38,7 +38,9 @@ describe ReportsController, type: :controller do
 
   describe "GET /schools/:account_name/pedagogic/:year/:month" do
     before do
-      school.stub(:account).and_return PadmaAccount.new(account_name: school.account_name)
+      allow(school).to receive(:account).and_return(
+        PadmaAccount.new(account_name: school.account_name)
+      )
       get :pedagogic_snapshot, school_id: school.account_name,
                                year: 2014,
                                month: 6
