@@ -62,14 +62,26 @@ describe School do
       )
       allow(TeacherMonthlyStat).to receive(:calculate_local_value).and_return("1")
     end
-    it "should create stats for each month for each stat name" do
-      n = MonthlyStat::VALID_NAMES.size * 12
-      n = n + TeacherMonthlyStat::STATS_BY_TEACHER.size * 2 * 12
-      expect{school.sync_year_stats(2011)}.to change{school.monthly_stats.count}.by(n)
+    context "when teacher stats are counted" do
+      it "should create stats for each month for each stat name" do
+        n = MonthlyStat::VALID_NAMES.size * 12
+        n = n + TeacherMonthlyStat::STATS_BY_TEACHER.size * 2 * 12
+        expect{school.sync_year_stats(2011)}.to change{school.monthly_stats.count}.by(n)
+      end
+      it "should update school#synced_at timestamp" do
+        school.sync_year_stats(2011)
+        expect(school.synced_at).to be_within(1.minute).of(Time.now)
+      end
     end
-    it "should update school#synced_at timestamp" do
-      school.sync_year_stats(2011)
-      expect(school.synced_at).to be_within(1.minute).of(Time.now)
+    context "when teacher stats are skipped" do
+      it "should create stats for each month for each stat name" do
+        n = MonthlyStat::VALID_NAMES.size * 12
+        expect{school.sync_year_stats(2011, { skip_teachers: true })}.to change{school.monthly_stats.count}.by(n)
+      end
+      it "should update school#synced_at timestamp" do
+        school.sync_year_stats(2011, { skip_teachers: true })
+        expect(school.synced_at).to be_within(1.minute).of(Time.now)
+      end
     end
   end
 
