@@ -28,7 +28,6 @@ class MonthlyStat < ActiveRecord::Base
                  :enrollments,
                  :male_enrollments,
                  :p_interviews,
-                 :male_p_interviews,
                  :enrollment_rate, # dependes of :enrollments and :p_interviews
                  :male_enrollment_rate, # dependes of :male_enrollments and :male_p_interviews
 
