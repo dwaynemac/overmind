@@ -2,11 +2,11 @@ shared_examples_for "a stats matrix" do
   describe "to_matrix" do
     let(:s){ create :school }
     before do
-      @out_of_scope = create(:monthly_stat, school: create(:school), ref_date: Date.civil(2012,1,3), value: 3, name: 'enrollments')
+      @out_of_scope = create(:monthly_stat, school: create(:school), ref_date: Date.civil(2012,1,3), value: 3, name: :enrollments)
 
-      @apr = create(:school_monthly_stat, school: s, ref_date: Date.civil(2012,4,1), value: 1, name: 'enrollments')
-      @dec = create(:school_monthly_stat, school: s, ref_date: Date.civil(2012,12,5),value: 6, name: 'enrollments')
-      @jan = create(:school_monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 4, name: 'enrollments')
+      @apr = create(:school_monthly_stat, school: s, ref_date: Date.civil(2012,4,1), value: 1, name: :enrollments)
+      @dec = create(:school_monthly_stat, school: s, ref_date: Date.civil(2012,12,5),value: 6, name: :enrollments)
+      @jan = create(:school_monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 4, name: :enrollments)
 
       @matrix = s.monthly_stats.to_matrix
     end
@@ -37,11 +37,11 @@ shared_examples_for "a stats matrix" do
     end
     describe "dropout_rate" do
       before do
-        @stud_jan = create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,3), value: 3, name: 'students')
-        @drop_jan = create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,3), value: 1, name: 'dropouts')
+        @stud_jan = create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,3), value: 3, name: :students)
+        @drop_jan = create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,3), value: 1, name: :dropouts)
 
-        @stud_dec = create(:monthly_stat, school: s, ref_date: Date.civil(2012,12,3), value: 1, name: 'students')
-        @drop_dec = create(:monthly_stat, school: s, ref_date: Date.civil(2012,12,3), value: 1, name: 'dropouts')
+        @stud_dec = create(:monthly_stat, school: s, ref_date: Date.civil(2012,12,3), value: 1, name: :students)
+        @drop_dec = create(:monthly_stat, school: s, ref_date: Date.civil(2012,12,3), value: 1, name: :dropouts)
 
         SchoolMonthlyStat.create_from_service!(s,:dropout_rate,Date.civil(2012,1,3))
         SchoolMonthlyStat.create_from_service!(s,:dropout_rate,Date.civil(2012,12,3))
@@ -57,9 +57,9 @@ shared_examples_for "a stats matrix" do
     end
     describe "enrollment_rate" do
       before do
-        create(:monthly_stat, school: s, ref_date: Date.civil(2012,4,2), value: 2, name: 'p_interviews')
-        create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,2), value: 16, name: 'interviews')
-        create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,2), value: 8, name: 'p_interviews')
+        create(:monthly_stat, school: s, ref_date: Date.civil(2012,4,2), value: 2, name: :p_interviews)
+        create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,2), value: 16, name: :interviews)
+        create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,2), value: 8, name: :p_interviews)
         SchoolMonthlyStat.create_from_service!(s,:enrollment_rate,Date.civil(2012,4,2))
         SchoolMonthlyStat.create_from_service!(s,:enrollment_rate,Date.civil(2012,1,2))
 
@@ -78,9 +78,9 @@ shared_examples_for "a stats matrix" do
     end
     describe "swasthya_students_subtotal" do
       before do
-        create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 1, name: 'sadhaka_students')
-        create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 1, name: 'yogin_students')
-        create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 1, name: 'chela_students')
+        create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 1, name: :sadhaka_students)
+        create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 1, name: :yogin_students)
+        create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 1, name: :chela_students)
 
         @matrix = s.monthly_stats.to_matrix
       end

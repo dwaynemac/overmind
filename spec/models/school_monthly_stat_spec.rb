@@ -33,7 +33,7 @@ describe SchoolMonthlyStat do
     context "if stats doesnt exist" do
       it "calls create_from_service" do
         expect(SchoolMonthlyStat).to receive('create_from_service!')
-        SchoolMonthlyStat.sync_from_service!(create(:school),'students',Date.today)
+        SchoolMonthlyStat.sync_from_service!(create(:school),:students,Date.today)
       end
     end
   end
@@ -88,7 +88,7 @@ describe SchoolMonthlyStat do
       end
     end
     context "for monthly stat with service name crm" do
-      let(:ms){ create(:school_monthly_stat, value: 1, service: 'crm', name: 'students')}
+      let(:ms){ create(:school_monthly_stat, value: 1, service: 'crm', name: :students)}
       before do
         allow_any_instance_of(School).to receive(:count_students).and_return("4")
       end

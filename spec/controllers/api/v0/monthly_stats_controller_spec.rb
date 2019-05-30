@@ -24,7 +24,7 @@ describe Api::V0::MonthlyStatsController, type: :controller do
                               value: 3)}
         it "updates stat value" do
           expect{req_with_key :post, :create,
-                              monthly_stat: {name: 'students',
+                              monthly_stat: {name: :students,
                                              ref_date: Date.civil(2012,10,31).to_s,
                                              account_name: 'account-name',
                                              teacher_username: 'dwayne',
@@ -33,7 +33,7 @@ describe Api::V0::MonthlyStatsController, type: :controller do
         end
         it "updates stat service" do
           expect{req_with_key :post, :create, monthly_stat: {service: 'new-service',
-                                                             name: 'students',
+                                                             name: :students,
                                                              ref_date: Date.civil(2012,10,31).to_s,
                                                              account_name: 'account-name',
                                                              teacher_username: 'dwayne',
@@ -47,7 +47,7 @@ describe Api::V0::MonthlyStatsController, type: :controller do
         end
         it "creates stat" do
           expect{
-            req_with_key :post, :create, monthly_stat: {name: 'students',
+            req_with_key :post, :create, monthly_stat: {name: :students,
                                                         ref_date: Date.civil(2012,10,31).to_s,
                                                         account_name: 'account-name',
                                                         teacher_username: 'dwayne',
@@ -65,7 +65,7 @@ describe Api::V0::MonthlyStatsController, type: :controller do
         end
         it "updates stat value" do
           expect{req_with_key :post, :create,
-                              monthly_stat: {name: 'students',
+                              monthly_stat: {name: :students,
                                              ref_date: Date.civil(2012,10,31).to_s,
                                              account_name: 'account-name',
                                              value: 4}}.to_not change{MonthlyStat.count}
@@ -73,7 +73,7 @@ describe Api::V0::MonthlyStatsController, type: :controller do
         end
         it "updates stat service" do
           expect{req_with_key :post, :create, monthly_stat: {service: 'new-service',
-                                                             name: 'students',
+                                                             name: :students,
                                                              ref_date: Date.civil(2012,10,31).to_s,
                                                              account_name: 'account-name',
                                                              value: 4}}.to_not change{MonthlyStat.count}
@@ -83,7 +83,7 @@ describe Api::V0::MonthlyStatsController, type: :controller do
       context "with non-existing MonthlyStat" do
         it "creates stat" do
           expect{
-            req_with_key :post, :create, monthly_stat: {name: 'students',
+            req_with_key :post, :create, monthly_stat: {name: :students,
                                                         ref_date: Date.civil(2012,10,31).to_s,
                                                         account_name: 'account-name',
                                                         value: 4}
