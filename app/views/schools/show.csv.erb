@@ -4,7 +4,8 @@
   @stat_names.each do |name|
     csv << [t("monthly_stat.names.#{name}")] + (1...13).map do |month|
       monthly_stat = @school_monthly_stats[name][month]
-      print_value(monthly_stat)
+      v = print_value(monthly_stat)
+      v.blank?? nil : v
     end
   end
 end -%>

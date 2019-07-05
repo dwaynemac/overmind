@@ -65,7 +65,7 @@ class SchoolsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv do
-        response.headers['Content-Disposition'] = "attachment; filename='#{@school.account_name}_#{@year}.csv'"
+        response.headers['Content-Disposition'] = "attachment; filename=#{@school.account_name}_#{@year}.csv"
         render 'show.csv.erb'
       end
     end
