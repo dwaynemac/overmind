@@ -26,6 +26,7 @@
     </nav>
   </header>
   <section class='schools-content'>
+    <div id="newChartContainer" class="chart-container"></div> <!-- chart -->
     <ul class='nav nav-tabs' role='tablist'>
       <li>
         <%= link_to @school.full_name, school_path(id: @school.id, year: @year) %>
@@ -59,3 +60,98 @@
   </h2>
   <%= render :partial => 'schools/sync_request_notification' %>
 </div>
+
+<%= content_for :body_end do %>
+  <% 
+  @graph_stat_names = @stat_names.select do |sn|
+    !sn.in?(MonthlyStat::MANUAL_STATS.map(&:to_sym)) && sn != :students_average_age
+  end
+  %>
+<script>
+    var chartData = <%= (1..12).map do |month|
+      r = { month: Date::MONTHNAMES[month] }
+      @rendering_pers = false
+      @graph_stat_names.each do |name|
+        val = (@stats[name.to_sym][month].try(:value) || 0)
+        if MonthlyStat.is_a_rate?(name)
+          @rendering_pers = true
+          val = val.to_f/100
+        end
+        r.merge!({ name => val })
+      end
+      r
+    end.to_json.html_safe -%>;
+
+    chart = new AmCharts.AmSerialChart();
+    chart.dataProvider = chartData;
+    chart.categoryField = "month";
+
+    chart.color = "#AAAAAA";
+    chart.startDuration = 2;
+    chart.autoMargins = false;
+    chart.marginTop = 30;
+    chart.marginBottom = 30;
+    chart.marginLeft = 80;
+    chart.marginRight = 80;
+
+    valAxis = new AmCharts.ValueAxis();
+    valAxis.position = "left";
+    valAxis.axisColor = "#2d66bb";
+    valAxis.gridAlpha = 0;
+    valAxis.fillColor = "#2d66bb";
+    valAxis.fillAlpha = 0.1;
+    valAxis.dashLength = 3;
+    chart.addValueAxis(valAxis);
+
+    <% if @rendering_pers %>
+      perAxis = new AmCharts.ValueAxis();
+      perAxis.minimum = 0;
+      perAxis.maximum = 100;
+      perAxis.position = "right";
+      perAxis.gridAlpha = 0;
+      perAxis.dashLength = 3;
+      chart.addValueAxis(perAxis);
+    <% end %>
+
+    <% @graph_stat_names.each do |stat_name| %>
+      <%= stat_name %>_graph = new AmCharts.AmGraph();
+      <%= stat_name %>_graph.valueField = "<%= stat_name %>";
+      <%= stat_name %>_graph.title = $("#stats-names").data("<%= stat_name %>");
+      <%= stat_name %>_graph.type = "line";
+      <%= stat_name %>_graph.lineThickness = <%= MonthlyStat.is_a_rate?(stat_name)? '1' : '2' %>;
+      <%= stat_name %>_graph.bullet = "<%= MonthlyStat.is_a_rate?(stat_name)? 'none' : 'round' %>";
+      <%= stat_name %>_graph.dashLength = <%= MonthlyStat.is_a_rate?(stat_name)? '3' : '1' %>;
+      <%= stat_name %>_graph.valueAxis = <%= MonthlyStat.is_a_rate?(stat_name)? "perAxis" : "valAxis" %>;
+      <%= case stat_name
+          when :students
+            "students_graph.lineColor = 'black';"
+          when :male_students
+            "male_students_graph.lineColor = 'blue';"
+          when :female_students
+            "female_students_graph.lineColor = 'pink';"
+          when :enrollments
+            "enrollments_graph.lineColor = 'green';"
+          when :enrollment_rate
+            "enrollment_rate_graph.lineColor = '#3fff3f';"
+          when :dropouts
+            "dropouts_graph.lineColor = 'red';"
+          when :dropout_rate
+            "dropout_rate_graph.lineColor = '#ff3f3f';"
+          else
+            ""
+          end.html_safe
+      %>
+      chart.addGraph(<%= stat_name %>_graph);
+    <% end %>
+    
+    chartCursor = new AmCharts.ChartCursor();
+    chart.addChartCursor( chartCursor );
+
+    legend = new AmCharts.AmLegend();
+    legend.align = "center";
+    legend.markerType = "circle";
+    chart.addLegend(legend);
+
+    chart.write('newChartContainer');
+</script>
+<% end %>
