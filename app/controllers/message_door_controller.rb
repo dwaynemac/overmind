@@ -1,5 +1,6 @@
 class MessageDoorController < ApplicationController
   include SnsHelper
+  include SsoSessionsHelper
 
   skip_before_filter :mock_login
   skip_before_filter :authenticate_user!
@@ -16,19 +17,22 @@ class MessageDoorController < ApplicationController
     when 'Notification'
       if sns_verified?
         unless sns_duplicate_submission?
-        
-          @key_name = sns_topic
-          @data = sns_message
-          set_ref_dates(sns_topic)
-          load_school
-          
-          if @data.present? && @school.present? && !@ref_dates.empty?
-            queue_sync_requests
-            
-            sns_set_as_received!
-            render json: "received", status: 200
+          if sns_topic == "sso_session_destroyed"
+            set_sso_session_destroyed_flag(sns_message[:username])
           else
-            render json: "data insuficient", status: 400
+            @key_name = sns_topic
+            @data = sns_message
+            set_ref_dates(sns_topic)
+            load_school
+          
+            if @data.present? && @school.present? && !@ref_dates.empty?
+              queue_sync_requests
+              
+              sns_set_as_received!
+              render json: "received", status: 200
+            else
+              render json: "data insuficient", status: 400
+            end
           end
         else
           render json: 'duplicate', status: 200

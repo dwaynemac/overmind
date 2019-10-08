@@ -206,8 +206,4 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
-
-  config.cas_base_url    = "https://metododerose.org:9443"
-  config.cas_create_user = true
-  config.cas_enable_single_sign_out = true
 end

@@ -2,7 +2,9 @@ require 'padma_user'
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :mock_login
+  include SsoSessionsHelper
+
+  before_filter :get_sso_session
 
   before_filter :authenticate_user!
 
@@ -22,15 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def mock_login
-    if Rails.env.development?
-      unless signed_in?
-        user = User.find_or_create_by_username("luis.perichon")
-        sign_in(user)
-      end
-    end
-  end
 
   # only CAS users with role or with a PADMA account are allowed
   def pre_check_access

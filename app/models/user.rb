@@ -2,7 +2,9 @@ class User < ActiveRecord::Base
 
   include Accounts::IsAUser
 
-  devise :cas_authenticatable
+  devise :database_authenticatable
+  def encrypted_password
+  end
 
   attr_accessible :username, :federation_id, :role, :locale
 

@@ -8,7 +8,6 @@ gem 'rack-cors'
 
 # CAS authentication
 gem 'devise', '1.5.0'
-gem 'devise_cas_authenticatable', '~> 1.3'
 # Authorization
 gem 'cancan'
 
@@ -34,7 +33,7 @@ gem 'delayed_job_active_record'
 
 gem 'logical_model', '0.6.4'
 gem 'messaging_client', '~> 0.1'
-gem 'accounts_client', '0.2.28'
+gem 'accounts_client', '0.2.38'
 gem 'kaminari'
 gem 'ransack'
 

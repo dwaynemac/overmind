@@ -1,8 +1,9 @@
 Overmind::Application.routes.draw do
   devise_for :users do
-    match "/login", :to => "devise/cas_sessions#new"
-    match '/logout', to: "devise/cas_sessions#destroy"
+    match "/login", :to => "sso_sessions#show"
+    match '/logout', to: "sso_sessions_#destroy"
   end
+  resource :sso_session
 
   match "/formulario_ics", to: "ics#show", school_id: "current"
   match "/analytics", to: "rankings#history"
