@@ -7,7 +7,7 @@ gem 'rails', '3.2.8'
 gem 'rack-cors'
 
 # CAS authentication
-gem 'devise', '1.5.0'
+gem 'devise', '3.5.10'
 # Authorization
 gem 'cancan'
 
