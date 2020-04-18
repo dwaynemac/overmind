@@ -37,7 +37,8 @@ class SchoolsSynchronizer
       end
     end
     
-    School.all.each{|s| s.nucleo_enabled? } # cache nucleo_enabled on attribute: cached_nucleo_enabled
+    # TODO disable until nucleo is online again --
+    # School.all.each{|s| s.nucleo_enabled? } # cache nucleo_enabled on attribute: cached_nucleo_enabled
     School.all.each{|s| s.padma_enabled? } # cache padma_enabled on attribute: cached_padma_enabled
   end
 

@@ -118,9 +118,13 @@ class School < ActiveRecord::Base
   # @return nil on Connection Problems
   # @return [TrueClass]
   def nucleo_enabled?
+    cached_nucleo_enabled
+=begin
+    TODO disable until nucleo back online
     ret = !!(self.api.try(:uni_status) == '1')
     update_attribute :cached_nucleo_enabled, ret
     ret
+=end
   end
 
   # @return nil on Connection Problems
