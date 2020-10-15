@@ -1,7 +1,7 @@
 class Teacher < ActiveRecord::Base
   attr_accessible :full_name, :username
 
-  has_and_belongs_to_many :schools
+  has_and_belongs_to_many :schools, join_table: 'schools_teachers'
 
   has_many :monthly_stats, dependent: :destroy
 

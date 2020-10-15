@@ -16,7 +16,7 @@ class School < ActiveRecord::Base
 
   has_many :sync_requests
 
-  has_and_belongs_to_many :teachers
+  has_and_belongs_to_many :teachers, join_table: 'schools_teachers'
 
   include NucleoApi
   include KshemaApi
