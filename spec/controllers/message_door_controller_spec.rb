@@ -1,8 +1,10 @@
 require 'spec_helper'
+include AuthHelper
 
 describe MessageDoorController do
 
   def request(key_name,sk,data)
+    login_user
     post :catch,
          key_name: key_name,
          secret_key: sk,
