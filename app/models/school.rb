@@ -33,9 +33,9 @@ class School < ActiveRecord::Base
 
   include Accounts::BelongsToAccount
   validates_uniqueness_of :account_name, allow_blank: true
-  
-  scope :enabled_on_nucleo, where("(cached_nucleo_enabled IS NULL) OR cached_nucleo_enabled")
-  scope :enabled_on_padma, where("(cached_padma_enabled IS NULL) OR cached_padma_enabled")
+
+  scope :enabled_on_nucleo, -> {where("(cached_nucleo_enabled IS NULL) OR cached_nucleo_enabled")}
+  scope :enabled_on_padma, -> {where("(cached_padma_enabled IS NULL) OR cached_padma_enabled")}
 
   # avoid calling accounts-ws to get the name.
   # if PadmaAccount cached call full_name on it
@@ -47,7 +47,7 @@ class School < ActiveRecord::Base
   def full_name
     account.nil? ? name : account.full_name
   end
-  
+
   ##
   # Checks if this schools has pending sync_requests
   # @return [Boolean]
