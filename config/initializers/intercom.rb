@@ -54,7 +54,7 @@ IntercomRails.config do |config|
   # that the user belongs to.
   #
   # config.user.company_association = Proc.new { |user| user.companies.to_a }
-  config.user.company_association = Proc.new { |user| [user.enabled_accounts] }
+  # config.user.company_association = Proc.new { |user| [user.enabled_accounts] }
 
   # == Current company method/variable
   # The method/variable that contains the current company for the current user,
