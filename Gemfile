@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
+ruby '2.3.0'
 
-gem 'rails', '3.2.8'
+gem 'rails', '4.0.0'
 
 gem 'rack-cors'
 
@@ -14,7 +14,7 @@ gem 'cancan'
 gem 'intercom-rails'
 
 # DB
-gem 'sqlite3', :group => [:development, :test]
+gem 'sqlite3', '1.3.11' 
 gem 'pg'
 
 # Inplace editor
@@ -32,27 +32,25 @@ gem 'daemons'
 gem 'delayed_job_active_record'
 
 gem 'logical_model', '0.6.4'
-gem 'messaging_client', '~> 0.1'
+#gem 'messaging_client', '~> 0.1'
 gem 'accounts_client', '0.2.38'
 gem 'kaminari'
 gem 'ransack'
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '~> 3.2'
-  gem 'jquery-rails'
-  gem "execjs"
-  gem 'less-rails-bootstrap', '~> 3.0.6'
-  gem "therubyracer", '0.12.2'
-end
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier', '~> 3.2'
+gem 'jquery-rails'
+gem "execjs"
+gem 'less-rails-bootstrap'
+gem "therubyracer", '0.12.2'
 
 group :development, :test do
   gem "rspec-rails"
   gem "shoulda", require: false
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
   gem "guard-rspec"
   gem "libnotify"
 
@@ -70,7 +68,7 @@ group :development do
   gem 'subcontractor', '>= 0.6.1'
   gem 'foreman'
 
-  gem 'debugger'
+  gem 'byebug'
 
   gem 'git-pivotal-tracker-integration'
   gem 'padma-deployment'
