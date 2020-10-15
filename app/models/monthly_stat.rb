@@ -10,12 +10,12 @@ class MonthlyStat < ActiveRecord::Base
 
   # Adds methods to build stats matrix.
   include StatsMatrix
-  
+
   include SearchUrls
-  
+
   include MoneyStat
 
-  attr_accessible :value, :name, :school_id, :ref_date, :service, :account_name, :id, :unit   # account name is an accessor, delegated to School.
+  #attr_accessible :value, :name, :school_id, :ref_date, :service, :account_name, :id, :unit   # account name is an accessor, delegated to School.
 
   # IMPORTANT
   # Stats are synced in THIS order
@@ -216,14 +216,14 @@ class MonthlyStat < ActiveRecord::Base
   def self.is_manual?(name)
     name.to_s.in?(MANUAL_STATS)
   end
-  
+
   def self.default_reduction(name)
     case name.to_s
     when 'students_average_age', 'team_teachers'
       :avg
     end
   end
-  
+
   def recalculate_dependent_local_stats
     dependant_stat_names = LocalStat.dependant_on(name)
     unless dependant_stat_names.empty?

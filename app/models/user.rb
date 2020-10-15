@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   def encrypted_password
   end
 
-  attr_accessible :username, :federation_id, :role, :locale
+  #attr_accessible :username, :federation_id, :role, :locale
 
   validates_uniqueness_of :username
   validates_presence_of :username

@@ -2,7 +2,7 @@ require 'appsignal'
 require 'appsignal/integrations/object'
 
 class TeacherMonthlyStat < MonthlyStat
-  attr_accessible :teacher_id, :teacher_username
+  #attr_accessible :teacher_id, :teacher_username
   belongs_to :teacher
 
   # IMPORTANT

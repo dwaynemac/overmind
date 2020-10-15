@@ -2,7 +2,7 @@ require 'appsignal'
 require 'appsignal/integrations/object'
 
 class School < ActiveRecord::Base
-  attr_accessible :name, :federation_id, :nucleo_id, :account_name, :migrated_kshema_to_padma_at
+  #attr_accessible :name, :federation_id, :nucleo_id, :account_name, :migrated_kshema_to_padma_at
 
   belongs_to :federation
 

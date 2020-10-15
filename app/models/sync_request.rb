@@ -14,9 +14,9 @@ require 'appsignal/integrations/object'
 #                    syncs requestes by user through web have high priority
 #
 class SyncRequest < ActiveRecord::Base
-  attr_accessible :school_id, :year, :month, :state, :synced_at, :filter_by_event
+  #attr_accessible :school_id, :year, :month, :state, :synced_at, :filter_by_event
 
-  attr_accessible :priority
+  #attr_accessible :priority
 
   belongs_to :school
 
