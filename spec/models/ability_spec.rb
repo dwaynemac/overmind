@@ -18,6 +18,12 @@ describe Ability do
 
   describe "council" do
     let(:user){create(:user,role: 'council')}
+    before do
+      pu = PadmaUser.new
+      #expect user.to receive_message_chain(:user, :padma_accounts, :map).and_return(["name"])
+      user.should_receive(:user).at_least(1).times.and_return(pu)
+      pu.should_receive(:padma_accounts).at_least(1).times.and_return([PadmaAccount.new(name: "first")])
+    end
     it "should NOT be able to manage all" do
       it_cannot(:manage,:all)
     end
