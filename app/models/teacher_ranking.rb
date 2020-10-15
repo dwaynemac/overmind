@@ -63,7 +63,7 @@ class TeacherRanking
                      .includes(:teacher)
                      .where(name: @column_names)
 
-    scope.all.group_by(&:teacher).map do |teacher, stats|
+    scope.group_by(&:teacher).map do |teacher, stats|
       stats.group_by(&:name).map do |name, stats|
         ReducedStat.new(teacher: teacher,
                         stats: stats,
