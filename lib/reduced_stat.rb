@@ -15,7 +15,7 @@ class ReducedStat
     self.stats = attributes[:stats]
     self.stats_scope = attributes[:stats_scope]
 
-    self.name = attributes[:name] || stats.try(:first).try(:name) 
+    self.name = attributes[:name] || stats.try(:first).try(:name) || stats_scope.try(:first).try(:name) 
     self.ref_date = attributes[:ref_date] || data.try(:first).try(:ref_date)
     self.reduce_as = attributes[:reduce_as] || default_reduction
 
