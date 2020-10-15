@@ -1,3 +1,4 @@
+=begin
 shared_examples_for "it uses FederationApi" do
   it { should validate_uniqueness_of :nucleo_id }
   describe "Class" do
@@ -28,3 +29,4 @@ shared_examples_for "it uses FederationApi" do
     it { should respond_to :api }
   end
 end
+=end
