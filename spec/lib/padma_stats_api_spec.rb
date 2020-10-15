@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe PadmaStatsApi do
   describe "#count_students" do

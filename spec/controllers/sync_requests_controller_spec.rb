@@ -1,11 +1,11 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe SyncRequestsController do
 
   before do
     @school = School.first||create(:school) 
     
-    @user = FactoryGirl.create(:user, role: 'admin')
+    @user = FactoryBot.create(:user, role: 'admin')
     pu = PadmaUser.new(username: @user.username)
     User.any_instance.stub(:padma_enabled?).and_return true
     User.any_instance.stub(:padma).and_return pu

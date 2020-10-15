@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe School do
   let(:school){create(:school)}
@@ -20,7 +20,7 @@ describe School do
   it { should allow_value(nil).for(:account_name)}
   it "should validate uniqueness of account_name" do
     create(:school, account_name: 'blah')
-    s = FactoryGirl.build(:school, account_name: 'blah')
+    s = FactoryBot.build(:school, account_name: 'blah')
     s.save
     s.errors.keys.should include :account_name
   end

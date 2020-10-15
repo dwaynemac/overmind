@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe SyncRequest do
   let(:sync_request){create(:sync_request)}
