@@ -62,9 +62,9 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
       @monthly_stat.service = params[:monthly_stat][:service]
     else
       if is_a_teacher_stat?
-        @monthly_stat = TeacherMonthlyStat.new(params[:monthly_stat])
+        @monthly_stat = TeacherMonthlyStat.new(monthly_stat_params)
       else
-        @monthly_stat = MonthlyStat.new(params[:monthly_stat])
+        @monthly_stat = MonthlyStat.new(monthly_stat_params)
       end
     end
     if @monthly_stat.save!
@@ -83,7 +83,7 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   # @retuired [Integer] id
   def update
     @monthly_stat = MonthlyStat.find(params[:id])
-    if @monthly_stat.update_attributes params[:monthly_stat]
+    if @monthly_stat.update_attributes monthly_stat_params
       render json: 'ok'
     else
       render json: {
@@ -128,6 +128,20 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
                       school_id: school.try(:id),
                       teacher_id: @teacher.try(:id)
                      ).first
+  end
+
+  def monthly_stat_params
+    params.require(:monthly_stat).permit(
+      :value,
+      :name,
+      :school_id,
+      :ref_date,
+      :service,
+      :account_name,
+      :id,
+      :teacher_username,
+      :unit
+    )
   end
 
 end
