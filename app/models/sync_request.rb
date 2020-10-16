@@ -51,7 +51,7 @@ class SyncRequest < ActiveRecord::Base
   RETRIES = 10
 
   def self.on_ref_date(options={})
-    scope = self.scoped
+    scope = self.all
     if options[:year]
       scope = scope.where(year: options[:year])
     end
