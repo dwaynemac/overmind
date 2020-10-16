@@ -26,7 +26,7 @@ describe SchoolsController do
       describe "if school doesnt have nucleo_id" do
         let!(:school){create(:school, nucleo_id: nil, account_name: 'xx-acname-xx')}
         before do
-          PadmaAccount.stub(:find_by_nucleo_id).and_return PadmaAccount.new name: school.account_name
+          allow(PadmaAccount).to receive(:find_by_nucleo_id).and_return PadmaAccount.new name: school.account_name
           get :show_by_nucleo_id, nid: 12
         end
         it { should redirect_to school }
@@ -41,8 +41,8 @@ describe SchoolsController do
     let(:user){create(:user,role: '', federation_id: 3)}
     before do
       create(:school, account_name: 'an-account', federation_id: 3)
-      user.stub!(:padma_enabled?).and_return(true)
-      user.stub!(:enabled_accounts).and_return([mock(name: 'an-account')])
+      allow(user).to receive(:padma_enabled?).and_return(true)
+      allow(user).to receive(:enabled_accounts).and_return([mock(name: 'an-account')])
       sign_in(user)
     end
   end
