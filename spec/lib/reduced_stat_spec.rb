@@ -58,7 +58,7 @@ describe ReducedStat do
   end
   
   describe "with stats_scope" do
-    let(:stats_scope){ SchoolMonthlyStat.scoped }
+    let(:stats_scope){ SchoolMonthlyStat.all }
     it "doesnt call DB on initialization" do
       rs = ReducedStat.new(stats_scope: stats_scope)
       expect(rs.stats_scope).to be_a(ActiveRecord::Relation)
