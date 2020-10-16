@@ -27,7 +27,7 @@ class IcsController < ApplicationController
   end
 
   def update
-    @ics.update_stats params[:ics]
+    @ics.update_stats ics_params
 
     redirect_to school_ics_path(ref_date: @ref_date, school_id: @school.id),
                 notice: I18n.t('ics.update.updated')
@@ -70,5 +70,9 @@ class IcsController < ApplicationController
     if @ref_date.nil?
       @ref_date = 1.month.ago.to_date
     end
+  end
+
+  def ics_params
+    params.require(:ics).permit(:school, :ref_date, :options)
   end
 end

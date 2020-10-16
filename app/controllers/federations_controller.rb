@@ -1,6 +1,6 @@
 class FederationsController < ApplicationController
   include ApplicationHelper
-
+  before_filter :load_federation, only: [:create]
   load_and_authorize_resource
 
   def index
@@ -77,7 +77,7 @@ class FederationsController < ApplicationController
   end
 
   def update
-    if @federation.update_attributes(params[:federation])
+    if @federation.update_attributes(federation_params)
       redirect_to federations_path, notice: t('federations.update.success')
     else
       render :edit
@@ -89,4 +89,13 @@ class FederationsController < ApplicationController
     redirect_to federations_path, notice: t('federations.destroy.success')
   end
 
+  private
+  
+  def federation_params
+    params.require(:federation).permit(:name, :nucleo_id)
+  end
+
+  def load_federation
+    @federation = Federation.new(federation_params)
+  end
 end
