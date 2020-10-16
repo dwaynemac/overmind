@@ -32,7 +32,7 @@ describe UsersController do
       end
       it "should update user attributes" do
         @user.reload
-        @user.role.should == 'council'
+        expect(@user.role).to eq 'council'
       end
     end
   end
