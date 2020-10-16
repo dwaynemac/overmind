@@ -21,6 +21,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Devise::TestHelpers, :type => :controller
 
+  config.infer_spec_type_from_file_location!
   # Only run specs marked with :focus in metadata or all specs if none with :focus is found.
   # config.treat_symbols_as_metadata_keys_with_true_values = true
   config.filter_run :focus => true
