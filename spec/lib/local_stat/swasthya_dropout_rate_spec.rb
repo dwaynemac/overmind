@@ -16,11 +16,11 @@ describe "swasthya dropout rate" do
         create(:monthly_stat, school: school, ref_date: ref_date-1.month, name: :chela_students, value: 5)
       end
 
-      it  { local_stat.value.should == 5000 }
+      it  { expect(local_stat.value).to eq 5000 }
       describe SchoolMonthlyStat do
         it "uses LocalStat for :swasthya_dropout_rate" do
           ms = SchoolMonthlyStat.create_from_service!(school,:swasthya_dropout_rate,ref_date)
-          ms.value.should == 5000
+          expect(ms.value).to eq 5000
         end
       end
     end
