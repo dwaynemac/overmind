@@ -4,7 +4,8 @@ describe RankingsController do
   describe "for admin user" do
   let(:user){create(:user,role: 'admin')}
     before do
-      PadmaUser.stub(:find).and_return PadmaUser.new username: user.username, current_account_name: 'test-acc'
+      allow_any_instance_of(SyncRequest).to receive_message_chain(:delay, :start)
+      allow(PadmaUser).to receive(:find).and_return PadmaUser.new username: user.username, current_account_name: 'test-acc'
       @fedone = create(:federation,id:1)
       @fedtwo = create(:federation,id:2)
       @school = create(:school, :account_name => 'test-acc')
@@ -21,8 +22,8 @@ describe RankingsController do
 
       it "allows to filter from all federations visible to user even when filtered" do
         get :show, ranking: { federation_ids: [1] }
-        @fedone.should be_in assigns(:federations)
-        @fedtwo.should be_in assigns(:federations)
+        expect(@fedone).to be_in assigns(:federations)
+        expect(@fedtwo).to be_in assigns(:federations)
       end
       
       describe "shows missing schools" do
@@ -30,7 +31,7 @@ describe RankingsController do
           yes = create(:school, federation_id: 1)
           no  = create(:school, federation_id: 2)
           get :show, ranking: { federation_ids: [1] }
-          yes.should be_in assigns(:missing_schools)
+          expect(yes).to be_in assigns(:missing_schools)
         end
       end
     end

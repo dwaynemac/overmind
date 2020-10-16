@@ -13,6 +13,7 @@ describe MessageDoorController do
 
   before do
     SyncRequest.destroy_all
+    allow_any_instance_of(SyncRequest).to receive_message_chain(:delay, :start)
   end
 
   let!(:recoleta){ create(:school, account_name: 'recoleta') }

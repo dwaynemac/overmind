@@ -3,6 +3,7 @@ require 'rails_helper'
 describe TeacherRankingsController do
   let(:user){create(:user,role: 'admin')}
   before do
+    allow_any_instance_of(SyncRequest).to receive_message_chain(:delay, :start)
       allow(PadmaUser).to receive(:find).and_return PadmaUser.new username: user.username, current_account_name: 'test-acc'
       sign_in(user)
   end

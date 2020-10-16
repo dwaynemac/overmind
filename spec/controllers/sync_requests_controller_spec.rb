@@ -13,6 +13,7 @@ describe SyncRequestsController do
     pa = PadmaAccount.new
     allow_any_instance_of(User).to receive(:current_account).and_return pa
 
+    allow_any_instance_of(SyncRequest).to receive_message_chain(:delay, :start)
     sign_in(@user)
   end
 
@@ -51,7 +52,7 @@ describe SyncRequestsController do
   end
 
   describe "#update" do
-    let(:sr){create(:sync_request)}
+    let(:sr){create(:sync_request, school_id: FactoryBot.create(:school).id)}
     it "changes priorty value" do
       sr.update_attribute :priority, 2
       put :update, school_id: sr.school_id, id: sr.id, sync_request: { priority: 10 }
