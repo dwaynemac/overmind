@@ -15,7 +15,7 @@ gem 'intercom-rails'
 
 # DB
 gem 'sqlite3', '1.3.11'
-gem 'pg'
+gem 'pg', '~> 0.20'
 
 # Inplace editor
 gem 'best_in_place', :github => 'afalkear/best_in_place_post'
