@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.3.0'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.1'
 
 gem 'rack-cors'
 
@@ -29,7 +29,7 @@ group :production do
 end
 
 gem 'daemons'
-gem 'delayed_job_active_record'
+gem 'delayed_job_active_record', '~> 4.1.1'
 
 #gem 'logical_model', '0.6.4'
 gem 'messaging_client'
