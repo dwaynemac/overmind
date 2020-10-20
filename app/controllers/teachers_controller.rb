@@ -12,7 +12,7 @@ class TeachersController < ApplicationController
 
     current_school_teachers = @school.account.present?? @school.account.users.map(&:username) : nil
     @teachers = current_school_teachers.blank?? @school.teachers : @school.teachers.select{|t| t.username.in?(current_school_teachers) }
-    @stats = @school.teacher_monthly_stats.for_year(@year).where(teacher_id: params[:id]).to_matrix
+    @stats = Matrixer.new(@school.teacher_monthly_stats.for_year(@year).where(teacher_id: params[:id])).to_matrix
     @stat_names = get_stat_names.map(&:to_sym)
     respond_to do |format|
       format.html

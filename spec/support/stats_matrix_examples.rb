@@ -8,7 +8,7 @@ shared_examples_for "a stats matrix" do
       @dec = create(:school_monthly_stat, school: s, ref_date: Date.civil(2012,12,5),value: 6, name: 'enrollments')
       @jan = create(:school_monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 4, name: 'enrollments')
 
-      @matrix = s.monthly_stats.to_matrix
+      @matrix = Matrixer.new(s.monthly_stats).to_matrix
     end
     it "should default matrix[stat-name] to {}" do
       expect(@matrix.default).to eq({})
@@ -26,7 +26,7 @@ shared_examples_for "a stats matrix" do
     end
     context "when there is more than one stat in a month (eg: scoping by fed)" do
       before do
-        @matrix = MonthlyStat.to_matrix
+        @matrix = Matrixer.new(MonthlyStat.all).to_matrix
       end
       it "should set a ReducedStat" do
         expect(@matrix[:enrollments][1]).to be_a(ReducedStat)
@@ -46,7 +46,7 @@ shared_examples_for "a stats matrix" do
         SchoolMonthlyStat.create_from_service!(s,:dropout_rate,Date.civil(2012,1,3))
         SchoolMonthlyStat.create_from_service!(s,:dropout_rate,Date.civil(2012,12,3))
 
-        @matrix = s.monthly_stats.for_year(2012).to_matrix
+        @matrix = Matrixer.new(s.monthly_stats.for_year(2012)).to_matrix
       end
       it "should set matrix[:dropout_rate][1] to januaries dropout rate (cents)" do
         expect(@matrix[:dropout_rate][1].value).to eq 2500
@@ -63,7 +63,7 @@ shared_examples_for "a stats matrix" do
         SchoolMonthlyStat.create_from_service!(s,:enrollment_rate,Date.civil(2012,4,2))
         SchoolMonthlyStat.create_from_service!(s,:enrollment_rate,Date.civil(2012,1,2))
 
-        @matrix = s.monthly_stats.to_matrix
+        @matrix = Matrixer.new(s.monthly_stats.all).to_matrix
       end
       it "should cosider P interviews, not total" do
         expect(@matrix[:enrollment_rate][1].value).to_not eq 2500
@@ -74,7 +74,7 @@ shared_examples_for "a stats matrix" do
       end
     end
     it "shouldnt raise expection when scoped to federation" do
-      expect{create(:federation).school_monthly_stats.to_matrix}.not_to raise_exception
+      expect{Matrixer.new(create(:federation).school_monthly_stats).to_matrix}.not_to raise_exception
     end
     describe "swasthya_students_subtotal" do
       before do
@@ -82,7 +82,7 @@ shared_examples_for "a stats matrix" do
         create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 1, name: 'yogin_students')
         create(:monthly_stat, school: s, ref_date: Date.civil(2012,1,1), value: 1, name: 'chela_students')
 
-        @matrix = s.monthly_stats.to_matrix
+        @matrix = Matrixer.new(s.monthly_stats.all).to_matrix
       end
       it "should set matrix[:swasthya_students_subtotal][1] to 3" do
         expect(@matrix[:swasthya_students_subtotal][1].value).to eq 3

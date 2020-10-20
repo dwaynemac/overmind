@@ -12,7 +12,7 @@ class FederationsController < ApplicationController
 
     @ref_since = 1.year.ago.end_of_month.to_date
     @ref_until = Date.today.end_of_month.to_date
-    
+
     @federations.each do |federation|
       @schools_sums[federation.id] = federation.schools.enabled_on_nucleo.count
 
@@ -25,7 +25,7 @@ class FederationsController < ApplicationController
                                                       .joins(:school).where(schools: { federation_id: federation.id })
                                                       .where(ref_date: @ref_until)
                                                       .sum(:value)
-      
+
       @dropouts_sums[federation.id] = SchoolMonthlyStat.where(name: :dropouts)
                                                         .where(school_id: federation.schools.map(&:id))
                                                         .where("ref_date >= ? and ref_date <= ?", @ref_since, @ref_until )
@@ -48,7 +48,7 @@ class FederationsController < ApplicationController
   def show
     @years = (2010..Date.today.year)
     @year = params[:year] || Date.today.year
-    @monthly_stats = @federation.school_monthly_stats.for_year(@year).to_matrix
+    @monthly_stats = Matrixer.new(@federation.school_monthly_stats.for_year(@year)).to_matrix
     respond_to do |format|
       format.html do
         render layout: role_layout
@@ -90,7 +90,7 @@ class FederationsController < ApplicationController
   end
 
   private
-  
+
   def federation_params
     params.require(:federation).permit(:name, :nucleo_id)
   end
