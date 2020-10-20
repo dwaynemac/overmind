@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.3.8'
 
-gem 'rails', '4.1.0'
+gem 'rails', '4.1.2'
 
 gem 'rack-cors'
 
 # CAS authentication
-gem 'devise', '1.5.0'
+gem 'devise', '3.4.1'
 # Authorization
 gem 'cancan'
 
@@ -44,6 +44,7 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier', '~> 3.2'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem "execjs"
 gem 'less-rails-bootstrap'
 gem "therubyracer", '0.12.2'
