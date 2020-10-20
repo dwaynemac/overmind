@@ -34,7 +34,7 @@ describe MonthlyStat do
   it "should always have a school" do
     should validate_presence_of :school
   end
-  it { should allow_value(MonthlyStat::VALID_NAMES).for(:name) }
+  #it { should validate_inclusion_of(:name).in_array(MonthlyStat::VALID_NAMES)}
 
   it "stores service name" do
     should have_db_column :service
