@@ -51,7 +51,7 @@ gem "therubyracer", '0.12.2'
 group :development, :test do
   gem "rspec-rails"
   gem "shoulda", require: false
-  gem "shoulda-matchers"
+  gem "shoulda-matchers", '~> 2.6.2'
   gem "factory_bot_rails"
   gem "guard-rspec"
   gem "libnotify"
