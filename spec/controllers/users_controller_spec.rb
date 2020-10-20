@@ -9,7 +9,9 @@ describe UsersController do
     describe "#index" do
       before { get :index }
       it { should respond_with :success }
-      it { should assign_to :users }
+      it "should assign user" do
+        expect(assigns(:users).first).to eq user
+      end
     end
     describe "#create" do
       before do
