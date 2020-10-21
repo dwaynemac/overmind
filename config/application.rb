@@ -44,14 +44,6 @@ module Overmind
     # like if you have constraints or database-specific column types
     # config.active_record.schema_format = :sql
 
-    # Enable the asset pipeline
-    config.assets.enabled = true
-
-    config.assets.js_compressor = Uglifier.new( harmony: true ) # ES6 support
-
-    # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.4'
-
     config.assets.initialize_on_precompile = false
     config.middleware.insert_before 0, Rack::Cors do
       allow do
