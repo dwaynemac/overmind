@@ -10,7 +10,7 @@ module MonthlyStatsHelper
   
   def print_value(monthly_stat, options = {})
     v = monthly_stat.try :value
-    return '' if v.nil?
+    return '' if skip_value(v)
 
     val = if monthly_stat.is_a_rate?
       # rates are represented as 'cents' in integer.
@@ -90,6 +90,10 @@ module MonthlyStatsHelper
     not_teacher_stats = !options[:teacher_stats]
 
     permitions && month_past && is_not_reduced_stat && not_teacher_stats && is_not_local_stat
+  end
+
+  def skip_value(value)
+    value.nil? || ((value.is_a?(Float) || value.is_a?(BigDecimal)) && value.nan?)
   end
 
 end
