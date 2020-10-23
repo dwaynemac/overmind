@@ -350,7 +350,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   kaminari
-  less-rails-bootstrap
+  less-rails-bootstrap (~> 3.3.5.0)
   libnotify
   messaging_client
   padma-assets (= 0.2.30)

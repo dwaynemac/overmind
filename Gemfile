@@ -46,7 +46,7 @@ gem 'uglifier', '~> 3.2'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem "execjs"
-gem 'less-rails-bootstrap'
+gem 'less-rails-bootstrap', '~> 3.3.5.0'
 gem "therubyracer", '0.12.2'
 
 group :development, :test do
