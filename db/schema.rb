@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20201020001834) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -27,7 +30,7 @@ ActiveRecord::Schema.define(version: 20201020001834) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "federations", force: true do |t|
     t.string   "name"
@@ -49,8 +52,8 @@ ActiveRecord::Schema.define(version: 20201020001834) do
     t.string   "unit"
   end
 
-  add_index "monthly_stats", ["id", "school_id", "teacher_id", "ref_date"], name: "existance_optimizer"
-  add_index "monthly_stats", ["school_id", "name", "teacher_id", "ref_date"], name: "load_optimizer"
+  add_index "monthly_stats", ["id", "school_id", "teacher_id", "ref_date"], name: "existance_optimizer", using: :btree
+  add_index "monthly_stats", ["school_id", "name", "teacher_id", "ref_date"], name: "load_optimizer", using: :btree
 
   create_table "schools", force: true do |t|
     t.string   "name"
@@ -69,10 +72,10 @@ ActiveRecord::Schema.define(version: 20201020001834) do
     t.boolean  "cached_padma_enabled"
   end
 
-  add_index "schools", ["account_name"], name: "index_schools_on_account_name"
-  add_index "schools", ["federation_id"], name: "index_schools_on_federation_id"
-  add_index "schools", ["id"], name: "index_schools_on_id"
-  add_index "schools", ["nucleo_id"], name: "index_schools_on_nucleo_id"
+  add_index "schools", ["account_name"], name: "index_schools_on_account_name", using: :btree
+  add_index "schools", ["federation_id"], name: "index_schools_on_federation_id", using: :btree
+  add_index "schools", ["id"], name: "index_schools_on_id", using: :btree
+  add_index "schools", ["nucleo_id"], name: "index_schools_on_nucleo_id", using: :btree
 
   create_table "schools_teachers", force: true do |t|
     t.integer "teacher_id"
@@ -86,8 +89,8 @@ ActiveRecord::Schema.define(version: 20201020001834) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id"
-  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "sync_requests", force: true do |t|
     t.integer  "school_id"
@@ -116,6 +119,6 @@ ActiveRecord::Schema.define(version: 20201020001834) do
     t.string   "locale"
   end
 
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

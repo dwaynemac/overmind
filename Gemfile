@@ -6,6 +6,9 @@ gem 'rails', '4.1.2'
 
 gem 'rack-cors', '~> 1.0.3'
 
+gem 'puma'
+gem 'puma_worker_killer'
+
 # CAS authentication
 gem 'devise', '3.4.1'
 # Authorization
@@ -14,12 +17,13 @@ gem 'cancan', '~> 1.6.10'
 gem 'intercom-rails', '~> 0.4.2'
 
 # DB
-gem 'sqlite3', '1.3.11'
+#gem 'pg', "~> 1.2"
 gem 'pg', '~> 0.20'
 
 # Inplace editor
 gem 'best_in_place', :github => 'afalkear/best_in_place_post'
-gem 'padma-assets', '0.2.30'
+gem 'padma-assets', '0.3.1'
+gem 'padma-assets', '0.3.1'
 
 gem 'appsignal', '~> 2.8'
 
@@ -50,12 +54,13 @@ gem 'less-rails-bootstrap', '~> 3.3.5.0'
 gem "therubyracer", '0.12.2'
 
 group :development, :test do
+  gem 'sqlite3', '1.3.11'
   gem "rspec-rails", '~> 3.9.1'
   gem "shoulda", '~> 3.5.0', require: false
   gem "shoulda-matchers", '~> 2.6.2'
   gem "factory_bot_rails", '~> 4.11.1'
   gem "guard-rspec", '~> 4.7.3'
-  gem "libnotify", '~> 0.9.4'
+  #gem "libnotify", '~> 0.9.4'
   gem 'byebug', '~> 11.0.1'
 end
 
