@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
   def global_teachers
     authorize! :global_teachers, :reports
 
-    scope = TeacherMonthlyStat.scoped
+    scope = TeacherMonthlyStat.all
 
     if params[:federation_ids]
       scope = scope.joins(:school).where( schools: { federation_id: params[:federation_ids] })

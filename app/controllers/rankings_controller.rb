@@ -4,7 +4,7 @@ class RankingsController < ApplicationController
   def history
     authorize! :history, Ranking
     
-    @federations = Federation.scoped 
+    @federations = Federation.all
     federation_ids = Federation.accessible_by(current_ability).pluck(:id)
     
     if params[:ranking].nil?

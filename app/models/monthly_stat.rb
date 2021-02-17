@@ -100,7 +100,7 @@ class MonthlyStat < ActiveRecord::Base
 
 
   def self.api_where(conditions={})
-    ret = self.scoped
+    ret = self.all
     return ret if conditions.blank?
 
     if conditions[:month] && conditions[:year]
