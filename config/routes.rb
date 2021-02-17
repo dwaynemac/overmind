@@ -1,12 +1,14 @@
 Overmind::Application.routes.draw do
   devise_for :users do
-    match "/login", :to => "sso_sessions#show"
-    match '/logout', to: "sso_sessions_#destroy"
+    get "/login", :to => "sso_sessions#show"
+    match '/logout', to: "sso_sessions_#destroy", via: [:get, :delete]
   end
   resource :sso_session
+  get "/login", :to => "sso_sessions#show"
+  match '/logout', to: "sso_sessions_#destroy", via: [:get, :delete]
 
-  match "/formulario_ics", to: "ics#show", school_id: "current"
-  match "/analytics", to: "rankings#history"
+  get "/formulario_ics", to: "ics#show", school_id: "current"
+  get "/analytics", to: "rankings#history"
 
   resource :ics, only: [] do
     collection do
@@ -40,10 +42,10 @@ Overmind::Application.routes.draw do
       get 'sync_year'
     end
     collection do
-      match "/pa/:account_name", to: 'schools#show_by_name'
-      match "/pa/:account_name/ics", to: 'ics#show'
-      match "/nid/:nid", to: 'schools#show_by_nucleo_id'
-      match "/nid/:nucleo_id/ics", to: 'ics#show'
+      get "/pa/:account_name", to: 'schools#show_by_name'
+      get "/pa/:account_name/ics", to: 'ics#show'
+      get "/nid/:nid", to: 'schools#show_by_nucleo_id'
+      get "/nid/:nucleo_id/ics", to: 'ics#show'
     end
     resources :sync_requests, only: [:create, :update]
     resource :teacher_ranking, only: [:show, :update]
@@ -75,6 +77,6 @@ Overmind::Application.routes.draw do
   end
 
  root to: 'rankings#show'
- match 'message_door', to: 'message_door#catch'
- match 'sns', to: 'message_door#sns'
+ get 'message_door', to: 'message_door#catch'
+ get 'sns', to: 'message_door#sns'
 end

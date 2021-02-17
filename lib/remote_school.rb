@@ -1,4 +1,5 @@
 # Client for Nucleo Api
+=begin
 class RemoteSchool < LogicalModel
 
   self.hydra = HYDRA
@@ -27,3 +28,4 @@ class RemoteSchool < LogicalModel
   end
 
 end
+=end

@@ -1,5 +1,6 @@
 class SchoolsController < ApplicationController
 
+  before_filter :load_school, only: [:create]
   load_and_authorize_resource except: :show_by_name
 
   def index
@@ -88,7 +89,7 @@ class SchoolsController < ApplicationController
   end
 
   def update
-    if @school.update_attributes(params[:school])
+    if @school.update_attributes(school_params)
       redirect_to schools_path
     else
       render :edit
@@ -114,5 +115,19 @@ class SchoolsController < ApplicationController
       end
     end
     regular + MonthlyStat::MANUAL_STATS
+  end
+
+  def school_params
+    params.require(:school).permit(
+      :name,
+      :federation_id,
+      :nucleo_id,
+      :account_name,
+      :migrated_kshema_to_padma_at
+    )
+  end
+
+  def load_school
+    @school = School.new(school_params)
   end
 end

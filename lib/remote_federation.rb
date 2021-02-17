@@ -1,3 +1,4 @@
+=begin
 class RemoteFederation < LogicalModel
 
   self.host  = NUCLEO_HOST
@@ -24,3 +25,4 @@ class RemoteFederation < LogicalModel
   end
 
 end
+=end

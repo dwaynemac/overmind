@@ -1,14 +1,3 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
-require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
-require 'rspec/autorun'
-require 'shoulda'
-
-# Requires supporting ruby files with custom matchers and macros, etc,
-# in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
-
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -29,11 +18,21 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include Devise::TestHelpers, :type => :controller
 
+  config.infer_spec_type_from_file_location!
   # Only run specs marked with :focus in metadata or all specs if none with :focus is found.
-  config.treat_symbols_as_metadata_keys_with_true_values = true
+  # config.treat_symbols_as_metadata_keys_with_true_values = true
   config.filter_run :focus => true
   config.run_all_when_everything_filtered = true
+end
+
+module AuthHelper
+ def login_user
+  @request.env["devise.mapping"] = Devise.mappings[:user]
+  user = FactoryBot.create(:user)
+  # user.confirm # or set a confirmed_at inside the factory. Only necessary if you are using the "confirmable" module
+  sign_in user
+ end
 end

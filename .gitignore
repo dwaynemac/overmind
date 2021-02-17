@@ -23,4 +23,5 @@ config/database.yml
 .yardoc/
 public/documentation/
 doc/
+.byebug_history
 *.swp

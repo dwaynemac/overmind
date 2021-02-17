@@ -1,8 +1,10 @@
-require 'spec_helper'
+require 'rails_helper'
+include AuthHelper
 
 describe MessageDoorController do
 
   def request(key_name,sk,data)
+    login_user
     post :catch,
          key_name: key_name,
          secret_key: sk,
@@ -11,6 +13,7 @@ describe MessageDoorController do
 
   before do
     SyncRequest.destroy_all
+    allow_any_instance_of(SyncRequest).to receive_message_chain(:delay, :start)
   end
 
   let!(:recoleta){ create(:school, account_name: 'recoleta') }

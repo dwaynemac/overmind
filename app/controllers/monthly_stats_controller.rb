@@ -1,5 +1,6 @@
 class MonthlyStatsController < ApplicationController
 
+  before_filter :load_monthly_stat, only: [:create]
   load_and_authorize_resource :school, except: [:global]
   load_and_authorize_resource through: :school, except: [:global]
 
@@ -33,7 +34,7 @@ class MonthlyStatsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @monthly_stat.update_attributes(params[:monthly_stat])
+      if @monthly_stat.update_attributes(monthly_stat_params)
         format.html {redirect_to @school, notice: t('monthly_stats.update.success')}
         format.json do
           render json: {id: @monthly_stat.id}
@@ -79,5 +80,24 @@ end
         render 'global.csv.erb'
       end
     end
+  end
+
+  private
+  def monthly_stat_params
+    params.require(:monthly_Stat).permit(
+      :value,
+      :name,
+      :school_id,
+      :ref_date,
+      :service,
+      :account_name,
+      :teacher_username,
+      :id,
+      :unit
+    )
+  end
+
+  def load_monthly_stat
+    @monthly_stat = MonthlyStat.new(monthly_stat_params)
   end
 end
