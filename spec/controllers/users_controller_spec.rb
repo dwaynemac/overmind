@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe UsersController do
   context "for admin" do
@@ -9,7 +9,9 @@ describe UsersController do
     describe "#index" do
       before { get :index }
       it { should respond_with :success }
-      it { should assign_to :users }
+      it "should assign user" do
+        expect(assigns(:users).first).to eq user
+      end
     end
     describe "#create" do
       before do
@@ -32,7 +34,7 @@ describe UsersController do
       end
       it "should update user attributes" do
         @user.reload
-        @user.role.should == 'council'
+        expect(@user.role).to eq 'council'
       end
     end
   end

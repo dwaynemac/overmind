@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "male students rate" do
   let(:school){create(:school)}

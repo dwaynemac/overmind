@@ -14,9 +14,9 @@ require 'appsignal/integrations/object'
 #                    syncs requestes by user through web have high priority
 #
 class SyncRequest < ActiveRecord::Base
-  attr_accessible :school_id, :year, :month, :state, :synced_at, :filter_by_event
+  #attr_accessible :school_id, :year, :month, :state, :synced_at, :filter_by_event
 
-  attr_accessible :priority
+  #attr_accessible :priority
 
   belongs_to :school
 
@@ -26,7 +26,7 @@ class SyncRequest < ActiveRecord::Base
             presence: true,
             numericality: { greater_than: 0,
                             less_than: 13 }
-  
+
   validate :valid_ref_date
   validate :only_one_unfinished_per_school_per_month
 
@@ -39,19 +39,19 @@ class SyncRequest < ActiveRecord::Base
   # finished - sync successfully finished
   STATES = %W(ready running paused failed finished)
 
-  scope :in_progress, where(state: %W(paused running))
-  scope :failed, where(state: 'failed')
-  scope :pending, where(state: %W(ready paused))
-  scope :unfinished, where(state: %W(ready paused running failed))
-  scope :finished, where(state: 'finished')
-  scope :prioritized, order('priority desc')
-  scope :night_only, where("priority IS NULL OR priority < 5")
-  scope :not_night_only, where("NOT (priority IS NULL OR priority < 5)")
+  scope :in_progress, -> {where(state: %W(paused running))}
+  scope :failed, -> {where(state: 'failed')}
+  scope :pending, -> {where(state: %W(ready paused))}
+  scope :unfinished, -> {where(state: %W(ready paused running failed))}
+  scope :finished, -> {where(state: 'finished')}
+  scope :prioritized, -> {order('priority desc')}
+  scope :night_only, -> {where("priority IS NULL OR priority < 5")}
+  scope :not_night_only, -> {where("NOT (priority IS NULL OR priority < 5)")}
 
   RETRIES = 10
 
   def self.on_ref_date(options={})
-    scope = self.scoped
+    scope = self.all
     if options[:year]
       scope = scope.where(year: options[:year])
     end
@@ -62,7 +62,7 @@ class SyncRequest < ActiveRecord::Base
   end
 
   # @param safe [Boolean] if true, exceptions will be catched and logged without raising (true)
-  # @return [String] state 
+  # @return [String] state
   def start(safe=true)
     return unless school.present? && year.present? && month.present?
     return if finished? || failed?
@@ -164,7 +164,7 @@ class SyncRequest < ActiveRecord::Base
   end
 
   private
-  
+
   def valid_ref_date
     if year && month
       if ref_date(year,month).end_of_month > Time.zone.now.to_date.end_of_month
@@ -181,7 +181,7 @@ class SyncRequest < ActiveRecord::Base
   end
 
   # Checks if given month is not in the future
-  # @param month [Integer] 
+  # @param month [Integer]
   # @return [Boolean]
   def syncable_month?(month)
     (self.year < Time.now.year && month <= 12) || (self.year == Time.now.year && month <= Time.now.month)

@@ -74,7 +74,7 @@ class Ranking
       pre_scope = pre_scope.where(schools: { federation_id: @federation_ids}) unless @federation_ids.nil?
       simple_reduction_scope = pre_scope.where(name: @column_names - columns_with_special_reduction)
   
-      @stats = simple_reduction_scope.all.group_by(&:school).map do |school, stats|
+      @stats = simple_reduction_scope.group_by(&:school).map do |school, stats|
         stats_by_name = stats.group_by(&:name)
         (stats_by_name.keys + columns_with_special_reduction).map do |name|
           ReducedStat.new(school: school,

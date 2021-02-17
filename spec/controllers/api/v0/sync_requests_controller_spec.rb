@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Api::V0::SyncRequestsController do
   describe "#pause_all" do

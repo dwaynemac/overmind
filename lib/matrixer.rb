@@ -20,7 +20,7 @@ class Matrixer
     matrix = Hash.new({})
 
     # fetch from DB grouped by name.
-    @stats.scoped.group_by(&:name).each_pair do |stat_name, stats|
+    @stats.group_by(&:name).each_pair do |stat_name, stats|
       # WARNING if stat has not been scoped to a year this will acumulate all months
       matrix[stat_name] = stats.group_by{|ms|ms.ref_date.month}
     end
@@ -38,7 +38,7 @@ class Matrixer
         if stats.size>1
           if LocalStat.has_special_reduction?(stat_name)
             # ignore this values, for reduction we need to recalculate from source. 
-            stat_scope = @stats.scoped
+            stat_scope = @stats.all
                                .where(ref_date: stats.first.ref_date)
             rs = ReducedStat.new(
                             name: stat_name,
@@ -65,7 +65,7 @@ class Matrixer
         matrix[stat_name][:total] = ReducedStat.new(
           name: stat_name,
           stats: matrix[stat_name].values,
-          stats_scope: @stats.scoped,
+          stats_scope: @stats,
           reduce_as: red_fn
         )
       end

@@ -2,8 +2,8 @@ require 'appsignal'
 require 'appsignal/integrations/object'
 
 class SchoolMonthlyStat < MonthlyStat
-  default_scope where(teacher_id: nil)
-  attr_protected :teacher_id
+  default_scope -> { where(teacher_id: nil) }
+  # attr_protected :teacher_id
 
   validate :teacher_id_should_be_nil
   

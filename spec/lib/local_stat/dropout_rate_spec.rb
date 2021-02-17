@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "dropout rate" do
   let(:school){create(:school)}

@@ -107,7 +107,7 @@ class RankingsController < ApplicationController
   def show
     authorize! :read, Ranking
 
-    @federations = Federation.scoped 
+    @federations = Federation.all
     federation_ids = Federation.accessible_by(current_ability).pluck(:id)
     
     if params[:ranking].nil?

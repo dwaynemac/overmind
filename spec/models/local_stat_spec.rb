@@ -1,12 +1,12 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe LocalStat do
   describe ".has_special_reduction?" do
     it "returns true for :dropout_rate" do
-      expect(LocalStat.has_special_reduction?(:dropout_rate)).to be_true
+      expect(LocalStat.has_special_reduction?(:dropout_rate)).to be_truthy
     end
     it "returns false for :dropouts" do
-      expect(LocalStat.has_special_reduction?(:dropouts)).to be_false
+      expect(LocalStat.has_special_reduction?(:dropouts)).to be_falsey
     end
   end
   

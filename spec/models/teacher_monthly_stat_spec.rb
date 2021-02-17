@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe TeacherMonthlyStat do
 
@@ -17,7 +17,7 @@ describe TeacherMonthlyStat do
   describe ".sync_from_service" do
     before do
       # mock interaction with services.
-      TeacherMonthlyStat.stub(:get_remote_values).and_return([
+      allow(TeacherMonthlyStat).to receive(:get_remote_values).and_return([
            {value: 1, full_name: 'Pablo Lewin', padma_username: nil},
            {value: 23, full_name: 'Alex Falke', padma_username: nil},
            {value: 38, full_name: 'Lucia Gagliardini', padma_username: nil}

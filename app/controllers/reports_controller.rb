@@ -56,7 +56,7 @@ class ReportsController < ApplicationController
       sr.queue_dj
     end
 
-    preloaded_stats = @scope.all
+    preloaded_stats = @scope
 
     #widget
     @enrollments = select_value preloaded_stats,  :enrollments

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :load_user, only: [:create]
   load_and_authorize_resource
 
   def index
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       redirect_to @user, notice: t('users.update.success')
     else
       render 'edit'
@@ -32,5 +33,19 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     redirect_to users_url, notice: t('users.destroy.success')
+  end
+  
+  private
+  def user_params
+    params.require(:user).permit(
+      :username,
+      :federation_id,
+      :role,
+      :locale
+    )
+  end
+
+  def load_user
+    @user = User.new(user_params)
   end
 end
