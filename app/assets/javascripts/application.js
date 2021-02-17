@@ -15,7 +15,6 @@
 //= require jquery-ui
 //= require padma-assets
 //= require jquery.tablesorter
-//= require mixpanel
 //= require ux-events
 //= require best_in_place
 //= require best_in_place.purr
