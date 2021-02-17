@@ -13,7 +13,7 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   #         
   #
   def index
-    @monthly_stats = MonthlyStat.api_where(params[:where]).all(include: :school)
+    @monthly_stats = MonthlyStat.api_where(params[:where]).includes(:school).all
     render json: {
         collection: @monthly_stats,
         total: @monthly_stats.size
