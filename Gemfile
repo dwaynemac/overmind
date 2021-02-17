@@ -10,7 +10,7 @@ gem 'puma'
 gem 'puma_worker_killer'
 
 # CAS authentication
-gem 'devise', '3.4.1'
+gem 'devise', '4.7.3'
 # Authorization
 gem 'cancan', '~> 1.6.10'
 
