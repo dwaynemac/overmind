@@ -84,7 +84,7 @@ end
 
   private
   def monthly_stat_params
-    params.require(:monthly_Stat).permit(
+    params.require(:monthly_stat).permit(
       :value,
       :name,
       :school_id,
