@@ -73,6 +73,26 @@ class IcsController < ApplicationController
   end
 
   def ics_params
-    params.require(:ics).permit(:school, :ref_date, :options)
+    params.require(:ics).permit(:school,
+                                :ref_date,
+                                :options,
+
+                                :students,
+                                :male_students,
+                                :demand,
+                                :conversion_rate,
+                                :p_interviews,
+                                :enrollments,
+                                :enrollment_rate,
+                                :dropout_rate,
+                                :students_average_age,
+                                :in_professional_training,
+                                :gross_income,
+                                :gross_income_unit,
+                                :expenses,
+                                :expenses_unit,
+                                :profit,
+                                :profit_unit,
+                                :team_teachers)
   end
 end
