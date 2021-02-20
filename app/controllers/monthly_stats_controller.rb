@@ -99,5 +99,6 @@ end
 
   def load_monthly_stat
     @monthly_stat = MonthlyStat.new(monthly_stat_params)
+    @monthly_stat.school_id = params[:school_id] if @monthly_stat.school_id.nil?
   end
 end
