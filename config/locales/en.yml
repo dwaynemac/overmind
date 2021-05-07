@@ -21,8 +21,8 @@ en:
       recalculate_these_values: "Re-calculate these values"
       previous_month: Previous month
       next_month: next month
-      see_all_ics: Go to yearly advanced screen with more items
-      see_all_ics_explained: On yearly screen you can choose values, and see anual history as shown on Data Together vidoes.
+      see_all_ics: Go to input my data
+      see_all_ics_explained: Click here to input your data of previous months as seen on tutorial videos.
       this_month_ics: "You may input value from %{month} here"
   monthly_stats:
     chrono_table:

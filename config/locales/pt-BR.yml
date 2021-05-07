@@ -18,9 +18,9 @@ pt-BR:
       update_ics: Salvar estes indices de controle
       recalculate_these_values: Recalcular estes valores
       previous_month: Mês anterior
-      next_month: próximo mês 
-      see_all_ics: Ir a tela anual avanzada com mais indices de controle
-      see_all_ics_explained: Na tela anual você pode selecionar os índices de controle e ver o histórico anual como indicado nos vídeos da Data Together.
+      next_month: próximo mês
+      see_all_ics: Carregar meus dados na planilha anual
+      see_all_ics_explained: Click aqui para carregar dados como nos vídeos do WorkPlace
       this_month_ics: "Aquí você pode colocar os dados de %{month}"
   monthly_stats:
     chrono_table:

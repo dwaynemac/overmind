@@ -19,8 +19,8 @@ es:
       recalculate_these_values: Recalcular estos valores
       previous_month: Mes anterior
       next_month: Próximo mes
-      see_all_ics: Ir a pantalla anual avanzada con más indices de control.
-      see_all_ics_explained: En la pantalla anual podés seleccionar los índices que quieras cargar y ver todo el histórico anual como indicado en los videos de Data Together.
+      see_all_ics: Cargar mis datos en la planilla anual
+      see_all_ics_explained: Click aquí para cargar los datos como explicado en los videos de WorkPlace
       this_month_ics: "A continuación podés cargar los datos de %{month}"
   monthly_stat:
     description:
