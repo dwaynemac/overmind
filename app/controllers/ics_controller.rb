@@ -30,7 +30,7 @@ class IcsController < ApplicationController
     @ics.update_stats ics_params
 
     redirect_to school_ics_path(ref_date: @ref_date, school_id: @school.id),
-                notice: I18n.t('ics.update.updated')
+      notice: I18n.t('ics.update.updated')
   end
 
   private
@@ -74,25 +74,26 @@ class IcsController < ApplicationController
 
   def ics_params
     params.require(:ics).permit(:school,
-                                :ref_date,
-                                :options,
-
-                                :students,
-                                :male_students,
-                                :demand,
-                                :conversion_rate,
-                                :p_interviews,
-                                :enrollments,
-                                :enrollment_rate,
-                                :dropout_rate,
-                                :students_average_age,
-                                :in_professional_training,
-                                :gross_income,
-                                :gross_income_unit,
-                                :expenses,
-                                :expenses_unit,
-                                :profit,
-                                :profit_unit,
-                                :team_teachers)
+      :ref_date,
+      :options,
+      :students,
+      :male_students,
+      :demand,
+      :conversion_rate,
+      :interviews,
+      :p_interviews,
+      :enrollments,
+      :enrollment_rate,
+      :dropouts,
+      :dropout_rate,
+      :students_average_age,
+      :in_professional_training,
+      :gross_income,
+      :gross_income_unit,
+      :expenses,
+      :expenses_unit,
+      :profit,
+      :profit_unit,
+      :team_teachers)
   end
 end

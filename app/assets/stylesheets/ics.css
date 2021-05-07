@@ -18,6 +18,10 @@ select#school_select {
   color: #1f9dd9;
 }
 
+#currentContext {
+  margin-top: 25px;
+}
+
 #ics_info {
   color: white;
   margin-top: 50px;

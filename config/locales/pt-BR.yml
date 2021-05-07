@@ -14,12 +14,14 @@ pt-BR:
     update:
       updated: Valores atualizados!
     show:
-      automatic_for_padma_users: Os seguintes indices são calculados de forma automática para usuários do PADMA
-      update_ics: Salvar indices de controle
+      automatic_for_padma_users: Os seguintes indices são calculados de forma automática para usuários do PADMA, não precisa cadastrar valores manualmente.
+      update_ics: Salvar estes indices de controle
       recalculate_these_values: Recalcular estes valores
       previous_month: Mês anterior
       next_month: próximo mês 
       see_all_ics: Ir a tela anual avanzada com mais indices de controle
+      see_all_ics_explained: Na tela anual você pode selecionar os índices de controle e ver o histórico anual como indicado nos vídeos da Data Together.
+      this_month_ics: "Aquí você pode colocar os dados de %{month}"
   monthly_stats:
     chrono_table:
       title: Estatísticas mensais

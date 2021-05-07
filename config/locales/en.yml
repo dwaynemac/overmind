@@ -17,11 +17,13 @@ en:
       updated: Values updated
     show:
       automatic_for_padma_users: Following values are automatically stored for PADMA users
-      update_ics: Save values
+      update_ics: Save these values
       recalculate_these_values: "Re-calculate these values"
       previous_month: Previous month
       next_month: next month
       see_all_ics: Go to yearly advanced screen with more items
+      see_all_ics_explained: On yearly screen you can choose values, and see anual history as shown on Data Together vidoes.
+      this_month_ics: "You may input value from %{month} here"
   monthly_stats:
     chrono_table:
       title: Estatísticas mensais

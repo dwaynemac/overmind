@@ -3,20 +3,22 @@ class Ics
   attr_reader :school, :options
 
   ICS = [
-    :students,
-    :male_students,
     :demand,
-    :conversion_rate,
-    :p_interviews,
+    :interviews,
     :enrollments,
-    :enrollment_rate,
-    :dropout_rate,
-    :students_average_age,
-    :in_professional_training,
-    :gross_income,
-    :expenses,
-    :profit,
-    :team_teachers
+    :students,
+    :dropouts,
+    :in_professional_training
+    #:p_interviews,
+    #:male_students,
+    #:conversion_rate,
+    #:enrollment_rate,
+    #:dropout_rate,
+    #:students_average_age,
+    #:gross_income,
+    #:expenses,
+    #:profit,
+    #:team_teachers
   ]
 
   def initialize(school,ref_date, options = {})
@@ -38,14 +40,15 @@ class Ics
       end
     end
   end
-  %W(gross_income expenses profit).each do |money_stat|
-    define_method("#{money_stat}_unit") do
-      stat = monthly_stats(money_stat)
-      if stat
-        stat.unit
-      end
-    end
-  end
+
+  #   %W(gross_income expenses profit).each do |money_stat|
+  #     define_method("#{money_stat}_unit") do
+  #       stat = monthly_stats(money_stat)
+  #       if stat
+  #         stat.unit
+  #       end
+  #     end
+  #   end
 
   def sync_stats
     return if manual_input?

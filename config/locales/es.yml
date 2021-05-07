@@ -14,12 +14,14 @@ es:
     update:
       updated: Valores guardados!
     show:
-      automatic_for_padma_users: Los siguientes índices son calculados de forma automática para usuarios de PADMA
-      update_ics: Guardar índices de control
+      automatic_for_padma_users: Los siguientes índices son calculados de forma automática para usuarios de PADMA, no precisás registrar ningún dato manualmente.
+      update_ics: Guardar estos índices de control
       recalculate_these_values: Recalcular estos valores
       previous_month: Mes anterior
       next_month: Próximo mes
       see_all_ics: Ir a pantalla anual avanzada con más indices de control.
+      see_all_ics_explained: En la pantalla anual podés seleccionar los índices que quieras cargar y ver todo el histórico anual como indicado en los videos de Data Together.
+      this_month_ics: "A continuación podés cargar los datos de %{month}"
   monthly_stat:
     description:
       demand: Cantidad de personas que se contactaron con la escuela.

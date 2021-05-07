@@ -1,0 +1,82 @@
+<!-- MANUAL for ALL -->
+<li>
+  <label><%= t("monthly_stat.names.gross_income") %> :</label>
+  <div class="select-inline">
+    <div class="select">
+      <%= f.select "gross_income_unit",  currency_options,
+        {selected: @ics.gross_income_unit || @currency},
+        {
+          data: {
+            target: "ics.currency",
+            action: "change->ics#updateAllCurrencies"
+          }
+        }
+      %>
+    </div>
+    <div class="select">
+      <%= f.text_field "gross_income",
+        type: "tel",
+        class: "form-control #{'ic_missing' if !notice.blank? && @ics.monthly_stats("gross_income").blank?}",
+        data: {
+          target: "ics.gross_income",
+          action: "change->ics#updateProfit keyup->ics#updateProfit"
+        }
+      %>
+    </div>
+  </div>
+</li>
+<li>
+  <label><%= t("monthly_stat.names.expenses") %> :</label>
+  <div class="select-inline">
+    <div class="select">
+      <%= f.select "expenses_unit", currency_options,
+        {selected: @ics.expenses_unit || @currency},
+        {
+          data: {
+            target: "ics.currency",
+            action: "change->ics#updateAllCurrencies"
+          }
+        }
+      %>
+    </div>
+    <div class="select">
+      <%= f.text_field "expenses", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("expenses").blank?}",
+        type: "tel",
+        data: {
+          target: "ics.expenses",
+          action: "change->ics#updateProfit keyup->ics#updateProfit"
+        }
+      %>
+    </div>
+  </div>
+</li>
+<li>
+  <label><%= t("monthly_stat.names.profit") %> :</label>
+  <div class="select-inline">
+    <div class="select">
+      <%= f.select "profit_unit",  currency_options,
+        {selected: @ics.profit_unit || @currency},
+        {
+          data: {
+            target: "ics.currency",
+            action: "change->ics#updateAllCurrencies"
+          }
+        }
+      %>
+    </div>
+    <div class="select">
+      <%= f.text_field "profit", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("profit").blank?}",
+        type: "tel",
+        data: {
+          target: "ics.profit",
+          action: "change->ics#validateProfit"
+        } %>
+    </div>
+  </div>
+  <span data-target="ics.profitError"></span>
+</li>
+
+<li>
+  <label><%= t("monthly_stat.names.team_teachers") %> :</label>
+  <%= f.text_field "team_teachers", type: "tel", class: "#{'ic_missing' if !notice.blank? && @ics.monthly_stats("expenses").blank?}" %>
+</li>
