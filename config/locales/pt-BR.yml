@@ -14,7 +14,7 @@ pt-BR:
     update:
       updated: Valores atualizados!
     show:
-      automatic_for_padma_users: Os seguintes indices são calculados de forma automática para usuários do PADMA, não precisa cadastrar valores manualmente.
+      automatic_for_padma_users: Seus índices de controle são calculados e cadastrados automáticamente pelo PADMA, não precisa fazer mais nada. :-)
       update_ics: Salvar estes indices de controle
       recalculate_these_values: Recalcular estes valores
       previous_month: Mês anterior

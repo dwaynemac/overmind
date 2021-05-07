@@ -59,7 +59,12 @@
   <% end %>
 
   <section class="schools-content">
-    <small><%= t('.this_month_ics', month: l(@ref_date, format: :month)) %></small>
+    <% if @ics.manual_input? %>
+      <small><%= t('.this_month_ics', month: l(@ref_date, format: :month)) %></small>
+    <% else %>
+      <small> <%= t('.automatic_for_padma_users') %> </small>
+    <% end %>
+
     <%= form_for :ics,
                  url: school_ics_path(school_id: @ics.school.id, ref_date: @ref_date),
                  method: :put,
@@ -73,16 +78,6 @@
 
         <%# render partial: 'always_manual_ics', locals: {f: f} %>
 
-        <% unless @ics.manual_input? %>
-        <li>
-          <%= f.submit t('.update_ics'), class: 'btn btn-primary full-width' %>
-        </li>
-        <li>
-              <%= t('.automatic_for_padma_users') %>
-        </li>
-        <% end %>
-
-        <!-- MANUAL for non-padma -->
         <% Ics::ICS.reject{|ic_name| MonthlyStat.is_manual?(ic_name) }.each do |ic| %>
           <li>
             <label><%= t("monthly_stat.names.#{ic}") %> :</label>

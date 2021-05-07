@@ -16,7 +16,7 @@ en:
     update:
       updated: Values updated
     show:
-      automatic_for_padma_users: Following values are automatically stored for PADMA users
+      automatic_for_padma_users: Your data is received automatically from PADMA! No need for manual work. :-)
       update_ics: Save these values
       recalculate_these_values: "Re-calculate these values"
       previous_month: Previous month

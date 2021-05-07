@@ -114,7 +114,6 @@ class Ics
     true?(@options[:force_manual]) || !@school.padma_enabled?
   end
 
-  
   private
 
   def true?(val)
