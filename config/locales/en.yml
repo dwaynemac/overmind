@@ -21,7 +21,7 @@ en:
       recalculate_these_values: "Re-calculate these values"
       previous_month: Previous month
       next_month: next month
-      see_all_ics: See values for all year
+      see_all_ics: Go to yearly advanced screen with more items
   monthly_stats:
     chrono_table:
       title: Estatísticas mensais

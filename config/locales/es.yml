@@ -19,7 +19,7 @@ es:
       recalculate_these_values: Recalcular estos valores
       previous_month: Mes anterior
       next_month: Próximo mes
-      see_all_ics: Ver todos los índices de control del año
+      see_all_ics: Ir a pantalla anual avanzada con más indices de control.
   monthly_stat:
     description:
       demand: Cantidad de personas que se contactaron con la escuela.

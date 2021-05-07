@@ -19,7 +19,7 @@ pt-BR:
       recalculate_these_values: Recalcular estes valores
       previous_month: Mês anterior
       next_month: próximo mês 
-      see_all_ics: Ver todos os índices de controle do ano
+      see_all_ics: Ir a tela anual avanzada com mais indices de controle
   monthly_stats:
     chrono_table:
       title: Estatísticas mensais
