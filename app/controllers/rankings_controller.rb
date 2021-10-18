@@ -5,7 +5,8 @@ class RankingsController < ApplicationController
     authorize! :history, Ranking
     
     @federations = Federation.all
-    federation_ids = Federation.accessible_by(current_ability).pluck(:id)
+    # federation_ids = Federation.accessible_by(current_ability).pluck(:id) # solo muestra a cada usuario las escuelas de su federación
+    federation_ids = @federations.pluck(:id)
     
     if params[:ranking].nil?
       if params[:federation_id]
@@ -21,8 +22,7 @@ class RankingsController < ApplicationController
       params[:ranking][:column_names] = [params[:ranking][:column_names]]
     end
     @ranking = Ranking.new params[:ranking]
-    
-    
+
     @stat_name = @ranking.column_names.first
     @stat_name = @stat_name.first if @stat_name.is_a?(Array)
       
