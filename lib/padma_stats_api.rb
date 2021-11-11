@@ -14,7 +14,7 @@ module PadmaStatsApi
 
   CRM_URL = case Rails.env
     when 'production'
-      'http://crm.padm.am'
+      'https://crm.padm.am'
     when 'staging'
       'https://padma-crm-staging.herokuapp.com'
     else
