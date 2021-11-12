@@ -32,7 +32,8 @@
             <% else -%>
               <% if monthly_stat.nil? %>
                 <% if in_place_create?(ref_date: ref_date, stat_name: name, teacher_stats: false) -%>
-                  <%= best_in_place monthly_stat,
+                  <%# TODO para esto precisamos el fork best_in_place_post que hizo alex %>
+                  <%# best_in_place monthly_stat,
                                   :value,
                                   :nil => "<span class='glyphicon glyphicon-pencil'></span>".html_safe,
                                   :classes => "editable",
