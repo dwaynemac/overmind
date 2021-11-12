@@ -44,15 +44,15 @@ gem 'coffee-rails', '~> 4.2.2'
 gem 'uglifier', '4.2.0'
 gem 'jquery-rails', '~> 3.1.5'
 gem 'jquery-ui-rails', '~> 6.0.1'
-gem "execjs", '0.3.0'
-gem 'less-rails-bootstrap'#, '~> 3.3.5.0'
+gem "execjs", "2.8.1"
+gem 'less-rails-bootstrap', '~> 3.3.5.0'
 gem "therubyracer", '0.12.3'
 
 group :development, :test do
   gem "rspec-rails", '~> 3.9.1'
-  gem "shoulda", '~> 3.5.0', require: false
-  gem "shoulda-matchers", '~> 2.6.2'
-  gem "factory_bot_rails", '~> 4.11.1'
+  gem "shoulda", "4.0.0", require: false
+  gem "shoulda-matchers", "4.5.1"
+  gem "factory_bot_rails", "5.2.0"
   #gem "libnotify", '~> 0.9.4'
   gem 'byebug', '~> 11.0.1'
 end
@@ -63,13 +63,11 @@ group :doc do
   gem 'redcarpet', '~> 3.5.0'
 end
 
-#gem 'rake', '< 12'
+gem 'rake', '< 12'
 
 group :development do
   gem 'subcontractor', '>= 0.6.1'
   gem 'foreman', '~> 0.87.2'
-  gem 'git-pivotal-tracker-integration', '~> 1.4.0'
-  gem 'padma-deployment', '~> 0.2.1'
   gem 'better_errors', '~> 2.8.3'
   gem 'binding_of_caller', '~> 0.8.0'
 end
