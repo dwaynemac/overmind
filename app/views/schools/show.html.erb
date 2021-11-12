@@ -10,11 +10,11 @@
     <nav class='schools-navbar' role='navigation'>
       <div class='filter-controls'>
         <div class='btn-group'>
-          <%= link_to school_url(@school, params.merge(year: @year.to_i - 1)), class: 'btn btn-secondary btn-sm' do %>
+          <%= link_to school_url(@school, params.merge(year: @year.to_i - 1, format: nil)), class: 'btn btn-secondary btn-sm' do %>
             <span class='glyphicon glyphicon-chevron-left'></span>
           <% end %>
           <% unless @year.to_i == Time.zone.now.year %>
-            <%= link_to school_url(@school, params.merge(year: @year.to_i + 1)), class: 'btn btn-secondary btn-sm' do %>
+            <%= link_to school_url(@school, params.merge(year: @year.to_i + 1, format: nil)), class: 'btn btn-secondary btn-sm' do %>
               <span class='glyphicon glyphicon-chevron-right'></span>
             <% end %>
           <% end %>
