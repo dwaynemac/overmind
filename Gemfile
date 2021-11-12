@@ -17,8 +17,8 @@ gem 'intercom-rails', '~> 0.4.2'
 gem "pg", "0.21"
 
 # Inplace editor
-gem 'best_in_place', :github => 'afalkear/best_in_place_post'
-gem 'padma-assets', '0.3.1'
+gem 'best_in_place'#, :github => 'afalkear/best_in_place_post'
+gem 'padma-assets', '0.3.6'
 
 gem 'appsignal', '~> 2.8'
 
@@ -30,23 +30,23 @@ end
 gem 'daemons', '~> 1.3.1'
 gem 'delayed_job_active_record', '~> 4.1.1'
 
-#gem 'logical_model', '0.6.4'
-gem 'messaging_client', '0.2.0'
-gem 'accounts_client', '0.2.38'
-gem 'kaminari', '~> 0.13.0'
+gem 'logical_model', '0.7.1'
+gem 'messaging_client', '0.3.0'
+gem 'accounts_client', '0.3.0'
+gem 'kaminari', '1.2.1'
 gem 'ransack', '~> 1.8.10'
 gem 'activerecord-session_store', '~> 1.1.3'
 
 # Gems used only for assets and not required
 # in production environments by default.
-gem 'sass-rails', '~> 5.0.7'
+gem 'sass-rails', '6.0.0'
 gem 'coffee-rails', '~> 4.2.2'
-gem 'uglifier', '~> 3.2'
+gem 'uglifier', '4.2.0'
 gem 'jquery-rails', '~> 3.1.5'
 gem 'jquery-ui-rails', '~> 6.0.1'
-gem "execjs", '~> 2.7.0'
-gem 'less-rails-bootstrap', '~> 3.3.5.0'
-gem "therubyracer", '0.12.2'
+gem "execjs", '0.3.0'
+gem 'less-rails-bootstrap'#, '~> 3.3.5.0'
+gem "therubyracer", '0.12.3'
 
 group :development, :test do
   gem "rspec-rails", '~> 3.9.1'
@@ -63,7 +63,7 @@ group :doc do
   gem 'redcarpet', '~> 3.5.0'
 end
 
-gem 'rake', '< 12'
+#gem 'rake', '< 12'
 
 group :development do
   gem 'subcontractor', '>= 0.6.1'
