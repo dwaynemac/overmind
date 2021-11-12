@@ -13,7 +13,7 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   #         
   #
   def index
-    @monthly_stats = MonthlyStat.api_where(params[:where]).includes(:school).all
+    @monthly_stats = MonthlyStat.api_where(where_params).includes(:school).all
     render json: {
         collection: @monthly_stats,
         total: @monthly_stats.size
@@ -128,6 +128,10 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
                       school_id: school.try(:id),
                       teacher_id: @teacher.try(:id)
                      ).first
+  end
+
+  def where_params
+    params.require(:where).permit!
   end
 
   def monthly_stat_params
