@@ -57,7 +57,7 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
     
     remove_blank_teacher_username
 
-    if @monthly_stat = find_this_stat(params[:monthly_stat])
+    if @monthly_stat = find_this_stat(monthly_stat_params)
       @monthly_stat.value = params[:monthly_stat][:value]
       @monthly_stat.service = params[:monthly_stat][:service]
     else
@@ -104,7 +104,7 @@ class Api::V0::MonthlyStatsController < Api::V0::ApiController
   end
 
   private
-  
+
   def remove_blank_teacher_username
     if params[:monthly_stat]
       if params[:monthly_stat][:teacher_username].blank?
