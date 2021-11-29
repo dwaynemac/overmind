@@ -16,7 +16,7 @@ development:
 
 production:
   <<: *defaults
-  active: true
+  active: <%= ENV["APPSIGNAL_ENABLED"] %>
   enable_host_metrics: true
 
 
