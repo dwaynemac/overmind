@@ -16,7 +16,9 @@ development:
 
 production:
   <<: *defaults
-  active: <%= ENV["APPSIGNAL_ENABLED"] %>
+  active: <%= ENV['APPSIGNAL_ENABLED'] || 'false' %>
+  ignore_namespaces:
+    - "api"
   enable_host_metrics: true
 
 
