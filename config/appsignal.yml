@@ -5,6 +5,9 @@ default: &defaults
   # Your app's name
   name: "padma-overmind"
 
+  ignore_actions:
+    - PingController#ping
+
   # The cuttoff point in ms above which a request is considered slow, default is 200
   # slow_request_threshold: 200
 

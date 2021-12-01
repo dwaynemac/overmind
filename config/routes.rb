@@ -79,4 +79,6 @@ Overmind::Application.routes.draw do
  root to: 'rankings#show'
  get 'message_door', to: 'message_door#catch'
  get 'sns', to: 'message_door#sns'
+ get "/ping", to: "ping#ping"
+
 end
