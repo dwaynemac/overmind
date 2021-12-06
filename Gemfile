@@ -29,6 +29,7 @@ end
 
 gem 'daemons', '~> 1.3.1'
 gem 'delayed_job_active_record', '~> 4.1.1'
+gem "workless", "~> 2.2.0" # requires APP_NAME and WORKLESS_API_KEY in env.
 
 gem 'logical_model', '0.7.1'
 gem 'messaging_client', '0.3.0'
