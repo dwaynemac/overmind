@@ -35,9 +35,11 @@ module PadmaStatsApi
     # @param name [String]
     # @param ref_date [Date]
     # @param options [Hash]
-    # @option options [Boolean] by_teacher
+    # @option by_teacher [Boolean]
+    # @option async [Boolean]
     # @return [Integer/Array<Hash>] will return array if :by_teacher option is given.
     def fetch_stat_from_crm(name,ref_date,options={})
+      options[:stat_name] = name if options[:async]
       case name.to_sym
         when :students
           self.count_students(ref_date,options)
@@ -168,10 +170,14 @@ module PadmaStatsApi
     # Fetches students count from CRM-ws
     # @param ref_date [Date]
     # @param options [Hash]
-    # @option options [Hash] filter . Any valid argument for contacts-ws/search
-    # @option options [String] level. Filter by level. Valid values: aspirante, sádhaka, yôgin, chêla, graduado, asistente, docente, maestro
-    # @option options [String] teacher_username. -- will scope to this specific teacher
-    # @option options [Boolean] by_teacher. -- will return all teachers -- If :teacher_username is given this will be ignored.
+    #
+    # @option async [Boolean]
+    # @options stat_name [String]
+    #
+    # @option filter [Hash] Any valid argument for contacts-ws/search
+    # @option level [String] Filter by level. Valid values: aspirante, sádhaka, yôgin, chêla, graduado, asistente, docente, maestro
+    # @option teacher_username [String] will scope to this specific teacher
+    # @option by_teacher [Boolean] will return all teachers -- If :teacher_username is given this will be ignored.
     # Returns array if by_teacher given.
     # @return [Integer/Array<Hash>]
     def count_students(ref_date, options = {})
@@ -229,8 +235,17 @@ module PadmaStatsApi
         }
       end
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
-      parse_response(response,!options[:by_teacher])
+      if options[:async]
+        req_options[:async] = options[:async]
+        req_options[:stat_name] = options[:stat_name]
+        response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
+        if response.status == 202
+          true
+        end
+      else
+        response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
+        parse_response(response,!options[:by_teacher])
+      end
     end
 
     # Fetches students average age
