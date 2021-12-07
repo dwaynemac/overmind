@@ -239,9 +239,7 @@ module PadmaStatsApi
         req_options[:async] = options[:async]
         req_options[:stat_name] = options[:stat_name]
         response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
-        if response.status == 202
-          true
-        end
+        response.code == 202
       else
         response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/count_students", params: req_options)
         parse_response(response,!options[:by_teacher])
