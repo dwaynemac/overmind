@@ -342,8 +342,15 @@ module PadmaStatsApi
         req_options[:filter][:level] = options[:filter][:level] if options[:filter][:level]
       end
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/drop_outs/count", params: req_options)
-      parse_response(response,!options[:by_teacher])
+      if options[:async]
+        req_options[:async] = options[:async]
+        req_options[:stat_name] = options[:stat_name]
+        response = Typhoeus::Request.get("#{CRM_URL}/api/v0/drop_outs/count", params: req_options)
+        response.code == 202
+      else
+        response = Typhoeus::Request.get("#{CRM_URL}/api/v0/drop_outs/count", params: req_options)
+        parse_response(response,!options[:by_teacher])
+      end
     end
 
     def count_enrollments(ref_date, options={})
