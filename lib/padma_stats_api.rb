@@ -359,8 +359,15 @@ module PadmaStatsApi
         req_options[:filter].merge! options[:filter]
       end
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/enrollments/count", params: req_options)
-      parse_response(response,!options[:by_teacher])
+      if options[:async]
+        req_options[:async] = options[:async]
+        req_options[:stat_name] = options[:stat_name]
+        response = Typhoeus::Request.get("#{CRM_URL}/api/v0/enrollments/count", params: req_options)
+        response.code == 202
+      else
+        response = Typhoeus::Request.get("#{CRM_URL}/api/v0/enrollments/count", params: req_options)
+        parse_response(response,!options[:by_teacher])
+      end
     end
   end
 
