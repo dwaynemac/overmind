@@ -107,9 +107,16 @@ class SchoolMonthlyStat < MonthlyStat
   end
 
   def queue_resync
-    unless Delayed::Job.where("handler like '%SchoolMonthlyStat%id: #{id}%ping_service_for_resync%' AND attempts = 0").exists?
-      delay.ping_service_for_resync
+    if service == "crm"
+      unless Delayed::Job.where("handler like '%SchoolMonthlyStat%id: #{id}%ping_service_for_resync%' AND attempts = 0").exists?
+        delay.ping_service_for_resync
+      end
+    else
+      unless Delayed::Job.where("handler like '%SchoolMonthlyStat%id: #{id}%update_from_service!%' AND attempts = 0").exists?
+        delay.update_from_service!
+      end
     end
+
   end
 
   # Will delegate fetching value to a corresponding module according to
