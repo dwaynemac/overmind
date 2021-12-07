@@ -40,6 +40,7 @@ module PadmaStatsApi
     # @return [Integer/Array<Hash>] will return array if :by_teacher option is given.
     def fetch_stat_from_crm(name,ref_date,options={})
       if ENV["slow_fetch"]
+        Rails.logger.info "Slowing down fetch, waiting #{ENV["slow_fetch"]} seconds."
         sleep ENV["slow_fetch"].to_f # espera slow_fetch segundos antes de hacer la llamada, para no sobrecargar
       end
       options[:stat_name] = name if options[:async]
