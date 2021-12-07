@@ -42,13 +42,25 @@ class SchoolMonthlyStat < MonthlyStat
 
   # If stat exists in DB it will recalculate its value.
   # If it doesnt exist it will calculate value and store it
-  def self.sync_from_service!(school,name,ref_date)
-    ms = school.school_monthly_stats.where(name: name, ref_date: ref_date)
-    if ms.blank?
-      create_from_service!(school,name,ref_date)
+  # @param school
+  # @param name
+  # @param ref_date
+  # @param options
+  # @option async
+  def self.sync_from_service!(school,name,ref_date, options = {})
+    if options[:async]
+      ms = SchoolMonthlyStat.new(school: school, name: name, ref_date: ref_date)
+      if ms.set_service == "crm"
+        ms.ping_service_for_resync
+      end
     else
-      st = ms.first
-      st.update_from_service!
+      ms = school.school_monthly_stats.where(name: name, ref_date: ref_date)
+      if ms.blank?
+        create_from_service!(school,name,ref_date)
+      else
+        st = ms.first
+        st.update_from_service!
+      end
     end
   end
 
@@ -88,7 +100,7 @@ class SchoolMonthlyStat < MonthlyStat
 
   def ping_service_for_resync
     if service == "crm"
-      school.fetch_stat_from_crm(name,ref_date, async: true)
+      school.fetch_stat_from_crm(name, ref_date, async: true)
     else
       raise ArgumentError
     end
