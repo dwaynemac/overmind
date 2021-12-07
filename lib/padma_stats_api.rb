@@ -251,6 +251,10 @@ module PadmaStatsApi
     # @param options [Hash]
     # @option options [Hash] filter . Any valid argument for contacts-ws/search
     # @option options [String] level. Filter by level. Valid values: aspirante, sádhaka, yôgin, chêla, graduado, asistente, docente, maestro
+    #
+    # @option async [Boolean]
+    # @options stat_name [String]
+    #
     # @return [Integer]
     def students_average_age(ref_date, options = {})
       req_options = { app_key: ENV['crm_key'],
@@ -288,8 +292,15 @@ module PadmaStatsApi
         end
       end
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/students_average_age", params: req_options)
-      parse_response(response,true)
+      if options[:async]
+        req_options[:async] = options[:async]
+        req_options[:stat_name] = options[:stat_name]
+        response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/students_average_age", params: req_options)
+        response.code == 202
+      else
+        response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/students_average_age", params: req_options)
+        parse_response(response,true)
+      end
     end
 
     def count_interviews(ref_date, options={})
