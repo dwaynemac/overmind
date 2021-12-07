@@ -129,17 +129,24 @@ module PadmaStatsApi
       end
 
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options)
+      if options[:async]
+        req_options[:async] = options[:async]
+        req_options[:stat_name] = options[:stat_name]
+        response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options)
+        response.code == 202
+      else
+        response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options)
 
-      res = parse_response(response,!options[:by_teacher])
-      if res
-        if options[:by_teacher]
-          res.each do |h|
-            h['value'] = h['value'].to_i
+        res = parse_response(response,!options[:by_teacher])
+        if res
+          if options[:by_teacher]
+            res.each do |h|
+              h['value'] = h['value'].to_i
+            end
+            res
+          else
+            res.to_i
           end
-          res
-        else
-          res.to_i
         end
       end
     end
@@ -155,18 +162,24 @@ module PadmaStatsApi
         req_options.merge!({by_teacher: true})
       end
 
+      if options[:async]
+        req_options[:async] = options[:async]
+        req_options[:stat_name] = options[:stat_name]
+        response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options)
+        response.code == 202
+      else
+        response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options)
 
-      response = Typhoeus::Request.get("#{CRM_URL}/api/v0/accounts/#{self.account_name}/conversion_rate", params: req_options)
-
-      res = parse_response(response,!options[:by_teacher])
-      if res
-        if options[:by_teacher]
-          res.each do |h|
-            h['value'] = (h['value'].to_f*10000).to_i
+        res = parse_response(response,!options[:by_teacher])
+        if res
+          if options[:by_teacher]
+            res.each do |h|
+              h['value'] = (h['value'].to_f*10000).to_i
+            end
+            res
+          else
+            (res.to_f*10000).to_i
           end
-          res
-        else
-          (res.to_f*10000).to_i
         end
       end
     end
