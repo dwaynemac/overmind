@@ -86,6 +86,14 @@ class SchoolMonthlyStat < MonthlyStat
   end
   appsignal_instrument_method :update_from_service!
 
+  def ping_service_from_resync
+    if service == "crm"
+      school.fetch_stat_from_crm(name,ref_date, async: true)
+    else
+      raise ArgumentError
+    end
+  end
+
   def queue_resync
     unless Delayed::Job.where("handler like '%SchoolMonthlyStat%id: #{id}%update_from_service!%' AND attempts = 0").exists?
       delay.update_from_service!
