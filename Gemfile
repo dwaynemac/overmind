@@ -7,6 +7,8 @@ gem 'rack-cors', '~> 1.0.3'
 
 gem 'puma'
 gem 'puma_worker_killer'
+# No entiendo porque pero workless corriendo sobrecargaba en general a PADMA y a sí mismo.
+# gem "workless", "~> 2.2.0" # requires APP_NAME and WORKLESS_API_KEY in env.
 
 gem 'devise', '4.4.0'
 gem "cancan", ">= 1.6.8"
