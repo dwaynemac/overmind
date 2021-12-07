@@ -123,7 +123,7 @@ class TeacherMonthlyStat < MonthlyStat
   # @param name [Symbol] stat name
   # @param ref_date [Date]
   # @return --
-  def self.sync_school_from_service(school,name,ref_date)
+  def self.sync_school_from_service(school,name,ref_date, options = {})
 
     unless STATS_BY_TEACHER.include?(name)
       raise ArgumentError, 'this stats is not available on a teacher granularity level.'
@@ -138,8 +138,10 @@ class TeacherMonthlyStat < MonthlyStat
         value = self.calculate_local_value(school,teacher,name,ref_date)
         create_or_update(school,teacher,name,ref_date,value) if value
       end
+    elsif service == "crm" && options[:async]
+      get_remote_values(school,name,service,ref_date, options)
     else
-      teachers_stats = self.get_remote_values(school,name,service,ref_date) || []
+      teachers_stats = self.get_remote_values(school,name,service,ref_date, options) || []
 
       teachers_stats.each do |tstat|
 
@@ -195,13 +197,13 @@ class TeacherMonthlyStat < MonthlyStat
   # @param service [String] service from which to fetch stat
   # @param ref_date [Date]
   # @return [Array<Hash>]
-  def self.get_remote_values(school,name,service,ref_date)
+  def self.get_remote_values(school,name,service,ref_date, options = {})
     return nil if service.blank?
     case service
       when 'kshema'
         school.fetch_stat(name,ref_date,by_teacher: true)
       when 'crm'
-        school.fetch_stat_from_crm(name,ref_date,by_teacher: true)
+        school.fetch_stat_from_crm(name,ref_date,options.merge({by_teacher: true}))
       else
         raise 'unknown service'
     end

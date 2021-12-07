@@ -127,7 +127,7 @@ class SyncRequest < ActiveRecord::Base
   def sync_teachers_stats
     ref = ref_date(year,month)
     teacher_stat_names.each do |name|
-      TeacherMonthlyStat.sync_school_from_service(school,name,ref)
+      TeacherMonthlyStat.sync_school_from_service(school,name,ref, async: true)
     end
   end
   appsignal_instrument_method :sync_teachers_stats
