@@ -100,14 +100,15 @@ class School < ActiveRecord::Base
   def sync_school_month_stats(year,month,options={})
     ref = ref_date(year,month)
     MonthlyStat::VALID_NAMES.each do |name|
-      stats_for_month = self.school_monthly_stats.where(name: name).for_month(ref)
-      if stats_for_month.empty?
-        SchoolMonthlyStat.create_from_service!(self,name,ref)
-      else
-        if options[:update_existing]
-          stats_for_month.last.update_from_service!
-        end
-      end
+      SchoolMonthlyStat.sync_from_service!(self, name, ref, async: true)
+      #stats_for_month = self.school_monthly_stats.where(name: name).for_month(ref)
+      #if stats_for_month.empty?
+        #SchoolMonthlyStat.create_from_service!(self,name,ref)
+      #else
+        #if options[:update_existing]
+          #stats_for_month.last.update_from_service!
+        #end
+      #end
     end
     unless options[:skip_synced_at_setting]
       self.update_attribute(:synced_at, Time.now)
