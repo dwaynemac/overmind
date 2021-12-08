@@ -32,7 +32,7 @@ class TeachersController < ApplicationController
   private
 
   def queue_stats_resyncs
-    if ENV["queue_sync_on_show"] == "true"
+    if ENV["queue_sync_on_teacher_show"] == "true"
       @stats.each do |stat_name, by_month|
         by_month.each do |month_number, values|
           next if month_number==:total
