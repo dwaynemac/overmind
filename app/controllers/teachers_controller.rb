@@ -12,8 +12,15 @@ class TeachersController < ApplicationController
 
     current_school_teachers = @school.account.present?? @school.account.users.map(&:username) : nil
     @teachers = current_school_teachers.blank?? @school.teachers : @school.teachers.select{|t| t.username.in?(current_school_teachers) }
-    @stats = Matrixer.new(@school.teacher_monthly_stats.for_year(@year).where(teacher_id: params[:id])).to_matrix
+
+    stats_scope = @school.teacher_monthly_stats.for_year(@year).where(teacher_id: params[:id])
+    @stats = Matrixer.new(stats_scope).to_matrix
+
     @stat_names = get_stat_names.map(&:to_sym)
+
+    queue_stats_resyncs
+
+
     respond_to do |format|
       format.html
       format.csv do
@@ -24,6 +31,20 @@ class TeachersController < ApplicationController
   end
 
   private
+
+  def queue_stats_resyncs
+    if ENV["queue_sync_on_show"] == "true"
+      @stats.each do |stat_name, by_month|
+        by_month.each do |month_number, values|
+          ref_date = Date.civil(@year.to_i, month_number.to_i, 1).end_of_month
+          service = MonthlyStat.service_for(@school, stat_name, ref_date)
+          if service == "crm"
+            @school.fetch_stat_from_crm(stat_name, ref_date, async: true, by_teacher: true)
+          end
+        end
+      end
+    end
+  end
 
   def get_stat_names
     regular = if params[:ranking] && params[:ranking][:column_names]
