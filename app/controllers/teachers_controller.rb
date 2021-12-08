@@ -20,7 +20,6 @@ class TeachersController < ApplicationController
 
     queue_stats_resyncs
 
-
     respond_to do |format|
       format.html
       format.csv do
@@ -36,10 +35,13 @@ class TeachersController < ApplicationController
     if ENV["queue_sync_on_show"] == "true"
       @stats.each do |stat_name, by_month|
         by_month.each do |month_number, values|
+          next if month_number==:total
           ref_date = Date.civil(@year.to_i, month_number.to_i, 1).end_of_month
           service = MonthlyStat.service_for(@school, stat_name, ref_date)
           if service == "crm"
-            @school.fetch_stat_from_crm(stat_name, ref_date, async: true, by_teacher: true)
+            unless Delayed::Job.where("handler like '%School\n  raw_attributes:\n    id:%#{@school.id}%fetch_stat_from_crm%#{stat_name}%#{ref_date.to_s}%by_teacher%'").exists?
+              @school.delay.fetch_stat_from_crm(stat_name, ref_date, async: true, by_teacher: true)
+            end
           end
         end
       end
