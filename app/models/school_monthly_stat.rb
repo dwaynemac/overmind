@@ -102,7 +102,7 @@ class SchoolMonthlyStat < MonthlyStat
     if service == "crm"
       school.fetch_stat_from_crm(name, ref_date, async: true)
     else
-      raise ArgumentError
+      nil
     end
   end
 
