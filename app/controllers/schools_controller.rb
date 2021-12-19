@@ -57,9 +57,7 @@ class SchoolsController < ApplicationController
     @school_monthly_stats = Matrixer.new(stats_scope).to_matrix
 
     # queue updating all rendered stats
-    if ENV["queue_sync_on_show"] == "true"
-      stats_scope.each{|sms| sms.queue_resync }
-    end
+    QueueSyncsJob.new(stats_scope).queue_myself
 
     # load teachers for teacher tabs
     current_school_teachers = @school.account.present?? @school.account.users.map(&:username) : nil
