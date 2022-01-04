@@ -13,8 +13,6 @@ gem 'puma_worker_killer'
 gem 'devise', '4.4.0'
 gem "cancan", ">= 1.6.8"
 
-gem 'intercom-rails', '~> 0.4.2'
-
 # DB
 gem "pg", "0.21"
 
