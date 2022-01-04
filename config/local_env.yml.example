@@ -2,3 +2,4 @@ accounts_key: "secret"
 crm_key: "secret"
 api_key: secret
 messaging_secret: secret
+support_email: mail@asd.co
