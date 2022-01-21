@@ -172,7 +172,7 @@ GEM
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    padma-assets (0.3.10)
+    padma-assets (0.3.11)
       railties (>= 3.1)
     pg (0.21.0)
     puma (5.5.2)
@@ -311,7 +311,7 @@ DEPENDENCIES
   less-rails-bootstrap (~> 3.3.5.0)
   logical_model (= 0.7.1)
   messaging_client (= 0.3.0)
-  padma-assets (= 0.3.10)
+  padma-assets (= 0.3.11)
   pg (= 0.21)
   puma
   puma_worker_killer
