@@ -31,7 +31,7 @@ class SsoSessionsController < ApplicationController
       if params[:destination].blank?
         redirect_to root_url
       else
-        redirect_to params[:destination]
+        redirect_to destination_with_full_query_string
       end
     else
       render text: "got invalid token #{params[:sso_token]}"

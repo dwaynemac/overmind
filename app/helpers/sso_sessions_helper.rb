@@ -32,4 +32,21 @@ module SsoSessionsHelper
   def padma_sso_logout_url
     "#{APP_CONFIG['accounts-url']}/sso/session/delete"
   end
+
+  # Si enviamos a accounts destination=/admin/dashboard?a=1&b=2&c=3
+  # en el retorno params se ve así:
+  # {"destination"=>"/admin/dashboard?a=1", "b"=>"2", "c"=>"3", "sso_token"=>"[FILTERED]"}
+  # entonces precisamos reconstruir el destination.
+  #
+  # Este método retorna el destination original
+  def destination_with_full_query_string
+    if (ret = params[:destination])
+      if ret.match(/\?/)
+        to_join_params = params.reject{|k| k.in?(%W(destination action controller sso_token))}.permit!.to_param
+        ret += "&#{to_join_params}"
+      end
+    end
+    ret
+  end
+
 end
