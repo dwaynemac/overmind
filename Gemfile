@@ -18,7 +18,7 @@ gem "pg", "0.21"
 
 # Inplace editor
 gem 'best_in_place'#, :github => 'afalkear/best_in_place_post'
-gem 'padma-assets', '0.3.11'
+gem 'padma-assets', '0.3.12'
 
 gem 'appsignal', '~> 2.8'
 
