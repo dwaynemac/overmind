@@ -3,7 +3,7 @@ class SchoolsSynchronizer
   def self.start
     # accounts-ws doesn't actually paginate so we have
     # all accounts here.
-    accounts = PadmaAccount.paginate
+    accounts = PadmaAccount.paginate(per_page: 300)
     if accounts.nil?
       Rails.logger.warn "couldn't run SchoolsSynchronizer, connection to accounts-ws failed."
       return
