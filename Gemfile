@@ -24,7 +24,7 @@ gem 'appsignal', '~> 2.8'
 
 group :production do
   gem 'rails_12factor', '~> 0.0.3'
-  gem 'dalli', '~> 2.7.11'
+  gem 'dalli', '~> 3.2.3'
 end
 
 gem 'daemons', '~> 1.3.1'
